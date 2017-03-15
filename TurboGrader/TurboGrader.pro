@@ -1,4 +1,5 @@
 TEMPLATE = subdirs
+QT += sql widgets
 
 SUBDIRS += \
     engine \
