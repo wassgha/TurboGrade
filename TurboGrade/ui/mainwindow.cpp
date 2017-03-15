@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::getSelection() {
     if(popup == nullptr)
-            popup = new QWidget();
+            popup = new QWidget(NULL, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
     if(!popup->isVisible()) {
         pos = new QLabel();
         QHBoxLayout* layout = new QHBoxLayout();
@@ -28,6 +28,8 @@ void MainWindow::getSelection() {
         popup->setLayout(layout);
         popup->show();
     }
+    popup->move(this->cursor().pos());
+    popup->show();
     QString text = "Insert comment from ";
     text += QString::number(editor->textCursor().selectionStart());
     text += " to ";
@@ -37,6 +39,9 @@ void MainWindow::getSelection() {
 
 MainWindow::~MainWindow()
 {
+    delete popup->layout();
+    delete pos;
+    delete popup;
     delete highlighter;
     delete editor;
     delete ui;
