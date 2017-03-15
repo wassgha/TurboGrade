@@ -7,6 +7,7 @@
 
 QT_BEGIN_NAMESPACE
 class QTextEdit;
+class QLabel;
 QT_END_NAMESPACE
 
 namespace Ui {
@@ -25,6 +26,7 @@ public slots:
     void about();
     void newFile();
     void openFile(const QString &path = QString());
+    void getSelection();
 
 private:
     Ui::MainWindow *ui;
@@ -34,6 +36,8 @@ private:
 
     QTextEdit *editor;
     SyntaxHighlighter *highlighter;
+    QWidget* popup = nullptr;
+    QLabel* pos = nullptr;
 };
 
 #endif // MAINWINDOW_H

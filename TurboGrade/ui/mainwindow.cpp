@@ -14,12 +14,31 @@ MainWindow::MainWindow(QWidget *parent)
     setupEditor("MainWindow.cpp");
 
     setCentralWidget(editor);
-    setWindowTitle(tr("Syntax Highlighter"));
+    setWindowTitle(tr("Code Editor"));
+    this->connect(editor,  SIGNAL(selectionChanged()), this, SLOT(getSelection()));
 }
 
+void MainWindow::getSelection() {
+    if(popup == nullptr)
+            popup = new QWidget();
+    if(!popup->isVisible()) {
+        pos = new QLabel();
+        QHBoxLayout* layout = new QHBoxLayout();
+        layout->addWidget(pos);
+        popup->setLayout(layout);
+        popup->show();
+    }
+    QString text = "Insert comment from ";
+    text += QString::number(editor->textCursor().selectionStart());
+    text += " to ";
+    text += QString::number(editor->textCursor().selectionEnd());
+    pos->setText(text);
+}
 
 MainWindow::~MainWindow()
 {
+    delete highlighter;
+    delete editor;
     delete ui;
 }
 
