@@ -3,8 +3,9 @@ CONFIG      += console c++11
 CONFIG      -= app_bundle
 QT          += sql widgets
 
-SOURCES += main.cpp \
+SOURCES += \
     classdb.cpp \
+    main.cpp \
     dbengine.cpp
 
 HEADERS += \

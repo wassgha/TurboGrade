@@ -17,6 +17,7 @@ public:
 protected:
     // Executes SQL query
     void sql_query(const QString &query_text);
+    QSqlDatabase db;
 };
 
 #endif // DBENGINE_H

@@ -1,11 +1,13 @@
 #include <iostream>
-#include "../db/dbengine.h"
+#include "../db/classdb.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    DBEngine *db = new DBEngine();
-    cout << "Hello World!" << endl;
+    ClassDB classdb;
+//    classdb.add("CS 105");
+//    classdb.add("CS 150");
+    cout << "CS 150 has ID " << classdb.select("CS 150") << endl;
     return 0;
 }
