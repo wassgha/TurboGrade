@@ -9,6 +9,14 @@ ClassDB::ClassDB()
 }
 
 /**
+ * @brief Destructor
+ */
+
+ClassDB::~ClassDB() {
+
+}
+
+/**
  * @brief ClassDB::add Insert a row to the database
  * @param name the name of the class (ex. CS150)
  * @return true if the query succeded

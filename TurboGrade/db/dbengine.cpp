@@ -5,6 +5,7 @@
  * required tables inside the database if they do not
  * already exist
  */
+
 DBEngine::DBEngine()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
