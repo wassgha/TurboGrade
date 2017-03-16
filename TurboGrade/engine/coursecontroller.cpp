@@ -72,6 +72,21 @@ void CourseController::add_section(const QString course_name, const QString name
 }
 
 
+/**
+ * @brief CourseController::clear_course clears cached data from course
+ * @param course_name name of the course
+ */
+void CourseController::clear_course(const QString course_name) {
+
+    Course *cur_course = get_course(course_name);
+    cur_course->_sections.clear();
+
+}
+
+/**
+ * @brief CourseController::show_courses Displays courses (used for
+ * debugging purposes)
+ */
 void CourseController::show_courses() {
     for(Course *course : _courses) {
         std::cout<<(course->_name).toUtf8().data()<<std::endl;

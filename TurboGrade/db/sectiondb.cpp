@@ -1,4 +1,4 @@
-#include "coursedb.h"
+#include "sectiondb.h"
 
 /**
  * @brief Default constructor
@@ -89,18 +89,27 @@ void SectionDB::load_all() {
 
     int course_name_field = query.record().indexOf("course_name");
     int name_field = query.record().indexOf("name");
+
     while(query.next()) {
-        _courseController->add_section(query.value(course_name_field).toString(), query.value(name_field).toString(), true);
+
+        _courseController->add_section(query.value(course_name_field).toString(),
+                                       query.value(name_field).toString(),
+                                       true);
+
     }
 }
 
 
 
 /**
- * @brief SectionDB::load_all loads all database records
- * to the controller
+ * @brief SectionDB::load_course_sections loads a specific course's
+ * sections to the controller
+ * @param course_name the course whose sections will be loaded
  */
 void SectionDB::load_course_sections(QString course_name) {
+
+    _courseController->clear_course(course_name);
+
     QSqlQuery query(db);
 
     query.prepare("SELECT section.id, section.name, course.name AS course_name"
@@ -117,7 +126,12 @@ void SectionDB::load_course_sections(QString course_name) {
 
     int course_name_field = query.record().indexOf("course_name");
     int name_field = query.record().indexOf("name");
+
     while(query.next()) {
-        _courseController->add_section(query.value(course_name_field).toString(), query.value(name_field).toString(), true);
+
+        _courseController->add_section(query.value(course_name_field).toString(),
+                                       query.value(name_field).toString(),
+                                       true);
+
     }
 }
