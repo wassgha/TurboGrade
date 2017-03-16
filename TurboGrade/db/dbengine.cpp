@@ -78,7 +78,8 @@ DBEngine::DBEngine(QString connectionName)
                rubric INTEGER,\
                comment_text INTEGER,\
                grade INT,\
-               position VARCHAR(255),\
+               start_pos INT,\
+               end_pos INT,\
               FOREIGN KEY(file) REFERENCES file(id),\
               FOREIGN KEY(rubric) REFERENCES rubric(id),\
               FOREIGN KEY(comment_text) REFERENCES comment_text(id))");

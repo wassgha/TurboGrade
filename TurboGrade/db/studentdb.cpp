@@ -55,7 +55,7 @@ int StudentDB::select(const QString name) {
 
     // Execute the query
     if (!query.exec()) {
-        qDebug() << "Failed to select from table 'student'" << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to select from table 'student' (select)" << endl << "SQL ERROR: " << query.lastError();
         return NULL;
     }
 
@@ -76,14 +76,14 @@ int StudentDB::select(const QString name) {
 void StudentDB::load_all() {
     QSqlQuery query(db);
 
-    query.prepare("SELECT student.name, section.name AS section_name, course.name AS course_name"
+    query.prepare("SELECT student.name, section.name AS section_name, course.name AS course_name "
                   "FROM student, section, course "
                   "WHERE section.course_id = course.id "
                   "AND student.section_id = section.id");
 
     // Execute the query
     if (!query.exec()) {
-        qDebug() << "Failed to select from table 'section'" << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to select from table 'student' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
         return ;
     }
 
@@ -114,7 +114,7 @@ void StudentDB::load_section_students(QString course_name, QString section_name)
 
     QSqlQuery query(db);
 
-    query.prepare("SELECT student.name, section.name AS section_name, course.name AS course_name"
+    query.prepare("SELECT student.name, section.name AS section_name, course.name AS course_name "
                   "FROM student, section, course "
                   "WHERE section.course_id = course.id "
                   "AND student.section_id = section.id"
@@ -127,7 +127,7 @@ void StudentDB::load_section_students(QString course_name, QString section_name)
 
     // Execute the query
     if (!query.exec()) {
-        qDebug() << "Failed to select from table 'student'" << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to select from table 'student' (load_section_students)" << endl << "SQL ERROR: " << query.lastError();
         return;
     }
 

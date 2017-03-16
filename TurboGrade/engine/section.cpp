@@ -13,7 +13,7 @@ Section::Section(QString name)
 
 Section::~Section()
 {
-
+    _students.clear();
 }
 
 

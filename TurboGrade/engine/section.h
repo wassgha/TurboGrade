@@ -18,7 +18,7 @@ public:
     // Add a student to the section
     void add_student(const QString name);
     // Find a student in the section
-    Section* get_student(const QString name);
+    Student* get_student(const QString name);
 
     // Section name
     QString _name;

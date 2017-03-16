@@ -9,6 +9,7 @@ SOURCES += \
     "../engine/coursecontroller.cpp" \
     "../engine/course.cpp" \
     "../engine/section.cpp" \
+    "../engine/student.cpp" \
     coursedb.cpp \
     sectiondb.cpp \
     studentdb.cpp
@@ -18,6 +19,7 @@ HEADERS += \
     "../engine/coursecontroller.h" \
     "../engine/course.h" \
     "../engine/section.h" \
+    "../engine/student.h" \
     coursedb.h \
     sectiondb.h \
     studentdb.h

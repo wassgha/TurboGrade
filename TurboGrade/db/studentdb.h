@@ -32,8 +32,7 @@ public:
     // Load all students to controller
     void load_all();
     // Load students for a specific section to controller
-    void load_course_sections(QString course_name);
-
+    void load_section_students(QString course_name, QString section_name);
 
     // Course Controller
     CourseController* _courseController;
