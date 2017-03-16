@@ -68,11 +68,10 @@ int CourseDB::select(const QString name) {
 }
 
 /**
- * @brief CourseDB::selects all fields from the database
- * @return the resulting rows
+ * @brief CourseDB::load_all loads all database records
+ * to the controller
  */
-QSqlQuery CourseDB::select_all() {
-
+void CourseDB::load_all() {
     QSqlQuery query(db);
 
     query.prepare("SELECT * FROM course");
@@ -80,21 +79,11 @@ QSqlQuery CourseDB::select_all() {
     // Execute the query
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'course'" << endl << "SQL ERROR: " << query.lastError();
-        return QSqlQuery();
+        return;
     }
 
-    return query;
-}
-
-
-/**
- * @brief CourseDB::load_all loads all database records
- * to the controller
- */
-void CourseDB::load_all() {
-    QSqlQuery result = select_all();
-    int name_field = result.record().indexOf("name");
-    while(result.next()) {
-        _courseController->add_course(result.value(name_field).toString(), true);
+    int name_field = query.record().indexOf("name");
+    while(query.next()) {
+        _courseController->add_course(query.value(name_field).toString(), true);
     }
 }

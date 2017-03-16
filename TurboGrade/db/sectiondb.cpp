@@ -72,11 +72,10 @@ int SectionDB::select(const QString course_name, const QString name) {
 }
 
 /**
- * @brief SectionDB::selects all fields from the database
- * @return the resulting rows
+ * @brief SectionDB::load_all loads all database records
+ * to the controller
  */
-QSqlQuery SectionDB::select_all() {
-
+void SectionDB::load_all() {
     QSqlQuery query(db);
 
     query.prepare("SELECT section.id, section.name, course.name AS course_name"
@@ -85,22 +84,40 @@ QSqlQuery SectionDB::select_all() {
     // Execute the query
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'section'" << endl << "SQL ERROR: " << query.lastError();
-        return QSqlQuery();
+        return ;
     }
 
-    return query;
+    int course_name_field = query.record().indexOf("course_name");
+    int name_field = query.record().indexOf("name");
+    while(query.next()) {
+        _courseController->add_section(query.value(course_name_field).toString(), query.value(name_field).toString(), true);
+    }
 }
+
 
 
 /**
  * @brief SectionDB::load_all loads all database records
  * to the controller
  */
-void SectionDB::load_all() {
-    QSqlQuery result = select_all();
-    int course_name_field = result.record().indexOf("course_name");
-    int name_field = result.record().indexOf("name");
-    while(result.next()) {
-        _courseController->add_section(result.value(course_name_field).toString(), result.value(name_field).toString(), true);
+void SectionDB::load_course_sections(QString course_name) {
+    QSqlQuery query(db);
+
+    query.prepare("SELECT section.id, section.name, course.name AS course_name"
+                  " FROM section, course WHERE section.course_id = course.id AND"
+                  " course.id = (SELECT id FROM course WHERE name = ?)");
+
+    query.addBindValue(course_name);
+
+    // Execute the query
+    if (!query.exec()) {
+        qDebug() << "Failed to select from table 'section'" << endl << "SQL ERROR: " << query.lastError();
+        return;
+    }
+
+    int course_name_field = query.record().indexOf("course_name");
+    int name_field = query.record().indexOf("name");
+    while(query.next()) {
+        _courseController->add_section(query.value(course_name_field).toString(), query.value(name_field).toString(), true);
     }
 }

@@ -23,14 +23,16 @@ public:
         _courseController(courseController){};
     // Destructor
     ~CourseDB();
+
+
     // Adds a row to the table
     bool add(const QString name);
     // Gets row id matching name
     int select(const QString name);
-    // Selects all records
-    QSqlQuery select_all();
     // Load to controller
     void load_all();
+
+
     // Course Controller
     CourseController* _courseController;
 };
