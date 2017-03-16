@@ -18,14 +18,20 @@ public:
     CourseController();
     // Destructor
     ~CourseController();
+
     // Add a course to the software
     void add_course(const QString name, bool load = false);
-    // Searches for a course by name and returns it
-    Course* get_course(const QString name);
-    // Clears all locally cached course data
-    void clear_course(const QString course_name);
     // Adds a section to a course
     void add_section(const QString course_name, const QString name, bool load = false);
+
+    // Searches for a course by name and returns it
+    Course* get_course(const QString name);
+
+    // Clears all locally cached course data (sections)
+    void clear_course(const QString course_name);
+    // Clears all locally cached section data (students)
+    void clear_section(const QString course_name, const QString section_name);
+
     // Prints all courses and sections
     void show_courses();
 

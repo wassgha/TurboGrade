@@ -20,7 +20,7 @@ public:
     // Parametrized constructor
     CourseDB(CourseController *courseController):
         DBEngine("CourseDB"),
-        _courseController(courseController){};
+        _courseController(courseController){}
     // Destructor
     ~CourseDB();
 

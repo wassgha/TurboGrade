@@ -17,6 +17,8 @@ public:
     ~Course();
     // Add a section to the course
     void add_section(const QString name);
+    // Find a section in the course
+    Section* get_section(const QString name);
 
     // Class name
     QString _name;

@@ -10,7 +10,8 @@ SOURCES += \
     "../engine/course.cpp" \
     "../engine/section.cpp" \
     coursedb.cpp \
-    sectiondb.cpp
+    sectiondb.cpp \
+    studentdb.cpp
 
 HEADERS += \
     dbengine.h \
@@ -18,4 +19,5 @@ HEADERS += \
     "../engine/course.h" \
     "../engine/section.h" \
     coursedb.h \
-    sectiondb.h
+    sectiondb.h \
+    studentdb.h

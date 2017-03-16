@@ -17,7 +17,7 @@ SectionDB::~SectionDB() {
 }
 
 /**
- * @brief CourseDB::add Insert a row to the database
+ * @brief SectionDB::add Insert a row to the database
  * @param name the name of the section (ex. 01)
  * @param course_id the id of the course (ex. 1)
  * @return true if the query succeded

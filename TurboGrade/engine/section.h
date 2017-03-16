@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+#include "student.h"
 
 class Section
 {
@@ -14,8 +15,15 @@ public:
     Section(QString name);
     // Destructor
     ~Section();
+    // Add a student to the section
+    void add_student(const QString name);
+    // Find a student in the section
+    Section* get_student(const QString name);
+
     // Section name
     QString _name;
+    // Section students
+    std::vector<Student*> _students;
 };
 
 #endif // SECTION_H

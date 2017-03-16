@@ -83,6 +83,21 @@ void CourseController::clear_course(const QString course_name) {
 
 }
 
+
+/**
+ * @brief CourseController::clear_section clears cached data from section
+ * (removes students)
+ * @param course_name name of the course
+ * @param section_name name of the section
+ */
+void CourseController::clear_section(const QString course_name, const QString section_name) {
+
+    Course *cur_course = get_course(course_name);
+    Section *cur_section = cur_course->get_section(section_name);
+    cur_section->_students.clear();
+
+}
+
 /**
  * @brief CourseController::show_courses Displays courses (used for
  * debugging purposes)

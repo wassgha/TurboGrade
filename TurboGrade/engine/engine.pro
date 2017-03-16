@@ -10,7 +10,8 @@ SOURCES += \
     main.cpp \
     course.cpp \
     coursecontroller.cpp \
-    section.cpp
+    section.cpp \
+    student.cpp
 
 HEADERS += \
     "../db/dbengine.h" \
@@ -18,4 +19,5 @@ HEADERS += \
     "../db/sectiondb.h" \
     course.h \
     coursecontroller.h \
-    section.h
+    section.h \
+    student.h

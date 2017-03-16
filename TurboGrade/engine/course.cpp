@@ -26,3 +26,15 @@ void Course::add_section(const QString name) {
 
     _sections.push_back(new_section);
 }
+
+/**
+ * @brief Course::get_section finds a section by its name
+ * @param name the name of the section to search for
+ * @return the section found
+ */
+Section* Course::get_section(const QString name) {
+    for(Section* section:_sections)
+        if (section->_name == name)
+            return section;
+    return nullptr;
+}
