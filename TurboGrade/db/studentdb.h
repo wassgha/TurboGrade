@@ -27,8 +27,8 @@ public:
 
     // Adds a row to the table
     bool add(int section_id, const QString name);
-    // Gets row id matching student identifier
-    int select(const QString name);
+    // Gets row id matching student
+    int select(const QString course_name, const QString section_name, const QString name);
     // Load all students to controller
     void load_all();
     // Load students for a specific section to controller

@@ -44,14 +44,20 @@ bool StudentDB::add(int section_id, const QString name) {
  * @brief StudentDB::select Returns id of the row
  * that matches the given student name
  * @param name the name of the student (ex. Wassim Gharbi)
+ * @param course_name the name of the course (ex. CS 150)
+ * @param section_name the name of the student (ex. 02)
  * @return the resulting ID
  */
-int StudentDB::select(const QString name) {
+int StudentDB::select(const QString course_name, const QString section_name, const QString name) {
 
     QSqlQuery query(db);
 
-    query.prepare("SELECT * FROM student WHERE name = ?");
+    query.prepare("SELECT * FROM student WHERE name = ? AND "
+                  "section_id = (SELECT id FROM section WHERE name = ? AND "
+                  "course_id = (SELECT id FROM course WHERE name=?)) ");
     query.addBindValue(name);
+    query.addBindValue(section_name);
+    query.addBindValue(course_name);
 
     // Execute the query
     if (!query.exec()) {
