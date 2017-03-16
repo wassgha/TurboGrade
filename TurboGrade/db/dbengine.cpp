@@ -6,28 +6,40 @@
  * already exist
  */
 
-DBEngine::DBEngine()
+DBEngine::DBEngine(QString connectionName)
 {
-    db = QSqlDatabase::addDatabase("QSQLITE");
+
+    _connectionName.append(connectionName);
+
+    if( !QSqlDatabase::contains( _connectionName ) )
+        db = QSqlDatabase::addDatabase("QSQLITE", _connectionName);
+    else
+        db = QSqlDatabase::database(_connectionName);
+
     db.setDatabaseName("../db/turbograde.sqlite");
 
     if (!db.open()) {
-        QMessageBox::critical(0, qApp->tr("Cannot open database"),
-            qApp->tr("Unable to establish a database connection.\n"
-                     "Click Cancel to exit."), QMessageBox::Cancel);
+        std::cerr<<"Cannot open database"<<std::endl;
         return;
     }
 
-    // Class Table
+    // Course Table
 
-    sql_query("CREATE TABLE IF NOT EXISTS class (id INTEGER PRIMARY KEY, \
-              name VARCHAR(50))");
+    sql_query("CREATE TABLE IF NOT EXISTS course (id INTEGER PRIMARY KEY, \
+              name VARCHAR(50) UNIQUE)");
+
+    // Section Table
+
+    sql_query("CREATE TABLE IF NOT EXISTS section (id INTEGER PRIMARY KEY, \
+              course_id INTEGER,\
+              name VARCHAR(50),\
+              FOREIGN KEY(course_id) REFERENCES course(id))");
 
     // Student Table
     sql_query("CREATE TABLE IF NOT EXISTS student (id INTEGER PRIMARY KEY, \
-                class_id INTEGER, name VARCHAR(50),\
+                section_id INTEGER, name VARCHAR(50),\
                 username VARCHAR(23),\
-                FOREIGN KEY(class_id) REFERENCES class(id))");
+                FOREIGN KEY(section_id) REFERENCES section(id))");
 
     // Assignment Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment (id INTEGER PRIMARY KEY, \
@@ -97,7 +109,7 @@ DBEngine::DBEngine()
  */
 DBEngine::~DBEngine()
 {
-    db.close();
+    QSqlDatabase::database(_connectionName).close();
 }
 
 /**
@@ -106,10 +118,12 @@ DBEngine::~DBEngine()
  */
 void DBEngine::sql_query(const QString &query_text) {
     // Create query
-    QSqlQuery query;
+    QSqlQuery query(db);
 
     // Execute and show error if it exists
     if (!query.exec(query_text))
         qDebug() << query_text << endl << "SQL Error: " << query.lastError();
+
+    query.finish();
 
 }

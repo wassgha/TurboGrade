@@ -1,0 +1,106 @@
+#include "coursedb.h"
+
+/**
+ * @brief Default constructor
+ */
+SectionDB::SectionDB()
+{
+
+}
+
+/**
+ * @brief Destructor
+ */
+
+SectionDB::~SectionDB() {
+
+}
+
+/**
+ * @brief CourseDB::add Insert a row to the database
+ * @param name the name of the section (ex. 01)
+ * @param course_id the id of the course (ex. 1)
+ * @return true if the query succeded
+ */
+bool SectionDB::add(int course_id, const QString name) {
+
+    QSqlQuery query(db);
+
+    query.prepare("INSERT INTO section (id, course_id, name) "
+                  "VALUES (NULL, ?, ?)");
+    query.addBindValue(course_id);
+    query.addBindValue(name);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to insert to 'section' table" << endl << "SQL ERROR: " << query.lastError();
+        return false;
+    }
+
+    return true;
+}
+
+
+/**
+ * @brief SectionDB::select Returns id of the row
+ * that matches given name
+ * @param course_name the name of the course (ex. CS 150)
+ * @param name the name of the section (ex. 01)
+ * @return the resulting ID
+ */
+int SectionDB::select(const QString course_name, const QString name) {
+
+    QSqlQuery query(db);
+
+    query.prepare("SELECT * FROM section WHERE course_id = (SELECT id FROM course WHERE name=?) AND name = ?");
+    query.addBindValue(course_name);
+    query.addBindValue(name);
+
+    // Execute the query
+    if (!query.exec()) {
+        qDebug() << "Failed to select from table 'section'" << endl << "SQL ERROR: " << query.lastError();
+        return NULL;
+    }
+
+    // Return the row ID
+    int id_field = query.record().indexOf("id");
+    if (query.next()) {
+        return query.value(id_field).toInt();
+    }
+
+    // No rows found matching the query
+    return NULL;
+}
+
+/**
+ * @brief SectionDB::selects all fields from the database
+ * @return the resulting rows
+ */
+QSqlQuery SectionDB::select_all() {
+
+    QSqlQuery query(db);
+
+    query.prepare("SELECT section.id, section.name, course.name AS course_name"
+                  " FROM section, course WHERE section.course_id = course.id");
+
+    // Execute the query
+    if (!query.exec()) {
+        qDebug() << "Failed to select from table 'section'" << endl << "SQL ERROR: " << query.lastError();
+        return QSqlQuery();
+    }
+
+    return query;
+}
+
+
+/**
+ * @brief SectionDB::load_all loads all database records
+ * to the controller
+ */
+void SectionDB::load_all() {
+    QSqlQuery result = select_all();
+    int course_name_field = result.record().indexOf("course_name");
+    int name_field = result.record().indexOf("name");
+    while(result.next()) {
+        _courseController->add_section(result.value(course_name_field).toString(), result.value(name_field).toString(), true);
+    }
+}

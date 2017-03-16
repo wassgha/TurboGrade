@@ -19,13 +19,14 @@ class DBEngine
 {
 public:
     // Constructor
-    DBEngine();
+    DBEngine(QString connectionName = "EngineDB");
     // Destructor
     ~DBEngine();
 protected:
     // Executes SQL query
     void sql_query(const QString &query_text);
     QSqlDatabase db;
+    QString _connectionName;
 };
 
 #endif // DBENGINE_H

@@ -4,10 +4,18 @@ CONFIG      -= app_bundle
 QT          += sql widgets
 
 SOURCES += \
-    classdb.cpp \
     main.cpp \
-    dbengine.cpp
+    dbengine.cpp \
+    "../engine/coursecontroller.cpp" \
+    "../engine/course.cpp" \
+    "../engine/section.cpp" \
+    coursedb.cpp \
+    sectiondb.cpp
 
 HEADERS += \
-    classdb.h \
-    dbengine.h
+    dbengine.h \
+    "../engine/coursecontroller.h" \
+    "../engine/course.h" \
+    "../engine/section.h" \
+    coursedb.h \
+    sectiondb.h

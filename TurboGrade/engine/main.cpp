@@ -1,13 +1,17 @@
 #include <iostream>
-#include "../db/classdb.h"
+#include "../db/coursedb.h"
 
 using namespace std;
 
 int main(int argc, char *argv[])
 {
-    ClassDB classdb;
-//    classdb.add("CS 105");
+    CourseController courseController;
+//    courseController.add_course("CS 105");
+//    courseController.add_course("CS 150");
+//    courseController.add_section("CS 150", "01");
+//    courseController.add_section("CS 150", "02");
+//    courseController.show_courses();
 //    classdb.add("CS 150");
-    cout << "CS 150 has ID " << classdb.select("CS 150") << endl;
+//    cout << "CS 150 has ID " << coursedb.select("CS 150") << endl;
     return 0;
 }

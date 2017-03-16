@@ -5,11 +5,17 @@ QT          += sql widgets
 
 SOURCES += \
     "../db/dbengine.cpp" \
-    "../db/classdb.cpp" \
+    "../db/coursedb.cpp" \
+    "../db/sectiondb.cpp" \
     main.cpp \
-    submission.cpp
+    course.cpp \
+    coursecontroller.cpp \
+    section.cpp
 
 HEADERS += \
     "../db/dbengine.h" \
-    "../db/classdb.h" \
-    submission.h
+    "../db/coursedb.h" \
+    "../db/sectiondb.h" \
+    course.h \
+    coursecontroller.h \
+    section.h
