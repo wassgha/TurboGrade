@@ -28,7 +28,10 @@ void Rubric::add_criterion(const QString name, Criterion* parent, int out_of) {
 
     Criterion *new_criterion = new Criterion(name, parent, out_of, this);
 
-    _criteria.push_back(new_criterion);
+    if (parent != nullptr)
+        parent->add_child(new_criterion);
+    else
+        _criteria.push_back(new_criterion);
 }
 
 /**
@@ -37,8 +40,9 @@ void Rubric::add_criterion(const QString name, Criterion* parent, int out_of) {
  * @return the criterion found
  */
 Criterion* Rubric::get_criterion(const QString name) {
-    for(Criterion* criterion:_criteria)
-        if (criterion->_name == name)
-            return criterion;
+    for(Criterion* criterion:_criteria) {
+        if (criterion->find_criterion(name) != nullptr)
+            return criterion->find_criterion(name);
+    }
     return nullptr;
 }

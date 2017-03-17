@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 {
     CourseController* courseController = new CourseController();
     AssignmentController* assignmentController = new AssignmentController(courseController);
+
 //    courseController->add_course("CS 105");
 //    courseController->add_course("CS 150");
 //    courseController->add_section("CS 105", "01");
@@ -22,6 +23,14 @@ int main(int argc, char *argv[])
 //    assignmentController->add_assignment("Red Black Tree", "Implement a red black tree");
 //    assignmentController->link_assignment("CS 150", "01", "Red Black Tree", "/Users/wassgha/Downloads/CS150_01");
 //    assignmentController->add_submission("CS 105", "02", "Darren Norton", "nortondj", "Binary Search Tree");
+
     courseController->show_courses();
+
+//    assignmentController->add_criterion("Binary Search Tree", "Correctness", NULL, 10);
+//    assignmentController->add_criterion("Binary Search Tree", "Design", NULL, 5);
+//    assignmentController->add_criterion("Binary Search Tree", "Comments", NULL, 2);
+//    assignmentController->add_criterion("Binary Search Tree", "JavaDoc", "Comments", 1);
+
+    assignmentController->show_rubrics();
     return 0;
 }

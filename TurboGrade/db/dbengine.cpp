@@ -89,7 +89,7 @@ DBEngine::DBEngine(QString connectionName)
     // Note: A rubric section is auto-suggested when it has no parent
     // Note: A rubric section is considered extra-credit if it is out of 0
     sql_query("CREATE TABLE IF NOT EXISTS rubric (id INTEGER PRIMARY KEY, \
-               rubric_name VARCHAR(100),\
+               name VARCHAR(100),\
                assignment INTEGER,\
                parent INTEGER,\
                grade_out_of INT,\

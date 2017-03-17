@@ -9,10 +9,12 @@ AssignmentController::AssignmentController(CourseController* courseController)
     _courseController   = courseController;
     _assignmentDB       = new AssignmentDB(this, _courseController);
     _submissionDB       = new SubmissionDB(this, _courseController);
+    _rubricDB           = new RubricDB(this, _courseController);
 
 
     _assignmentDB->load_all();
     _submissionDB->load_all();
+    _rubricDB->load_all();
 }
 
 /**
@@ -21,15 +23,16 @@ AssignmentController::AssignmentController(CourseController* courseController)
  */
 AssignmentController::~AssignmentController(){
 
-//    delete _submissionDB;
+    delete _submissionDB;
     delete _assignmentDB;
+    delete _rubricDB;
 
     for(Assignment* assignment:_assignments)
         delete assignment;
 }
 
 /**
- * @brief Assignment::add_assignment adds an assignment to the engine
+ * @brief AssignmentController::add_assignment adds an assignment to the engine
  * @param name name of the assignment
  * @param objective objective of the assignment
  * @param load whether to add to the database or only locally
@@ -46,8 +49,41 @@ void AssignmentController::add_assignment(const QString name,
         _assignmentDB->add(name, objective);
 }
 
+
 /**
- * @brief Assignment::add_submission adds a submission to a student
+ * @brief Assignment::add_criterion adds a criterion to the rubric of an assignment
+ * @param assignment_name name of the assignment
+ * @param name name of the criterion
+ * @param parent_name name of the criterion's parent
+ * @param out_of maximum grade attributed to the criterion
+ * @param load whether to add to the database or only locally
+ */
+void AssignmentController::add_criterion(const QString assignment_name,
+                                         const QString name,
+                                         const QString parent_name,
+                                         int out_of,
+                                         bool load)
+{
+    Assignment *assignment = get_assignment(assignment_name);
+    Criterion *parent = nullptr;
+    if (assignment != nullptr)
+        parent = assignment->_rubric->get_criterion(parent_name);
+    else
+        return;
+
+    assignment->_rubric->add_criterion(name, parent, out_of);
+
+    if (!load) {
+        if (parent != nullptr)
+            _rubricDB->add_criterion(name, _assignmentDB->select(assignment_name), _rubricDB->select(_assignmentDB->select(assignment_name), parent->_name), out_of);
+        else
+            _rubricDB->add_criterion(name, _assignmentDB->select(assignment_name), NULL, out_of);
+    }
+
+}
+
+/**
+ * @brief AssignmentController::add_submission adds a submission to a student
  * @param course_name name of the course
  * @param section_name name of the section
  * @param student_name name of the student
@@ -88,7 +124,7 @@ void AssignmentController::add_submission(const QString course_name,
 
 
 /**
- * @brief Assignment::add_submission adds a submission to a student
+ * @brief AssignmentController::add_submission adds a submission to a student
  * @param student the student who submitted
  * @param assignment the assignment the submission belongs to
  * @param load whether to add to the database or only locally
@@ -112,9 +148,11 @@ void AssignmentController::add_submission(Student* student,
 }
 
 /**
- * @brief CourseController::add_section adds a section to a course
+ * @brief AssignmentController::link_assignment adds an assignment to a section
  * @param course_name name of the course
- * @param name name of the section
+ * @param section_name name of the section
+ * @param assignment_name name of the assignment
+ * @param folder path to the folder that contains the submissions
  * @param load whether to add to the database or only locally
  */
 void AssignmentController::link_assignment(const  QString course_name,
@@ -135,9 +173,10 @@ void AssignmentController::link_assignment(const  QString course_name,
 
 
 /**
- * @brief CourseController::add_section adds a section to a course
- * @param course_name name of the course
- * @param name name of the section
+ * @brief AssignmentController::link_assignment adds an assignment to a section
+ * @param section the section to link the  assignment to
+ * @param assignment the assignment object
+ * @param folder path to the folder that contains the submissions
  * @param load whether to add to the database or only locally
  */
 void AssignmentController::link_assignment(Section* section,
@@ -166,6 +205,23 @@ Assignment* AssignmentController::get_assignment(const QString name) {
         if (assignment->_name == name)
             return assignment;
     return nullptr;
+}
+
+/**
+ * @brief AssignmentController::show_rubric prints the rubrics for assignments
+ */
+void AssignmentController::show_rubrics() {
+
+    std::cout<<std::endl<<"Showing rubrics"<<std::endl;
+
+    for(Assignment *assignment : _assignments) {
+        std::cout<<(assignment->_name).toUtf8().data()<<std::endl;
+            for(Criterion *criterion : assignment->_rubric->_criteria) {
+                std::cout<<"    ->"<<(criterion->_name).toUtf8().data()<< " (? / " << criterion->_out_of << ")" << std::endl;
+                criterion->show_children();
+            }
+    }
+
 }
 
 

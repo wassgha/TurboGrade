@@ -3,7 +3,7 @@
 
 /**
  * @brief SubmissionDB is the interface for the
- * assignments database table. It is used to add
+ * submission database table. It is used to add
  * and retrieve rows from the table.
  */
 
@@ -27,8 +27,10 @@ public:
     ~SubmissionDB();
 
 
-    // Adds a row to the table
+    // Adds a row to the submission table
     bool add(int student_id, int assignment_id);
+    // Adds a row to the file table
+    bool add_file(int submission_id, QString filename);
     // Gets row id matching submission
     int select(int student_id, int assignment_id);
     // Loads submissions and links them to the controller

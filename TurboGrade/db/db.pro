@@ -19,7 +19,8 @@ SOURCES     += \
             sectiondb.cpp \
             studentdb.cpp \
     assignmentdb.cpp \
-    submissiondb.cpp
+    submissiondb.cpp \
+    rubricdb.cpp
 
 HEADERS     += \
             dbengine.h \
@@ -36,4 +37,5 @@ HEADERS     += \
             sectiondb.h \
             studentdb.h \
     assignmentdb.h \
-    submissiondb.h
+    submissiondb.h \
+    rubricdb.h
