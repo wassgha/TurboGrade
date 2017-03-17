@@ -6,10 +6,11 @@ Student::Student()
     exit(0);
 }
 
-Student::Student(QString name, QString username)
+Student::Student(QString name, QString username, Section* section)
 {
     _name = name;
     _username = username;
+    _section = section;
 }
 
 Student::~Student()
@@ -25,7 +26,7 @@ Student::~Student()
  */
 void Student::add_submission(Assignment* assignment) {
 
-    Submission *new_submission = new Submission(assignment);
+    Submission *new_submission = new Submission(assignment, this);
 
     _submissions.push_back(new_submission);
 }

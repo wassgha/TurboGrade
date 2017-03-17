@@ -6,9 +6,10 @@ Section::Section()
     exit(0);
 }
 
-Section::Section(QString name)
+Section::Section(QString name, Course* course)
 {
     _name = name;
+    _course = course;
 }
 
 Section::~Section()
@@ -25,7 +26,7 @@ Section::~Section()
  */
 void Section::add_student(const QString name, const QString username) {
 
-    Student *new_student = new Student(name, username);
+    Student *new_student = new Student(name, username, this);
 
     _students.push_back(new_student);
 }

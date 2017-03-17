@@ -6,6 +6,10 @@
 #include <QString>
 #include "assignment.h"
 #include "submission.h"
+#include "section.h"
+
+class Section;
+class Submission;
 
 class Student
 {
@@ -13,7 +17,7 @@ public:
     // Constructor
     Student();
     // Parametrized constructor
-    Student(QString name, QString username);
+    Student(QString name, QString username, Section* section);
     // Destructor
     ~Student();
     // Add a student submission
@@ -21,6 +25,8 @@ public:
     // Find a submission
     Submission* get_submission(Assignment* assignment);
 
+    // Student's section
+    Section* _section;
     // Student name
     QString _name;
     // Student username

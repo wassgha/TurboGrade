@@ -13,6 +13,8 @@ SOURCES     += \
             "../engine/assignmentcontroller.cpp" \
             "../engine/assignment.cpp" \
             "../engine/submission.cpp" \
+            "../engine/rubric.cpp" \
+            "../engine/criterion.cpp" \
             coursedb.cpp \
             sectiondb.cpp \
             studentdb.cpp \
@@ -28,6 +30,8 @@ HEADERS     += \
             "../engine/assignmentcontroller.h" \
             "../engine/assignment.h" \
             "../engine/submission.h" \
+            "../engine/rubric.h" \
+            "../engine/criterion.h" \
             coursedb.h \
             sectiondb.h \
             studentdb.h \

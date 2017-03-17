@@ -10,13 +10,10 @@ Assignment::Assignment(const QString name, const QString objective)
 {
     _name = name;
     _objective = objective;
+    _rubric = new Rubric(this);
 }
 
 Assignment::~Assignment()
 {
-//    delete _rubric;
+    delete _rubric;
 }
-
-//Assignment::assign_rubric(Rubric * rubric) {
-//    _rubric = rubric;
-//}

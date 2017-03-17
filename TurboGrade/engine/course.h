@@ -6,6 +6,8 @@
 #include <QString>
 #include "section.h"
 
+class Section;
+
 class Course
 {
 public:

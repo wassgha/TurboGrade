@@ -5,6 +5,9 @@
 #include <vector>
 #include <QString>
 #include "assignment.h"
+#include "rubric.h"
+
+class Rubric;
 
 class Assignment
 {
@@ -15,12 +18,10 @@ public:
     Assignment(const QString name, const QString objective);
     // Destructor
     ~Assignment();
-    // Assign rubric
-//    void assign_rubric(Rubric* rubric)
 
     QString _name;
     QString _objective;
-//    Rubric* _rubric;
+    Rubric* _rubric;
 };
 
 #endif // ASSIGNMENT_H

@@ -6,9 +6,10 @@ Submission::Submission()
     exit(0);
 }
 
-Submission::Submission(Assignment *assignment)
+Submission::Submission(Assignment *assignment, Student* student)
 {
     _assignment = assignment;
+    _student = student;
 }
 
 Submission::~Submission()

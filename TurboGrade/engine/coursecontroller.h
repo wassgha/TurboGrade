@@ -49,12 +49,15 @@ public:
 
     // Clears all locally cached course data (sections)
     void clear_course(const QString course_name);
+
     // Clears all locally cached section data (students)
     void clear_section_students(const QString course_name,
                                 const QString section_name);
+
     // Clears all locally cached section data (assignments)
     void clear_section_assignments(const QString course_name,
                                    const QString section_name);
+
     // Clears all locally cached student data (submissions)
     void clear_student_submissions(const QString course_name,
                                    const QString section_name,

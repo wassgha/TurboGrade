@@ -32,6 +32,12 @@ public:
                          const QString folder,
                          bool load = false);
 
+    // Link assignment to a section by objects
+    void link_assignment(Section* section,
+                        Assignment* assignment,
+                        const QString folder,
+                        bool load);
+
     // Adds a submission to a student
     void add_submission(const QString course_name,
                         const QString section_name,
@@ -39,6 +45,11 @@ public:
                         const QString student_username,
                         const QString assignment_name,
                         bool load = false);
+
+    // Adds a submission to a student by objects
+    void add_submission(Student* student,
+                        Assignment* assignment,
+                        bool load);
 
     // Searches for an assignment by name and returns it
     Assignment* get_assignment(const QString name);

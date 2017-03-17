@@ -17,7 +17,9 @@ SOURCES     += \
             student.cpp \
             assignmentcontroller.cpp \
             submission.cpp \
-            assignment.cpp
+            assignment.cpp \
+            rubric.cpp \
+            criterion.cpp
 
 HEADERS     += \
             "../db/dbengine.h" \
@@ -32,4 +34,6 @@ HEADERS     += \
             student.h \
             assignmentcontroller.h \
             submission.h \
-            assignment.h
+            assignment.h \
+            rubric.h \
+            criterion.h

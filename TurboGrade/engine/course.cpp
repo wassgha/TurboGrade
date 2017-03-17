@@ -23,7 +23,7 @@ Course::~Course()
  */
 void Course::add_section(const QString name) {
 
-    Section *new_section = new Section(name);
+    Section *new_section = new Section(name, this);
 
     _sections.push_back(new_section);
 }

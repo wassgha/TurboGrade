@@ -4,7 +4,11 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+#include "course.h"
 #include "student.h"
+
+class Course;
+class Student;
 
 class Section
 {
@@ -12,7 +16,7 @@ public:
     // Constructor
     Section();
     // Parametrized constructor
-    Section(QString name);
+    Section(QString name, Course* course);
     // Destructor
     ~Section();
     // Add a student to the section
@@ -24,6 +28,8 @@ public:
     // Find an assignment in the section
     std::pair<Assignment*, QString> get_assignment(const QString name);
 
+    // Course
+    Course* _course;
     // Section name
     QString _name;
     // Section students
