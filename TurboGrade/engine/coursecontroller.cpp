@@ -180,6 +180,36 @@ void CourseController::clear_section_assignments(const QString course_name, cons
 
 }
 
+
+/**
+ * @brief CourseController::clear_student_submissions clears cached data from student (removes submissions)
+ * @param course_name name of the course
+ * @param section_name name of the section
+ * @param username student unique identifier
+ */
+void CourseController::clear_student_submissions(const QString course_name, const QString section_name, const QString username) {
+
+    Course *cur_course = get_course(course_name);
+
+    Section *cur_section = nullptr;
+
+    if (cur_course != nullptr)
+        cur_section = cur_course->get_section(section_name);
+    else
+        return;
+
+    Student *cur_student = nullptr;
+
+    if (cur_section != nullptr)
+        cur_student = cur_section->get_student(username);
+    else
+        return;
+
+    if (cur_student != nullptr)
+        cur_student->_submissions.clear();
+
+}
+
 /**
  * @brief CourseController::show_courses Displays courses (used for
  * debugging purposes)
@@ -189,8 +219,12 @@ void CourseController::show_courses() {
         std::cout<<(course->_name).toUtf8().data()<<std::endl;
             for(Section *section : course->_sections) {
                 std::cout<<"    ->"<<(section->_name).toUtf8().data()<<std::endl;
-                for(Student *student : section->_students)
+                for(Student *student : section->_students) {
                     std::cout<<"        ->"<< (student->_name).toUtf8().data() <<" (" << (student->_username).toUtf8().data() << ")"<<std::endl;
+                    for(Submission *submission : student->_submissions) {
+                        std::cout<<"            -> Submission for "<< (submission->_assignment->_name).toUtf8().data() <<std::endl;
+                    }
+                }
                 for(std::pair<Assignment*, QString> assignment : section->_assignments)
                     std::cout<<"        *"<< (assignment.first->_name).toUtf8().data() <<std::endl;
             }

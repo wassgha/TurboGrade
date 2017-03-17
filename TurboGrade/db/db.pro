@@ -16,7 +16,8 @@ SOURCES     += \
             coursedb.cpp \
             sectiondb.cpp \
             studentdb.cpp \
-    assignmentdb.cpp
+    assignmentdb.cpp \
+    submissiondb.cpp
 
 HEADERS     += \
             dbengine.h \
@@ -30,4 +31,5 @@ HEADERS     += \
             coursedb.h \
             sectiondb.h \
             studentdb.h \
-    assignmentdb.h
+    assignmentdb.h \
+    submissiondb.h

@@ -9,6 +9,7 @@ SOURCES     += \
             "../db/sectiondb.cpp" \
             "../db/studentdb.cpp" \
             "../db/assignmentdb.cpp" \
+            "../db/submissiondb.cpp" \
             main.cpp \
             course.cpp \
             coursecontroller.cpp \
@@ -23,7 +24,8 @@ HEADERS     += \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \
             "../db/studentdb.h" \
-            "../db/assignmentdb.cpp" \
+            "../db/assignmentdb.h" \
+            "../db/submissiondb.h" \
             course.h \
             coursecontroller.h \
             section.h \

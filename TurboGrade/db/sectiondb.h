@@ -32,7 +32,7 @@ public:
     // Load all sections to controller
     void load_all();
     // Load sections for a specific course to controller
-    void load_course_sections(QString course_name);
+    void load_course_sections(int course_id);
 
 
     // Course Controller

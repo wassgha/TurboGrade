@@ -117,12 +117,9 @@ void StudentDB::load_all() {
 /**
  * @brief StudentDB::load_section_students loads a specific section's
  * students to the controller
- * @param course_name the course the sections belongs to
- * @param section_name the section whose students will be loaded
+ * @param section_id the section students belong to
  */
-void StudentDB::load_section_students(QString course_name, QString section_name) {
-
-    _courseController->clear_section_students(course_name, section_name);
+void StudentDB::load_section_students(int section_id) {
 
     QSqlQuery query(db);
 
@@ -130,12 +127,11 @@ void StudentDB::load_section_students(QString course_name, QString section_name)
                   "FROM student, section, course "
                   "WHERE section.course_id = course.id "
                   "AND student.section_id = section.id"
-                  "AND student.section_id = (SELECT id FROM section WHERE name = ?)"
-                  "AND course.id = (SELECT id FROM course WHERE name = ?)");
+                  "AND student.section_id = ?"
+                  "AND course.id = section.course_id");
 
 
-    query.addBindValue(section_name);
-    query.addBindValue(course_name);
+    query.addBindValue(section_id);
 
     // Execute the query
     if (!query.exec()) {

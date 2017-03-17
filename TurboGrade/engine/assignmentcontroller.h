@@ -7,7 +7,7 @@
 #include "coursecontroller.h"
 #include "assignment.h"
 #include "../db/assignmentdb.h"
-//#include "../db/submissiondb.h"
+#include "../db/submissiondb.h"
 
 class AssignmentDB;
 class SubmissionDB;
@@ -34,10 +34,11 @@ public:
 
     // Adds a submission to a student
     void add_submission(const QString course_name,
-                         const QString section_name,
-                         const QString student_name,
-                         const QString assignment_name,
-                         bool load = false);
+                        const QString section_name,
+                        const QString student_name,
+                        const QString student_username,
+                        const QString assignment_name,
+                        bool load = false);
 
     // Searches for an assignment by name and returns it
     Assignment* get_assignment(const QString name);

@@ -8,11 +8,11 @@ AssignmentController::AssignmentController(CourseController* courseController)
 {
     _courseController   = courseController;
     _assignmentDB       = new AssignmentDB(this, _courseController);
-//    _submissionDB       = new SubmissionDB(this);
+    _submissionDB       = new SubmissionDB(this, _courseController);
 
 
     _assignmentDB->load_all();
-//    _submissionDB->load_all();
+    _submissionDB->load_all();
 }
 
 /**
@@ -44,6 +44,46 @@ void AssignmentController::add_assignment(const QString name,
 
     if (!load)
         _assignmentDB->add(name, objective);
+}
+
+/**
+ * @brief Assignment::add_submission adds a submission to a student
+ * @param course_name name of the course
+ * @param section_name name of the section
+ * @param student_name name of the student
+ * @param assignment_name name of the assignment
+ * @param load whether to add to the database or only locally
+ */
+void AssignmentController::add_submission(const QString course_name,
+                                          const QString section_name,
+                                          const QString student_name,
+                                          const QString student_username,
+                                          const QString assignment_name,
+                                          bool load) {
+
+    Submission *new_submission = new Submission(get_assignment(assignment_name));
+    Course *cur_course = _courseController->get_course(course_name);
+    Section *cur_section = nullptr;
+    if (cur_course != nullptr)
+        cur_section = cur_course->get_section(section_name);
+    else
+        return;
+
+    Student *cur_student = nullptr;
+
+    if (cur_section != nullptr)
+        cur_student = cur_section->get_student(student_username);
+    else
+        return;
+
+    if (cur_student != nullptr)
+        cur_student->_submissions.push_back(new_submission);
+    else
+        return;
+
+    if (!load)
+        _submissionDB->add(_courseController->_studentDB->select(course_name, section_name, student_name, student_username),
+                           _assignmentDB->select(assignment_name));
 }
 
 /**

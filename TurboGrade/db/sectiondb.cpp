@@ -104,19 +104,17 @@ void SectionDB::load_all() {
 /**
  * @brief SectionDB::load_course_sections loads a specific course's
  * sections to the controller
- * @param course_name the course whose sections will be loaded
+ * @param course_id the course whose sections will be loaded
  */
-void SectionDB::load_course_sections(QString course_name) {
-
-    _courseController->clear_course(course_name);
+void SectionDB::load_course_sections(int course_id) {
 
     QSqlQuery query(db);
 
     query.prepare("SELECT section.id, section.name, course.name AS course_name"
                   " FROM section, course WHERE section.course_id = course.id AND"
-                  " course.id = (SELECT id FROM course WHERE name = ?)");
+                  " course.id = ?");
 
-    query.addBindValue(course_name);
+    query.addBindValue(course_id);
 
     // Execute the query
     if (!query.exec()) {

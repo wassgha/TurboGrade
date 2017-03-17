@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
 //    assignmentController->link_assignment("CS 105", "02", "Binary Search Tree", "/Users/wassgha/Downloads/CS105_02");
 //    assignmentController->add_assignment("Red Black Tree", "Implement a red black tree");
 //    assignmentController->link_assignment("CS 150", "01", "Red Black Tree", "/Users/wassgha/Downloads/CS150_01");
+//    assignmentController->add_submission("CS 105", "02", "Darren Norton", "nortondj", "Binary Search Tree");
     courseController->show_courses();
     return 0;
 }
