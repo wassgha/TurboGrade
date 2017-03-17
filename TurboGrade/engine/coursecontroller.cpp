@@ -94,7 +94,7 @@ void CourseController::add_student(const  QString course_name,
         return;
 
     if (!load)
-        _studentDB->add(_courseDB->select(cur_course->_name), name, username);
+        _studentDB->add(_sectionDB->select(cur_course->_name, cur_section->_name), name, username);
 
 }
 

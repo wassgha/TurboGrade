@@ -14,9 +14,13 @@ int main(int argc, char *argv[])
 //    courseController->add_section("CS 105", "02");
 //    courseController->add_student("CS 105", "01", "Wassim Gharbi", "gharbiw");
 //    courseController->add_student("CS 105", "02", "Darren Norton", "nortondj");
+//    courseController->add_section("CS 150", "01");
+//    courseController->add_student("CS 150", "01", "Sam Cutrone", "cutrones");
 //    assignmentController->add_assignment("Binary Search Tree", "Implement a binary search tree with polymorphism");
 //    assignmentController->link_assignment("CS 105", "01", "Binary Search Tree", "/Users/wassgha/Downloads/CS105_01");
 //    assignmentController->link_assignment("CS 105", "02", "Binary Search Tree", "/Users/wassgha/Downloads/CS105_02");
+//    assignmentController->add_assignment("Red Black Tree", "Implement a red black tree");
+//    assignmentController->link_assignment("CS 150", "01", "Red Black Tree", "/Users/wassgha/Downloads/CS150_01");
     courseController->show_courses();
     return 0;
 }

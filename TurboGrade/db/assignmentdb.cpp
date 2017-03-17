@@ -128,8 +128,10 @@ void AssignmentDB::load_all() {
         link_query.prepare("SELECT assignment_section.folder AS folder, assignment.name AS assignment_name, section.name AS section_name, course.name AS course_name "
                       "FROM assignment_section, assignment, section, course "
                       "WHERE assignment_section.assignment = assignment.id "
+                      "AND assignment.id = ? "
                       "AND assignment_section.section = section.id "
                       "AND section.course_id = course.id");
+        link_query.addBindValue(query.value(id_field).toString());
 
         // Execute the query
         if (!link_query.exec()) {
@@ -198,7 +200,8 @@ void AssignmentDB::load_section_assignments(QString course_name, QString section
 
         link_query.prepare("SELECT assignment_section.folder AS folder, assignment.name AS assignment_name, section.name AS section_name, course.name AS course_name "
                       "FROM assignment_section, assignment, section, course "
-                      "WHERE assignment_section.assignment = ? "
+                      "WHERE assignment_section.assignment = assignment.id "
+                      "AND assignment.id = ? "
                       "AND assignment_section.section = section.id"
                       "AND section.course_id = course.id");
         link_query.addBindValue(query.value(id_field).toInt());
