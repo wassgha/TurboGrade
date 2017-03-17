@@ -39,11 +39,12 @@ DBEngine::DBEngine(QString connectionName)
     sql_query("CREATE TABLE IF NOT EXISTS student (id INTEGER PRIMARY KEY, \
                 section_id INTEGER, \
                 name VARCHAR(50),\
+                username VARCHAR(50),\
                 FOREIGN KEY(section_id) REFERENCES section(id))");
 
     // Assignment Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment (id INTEGER PRIMARY KEY, \
-               name VARCHAR(50),\
+               name VARCHAR(50) UNIQUE,\
                objective TEXT)");
 
     // AssignmentSection Table
@@ -57,9 +58,9 @@ DBEngine::DBEngine(QString connectionName)
     // Submission Table
     sql_query("CREATE TABLE IF NOT EXISTS submission (id INTEGER PRIMARY KEY, \
                student INTEGER,\
-               assignment_section INTEGER,\
+               assignment INTEGER,\
               FOREIGN KEY(student) REFERENCES student(id),\
-              FOREIGN KEY(assignment_section) REFERENCES assignment_section(id))");
+              FOREIGN KEY(assignment) REFERENCES assignment(id))");
 
     // File Table
     sql_query("CREATE TABLE IF NOT EXISTS file (id INTEGER PRIMARY KEY, \

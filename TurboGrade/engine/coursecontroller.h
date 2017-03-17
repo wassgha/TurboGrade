@@ -5,6 +5,9 @@
 #include <vector>
 #include <algorithm>
 #include "course.h"
+#include "section.h"
+#include "student.h"
+#include "assignment.h"
 #include "../db/coursedb.h"
 #include "../db/sectiondb.h"
 #include "../db/studentdb.h"
@@ -32,7 +35,14 @@ public:
     void add_student(const QString course_name,
                      const QString section_name,
                      const QString name,
+                     const QString username,
                      bool load = false);
+    // Adds an assignment to a section
+    void link_assignment(const QString course_name,
+                         const QString section_name,
+                         Assignment    *assignment,
+                         const QString folder);
+
 
     // Searches for a course by name and returns it
     Course* get_course(const QString name);
@@ -40,20 +50,15 @@ public:
     // Clears all locally cached course data (sections)
     void clear_course(const QString course_name);
     // Clears all locally cached section data (students)
-    void clear_section(const QString course_name,
-                       const QString section_name);
+    void clear_section_students(const QString course_name,
+                                const QString section_name);
+    // Clears all locally cached section data (assignments)
+    void clear_section_assignments(const QString course_name,
+                                   const QString section_name);
 
     // Prints all courses and sections
     void show_courses();
 
-
-private:
-    /*
-     * Local containers
-     */
-
-    // All courses in the engine
-    std::vector<Course*> _courses;
 
     /*
      * Database containers
@@ -65,6 +70,14 @@ private:
     SectionDB *_sectionDB;
     // Student database table
     StudentDB *_studentDB;
+
+private:
+    /*
+     * Local containers
+     */
+
+    // All courses in the engine
+    std::vector<Course*> _courses;
 };
 
 #endif // CLASSCONTROLLER_H

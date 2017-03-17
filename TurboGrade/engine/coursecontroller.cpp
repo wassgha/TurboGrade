@@ -25,7 +25,8 @@ CourseController::~CourseController(){
     delete _sectionDB;
     delete _studentDB;
 
-    _courses.clear();
+    for(Course* course:_courses)
+        delete course;
 }
 
 /**
@@ -67,14 +68,17 @@ void CourseController::add_section(const QString course_name,
 }
 
 /**
- * @brief CourseController::add_section adds a section to a course
+ * @brief CourseController::add_student adds a student to a section
  * @param course_name name of the course
- * @param name name of the section
+ * @param section_name name of the section
+ * @param name name of the student
+ * @param username student identifier
  * @param load whether to add to the database or only locally
  */
 void CourseController::add_student(const  QString course_name,
                                    const QString section_name,
                                    const QString name,
+                                   const QString username,
                                    bool load)
 {
     Course *cur_course = get_course(course_name);
@@ -85,13 +89,37 @@ void CourseController::add_student(const  QString course_name,
         return;
 
     if (cur_section != nullptr)
-        cur_section->add_student(name);
+        cur_section->add_student(name, username);
     else
         return;
 
     if (!load)
-        _studentDB->add(_courseDB->select(cur_course->_name), name);
+        _studentDB->add(_courseDB->select(cur_course->_name), name, username);
 
+}
+
+
+/**
+ * @brief CourseController::link_assignment adds an assignment to a section
+ * @param course_name name of the course
+ * @param name name of the section
+ */
+void CourseController::link_assignment(const  QString course_name,
+                                       const QString section_name,
+                                       Assignment* assignment,
+                                       const QString folder)
+{
+    Course *cur_course = get_course(course_name);
+    Section *cur_section = nullptr;
+    if (cur_course != nullptr)
+        cur_section = cur_course->get_section(section_name);
+    else
+        return;
+
+    if (cur_section != nullptr)
+        cur_section->add_assignment(assignment, folder);
+    else
+        return;
 }
 
 /**
@@ -114,22 +142,41 @@ Course* CourseController::get_course(const QString name) {
 void CourseController::clear_course(const QString course_name) {
 
     Course *cur_course = get_course(course_name);
+    for(Section* section:cur_course->_sections)
+        delete section;
     cur_course->_sections.clear();
 
 }
 
 
 /**
- * @brief CourseController::clear_section clears cached data from section
+ * @brief CourseController::clear_section_students clears cached data from section
  * (removes students)
  * @param course_name name of the course
  * @param section_name name of the section
  */
-void CourseController::clear_section(const QString course_name, const QString section_name) {
+void CourseController::clear_section_students(const QString course_name, const QString section_name) {
 
     Course *cur_course = get_course(course_name);
     Section *cur_section = cur_course->get_section(section_name);
+    for(Student* student:cur_section->_students)
+        delete student;
     cur_section->_students.clear();
+
+}
+
+/**
+ * @brief CourseController::clear_section_assignments clears cached data from section
+ * (removes assignments)
+ * @param course_name name of the course
+ * @param section_name name of the section
+ */
+void CourseController::clear_section_assignments(const QString course_name, const QString section_name) {
+
+    Course *cur_course = get_course(course_name);
+    Section *cur_section = cur_course->get_section(section_name);
+
+    cur_section->_assignments.clear();
 
 }
 
@@ -143,7 +190,9 @@ void CourseController::show_courses() {
             for(Section *section : course->_sections) {
                 std::cout<<"    ->"<<(section->_name).toUtf8().data()<<std::endl;
                 for(Student *student : section->_students)
-                    std::cout<<"        ->"<<(student->_name).toUtf8().data()<<std::endl;
+                    std::cout<<"        ->"<< (student->_name).toUtf8().data() <<" (" << (student->_username).toUtf8().data() << ")"<<std::endl;
+                for(std::pair<Assignment*, QString> assignment : section->_assignments)
+                    std::cout<<"        *"<< (assignment.first->_name).toUtf8().data() <<std::endl;
             }
     }
 }

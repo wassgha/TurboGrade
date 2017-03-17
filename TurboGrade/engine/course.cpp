@@ -13,7 +13,8 @@ Course::Course(QString name)
 
 Course::~Course()
 {
-    _sections.clear();
+    for(Section* section:_sections)
+        delete section;
 }
 
 /**
