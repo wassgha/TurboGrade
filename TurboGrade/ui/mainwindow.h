@@ -2,8 +2,11 @@
 #define MAINWINDOW_H
 
 #include "../tools/syntaxhighlight.h"
+#include "../tools/codeeditor.h"
 
 #include <QMainWindow>
+#include <QModelIndex>
+#include <QFileSystemModel>
 
 QT_BEGIN_NAMESPACE
 class QTextEdit;
@@ -27,6 +30,8 @@ public slots:
     void newFile();
     void openFile(const QString &path = QString());
     void getSelection();
+    void loadFile(QModelIndex item);
+    void openDir(const QString &path = QString());
 
 private:
     Ui::MainWindow *ui;
@@ -34,10 +39,11 @@ private:
     void setupFileMenu();
     void setupHelpMenu();
 
-    QTextEdit *editor;
+    CodeEditor *editor;
     SyntaxHighlighter *highlighter;
     QWidget* popup = nullptr;
     QLabel* pos = nullptr;
+    QFileSystemModel *model;
 };
 
 #endif // MAINWINDOW_H

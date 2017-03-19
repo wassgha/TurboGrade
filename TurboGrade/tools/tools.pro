@@ -4,7 +4,9 @@ CONFIG      -= app_bundle
 QT          += widgets
 
 SOURCES += main.cpp \
-    syntaxhighlight.cpp
+    syntaxhighlight.cpp \
+    codeeditor.cpp
 
 HEADERS += \
-    syntaxhighlight.h
+    syntaxhighlight.h \
+    codeeditor.h

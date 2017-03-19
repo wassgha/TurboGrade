@@ -13,20 +13,33 @@ MainWindow::MainWindow(QWidget *parent)
     setupHelpMenu();
     setupEditor("MainWindow.cpp");
 
-    setCentralWidget(editor);
+    ui->centralWidget->layout()->addWidget(editor);
+    model = new QFileSystemModel;
+    model->setRootPath(QDir::currentPath()+ "/../../../../../");
+    ui->treeView->setModel(model);
+    ui->treeView->setRootIndex(model->index(QDir::currentPath()+ "/../../../../../"));
+
+    ui->treeView->hideColumn(1);
+    ui->treeView->hideColumn(2);
+    ui->treeView->hideColumn(3);
+
     setWindowTitle(tr("Code Editor"));
+    this->connect(ui->treeView, SIGNAL(clicked( QModelIndex )), this, SLOT(loadFile(QModelIndex)));
+
     this->connect(editor,  SIGNAL(selectionChanged()), this, SLOT(getSelection()));
 }
 
 void MainWindow::getSelection() {
-    if(popup == nullptr)
+    if(popup == nullptr) {
             popup = new QWidget(NULL, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-    if(!popup->isVisible()) {
-        pos = new QLabel();
-        QHBoxLayout* layout = new QHBoxLayout();
-        layout->addWidget(pos);
-        popup->setLayout(layout);
-        popup->show();
+            pos = new QLabel();
+            QHBoxLayout* layout = new QHBoxLayout();
+            layout->addWidget(pos);
+            popup->setLayout(layout);
+    }
+    if (editor->textCursor().selectionEnd() == editor->textCursor().selectionStart()) {
+        popup->hide();
+        return;
     }
     popup->move(this->cursor().pos());
     popup->show();
@@ -39,7 +52,7 @@ void MainWindow::getSelection() {
 
 MainWindow::~MainWindow()
 {
-    delete popup->layout();
+
     delete pos;
     delete popup;
     delete highlighter;
@@ -77,6 +90,31 @@ void MainWindow::openFile(const QString &path)
     }
 }
 
+void MainWindow::loadFile(QModelIndex item)
+{
+    if (!model->isDir(item)) {
+        QFile file(model->filePath(item));
+        if (file.open(QFile::ReadOnly | QFile::Text))
+            editor->setPlainText(file.readAll());
+    }
+}
+
+void MainWindow::openDir(const QString &path)
+{
+    QString dirName = path;
+
+    if (dirName.isNull())
+        dirName = QFileDialog::getExistingDirectory(this,
+                                               tr("Open Folder"), "",
+                                               QFileDialog::ShowDirsOnly
+                                               | QFileDialog::DontResolveSymlinks);
+
+    if (!dirName.isEmpty()) {
+        model->setRootPath(dirName);
+        ui->treeView->setRootIndex(model->index(dirName));
+    }
+}
+
 void MainWindow::setupEditor(const QString &file_name)
 {
     QFont font;
@@ -85,7 +123,7 @@ void MainWindow::setupEditor(const QString &file_name)
     font.setFixedPitch(true);
     font.setPointSize(12);
 
-    editor = new QTextEdit;
+    editor = new CodeEditor(this);
     editor->setFont(font);
 
     highlighter = new SyntaxHighlighter(editor->document());
@@ -100,7 +138,7 @@ void MainWindow::setupFileMenu()
     menuBar()->addMenu(fileMenu);
 
     fileMenu->addAction(tr("&New"), this, SLOT(newFile()), QKeySequence::New);
-    fileMenu->addAction(tr("&Open..."), this, SLOT(openFile()), QKeySequence::Open);
+    fileMenu->addAction(tr("&Open..."), this, SLOT(openDir()), QKeySequence::Open);
     fileMenu->addAction(tr("E&xit"), qApp, SLOT(quit()), QKeySequence::Quit);
 }
 

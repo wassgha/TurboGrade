@@ -48,53 +48,62 @@
 **
 ****************************************************************************/
 
-#ifndef SYNTAXHIGHLIGHT_H
-#define SYNTAXHIGHLIGHT_H
+#ifndef CODEEDITOR_H
+#define CODEEDITOR_H
 
-/**
- * @brief SyntaxHighlighter is used to format
- * code blocks used in the code editor.
- *
- * Original source obtained from Qt Examples,
- * modified as needed.
- */
-
-#include <QSyntaxHighlighter>
-#include <QTextCharFormat>
+#include <QPlainTextEdit>
+#include <QObject>
 
 QT_BEGIN_NAMESPACE
-class QTextDocument;
+class QPaintEvent;
+class QResizeEvent;
+class QSize;
+class QWidget;
 QT_END_NAMESPACE
 
-class SyntaxHighlighter : public QSyntaxHighlighter
+class LineNumberArea;
+
+class CodeEditor : public QPlainTextEdit
 {
     Q_OBJECT
 
 public:
-    SyntaxHighlighter(QTextDocument *parent = 0);
+    CodeEditor(QWidget *parent = 0);
+
+    void lineNumberAreaPaintEvent(QPaintEvent *event);
+    int lineNumberAreaWidth();
 
 protected:
-    void highlightBlock(const QString &text) override;
+    void resizeEvent(QResizeEvent *event) override;
+
+private slots:
+    void updateLineNumberAreaWidth(int newBlockCount);
+    void highlightCurrentLine();
+    void updateLineNumberArea(const QRect &, int);
 
 private:
-    struct HighlightingRule
-    {
-        QRegExp pattern;
-        QTextCharFormat format;
-    };
-    QVector<HighlightingRule> highlightingRules;
-
-    QRegExp commentStartExpression;
-    QRegExp commentEndExpression;
-
-    QTextCharFormat keywordFormat;
-    QTextCharFormat classFormat;
-    QTextCharFormat singleLineCommentFormat;
-    QTextCharFormat multiLineCommentFormat;
-    QTextCharFormat quotationFormat;
-    QTextCharFormat functionFormat;
-    QTextCharFormat typeFormat;
-    QTextCharFormat controlflowFormat;
+    QWidget *lineNumberArea;
 };
 
-#endif // SYNTAXHIGHLIGHT_H
+
+class LineNumberArea : public QWidget
+{
+public:
+    LineNumberArea(CodeEditor *editor) : QWidget(editor) {
+        codeEditor = editor;
+    }
+
+    QSize sizeHint() const override {
+        return QSize(codeEditor->lineNumberAreaWidth(), 0);
+    }
+
+protected:
+    void paintEvent(QPaintEvent *event) override {
+        codeEditor->lineNumberAreaPaintEvent(event);
+    }
+
+private:
+    CodeEditor *codeEditor;
+};
+
+#endif
