@@ -54,6 +54,17 @@
 
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
+
+    QFont font;
+
+    font.setFamily("Courier");
+    font.setStyleHint(QFont::TypeWriter);
+    font.setFixedPitch(true);
+    font.setPointSize(12);
+
+    setFont(font);
+
+    syntaxHighlighter = new SyntaxHighlighter(this->document());
     lineNumberArea = new LineNumberArea(this);
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));

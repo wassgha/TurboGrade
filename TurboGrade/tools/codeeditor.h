@@ -53,6 +53,7 @@
 
 #include <QPlainTextEdit>
 #include <QObject>
+#include "syntaxhighlight.h"
 
 QT_BEGIN_NAMESPACE
 class QPaintEvent;
@@ -62,6 +63,7 @@ class QWidget;
 QT_END_NAMESPACE
 
 class LineNumberArea;
+class SyntaxHighlighter;
 
 class CodeEditor : public QPlainTextEdit
 {
@@ -83,6 +85,7 @@ private slots:
 
 private:
     QWidget *lineNumberArea;
+    SyntaxHighlighter *syntaxHighlighter;
 };
 
 
