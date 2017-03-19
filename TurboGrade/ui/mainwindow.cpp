@@ -16,9 +16,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->treeView->setModel(model);
     ui->treeView->setRootIndex(model->index(QDir::currentPath()+ "/../../../../../"));
 
+    ui->treeView->setHeaderHidden(true);
     ui->treeView->hideColumn(1);
     ui->treeView->hideColumn(2);
     ui->treeView->hideColumn(3);
+    ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
 
     setWindowTitle(tr("Grading"));
     this->connect(ui->treeView, SIGNAL(clicked( QModelIndex )), this, SLOT(loadFile(QModelIndex)));
