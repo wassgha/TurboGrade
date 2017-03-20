@@ -146,6 +146,7 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
             painter.setPen(Qt::darkGray);
+            painter.setFont(QFont("Courier", 10));
             painter.drawText(-5, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignRight, number);
         }

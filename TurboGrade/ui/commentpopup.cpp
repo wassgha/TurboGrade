@@ -2,9 +2,10 @@
 #include "ui_commentpopup.h"
 
 CommentPopup::CommentPopup(QWidget *parent) :
-    QWidget(parent, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint),
+    QWidget(parent, Qt::Tool | Qt::FramelessWindowHint),
     ui(new Ui::CommentPopup)
 {
+    setAttribute(Qt::WA_ShowWithoutActivating);
     ui->setupUi(this);
 }
 

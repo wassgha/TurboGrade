@@ -34,7 +34,7 @@ private:
     Ui::MainWindow *ui;
     void setupEditor(const QString &file_name);
 
-    CommentPopup* popup = new CommentPopup();
+    CommentPopup* popup = new CommentPopup(this);
     QFileSystemModel *model;
 };
 

@@ -12,15 +12,19 @@ MainWindow::MainWindow(QWidget *parent)
     setupEditor("MainWindow.cpp");
 
     model = new QFileSystemModel;
-    model->setRootPath(QDir::currentPath()+ "/../../../../../");
+    model->setRootPath(QDir::currentPath()+ "/../../../../../yikyak");
     ui->treeView->setModel(model);
-    ui->treeView->setRootIndex(model->index(QDir::currentPath()+ "/../../../../../"));
+    ui->treeView->setRootIndex(model->index(QDir::currentPath()+ "/../../../../../yikyak"));
 
     ui->treeView->setHeaderHidden(true);
     ui->treeView->hideColumn(1);
     ui->treeView->hideColumn(2);
     ui->treeView->hideColumn(3);
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
+
+    ui->run->setIcon(ui->run->style()->standardIcon(QStyle::SP_MediaPlay));
+    ui->overview->setIcon(ui->overview->style()->standardIcon(QStyle::SP_DialogApplyButton));
+
 
     setWindowTitle(tr("Grading"));
     this->connect(ui->treeView, SIGNAL(clicked( QModelIndex )), this, SLOT(loadFile(QModelIndex)));

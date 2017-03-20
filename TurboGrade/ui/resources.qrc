@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/logo">
+        <file>logo.png</file>
+        <file>logodark.png</file>
+    </qresource>
+    <qresource prefix="/misc">
+        <file>splitter.png</file>
+    </qresource>
+</RCC>
