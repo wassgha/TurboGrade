@@ -59,10 +59,16 @@ QSplitter::handle:horizontal {
       </property>
       <widget class="QTreeView" name="treeView">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>0</height>
+        </size>
        </property>
        <property name="maximumSize">
         <size>
@@ -72,7 +78,7 @@ QSplitter::handle:horizontal {
        </property>
        <property name="baseSize">
         <size>
-         <width>150</width>
+         <width>0</width>
          <height>0</height>
         </size>
        </property>
@@ -83,7 +89,14 @@ QSplitter::handle:horizontal {
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="CodeEditor" name="editor" native="true"/>
+      <widget class="CodeEditor" name="editor" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </widget>
     </item>
     <item row="0" column="0">

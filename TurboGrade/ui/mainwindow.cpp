@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->overview->setIcon(ui->overview->style()->standardIcon(QStyle::SP_DialogApplyButton));
 
 
-    setWindowTitle(tr("Grading"));
+    setWindowTitle(tr("TurboGrade - Grading submission"));
     this->connect(ui->treeView, SIGNAL(clicked( QModelIndex )), this, SLOT(loadFile(QModelIndex)));
 
     this->connect(ui->editor,  SIGNAL(selectionChanged()), this, SLOT(getSelection()));
