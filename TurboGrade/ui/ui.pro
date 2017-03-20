@@ -27,10 +27,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp\
         "../tools/syntaxhighlight.cpp"\
-        "../tools/codeeditor.cpp"
+        "../tools/codeeditor.cpp" \
+    commentpopup.cpp
 
 HEADERS  += mainwindow.h\
         "../tools/syntaxhighlight.h"\
-        "../tools/codeeditor.h"
+        "../tools/codeeditor.h" \
+    commentpopup.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    commentpopup.ui

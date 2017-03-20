@@ -29,13 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
 }
 
 void MainWindow::getSelection() {
-    if(popup == nullptr) {
-            popup = new QWidget(NULL, Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-            pos = new QLabel();
-            QHBoxLayout* layout = new QHBoxLayout();
-            layout->addWidget(pos);
-            popup->setLayout(layout);
-    }
     if (ui->editor->textCursor().selectionEnd() == ui->editor->textCursor().selectionStart()) {
         popup->hide();
         return;
@@ -46,13 +39,12 @@ void MainWindow::getSelection() {
     text += QString::number(ui->editor->textCursor().selectionStart());
     text += " to ";
     text += QString::number(ui->editor->textCursor().selectionEnd());
-    pos->setText(text);
+    popup->ui->add->setText(text);
 }
 
 MainWindow::~MainWindow()
 {
 
-    delete pos;
     delete popup;
     delete ui;
 }

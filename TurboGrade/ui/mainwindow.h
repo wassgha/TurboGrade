@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include "../tools/codeeditor.h"
+#include "commentpopup.h"
+#include "ui_commentpopup.h"
 
 #include <QMainWindow>
 #include <QModelIndex>
@@ -32,8 +34,7 @@ private:
     Ui::MainWindow *ui;
     void setupEditor(const QString &file_name);
 
-    QWidget* popup = nullptr;
-    QLabel* pos = nullptr;
+    CommentPopup* popup = new CommentPopup();
     QFileSystemModel *model;
 };
 
