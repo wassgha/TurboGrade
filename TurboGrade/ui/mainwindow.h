@@ -4,10 +4,13 @@
 #include "../tools/codeeditor.h"
 #include "commentpopup.h"
 #include "ui_commentpopup.h"
+#include "gradeoverview.h"
+#include "ui_gradeoverview.h"
 
 #include <QMainWindow>
 #include <QModelIndex>
 #include <QFileSystemModel>
+#include <iostream>
 
 QT_BEGIN_NAMESPACE
 class QTextEdit;
@@ -29,6 +32,11 @@ public:
 public slots:
     void getSelection();
     void loadFile(QModelIndex item);
+
+private slots:
+    void on_run_clicked();
+
+    void on_overview_clicked();
 
 private:
     Ui::MainWindow *ui;

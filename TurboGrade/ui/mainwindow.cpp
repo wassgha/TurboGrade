@@ -68,3 +68,22 @@ void MainWindow::setupEditor(const QString &file_name)
     if (file.open(QFile::ReadOnly | QFile::Text))
         ui->editor->setPlainText(file.readAll());
 }
+
+void MainWindow::on_run_clicked()
+{
+    ui->run->setText("Running");
+    QProcess *processing_app = new QProcess(this);
+    processing_app->start("/usr/local/bin/processing-java",QStringList() << "--sketch=/Users/wassgha/Documents/cs205/project/yikyak"<<"--run");
+//    processing_app->waitForFinished();
+    QString output(processing_app->readAllStandardOutput());
+    std::cout<<output.toStdString()<<std::endl;
+    std::cerr<<output.toStdString()<<std::endl;
+
+
+}
+
+void MainWindow::on_overview_clicked()
+{
+    GradeOverview *gradeOverview = new GradeOverview();
+    gradeOverview->show();
+}
