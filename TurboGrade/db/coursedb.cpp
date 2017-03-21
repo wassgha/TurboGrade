@@ -54,7 +54,7 @@ int CourseDB::select(const QString name) {
     // Execute the query
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'course'" << endl << "SQL ERROR: " << query.lastError();
-        return NULL;
+        return NAN;
     }
 
     // Return the row ID
@@ -64,7 +64,7 @@ int CourseDB::select(const QString name) {
     }
 
     // No rows found matching the query
-    return NULL;
+    return NAN;
 }
 
 /**
