@@ -82,9 +82,5 @@ void GradingView::on_run_clicked()
 
 void GradingView::on_overview_clicked()
 {
-    MainWindow* parent = qobject_cast<MainWindow*>(this->parent());
-    if (parent == 0) { return; }
-    parent->setCentralWidget(parent->grade_overview);
-    parent->grading_view->hide();
-    parent->grade_overview->show();
+    emit toggle();
 }

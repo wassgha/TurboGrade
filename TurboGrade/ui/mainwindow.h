@@ -26,6 +26,8 @@ public:
     Ui::MainWindow *ui;
     GradingView *grading_view;
     GradeOverview *grade_overview;
+public slots:
+    void toggle_views();
 };
 
 #endif // MAINWINDOW_H

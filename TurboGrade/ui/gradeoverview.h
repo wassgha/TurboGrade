@@ -2,6 +2,7 @@
 #define GRADEOVERVIEW_H
 
 #include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 #include <QMainWindow>
 #include <QWidget>
@@ -15,7 +16,7 @@ class GradeOverview : public QWidget
     Q_OBJECT
 
 public:
-    explicit GradeOverview(QWidget *parent = 0);
+    explicit GradeOverview(QWidget *parent);
     ~GradeOverview();
 
 private slots:
@@ -23,6 +24,9 @@ private slots:
 
 private:
     Ui::GradeOverview *ui;
+
+signals:
+    void toggle();
 };
 
 #endif // GRADEOVERVIEW_H

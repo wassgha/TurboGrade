@@ -1,8 +1,9 @@
 #ifndef GRADINGVIEW_H
 #define GRADINGVIEW_H
 
-#include "mainwindow.h"
 #include "../tools/codeeditor.h"
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 #include "commentpopup.h"
 #include "ui_commentpopup.h"
 #include "gradeoverview.h"
@@ -25,7 +26,7 @@ class GradingView : public QWidget
     Q_OBJECT
 
 public:
-    explicit GradingView(QWidget *parent = 0);
+    explicit GradingView(QWidget *parent);
     ~GradingView();
 
 public slots:
@@ -43,6 +44,9 @@ private:
 
     CommentPopup* popup = new CommentPopup(this);
     QFileSystemModel *model;
+
+signals:
+    void toggle();
 };
 
 #endif // GRADINGVIEW_H
