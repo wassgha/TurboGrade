@@ -41,7 +41,7 @@ void GradingView::getSelection() {
     text += QString::number(ui->editor->textCursor().selectionStart());
     text += " to ";
     text += QString::number(ui->editor->textCursor().selectionEnd());
-    popup->ui->add->setText(text);
+    popup->ui->add_btn->setText(text);
 }
 
 GradingView::~GradingView()

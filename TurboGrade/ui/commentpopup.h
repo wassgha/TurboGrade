@@ -15,6 +15,8 @@ public:
     explicit CommentPopup(QWidget *parent = 0);
     ~CommentPopup();
     Ui::CommentPopup *ui;
+private slots:
+    void on_add_btn_clicked();
 };
 
 #endif // COMMENTPOPUP_H

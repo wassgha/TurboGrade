@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>330</width>
+    <width>370</width>
     <height>177</height>
    </rect>
   </property>
@@ -22,14 +22,14 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="adjust_grade_label">
        <property name="text">
         <string>Adjust grade : </string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="spinBox">
+      <widget class="QSpinBox" name="adjust_grade">
        <property name="styleSheet">
         <string notr="true">QSpinBox#spinBox {
 	outline:0;
@@ -51,14 +51,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="rubric_label">
        <property name="text">
         <string>Rubric:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox">
+      <widget class="QComboBox" name="rubric">
        <item>
         <property name="text">
          <string>Completeness</string>
@@ -84,10 +84,10 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextEdit" name="textEdit"/>
+    <widget class="QTextEdit" name="comment"/>
    </item>
    <item>
-    <widget class="QPushButton" name="add">
+    <widget class="QPushButton" name="add_btn">
      <property name="text">
       <string>Add Comment</string>
      </property>

@@ -13,3 +13,11 @@ CommentPopup::~CommentPopup()
 {
     delete ui;
 }
+
+void CommentPopup::on_add_btn_clicked()
+{
+    this->hide();
+    ui->adjust_grade->setValue(0);
+    ui->comment->clear();
+    ui->rubric->setCurrentIndex(0);
+}
