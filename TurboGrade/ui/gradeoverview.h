@@ -18,12 +18,10 @@ class GradeOverview : public QWidget
 public:
     explicit GradeOverview(QWidget *parent);
     ~GradeOverview();
+    Ui::GradeOverview *ui;
 
 private slots:
     void on_overview_clicked();
-
-private:
-    Ui::GradeOverview *ui;
 
 signals:
     void toggle();

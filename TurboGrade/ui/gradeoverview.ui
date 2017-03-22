@@ -32,17 +32,25 @@ QCheckBox#checkBox {
 QScrollArea {background-color:transparent;}
 
 #level1 {
-	border: 2px solid rgb(185, 0, 57);
+	color: white;
+	background: rgb(185, 0, 57);
+	border-radius: 3px;
 }
 
 #level2 {
-	border: 2px solid rgb(253, 117, 66);
+	color: white;
+	background: rgb(253, 117, 66);
+	border-radius: 3px;
 }
 #level3 {
-	border: 2px solid rgb(255, 232, 22);
+	color: white;
+	background: rgb(230, 212, 0);
+	border-radius: 3px;
 }
 #level4 {
-	border: 2px solid rgb(90, 175, 40);
+	color: white;
+	background: rgb(90, 175, 40);
+	border-radius: 3px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -72,7 +80,7 @@ QScrollArea {background-color:transparent;}
         <enum>Qt::PlainText</enum>
        </property>
        <property name="pixmap">
-        <pixmap resource="resources.qrc">:/logo/logodark.png</pixmap>
+        <pixmap resource="resources.qrc">:/logo/res/logodark.png</pixmap>
        </property>
        <property name="scaledContents">
         <bool>true</bool>
@@ -186,7 +194,7 @@ QGroupBox &gt; QGroupBox::title {
         <x>0</x>
         <y>0</y>
         <width>635</width>
-        <height>497</height>
+        <height>493</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -217,7 +225,7 @@ QGroupBox &gt; QGroupBox::title {
           </size>
          </property>
          <property name="title">
-          <string>Documentation</string>
+          <string>DOCUMENTATION</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -435,7 +443,7 @@ p, li { white-space: pre-wrap; }
           </size>
          </property>
          <property name="title">
-          <string>Completeness</string>
+          <string>COMPLETENESS</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

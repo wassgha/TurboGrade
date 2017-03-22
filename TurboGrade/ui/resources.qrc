@@ -1,9 +1,17 @@
 <RCC>
     <qresource prefix="/logo">
-        <file>logo.png</file>
-        <file>logodark.png</file>
+        <file>res/logo.png</file>
+        <file>res/logodark.png</file>
     </qresource>
     <qresource prefix="/misc">
-        <file>splitter.png</file>
+        <file>res/splitter.png</file>
+    </qresource>
+    <qresource prefix="/fonts">
+        <file>res/muli/Bold.ttf</file>
+        <file>res/muli/Light.ttf</file>
+        <file>res/muli/Regular.ttf</file>
+        <file>res/montserrat/Light.ttf</file>
+        <file>res/montserrat/Regular.ttf</file>
+        <file>res/montserrat/Bold.ttf</file>
     </qresource>
 </RCC>

@@ -26,6 +26,8 @@ public:
     Ui::MainWindow *ui;
     GradingView *grading_view;
     GradeOverview *grade_overview;
+    QFont muli;
+    QFont montserrat;
 public slots:
     void toggle_views();
 };

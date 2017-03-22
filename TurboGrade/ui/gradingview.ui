@@ -38,7 +38,7 @@ QLabel #label {
         border-radius: 10px;
 }
 QSplitter::handle:horizontal {
-        image: url(:/misc/splitter.png);
+        image: url(:/misc/res/splitter.png);
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -126,7 +126,7 @@ QSplitter::handle:horizontal {
           <enum>Qt::PlainText</enum>
          </property>
          <property name="pixmap">
-          <pixmap resource="resources.qrc">:/logo/logodark.png</pixmap>
+          <pixmap resource="resources.qrc">:/logo/res/logodark.png</pixmap>
          </property>
          <property name="scaledContents">
           <bool>true</bool>

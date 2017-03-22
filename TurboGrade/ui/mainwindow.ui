@@ -37,7 +37,21 @@
     </property>
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
-      <widget class="QWidget" name="page"/>
+      <widget class="QWidget" name="page">
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>120</x>
+          <y>90</y>
+          <width>381</width>
+          <height>121</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>This is a beautiful font</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="page_2"/>
      </widget>
     </item>

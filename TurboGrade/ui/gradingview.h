@@ -28,6 +28,7 @@ class GradingView : public QWidget
 public:
     explicit GradingView(QWidget *parent);
     ~GradingView();
+    Ui::GradingView *ui;
 
 public slots:
     void getSelection();
@@ -39,7 +40,6 @@ private slots:
     void on_overview_clicked();
 
 private:
-    Ui::GradingView *ui;
     void setupEditor(const QString &file_name);
 
     CommentPopup* popup = new CommentPopup(this);
