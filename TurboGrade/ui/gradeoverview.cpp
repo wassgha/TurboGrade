@@ -13,7 +13,7 @@ GradeOverview::~GradeOverview()
     delete ui;
 }
 
-void GradeOverview::on_overview_clicked()
+void GradeOverview::on_code_view_clicked()
 {
     emit toggle();
 }

@@ -5,13 +5,14 @@
     </qresource>
     <qresource prefix="/misc">
         <file>res/splitter.png</file>
+        <file>res/play-button.png</file>
+        <file>res/grade.png</file>
+        <file>res/play-button-white.png</file>
     </qresource>
     <qresource prefix="/fonts">
-        <file>res/muli/Bold.ttf</file>
-        <file>res/muli/Light.ttf</file>
-        <file>res/muli/Regular.ttf</file>
-        <file>res/montserrat/Light.ttf</file>
-        <file>res/montserrat/Regular.ttf</file>
-        <file>res/montserrat/Bold.ttf</file>
+        <file>res/Roboto-Black.ttf</file>
+        <file>res/Roboto-Bold.ttf</file>
+        <file>res/Roboto-Light.ttf</file>
+        <file>res/Roboto-Regular.ttf</file>
     </qresource>
 </RCC>

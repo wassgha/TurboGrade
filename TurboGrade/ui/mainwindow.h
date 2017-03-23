@@ -8,6 +8,7 @@
 
 #include <QMainWindow>
 #include <iostream>
+#include <QGraphicsDropShadowEffect>
 
 class GradeOverview;
 class GradingView;
@@ -26,8 +27,8 @@ public:
     Ui::MainWindow *ui;
     GradingView *grading_view;
     GradeOverview *grade_overview;
-    QFont muli;
-    QFont montserrat;
+    QFont roboto;
+    QGraphicsDropShadowEffect *cardShadow;
 public slots:
     void toggle_views();
 };

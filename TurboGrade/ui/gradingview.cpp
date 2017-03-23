@@ -19,10 +19,6 @@ GradingView::GradingView(QWidget *parent) :
     ui->treeView->hideColumn(3);
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
 
-    ui->run->setIcon(ui->run->style()->standardIcon(QStyle::SP_MediaPlay));
-    ui->overview->setIcon(ui->overview->style()->standardIcon(QStyle::SP_DialogApplyButton));
-
-
     setWindowTitle(tr("TurboGrade - Grading submission"));
     this->connect(ui->treeView, SIGNAL(clicked( QModelIndex )), this, SLOT(loadFile(QModelIndex)));
 
@@ -72,12 +68,9 @@ void GradingView::on_run_clicked()
     ui->run->setText("Running");
     QProcess *processing_app = new QProcess(this);
     processing_app->start("/usr/local/bin/processing-java",QStringList() << "--sketch=/Users/wassgha/Documents/cs205/project/yikyak"<<"--run");
-//    processing_app->waitForFinished();
     QString output(processing_app->readAllStandardOutput());
     std::cout<<output.toStdString()<<std::endl;
     std::cerr<<output.toStdString()<<std::endl;
-
-
 }
 
 void GradingView::on_overview_clicked()

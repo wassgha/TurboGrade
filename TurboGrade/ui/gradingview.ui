@@ -170,10 +170,14 @@ QSplitter::handle:horizontal {
          <property name="text">
           <string>Run</string>
          </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/misc/res/play-button.png</normaloff>:/misc/res/play-button.png</iconset>
+         </property>
          <property name="iconSize">
           <size>
-           <width>10</width>
-           <height>10</height>
+           <width>14</width>
+           <height>14</height>
           </size>
          </property>
         </widget>
@@ -183,11 +187,18 @@ QSplitter::handle:horizontal {
          <property name="text">
           <string>Grade Overview</string>
          </property>
+         <property name="icon">
+          <iconset resource="resources.qrc">
+           <normaloff>:/misc/res/grade.png</normaloff>:/misc/res/grade.png</iconset>
+         </property>
          <property name="iconSize">
           <size>
-           <width>10</width>
-           <height>10</height>
+           <width>14</width>
+           <height>14</height>
           </size>
+         </property>
+         <property name="default">
+          <bool>false</bool>
          </property>
         </widget>
        </item>

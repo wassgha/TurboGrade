@@ -9,21 +9,22 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QFontDatabase::addApplicationFont(":/fonts/res/muli/Bold.ttf");
-    QFontDatabase::addApplicationFont(":/fonts/res/muli/Light.ttf");
-    int id = QFontDatabase::addApplicationFont(":/fonts/res/muli/Regular.ttf");
+    int id = QFontDatabase::addApplicationFont(":/fonts/res/Roboto-Regular.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-    muli = QFont(family);
-
-    QFontDatabase::addApplicationFont(":/fonts/res/montserrat/Bold.ttf");
-    QFontDatabase::addApplicationFont(":/fonts/res/montserrat/Light.ttf");
-    family = QFontDatabase::applicationFontFamilies(QFontDatabase::addApplicationFont(":/fonts/res/montserrat/Regular.ttf")).at(0);
-    montserrat = QFont(family);
+    roboto = QFont(family);
+    roboto.setPointSize(14);
 
     grading_view = new GradingView(this->parentWidget());
     grade_overview = new GradeOverview(this->parentWidget());
 
-//    QApplication::setFont(montserrat);
+    QApplication::setFont(roboto);
+
+    cardShadow = new QGraphicsDropShadowEffect();
+    cardShadow->setBlurRadius(9.0);
+    cardShadow->setColor(QColor(0, 0, 0, 45));
+    cardShadow->setOffset(0.0);
+
+    grade_overview->ui->groupBox->setGraphicsEffect(cardShadow);
 
     ui->stackedWidget->addWidget(grading_view);
     ui->stackedWidget->addWidget(grade_overview);

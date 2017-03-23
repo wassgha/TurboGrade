@@ -21,7 +21,7 @@ public:
     Ui::GradeOverview *ui;
 
 private slots:
-    void on_overview_clicked();
+    void on_code_view_clicked();
 
 signals:
     void toggle();
