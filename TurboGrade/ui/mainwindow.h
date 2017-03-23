@@ -1,17 +1,14 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "gradingview.h"
-#include "ui_gradingview.h"
-#include "gradeoverview.h"
-#include "ui_gradeoverview.h"
+#include "gradesubmission.h"
+#include "ui_gradesubmission.h"
 
 #include <QMainWindow>
 #include <iostream>
 #include <QGraphicsDropShadowEffect>
 
-class GradeOverview;
-class GradingView;
+class GradeSubmission;
 
 namespace Ui {
 class MainWindow;
@@ -24,13 +21,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    Ui::MainWindow *ui;
-    GradingView *grading_view;
-    GradeOverview *grade_overview;
+    GradeSubmission *grade_submission;
     QFont roboto;
-    QGraphicsDropShadowEffect *cardShadow;
-public slots:
-    void toggle_views();
+
+private:
+    Ui::MainWindow *ui;
 };
 
 #endif // MAINWINDOW_H

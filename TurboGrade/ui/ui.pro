@@ -29,20 +29,23 @@ SOURCES += main.cpp\
         "../tools/syntaxhighlight.cpp"\
         "../tools/codeeditor.cpp" \
     commentpopup.cpp \
-    gradeoverview.cpp \
-    gradingview.cpp
+    gradesubmission.cpp \
+    codeview.cpp \
+    gradeview.cpp
 
 HEADERS  += mainwindow.h\
         "../tools/syntaxhighlight.h"\
         "../tools/codeeditor.h" \
     commentpopup.h \
-    gradeoverview.h \
-    gradingview.h
+    gradesubmission.h \
+    codeview.h \
+    gradeview.h
 
 FORMS    += mainwindow.ui \
     commentpopup.ui \
-    gradeoverview.ui \
-    gradingview.ui
+    gradesubmission.ui \
+    codeview.ui \
+    gradeview.ui
 
 RESOURCES += \
     resources.qrc

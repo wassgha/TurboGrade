@@ -36,7 +36,7 @@
      <number>0</number>
     </property>
     <item row="0" column="0">
-     <widget class="QStackedWidget" name="stackedWidget">
+     <widget class="QStackedWidget" name="mainWidget">
       <widget class="QWidget" name="page"/>
       <widget class="QWidget" name="page_2"/>
      </widget>

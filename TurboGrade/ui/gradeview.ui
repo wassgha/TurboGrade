@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GradeOverview</class>
- <widget class="QWidget" name="GradeOverview">
+ <class>GradeView</class>
+ <widget class="QWidget" name="GradeView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -17,13 +17,18 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget #GradeOverview {
-	background: rgb(55, 64, 80);
+   <string notr="true">QWidget #GradeView {
+        background: rgb(55, 64, 80);
 }
 
-QCheckBox#checkBox {
-        color: white;
+
+#export_pdf, #finalize {
+	color: white;
+	padding: 10px;
+	padding-right:0px;
+	padding-bottom:0px;
 }
+
 
 #total_grade {
 color:white;
@@ -64,8 +69,8 @@ color:white;
 
 
 #scrollArea   {
- background-color:rgb(66, 76, 96);
-border-radius:3px;
+	background-color:rgb(66, 76, 96);
+	border-radius:3px;
 }
 QAbstractScrollArea #scrollAreaWidgetContents  {
  background-color:transparent;
@@ -83,133 +88,21 @@ QGroupBox::title {
 	margin-left: 10px;
 	background:transparent;
 	font-weight: bold;
-}
-
-#run, #code_view {
-	padding: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	background: white;
-	border-radius: 18px;
-}
-
-#run {
-	color: white;
-	background: rgb(101, 203, 54);
-}
-
-#export_pdf, #finalize {
-	color: white;
-	padding: 10px;
-	padding-right:0px;
-	padding-bottom:0px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
-   <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <property name="sizeConstraint">
-      <enum>QLayout::SetDefaultConstraint</enum>
-     </property>
-     <item>
-      <widget class="QLabel" name="logo">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="textFormat">
-        <enum>Qt::PlainText</enum>
-       </property>
-       <property name="pixmap">
-        <pixmap resource="resources.qrc">:/logo/res/logodark.png</pixmap>
-       </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
-       <property name="wordWrap">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QComboBox" name="comboBox">
-       <item>
-        <property name="text">
-         <string>Student Name</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="checkBox">
-       <property name="text">
-        <string>Hide student name</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_3">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="run">
-       <property name="text">
-        <string>Run</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/misc/res/play-button-white.png</normaloff>:/misc/res/play-button-white.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="code_view">
-       <property name="text">
-        <string>Code View</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/misc/res/grade.png</normaloff>:/misc/res/grade.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>24</width>
-         <height>24</height>
-        </size>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QScrollArea" name="scrollArea">
      <property name="sizePolicy">
@@ -238,7 +131,7 @@ QGroupBox::title {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>635</width>
+        <width>659</width>
         <height>652</height>
        </rect>
       </property>
@@ -853,8 +746,6 @@ p, li { white-space: pre-wrap; }
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
