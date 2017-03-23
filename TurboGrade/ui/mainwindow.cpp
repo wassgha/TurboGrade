@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     roboto.setPointSize(14);
 
     QApplication::setFont(roboto);
+    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     grade_submission = new GradeSubmission(this->parentWidget());
 
