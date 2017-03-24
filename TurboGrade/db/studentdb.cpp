@@ -65,7 +65,7 @@ int StudentDB::select(const QString course_name, const QString section_name, con
     // Execute the query
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'student' (select)" << endl << "SQL ERROR: " << query.lastError();
-        return NULL;
+        return -1;
     }
 
     // Return the row ID
@@ -75,7 +75,7 @@ int StudentDB::select(const QString course_name, const QString section_name, con
     }
 
     // No rows found matching the query
-    return NULL;
+    return -1;
 }
 
 /**

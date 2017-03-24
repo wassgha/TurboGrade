@@ -81,7 +81,7 @@ int SubmissionDB::select(int student_id, int assignment_id) {
     // Execute the query
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'submission'" << endl << "SQL ERROR: " << query.lastError();
-        return NULL;
+        return -1;
     }
 
     // Return the row ID
@@ -91,7 +91,7 @@ int SubmissionDB::select(int student_id, int assignment_id) {
     }
 
     // No rows found matching the query
-    return NULL;
+    return -1;
 }
 
 

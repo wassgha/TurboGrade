@@ -58,7 +58,7 @@ int SectionDB::select(const QString course_name, const QString name) {
     // Execute the query
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'section'" << endl << "SQL ERROR: " << query.lastError();
-        return NULL;
+        return -1;
     }
 
     // Return the row ID
@@ -68,7 +68,7 @@ int SectionDB::select(const QString course_name, const QString name) {
     }
 
     // No rows found matching the query
-    return NULL;
+    return -1;
 }
 
 /**
