@@ -7,7 +7,10 @@ LIBS += -pthread
 
 SOURCES += main.cpp                                        \
         ../tools/gtest/googletest/src/gtest-all.cc \
-    testingtemplate.cpp
+    testingtemplate.cpp \
+    filewritertest.cpp  \
+    ../tools/objectidentifier.cpp \
+    ../tools/filewriter.cpp \
 
 INCLUDEPATH +=  ../tools/gtest                             \
                 ../tools/gtest/googletest                  \
@@ -15,4 +18,7 @@ INCLUDEPATH +=  ../tools/gtest                             \
                 ../tools/gtest/googletest/include/gtest
 
 HEADERS += \
-    testingtemplate.h
+    testingtemplate.h \
+    filewritertest.h \
+    ../tools/objectidentifier.h \
+    ../tools/filewriter.h \
