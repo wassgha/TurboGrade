@@ -13,8 +13,22 @@ public:
     FileWriter(const std::string& fileout);
     ~FileWriter();
 
+    //FileWriter& operator<<(std::string str);
+
     template<typename T>
-    FileWriter& operator<<(T t);
+    FileWriter& operator<<(T t){
+        if(_writer.is_open()){
+            _writer << t;
+            _writer.flush();
+        }
+        return *this;
+    }
+
+    void open(const std::string& fileout);
+
+    bool is_open();
+
+    void close();
 
 private:
     std::ofstream _writer;
