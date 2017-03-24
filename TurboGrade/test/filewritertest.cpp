@@ -54,6 +54,6 @@ TEST_F(FileWriterTest, TestWriteBool){
 
 TEST_F(FileWriterTest, TestExampleCSV){
     FileWriter out("csvtest2.txt");
-    out << "n, f1, f2, f3\n";
+    out << "n,f1,f2,f3\n";
     out << 1 << "," << 100 << "," << 10 << "," << 15;
 }
