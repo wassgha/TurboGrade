@@ -84,6 +84,6 @@ void CourseDB::load_all() {
 
     int name_field = query.record().indexOf("name");
     while(query.next()) {
-        _courseController->add_course(query.value(name_field).toString(), true);
+        _controller->add_course(query.value(name_field).toString(), true);
     }
 }

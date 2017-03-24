@@ -102,6 +102,7 @@ void RubricDB::load_all() {
     int out_of_field = query.record().indexOf("out_of");
     int parent_id_field = query.record().indexOf("parent_id");
 
+
     while(query.next()) {
 
         QString assignment_name = query.value(assignment_name_field).toString();
@@ -126,11 +127,9 @@ void RubricDB::load_all() {
 
         int parent_name_field = parent_query.record().indexOf("parent_name");
 
-        parent_query.first();
+        QString parent_name = parent_query.next() ? parent_query.value(parent_name_field).toString() : NULL;
 
-        QString parent_name = parent_query.value(parent_name_field).toString();
-
-        _assignmentController->add_criterion(assignment_name,
+        _controller->add_criterion(assignment_name,
                                              criterion_name,
                                              parent_name,
                                              out_of,
@@ -199,7 +198,7 @@ void RubricDB::load_assignment_criteria(int assignment_id) {
 
         QString parent_name = parent_query.value(parent_name_field).toString();
 
-        _assignmentController->add_criterion(assignment_name,
+        _controller->add_criterion(assignment_name,
                                              criterion_name,
                                              parent_name,
                                              out_of,

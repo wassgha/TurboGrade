@@ -8,10 +8,9 @@
  */
 
 #include "dbengine.h"
-#include "../engine/assignmentcontroller.h"
-#include "../engine/coursecontroller.h"
+#include "../engine/controller.h"
 
-class AssignmentController;
+class Controller;
 
 class RubricDB : public DBEngine
 {
@@ -19,10 +18,9 @@ public:
     // Constructor
     RubricDB();
     // Parametrized constructor
-    RubricDB(AssignmentController *assignmentController, CourseController *courseController):
+    RubricDB(Controller *controller):
         DBEngine("RubricDB"),
-        _assignmentController(assignmentController),
-        _courseController(courseController){}
+        _controller(controller){}
     // Destructor
     ~RubricDB();
 
@@ -37,10 +35,8 @@ public:
     void load_assignment_criteria(int assignment_id);
 
 
-    // Assignment Controller
-    AssignmentController* _assignmentController;
-    // Course Controller
-    CourseController* _courseController;
+    // Controller
+    Controller* _controller;
 };
 
 #endif // RUBRICDB_H

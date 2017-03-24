@@ -94,10 +94,10 @@ SyntaxHighlighter::SyntaxHighlighter(QTextDocument *parent)
 
     controlflowFormat.setForeground(QColor(114, 161, 20));
     QStringList controlflowPatterns;
-    typePatterns << "\\bswitch\\b" << "\\bcase\\b" << "\\bif\\b"
-                 << "\\bbreak\\b" << "\\belse\\b" << "\\belif\\b"
-                 << "\\bwhile\\b" << "\\bfor\\b" << "\\bdo\\b"
-                 << "\\bthen\\b" << "\\bcontinue\\b" << "\\breturn\\b";
+    controlflowPatterns << "\\bswitch\\b" << "\\bcase\\b" << "\\bif\\b"
+                         << "\\bbreak\\b" << "\\belse\\b" << "\\belif\\b"
+                         << "\\bwhile\\b" << "\\bfor\\b" << "\\bdo\\b"
+                         << "\\bthen\\b" << "\\bcontinue\\b" << "\\breturn\\b";
     foreach (const QString &pattern, controlflowPatterns) {
         rule.pattern = QRegExp(pattern);
         rule.format = controlflowFormat;

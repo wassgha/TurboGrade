@@ -8,10 +8,9 @@
  */
 
 #include "dbengine.h"
-#include "../engine/assignmentcontroller.h"
-#include "../engine/coursecontroller.h"
+#include "../engine/controller.h"
 
-class AssignmentController;
+class Controller;
 
 class AssignmentDB : public DBEngine
 {
@@ -19,10 +18,9 @@ public:
     // Constructor
     AssignmentDB();
     // Parametrized constructor
-    AssignmentDB(AssignmentController *assignmentController, CourseController *courseController):
+    AssignmentDB(Controller *controller):
         DBEngine("AssignmentDB"),
-        _assignmentController(assignmentController),
-        _courseController(courseController){}
+        _controller(controller){}
     // Destructor
     ~AssignmentDB();
 
@@ -39,10 +37,8 @@ public:
     void load_section_assignments(QString course_name, QString section_name);
 
 
-    // Assignment Controller
-    AssignmentController* _assignmentController;
-    // Course Controller
-    CourseController* _courseController;
+    // Controller
+    Controller* _controller;
 };
 
 #endif // ASSIGNMENTDB_H

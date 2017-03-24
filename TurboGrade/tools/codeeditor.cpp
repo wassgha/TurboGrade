@@ -64,6 +64,8 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     setFont(font);
 
+    setReadOnly(true);
+
     syntaxHighlighter = new SyntaxHighlighter(this->document());
     lineNumberArea = new LineNumberArea(this);
 

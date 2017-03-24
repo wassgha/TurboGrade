@@ -13,14 +13,13 @@ SOURCES     += \
             "../db/rubricdb.cpp" \
             main.cpp \
             course.cpp \
-            coursecontroller.cpp \
             section.cpp \
             student.cpp \
-            assignmentcontroller.cpp \
             submission.cpp \
             assignment.cpp \
             rubric.cpp \
-            criterion.cpp
+            criterion.cpp \
+    controller.cpp
 
 HEADERS     += \
             "../db/dbengine.h" \
@@ -31,11 +30,10 @@ HEADERS     += \
             "../db/submissiondb.h" \
             "../db/rubricdb.h" \
             course.h \
-            coursecontroller.h \
             section.h \
             student.h \
-            assignmentcontroller.h \
             submission.h \
             assignment.h \
             rubric.h \
-            criterion.h
+            criterion.h \
+    controller.h

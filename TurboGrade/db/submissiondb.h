@@ -8,10 +8,9 @@
  */
 
 #include "dbengine.h"
-#include "../engine/assignmentcontroller.h"
-#include "../engine/coursecontroller.h"
+#include "../engine/controller.h"
 
-class AssignmentController;
+class Controller;
 
 class SubmissionDB : public DBEngine
 {
@@ -19,10 +18,9 @@ public:
     // Constructor
     SubmissionDB();
     // Parametrized constructor
-    SubmissionDB(AssignmentController *assignmentController, CourseController *courseController):
+    SubmissionDB(Controller *controller):
         DBEngine("SubmissionDB"),
-        _assignmentController(assignmentController),
-        _courseController(courseController){}
+        _controller(controller){}
     // Destructor
     ~SubmissionDB();
 
@@ -39,10 +37,8 @@ public:
     void load_student_submissions(int student_id);
 
 
-    // Assignment Controller
-    AssignmentController* _assignmentController;
-    // Course Controller
-    CourseController* _courseController;
+    // Controller
+    Controller* _controller;
 };
 
 #endif // SUBMISSIONDB_H

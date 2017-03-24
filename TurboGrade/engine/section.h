@@ -1,6 +1,13 @@
 #ifndef SECTION_H
 #define SECTION_H
 
+/**
+ * @brief The Section class holds information
+ * about a single section of a course (name of
+ * section and students registered).
+ */
+
+
 #include <iostream>
 #include <vector>
 #include <QString>

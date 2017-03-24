@@ -103,7 +103,7 @@ void StudentDB::load_all() {
 
     while(query.next()) {
 
-        _courseController->add_student(query.value(course_name_field).toString(),
+        _controller->add_student(query.value(course_name_field).toString(),
                                        query.value(section_name_field).toString(),
                                        query.value(name_field).toString(),
                                        query.value(username_field).toString(),
@@ -146,7 +146,7 @@ void StudentDB::load_section_students(int section_id) {
 
     while(query.next()) {
 
-        _courseController->add_student(query.value(course_name_field).toString(),
+        _controller->add_student(query.value(course_name_field).toString(),
                                        query.value(section_name_field).toString(),
                                        query.value(name_field).toString(),
                                        query.value(username_field).toString(),

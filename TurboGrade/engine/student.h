@@ -1,6 +1,11 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+/**
+ * @brief The Student class holds information
+ * about a single student (name, ID, submissions).
+ */
+
 #include <iostream>
 #include <vector>
 #include <QString>

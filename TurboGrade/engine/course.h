@@ -1,6 +1,13 @@
 #ifndef COURSE_H
 #define COURSE_H
 
+/**
+ * @brief The Course class contains information
+ * about a course (name and sections) and is used
+ * to manage the course
+ */
+
+
 #include <iostream>
 #include <vector>
 #include <QString>

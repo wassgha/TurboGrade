@@ -92,7 +92,7 @@ void SectionDB::load_all() {
 
     while(query.next()) {
 
-        _courseController->add_section(query.value(course_name_field).toString(),
+        _controller->add_section(query.value(course_name_field).toString(),
                                        query.value(name_field).toString(),
                                        true);
 
@@ -127,7 +127,7 @@ void SectionDB::load_course_sections(int course_id) {
 
     while(query.next()) {
 
-        _courseController->add_section(query.value(course_name_field).toString(),
+        _controller->add_section(query.value(course_name_field).toString(),
                                        query.value(name_field).toString(),
                                        true);
 

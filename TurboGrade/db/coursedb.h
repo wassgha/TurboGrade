@@ -8,9 +8,9 @@
  */
 
 #include "dbengine.h"
-#include "../engine/coursecontroller.h"
+#include "../engine/controller.h"
 
-class CourseController;
+class Controller;
 
 class CourseDB : public DBEngine
 {
@@ -18,9 +18,9 @@ public:
     // Constructor
     CourseDB();
     // Parametrized constructor
-    CourseDB(CourseController *courseController):
+    CourseDB(Controller *controller):
         DBEngine("CourseDB"),
-        _courseController(courseController){}
+        _controller(controller){}
     // Destructor
     ~CourseDB();
 
@@ -33,8 +33,8 @@ public:
     void load_all();
 
 
-    // Course Controller
-    CourseController* _courseController;
+    // Controller
+    Controller* _controller;
 };
 
 #endif // COURSEDB_H

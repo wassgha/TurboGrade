@@ -1,6 +1,13 @@
 #ifndef CRITERION_H
 #define CRITERION_H
 
+/**
+ * @brief The Criterion class describe a single
+ * category that belongs to a rubric (and can be
+ * extender with children).
+ */
+
+
 #include <iostream>
 #include <vector>
 #include <QString>
@@ -25,11 +32,11 @@ public:
     // Show criteria tree
     void show_children();
 
-    // Student's section
+    // This criterion's rubric
     Rubric* _rubric = nullptr;
     // Criterion's parent (nullpointer if this is a parent)
     Criterion* _parent = nullptr;
-    // Student name
+    // Criterion name
     QString _name;
     // Maximum grade for this criterion (0 if extra-credit)
     int _out_of;

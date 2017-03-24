@@ -130,7 +130,7 @@ void SubmissionDB::load_all() {
 
     while(query.next()) {
 
-        _assignmentController->add_submission(query.value(course_name_field).toString(),
+        _controller->add_submission(query.value(course_name_field).toString(),
                                               query.value(section_name_field).toString(),
                                               query.value(student_name_field).toString(),
                                               query.value(student_username_field).toString(),
@@ -181,7 +181,7 @@ void SubmissionDB::load_student_submissions(int student_id) {
 
     while(query.next()) {
 
-        _assignmentController->add_submission(query.value(course_name_field).toString(),
+        _controller->add_submission(query.value(course_name_field).toString(),
                                               query.value(section_name_field).toString(),
                                               query.value(student_name_field).toString(),
                                               query.value(student_username_field).toString(),

@@ -6,11 +6,10 @@ QT          += sql widgets
 SOURCES     += \
             main.cpp \
             dbengine.cpp \
-            "../engine/coursecontroller.cpp" \
+            "../engine/controller.cpp" \
             "../engine/course.cpp" \
             "../engine/section.cpp" \
             "../engine/student.cpp" \
-            "../engine/assignmentcontroller.cpp" \
             "../engine/assignment.cpp" \
             "../engine/submission.cpp" \
             "../engine/rubric.cpp" \
@@ -24,11 +23,10 @@ SOURCES     += \
 
 HEADERS     += \
             dbengine.h \
-            "../engine/coursecontroller.h" \
+            "../engine/controller.h" \
             "../engine/course.h" \
             "../engine/section.h" \
             "../engine/student.h" \
-            "../engine/assignmentcontroller.h" \
             "../engine/assignment.h" \
             "../engine/submission.h" \
             "../engine/rubric.h" \

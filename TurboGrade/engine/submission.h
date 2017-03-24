@@ -1,6 +1,13 @@
 #ifndef SUBMISSION_H
 #define SUBMISSION_H
 
+/**
+ * @brief The Submission class holds information
+ * about a single submission (by whom and for which
+ * assignment).
+ */
+
+
 #include <iostream>
 #include <vector>
 #include <QString>

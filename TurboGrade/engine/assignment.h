@@ -1,6 +1,12 @@
 #ifndef ASSIGNMENT_H
 #define ASSIGNMENT_H
 
+/**
+ * @brief The Assignment class describes a single
+ * assignment (that can belong to multiple sections)
+ * and holds its rubric.
+ */
+
 #include <iostream>
 #include <vector>
 #include <QString>

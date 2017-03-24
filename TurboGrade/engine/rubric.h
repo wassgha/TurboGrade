@@ -1,6 +1,12 @@
 #ifndef RUBRIC_H
 #define RUBRIC_H
 
+/**
+ * @brief The Rubric class defines the
+ * hierarchy of criteria that belong to a
+ * certain assignment
+ */
+
 #include <iostream>
 #include <vector>
 #include <QString>

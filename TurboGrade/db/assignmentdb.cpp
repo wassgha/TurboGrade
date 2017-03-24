@@ -119,7 +119,7 @@ void AssignmentDB::load_all() {
 
     while(query.next()) {
 
-        _assignmentController->add_assignment(query.value(name_field).toString(),
+        _controller->add_assignment(query.value(name_field).toString(),
                                               query.value(objective_field).toString(),
                                               true);
 
@@ -145,11 +145,11 @@ void AssignmentDB::load_all() {
         int folder_field = link_query.record().indexOf("folder");
 
         while(link_query.next()) {
-            _assignmentController->link_assignment(link_query.value(course_name_field).toString(),
-                                                   link_query.value(section_name_field).toString(),
-                                                   link_query.value(assignment_name_field).toString(),
-                                                   link_query.value(folder_field).toString(),
-                                                   true);
+            _controller->link_assignment(link_query.value(course_name_field).toString(),
+                                           link_query.value(section_name_field).toString(),
+                                           link_query.value(assignment_name_field).toString(),
+                                           link_query.value(folder_field).toString(),
+                                           true);
         }
     }
 }
@@ -163,7 +163,7 @@ void AssignmentDB::load_all() {
  */
 void AssignmentDB::load_section_assignments(QString course_name, QString section_name) {
 
-    _courseController->clear_section_assignments(course_name, section_name);
+    _controller->clear_section_assignments(course_name, section_name);
 
     QSqlQuery query(db);
 
@@ -192,7 +192,7 @@ void AssignmentDB::load_section_assignments(QString course_name, QString section
 
     while(query.next()) {
 
-        _assignmentController->add_assignment(query.value(name_field).toString(),
+        _controller->add_assignment(query.value(name_field).toString(),
                                               query.value(objective_field).toString(),
                                               true);
 
@@ -218,11 +218,11 @@ void AssignmentDB::load_section_assignments(QString course_name, QString section
         int folder_field = link_query.record().indexOf("folder");
 
         while(link_query.next()) {
-            _assignmentController->link_assignment(link_query.value(course_name_field).toString(),
-                                                   link_query.value(section_name_field).toString(),
-                                                   link_query.value(assignment_name_field).toString(),
-                                                   link_query.value(folder_field).toString(),
-                                                   true);
+            _controller->link_assignment(link_query.value(course_name_field).toString(),
+                                           link_query.value(section_name_field).toString(),
+                                           link_query.value(assignment_name_field).toString(),
+                                           link_query.value(folder_field).toString(),
+                                           true);
         }
     }
 }
