@@ -6,10 +6,12 @@ QT          += widgets
 SOURCES     +=  main.cpp \
                 syntaxhighlight.cpp \
                 codeeditor.cpp \
-    objectidentifier.cpp
+    objectidentifier.cpp \
+    filewriter.cpp
 
 HEADERS     += \
                syntaxhighlight.h \
                codeeditor.h \
     objectidentifier.h \
-    macro.h
+    macro.h \
+    filewriter.h
