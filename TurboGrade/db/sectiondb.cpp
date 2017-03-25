@@ -1,14 +1,6 @@
 #include "sectiondb.h"
 
 /**
- * @brief Default constructor
- */
-SectionDB::SectionDB()
-{
-
-}
-
-/**
  * @brief Destructor
  */
 
@@ -22,7 +14,7 @@ SectionDB::~SectionDB() {
  * @param course_id the id of the course (ex. 1)
  * @return true if the query succeded
  */
-bool SectionDB::add(int course_id, const QString name) {
+int SectionDB::add(int course_id, const QString name) {
 
     QSqlQuery query(db);
 
@@ -36,7 +28,7 @@ bool SectionDB::add(int course_id, const QString name) {
         return false;
     }
 
-    return true;
+    return query.lastInsertId().toInt();
 }
 
 
@@ -72,49 +64,19 @@ int SectionDB::select(const QString course_name, const QString name) {
 }
 
 /**
- * @brief SectionDB::load_all loads all database records
- * to the controller
- */
-void SectionDB::load_all() {
-    QSqlQuery query(db);
-
-    query.prepare("SELECT section.id, section.name, course.name AS course_name"
-                  " FROM section, course WHERE section.course_id = course.id");
-
-    // Execute the query
-    if (!query.exec()) {
-        qDebug() << "Failed to select from table 'section'" << endl << "SQL ERROR: " << query.lastError();
-        return ;
-    }
-
-    int course_name_field = query.record().indexOf("course_name");
-    int name_field = query.record().indexOf("name");
-
-    while(query.next()) {
-
-        _controller->add_section(query.value(course_name_field).toString(),
-                                       query.value(name_field).toString(),
-                                       true);
-
-    }
-}
-
-
-
-/**
  * @brief SectionDB::load_course_sections loads a specific course's
  * sections to the controller
  * @param course_id the course whose sections will be loaded
  */
-void SectionDB::load_course_sections(int course_id) {
+void SectionDB::load_all(Course *course) {
 
     QSqlQuery query(db);
 
-    query.prepare("SELECT section.id, section.name, course.name AS course_name"
+    query.prepare("SELECT section.id AS section_id, section.name AS section_name"
                   " FROM section, course WHERE section.course_id = course.id AND"
                   " course.id = ?");
 
-    query.addBindValue(course_id);
+    query.addBindValue(course->_id);
 
     // Execute the query
     if (!query.exec()) {
@@ -122,14 +84,13 @@ void SectionDB::load_course_sections(int course_id) {
         return;
     }
 
-    int course_name_field = query.record().indexOf("course_name");
-    int name_field = query.record().indexOf("name");
+    int section_id_field = query.record().indexOf("section_id");
+    int section_name_field = query.record().indexOf("section_name");
 
     while(query.next()) {
 
-        _controller->add_section(query.value(course_name_field).toString(),
-                                       query.value(name_field).toString(),
-                                       true);
+        course->add_section(query.value(section_id_field).toInt(),
+                            query.value(section_name_field).toString());
 
     }
 }

@@ -12,17 +12,22 @@
 #include <vector>
 #include <QString>
 
+#include "../tools/macro.h"
+#include "../tools/objectidentifier.h"
+
+#include "controller.h"
 #include "rubric.h"
 
+class Controller;
 class Rubric;
 
-class Criterion
+class Criterion : public ObjectIdentifier
 {
 public:
     // Constructor
     Criterion();
     // Parametrized constructor
-    Criterion(const QString name, Criterion* parent, int out_of, Rubric* rubric);
+    Criterion(int id, const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller);
     // Destructor
     ~Criterion();
     // Add sub-criterion
@@ -32,6 +37,8 @@ public:
     // Show criteria tree
     void show_children();
 
+    // This Criterion's id
+    int _id;
     // This criterion's rubric
     Rubric* _rubric = nullptr;
     // Criterion's parent (nullpointer if this is a parent)
@@ -41,7 +48,9 @@ public:
     // Maximum grade for this criterion (0 if extra-credit)
     int _out_of;
     // Sub-criteria
-    std::vector<Criterion*> _sub_criteria;
+    std::vector<Criterion*> *_sub_criteria;
+    // Controller
+    Controller *_controller;
 };
 
 #endif // CRITERION_H

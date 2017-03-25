@@ -6,7 +6,7 @@ ObjectIdentifier::ObjectIdentifier()
 {
 
     // Uniquely identify the object.
-    id = id_cnt;
+    obj_id = id_cnt;
 
     // Increment the created object count.
     id_cnt++;

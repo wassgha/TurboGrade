@@ -1,14 +1,6 @@
 #include "coursedb.h"
 
 /**
- * @brief Default constructor
- */
-CourseDB::CourseDB()
-{
-
-}
-
-/**
  * @brief Destructor
  */
 
@@ -21,7 +13,7 @@ CourseDB::~CourseDB() {
  * @param name the name of the course (ex. CS150)
  * @return true if the query succeded
  */
-bool CourseDB::add(const QString name) {
+int CourseDB::add(const QString name) {
 
     QSqlQuery query(db);
 
@@ -31,10 +23,10 @@ bool CourseDB::add(const QString name) {
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'course' table" << endl << "SQL ERROR: " << query.lastError();
-        return false;
+        return -1;
     }
 
-    return true;
+    return query.lastInsertId().toInt();
 }
 
 
@@ -83,8 +75,10 @@ void CourseDB::load_all() {
         return;
     }
 
+    int id_field = query.record().indexOf("id");
     int name_field = query.record().indexOf("name");
     while(query.next()) {
-        _controller->add_course(query.value(name_field).toString(), true);
+        _controller->add_course(query.value(id_field).toInt(), query.value(name_field).toString());
     }
 }
+

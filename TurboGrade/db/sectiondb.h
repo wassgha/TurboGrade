@@ -16,8 +16,6 @@ class SectionDB : public DBEngine
 {
 public:
     // Constructor
-    SectionDB();
-    // Parametrized constructor
     SectionDB(Controller *controller):
         DBEngine("SectionDB"),
         _controller(controller){}
@@ -26,17 +24,14 @@ public:
 
 
     // Adds a row to the table
-    bool add(int course_id, const QString name);
+    int add(int course_id, const QString name);
     // Gets row id matching name
     int select(const QString course_name, const QString name);
     // Load all sections to controller
-    void load_all();
-    // Load sections for a specific course to controller
-    void load_course_sections(int course_id);
+    void load_all(Course* course);
 
-
-    // Controller
-    Controller* _controller;
+    //Controller
+    Controller *_controller;
 };
 
 #endif // SECTIONDB_H

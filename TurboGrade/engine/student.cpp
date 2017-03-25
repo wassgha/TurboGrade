@@ -6,17 +6,33 @@ Student::Student()
     exit(0);
 }
 
-Student::Student(QString name, QString username, Section* section)
+Student::Student(int id, QString name, QString username, Section* section, Controller * controller)
 {
+
+    SHOW_WHERE;
+
+    _controller = controller;
+
+    if (id == -1)
+        _id = _controller->_studentDB->add(section->_id, name, username);
+    else
+        _id = id;
+
     _name = name;
     _username = username;
     _section = section;
+
+    // Student submissions
+    _submissions = new std::vector<Submission*>();
+
+    _controller->_submissionDB->load_all(this);
 }
 
 Student::~Student()
 {
-    for(Submission* submission:_submissions)
+    for(Submission* submission:*_submissions)
         delete submission;
+    delete _submissions;
 }
 
 
@@ -24,11 +40,11 @@ Student::~Student()
  * @brief Student::add_submission adds a submission made by this student
  * @param assignment a pointer to the assignment the submission belongs to
  */
-void Student::add_submission(Assignment* assignment) {
+void Student::add_submission(int id, Assignment* assignment) {
 
-    Submission *new_submission = new Submission(assignment, this);
+    Submission *new_submission = new Submission(id, assignment, this, _controller);
 
-    _submissions.push_back(new_submission);
+    _submissions->push_back(new_submission);
 }
 
 /**
@@ -37,7 +53,7 @@ void Student::add_submission(Assignment* assignment) {
  * @return the submission found
  */
 Submission* Student::get_submission(Assignment* assignment) {
-    for(Submission* submission:_submissions)
+    for(Submission* submission:*_submissions)
         if (submission->_assignment == assignment)
             return submission;
     return nullptr;

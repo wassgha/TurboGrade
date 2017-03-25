@@ -22,9 +22,13 @@ public:
     DBEngine(QString connectionName = "EngineDB");
     // Destructor
     ~DBEngine();
-protected:
+
     // Executes SQL query
     void sql_query(const QString &query_text);
+    // Drops all tables in the database (CAUTION!)
+    void drop_tables();
+
+protected:
     QSqlDatabase db;
     QString _connectionName;
 };

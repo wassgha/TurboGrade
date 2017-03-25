@@ -9,27 +9,35 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+
+#include "../tools/macro.h"
+#include "../tools/objectidentifier.h"
+
+#include "controller.h"
 #include "assignment.h"
 #include "submission.h"
 #include "section.h"
 
+class Controller;
 class Section;
 class Submission;
 
-class Student
+class Student : public ObjectIdentifier
 {
 public:
     // Constructor
     Student();
     // Parametrized constructor
-    Student(QString name, QString username, Section* section);
+    Student(int id, QString name, QString username, Section* section, Controller * controller);
     // Destructor
     ~Student();
     // Add a student submission
-    void add_submission(Assignment* assignment);
+    void add_submission(int id, Assignment* assignment);
     // Find a submission
     Submission* get_submission(Assignment* assignment);
 
+    // Student id
+    int _id;
     // Student's section
     Section* _section;
     // Student name
@@ -37,7 +45,9 @@ public:
     // Student username
     QString _username;
     // Student submissions
-    std::vector<Submission*> _submissions;
+    std::vector<Submission*> *_submissions;
+    // Controller
+    Controller *_controller;
 };
 
 #endif // STUDENT_H

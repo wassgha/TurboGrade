@@ -1,14 +1,6 @@
 #include "assignmentdb.h"
 
 /**
- * @brief Default constructor
- */
-AssignmentDB::AssignmentDB()
-{
-
-}
-
-/**
  * @brief Destructor
  */
 
@@ -119,110 +111,44 @@ void AssignmentDB::load_all() {
 
     while(query.next()) {
 
-        _controller->add_assignment(query.value(name_field).toString(),
-                                              query.value(objective_field).toString(),
-                                              true);
+        _controller->add_assignment(query.value(id_field).toInt(),
+                                   query.value(name_field).toString(),
+                                   query.value(objective_field).toString());
 
-        QSqlQuery link_query(db);
-
-        link_query.prepare("SELECT assignment_section.folder AS folder, assignment.name AS assignment_name, section.name AS section_name, course.name AS course_name "
-                      "FROM assignment_section, assignment, section, course "
-                      "WHERE assignment_section.assignment = assignment.id "
-                      "AND assignment.id = ? "
-                      "AND assignment_section.section = section.id "
-                      "AND section.course_id = course.id");
-        link_query.addBindValue(query.value(id_field).toString());
-
-        // Execute the query
-        if (!link_query.exec()) {
-            qDebug() << "Failed to select from table 'assignment_section' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
-            return ;
-        }
-
-        int assignment_name_field = link_query.record().indexOf("assignment_name");
-        int section_name_field = link_query.record().indexOf("section_name");
-        int course_name_field = link_query.record().indexOf("course_name");
-        int folder_field = link_query.record().indexOf("folder");
-
-        while(link_query.next()) {
-            _controller->link_assignment(link_query.value(course_name_field).toString(),
-                                           link_query.value(section_name_field).toString(),
-                                           link_query.value(assignment_name_field).toString(),
-                                           link_query.value(folder_field).toString(),
-                                           true);
-        }
     }
 }
 
 
-
 /**
- * @brief AssignmentDB::load_section_assignments loads a specific section's assignments
- * @param course_name the course the section belongs to
- * @param section_name the section whose assignments will be loaded
+ * @brief AssignmentDB::load_all loads all database records
+ * to the controller
  */
-void AssignmentDB::load_section_assignments(QString course_name, QString section_name) {
+void AssignmentDB::load_all(Section *section) {
 
-    _controller->clear_section_assignments(course_name, section_name);
+
 
     QSqlQuery query(db);
 
-    query.prepare("SELECT * FROM assignment "
-                  "WHERE "
-                  "assignment_section.section = "
-                  "("
-                      "SELECT section.id from section WHERE "
-                      "section.name = ? "
-                      "AND section.course_id = "
-                          "("
-                                "SELECT course.id FROM course WHERE course.name = ?"
-                          ")"
-                  ") "
-                  "AND assignment.id = assignment_section.assignment");
+    query.prepare("SELECT * FROM assignment_section WHERE section = ?");
+
+    query.addBindValue(section->_id);
 
     // Execute the query
     if (!query.exec()) {
-        qDebug() << "Failed to select from table 'assignment' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to select from table 'assignment_section' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
         return ;
     }
 
-    int id_field = query.record().indexOf("id");
-    int name_field = query.record().indexOf("name");
-    int objective_field = query.record().indexOf("objective");
+    int assignment_id_field = query.record().indexOf("assignment");
+    int folder_field = query.record().indexOf("folder");
 
     while(query.next()) {
 
-        _controller->add_assignment(query.value(name_field).toString(),
-                                              query.value(objective_field).toString(),
-                                              true);
+        std::cout<<"Adding assignment "<<query.value(assignment_id_field).toInt()<<" to section "<< section->_course->_name.toStdString() << section->_name.toStdString()<<std::endl;
 
-        QSqlQuery link_query(db);
+        section->add_assignment(_controller->get_assignment(query.value(assignment_id_field).toInt()),
+                                query.value(folder_field).toString(),
+                                true);
 
-        link_query.prepare("SELECT assignment_section.folder AS folder, assignment.name AS assignment_name, section.name AS section_name, course.name AS course_name "
-                      "FROM assignment_section, assignment, section, course "
-                      "WHERE assignment_section.assignment = assignment.id "
-                      "AND assignment.id = ? "
-                      "AND assignment_section.section = section.id"
-                      "AND section.course_id = course.id");
-        link_query.addBindValue(query.value(id_field).toInt());
-
-        // Execute the query
-        if (!link_query.exec()) {
-            qDebug() << "Failed to select from table 'assignment_section' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
-            return ;
-        }
-
-        int assignment_name_field = link_query.record().indexOf("assignment_name");
-        int section_name_field = link_query.record().indexOf("section_name");
-        int course_name_field = link_query.record().indexOf("course_name");
-        int folder_field = link_query.record().indexOf("folder");
-
-        while(link_query.next()) {
-            _controller->link_assignment(link_query.value(course_name_field).toString(),
-                                           link_query.value(section_name_field).toString(),
-                                           link_query.value(assignment_name_field).toString(),
-                                           link_query.value(folder_field).toString(),
-                                           true);
-        }
     }
 }

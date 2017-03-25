@@ -22,7 +22,7 @@ StudentDB::~StudentDB() {
  * @param username the student's username (ex. gharbiw)
  * @return true if the query succeded
  */
-bool StudentDB::add(int section_id, const QString name, const QString username) {
+int StudentDB::add(int section_id, const QString name, const QString username) {
 
     QSqlQuery query(db);
 
@@ -37,7 +37,7 @@ bool StudentDB::add(int section_id, const QString name, const QString username) 
         return false;
     }
 
-    return true;
+    return query.lastInsertId().toInt();
 }
 
 
@@ -82,13 +82,14 @@ int StudentDB::select(const QString course_name, const QString section_name, con
  * @brief StudentDB::load_all loads all database records
  * to the controller
  */
-void StudentDB::load_all() {
+void StudentDB::load_all(Section* section) {
     QSqlQuery query(db);
 
-    query.prepare("SELECT student.name, student.username, section.name AS section_name, course.name AS course_name "
-                  "FROM student, section, course "
-                  "WHERE section.course_id = course.id "
-                  "AND student.section_id = section.id");
+    query.prepare("SELECT student.name, student.username, student.id "
+                  "FROM student "
+                  "WHERE student.section_id = ?");
+
+    query.addBindValue(section->_id);
 
     // Execute the query
     if (!query.exec()) {
@@ -96,61 +97,13 @@ void StudentDB::load_all() {
         return ;
     }
 
-    int course_name_field = query.record().indexOf("course_name");
-    int section_name_field = query.record().indexOf("section_name");
+    int id_field = query.record().indexOf("id");
     int name_field = query.record().indexOf("name");
     int username_field = query.record().indexOf("username");
 
     while(query.next()) {
-
-        _controller->add_student(query.value(course_name_field).toString(),
-                                       query.value(section_name_field).toString(),
-                                       query.value(name_field).toString(),
-                                       query.value(username_field).toString(),
-                                       true);
-
-    }
-}
-
-
-
-/**
- * @brief StudentDB::load_section_students loads a specific section's
- * students to the controller
- * @param section_id the section students belong to
- */
-void StudentDB::load_section_students(int section_id) {
-
-    QSqlQuery query(db);
-
-    query.prepare("SELECT student.name, section.name AS section_name, course.name AS course_name "
-                  "FROM student, section, course "
-                  "WHERE section.course_id = course.id "
-                  "AND student.section_id = section.id"
-                  "AND student.section_id = ?"
-                  "AND course.id = section.course_id");
-
-
-    query.addBindValue(section_id);
-
-    // Execute the query
-    if (!query.exec()) {
-        qDebug() << "Failed to select from table 'student' (load_section_students)" << endl << "SQL ERROR: " << query.lastError();
-        return;
-    }
-
-    int course_name_field = query.record().indexOf("course_name");
-    int section_name_field = query.record().indexOf("section_name");
-    int name_field = query.record().indexOf("name");
-    int username_field = query.record().indexOf("username");
-
-    while(query.next()) {
-
-        _controller->add_student(query.value(course_name_field).toString(),
-                                       query.value(section_name_field).toString(),
-                                       query.value(name_field).toString(),
-                                       query.value(username_field).toString(),
-                                       true);
-
+        section->add_student(query.value(id_field).toInt(),
+                             query.value(name_field).toString(),
+                             query.value(username_field).toString());
     }
 }

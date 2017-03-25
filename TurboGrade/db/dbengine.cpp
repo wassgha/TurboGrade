@@ -129,3 +129,23 @@ void DBEngine::sql_query(const QString &query_text) {
     query.finish();
 
 }
+
+/**
+ * @brief DBEngine::drop_tables (CAUTION!) deletes all
+ * information stored in the database.
+ */
+void DBEngine::drop_tables()
+{
+    // Drop all tables
+    sql_query("DROP TABLE course;");
+    sql_query("DROP TABLE section;");
+    sql_query("DROP TABLE student;");
+    sql_query("DROP TABLE assignment;");
+    sql_query("DROP TABLE assignment_section;");
+    sql_query("DROP TABLE submission;");
+    sql_query("DROP TABLE file;");
+    sql_query("DROP TABLE comment_text;");
+    sql_query("DROP TABLE comment;");
+    sql_query("DROP TABLE grade;");
+    sql_query("DROP TABLE rubric;");
+}

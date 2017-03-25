@@ -10,24 +10,33 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+
+#include "../tools/macro.h"
+#include "../tools/objectidentifier.h"
+
+#include "controller.h"
 #include "assignment.h"
 #include "rubric.h"
 
+class Controller;
 class Rubric;
 
-class Assignment
+class Assignment : public ObjectIdentifier
 {
 public:
     // Constructor
     Assignment();
     // Parametrized constructor
-    Assignment(const QString name, const QString objective);
+    Assignment(int id, const QString name, const QString objective, Controller *controller);
     // Destructor
     ~Assignment();
 
+    int _id;
     QString _name;
     QString _objective;
     Rubric* _rubric;
+    // Controller
+    Controller *_controller;
 };
 
 #endif // ASSIGNMENT_H

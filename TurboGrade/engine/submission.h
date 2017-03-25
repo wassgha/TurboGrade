@@ -11,25 +11,36 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+
+#include "../tools/macro.h"
+#include "../tools/objectidentifier.h"
+
+#include "controller.h"
 #include "assignment.h"
 #include "student.h"
 
+class Controller;
 class Student;
+class Assignment;
 
-class Submission
+class Submission : public ObjectIdentifier
 {
 public:
     // Constructor
     Submission();
     // Parametrized constructor
-    Submission(Assignment* assignment, Student* student);
+    Submission(int id, Assignment* assignment, Student* student, Controller * controller);
     // Destructor
     ~Submission();
 
+    // Submission id
+    int _id;
     // Submission belongs to student
     Student* _student;
     // Submission assignment
     Assignment* _assignment = nullptr;
+    // Controller
+    Controller *_controller;
 };
 
 #endif // SUBMISSION_H

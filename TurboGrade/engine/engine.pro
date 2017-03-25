@@ -4,6 +4,7 @@ CONFIG      -= app_bundle
 QT          += sql widgets
 
 SOURCES     += \
+            "../tools/objectidentifier.cpp" \
             "../db/dbengine.cpp" \
             "../db/coursedb.cpp" \
             "../db/sectiondb.cpp" \
@@ -22,6 +23,8 @@ SOURCES     += \
     controller.cpp
 
 HEADERS     += \
+            "../tools/macro.h" \
+            "../tools/objectidentifier.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \

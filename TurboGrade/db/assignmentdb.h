@@ -16,8 +16,6 @@ class AssignmentDB : public DBEngine
 {
 public:
     // Constructor
-    AssignmentDB();
-    // Parametrized constructor
     AssignmentDB(Controller *controller):
         DBEngine("AssignmentDB"),
         _controller(controller){}
@@ -31,10 +29,10 @@ public:
     bool link(int assignment_id, int section_id, const QString folder);
     // Gets row id matching name
     int select(const QString name);
-    // Loads assignments and links them to sections in the controller
+    // Load to controller
     void load_all();
-    // Loads assignments for a specific section and links them
-    void load_section_assignments(QString course_name, QString section_name);
+    // Load assignment-section links for a specific section
+    void load_all(Section *section);
 
 
     // Controller

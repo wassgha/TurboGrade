@@ -9,7 +9,7 @@ public:
 
      static int id_cnt;
 
-     int id;
+     int obj_id;
 };
 
 #endif // OBJECTIDENTIFIER_H

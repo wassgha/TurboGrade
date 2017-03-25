@@ -26,15 +26,13 @@ public:
 
 
     // Adds a row to the submission table
-    bool add(int student_id, int assignment_id);
+    int add(int student_id, int assignment_id);
     // Adds a row to the file table
-    bool add_file(int submission_id, QString filename);
+    int add_file(int submission_id, QString filename);
     // Gets row id matching submission
     int select(int student_id, int assignment_id);
-    // Loads submissions and links them to the controller
-    void load_all();
     // Loads submissions for a specific student
-    void load_student_submissions(int student_id);
+    void load_all(Student *student);
 
 
     // Controller

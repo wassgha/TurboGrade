@@ -24,7 +24,7 @@ RubricDB::~RubricDB() {
  * @param out_of maximum grade assigned to the criterion (0 for extra-credit)
  * @return true if the query succeded
  */
-bool RubricDB::add_criterion(const QString name, int assignment_id, int parent_id, int out_of) {
+int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id, int out_of) {
 
     QSqlQuery query(db);
 
@@ -40,7 +40,7 @@ bool RubricDB::add_criterion(const QString name, int assignment_id, int parent_i
         return false;
     }
 
-    return true;
+    return query.lastInsertId().toInt();
 }
 
 /**
@@ -76,88 +76,57 @@ int RubricDB::select(int assignment_id, const QString name) {
 
 
 /**
- * @brief RubricDB::load_all loads all database records
- * to the controller
+ * @brief RubricDB::load_parent_criteria loads all top level
+ * criteria records related to the specified rubric
  */
-void RubricDB::load_all() {
+void RubricDB::load_parent_criteria(Rubric *rubric) {
 
     QSqlQuery query(db);
 
     query.prepare("SELECT "
                   "rubric.name AS criterion_name, "
+                  "rubric.id AS criterion_id, "
                   "rubric.parent AS parent_id, "
-                  "assignment.name AS assignment_name, "
                   "rubric.grade_out_of AS out_of "
-                  "FROM rubric, assignment "
-                  "WHERE assignment.id = rubric.assignment");
+                  "FROM rubric "
+                  "WHERE rubric.assignment = ? "
+                  "AND rubric.parent = -1");
+
+    query.addBindValue(rubric->_assignment->_id);
 
     // Execute the query
     if (!query.exec()) {
-        qDebug() << "Failed to select from table 'rubric' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to select from table 'rubric' (load_all)" << query.executedQuery() << endl << "SQL ERROR (" << rubric->_assignment->_id << " : " << query.lastError();
         return ;
     }
 
-    int assignment_name_field = query.record().indexOf("assignment_name");
+    int criterion_id_field = query.record().indexOf("criterion_id");
     int criterion_name_field = query.record().indexOf("criterion_name");
     int out_of_field = query.record().indexOf("out_of");
-    int parent_id_field = query.record().indexOf("parent_id");
-
 
     while(query.next()) {
-
-        QString assignment_name = query.value(assignment_name_field).toString();
-        QString criterion_name = query.value(criterion_name_field).toString();
-        int out_of = query.value(out_of_field).toInt();
-        int parent_id = query.value(parent_id_field).toInt();
-
-        QSqlQuery parent_query(db);
-
-        parent_query.prepare("SELECT "
-                      "rubric.name AS parent_name "
-                      "FROM rubric "
-                      "WHERE rubric.id = ?");
-
-        parent_query.addBindValue(parent_id);
-
-        // Execute the query
-        if (!parent_query.exec()) {
-            qDebug() << "Failed to select from table 'rubric' (parent)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
-            return ;
-        }
-
-        int parent_name_field = parent_query.record().indexOf("parent_name");
-
-        QString parent_name = parent_query.next() ? parent_query.value(parent_name_field).toString() : NULL;
-
-        _controller->add_criterion(assignment_name,
-                                             criterion_name,
-                                             parent_name,
-                                             out_of,
-                                             true);
+        rubric->add_criterion(query.value(criterion_id_field).toInt(), query.value(criterion_name_field).toString(), NULL, query.value(out_of_field).toInt());
     }
-
 }
 
 
 
 /**
- * @brief RubricDB::load_assignment_criteria loads a specific assignment's rubric
- * @param assignment_id the assignment's identifier in the database
+ * @brief RubricDB::load_sub_criteria loads all second level
+ * criteria records related to a parent criterion
  */
-void RubricDB::load_assignment_criteria(int assignment_id) {
+void RubricDB::load_sub_criteria(Criterion *criterion) {
 
     QSqlQuery query(db);
 
     query.prepare("SELECT "
                   "rubric.name AS criterion_name, "
-                  "rubric.parent AS parent_id, "
-                  "assignment.name AS assignment_name, "
+                  "rubric.id AS criterion_id, "
                   "rubric.grade_out_of AS out_of "
-                  "FROM rubric, assignment "
-                  "WHERE assignment.id = rubric.assignment "
-                  "AND rubric.assignment = ?");
+                  "FROM rubric "
+                  "WHERE rubric.parent = ?");
 
-    query.addBindValue(assignment_id);
+    query.addBindValue(criterion->_id);
 
     // Execute the query
     if (!query.exec()) {
@@ -165,44 +134,11 @@ void RubricDB::load_assignment_criteria(int assignment_id) {
         return ;
     }
 
-    int assignment_name_field = query.record().indexOf("assignment_name");
+    int criterion_id_field = query.record().indexOf("criterion_id");
     int criterion_name_field = query.record().indexOf("criterion_name");
     int out_of_field = query.record().indexOf("out_of");
-    int parent_id_field = query.record().indexOf("parent_id");
 
     while(query.next()) {
-
-        QString assignment_name = query.value(assignment_name_field).toString();
-        QString criterion_name = query.value(criterion_name_field).toString();
-        int out_of = query.value(out_of_field).toInt();
-        int parent_id = query.value(parent_id_field).toInt();
-
-        QSqlQuery parent_query(db);
-
-        parent_query.prepare("SELECT "
-                      "rubric.name AS parent_name "
-                      "FROM rubric "
-                      "WHERE rubric.id = ?");
-
-        parent_query.addBindValue(parent_id);
-
-        // Execute the query
-        if (!parent_query.exec()) {
-            qDebug() << "Failed to select from table 'rubric' (parent)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
-            return ;
-        }
-
-        int parent_name_field = parent_query.record().indexOf("parent_name");
-
-        parent_query.first();
-
-        QString parent_name = parent_query.value(parent_name_field).toString();
-
-        _controller->add_criterion(assignment_name,
-                                             criterion_name,
-                                             parent_name,
-                                             out_of,
-                                             true);
+        criterion->_rubric->add_criterion(query.value(criterion_id_field).toInt(), query.value(criterion_name_field).toString(), criterion, query.value(out_of_field).toInt());
     }
-
 }

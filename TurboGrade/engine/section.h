@@ -11,38 +11,50 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+
+#include "../tools/macro.h"
+#include "../tools/objectidentifier.h"
+
+#include "controller.h"
 #include "course.h"
+#include "assignment.h"
 #include "student.h"
 
+class Controller;
 class Course;
 class Student;
+class Assignment;
 
-class Section
+class Section : public ObjectIdentifier
 {
 public:
     // Constructor
     Section();
     // Parametrized constructor
-    Section(QString name, Course* course);
+    Section(int id, QString name, Course* course, Controller * controller);
     // Destructor
     ~Section();
     // Add a student to the section
-    void add_student(const QString name, const QString username);
+    void add_student(int id, const QString name, const QString username);
     // Add an assignment to the section
-    void add_assignment(Assignment* assignment, QString folder);
+    void add_assignment(Assignment* assignment, QString folder, bool load = false);
     // Find a student in the section
     Student* get_student(const QString username);
     // Find an assignment in the section
     std::pair<Assignment*, QString> get_assignment(const QString name);
 
+    // Section id
+    int _id;
     // Course
     Course* _course;
     // Section name
     QString _name;
     // Section students
-    std::vector<Student*> _students;
+    std::vector<Student*> *_students;
     // Section assignments (assignment and folder)
-    std::vector<std::pair<Assignment*, QString>> _assignments;
+    std::vector<std::pair<Assignment*, QString>> *_assignments;
+    // Controller
+    Controller *_controller;
 };
 
 #endif // SECTION_H

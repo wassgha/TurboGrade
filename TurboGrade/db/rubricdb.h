@@ -26,13 +26,13 @@ public:
 
 
     // Adds a row to the table
-    bool add_criterion(const QString name, int assignment_id, int parent_id, int out_of);
+    int add_criterion(const QString name, int assignment_id, int parent_id, int out_of);
     // Gets row id matching rubric criterion
     int select(int assignment_id, const QString name);
-    // Loads rubrics and links them to the controller
-    void load_all();
-    // Loads rubric for a specific assignment
-    void load_assignment_criteria(int assignment_id);
+    // Loads criteria to a rubric
+    void load_parent_criteria(Rubric *rubric);
+    // Loads children criteria for a specific criterion
+    void load_sub_criteria(Criterion *criterion);
 
 
     // Controller

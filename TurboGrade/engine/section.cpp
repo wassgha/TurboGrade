@@ -6,16 +6,37 @@ Section::Section()
     exit(0);
 }
 
-Section::Section(QString name, Course* course)
+Section::Section(int id, QString name, Course* course, Controller* controller)
 {
+
+    SHOW_WHERE;
+
+    _controller = controller;
+
+    if (id == -1)
+        _id = _controller->_sectionDB->add(course->_id, name);
+    else
+        _id = id;
+
     _name = name;
     _course = course;
+
+    // Section students
+    _students = new std::vector<Student*>();
+    // Section assignments (assignment and folder)
+    _assignments = new std::vector<std::pair<Assignment*, QString>>();
+
+    _controller->_assignmentDB->load_all(this);
+    _controller->_studentDB->load_all(this);
 }
 
 Section::~Section()
 {
-    for(Student* student:_students)
+    for(Student* student:*_students)
         delete student;
+    delete _students;
+
+    delete _assignments;
 }
 
 
@@ -24,11 +45,11 @@ Section::~Section()
  * @param name name of the student
  * @param username identifier of the student
  */
-void Section::add_student(const QString name, const QString username) {
+void Section::add_student(int id, const QString name, const QString username) {
 
-    Student *new_student = new Student(name, username, this);
+    Student *new_student = new Student(id, name, username, this, _controller);
 
-    _students.push_back(new_student);
+    _students->push_back(new_student);
 }
 
 /**
@@ -37,7 +58,7 @@ void Section::add_student(const QString name, const QString username) {
  * @return the student found
  */
 Student* Section::get_student(const QString username) {
-    for(Student* student:_students)
+    for(Student* student:*_students)
         if (student->_username == username)
             return student;
     return nullptr;
@@ -48,9 +69,12 @@ Student* Section::get_student(const QString username) {
  * @param assignment a pointer to the assignment
  * @param folder the folder where submissions can be found
  */
-void Section::add_assignment(Assignment* assignment, QString folder) {
+void Section::add_assignment(Assignment* assignment, QString folder, bool load) {
 
-    _assignments.push_back(std::make_pair(assignment, folder));
+    _assignments->push_back(std::make_pair(assignment, folder));
+
+    if (!load)
+        _controller->_assignmentDB->link(assignment->_id, _id, folder);
 
 }
 
@@ -60,7 +84,7 @@ void Section::add_assignment(Assignment* assignment, QString folder) {
  * @return a pair containing the assignment and the folder the submissions are in
  */
 std::pair<Assignment*, QString> Section::get_assignment(const QString name) {
-    for(std::pair<Assignment*, QString> assignment:_assignments)
+    for(std::pair<Assignment*, QString> assignment:*_assignments)
         if (assignment.first->_name == name)
             return assignment;
     std::cerr<<"Assignment not found";

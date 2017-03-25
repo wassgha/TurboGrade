@@ -22,7 +22,7 @@ SubmissionDB::~SubmissionDB() {
  * @param assignment_id the assignment this submission belongs to
  * @return true if the query succeded
  */
-bool SubmissionDB::add(int student_id, int assignment_id) {
+int SubmissionDB::add(int student_id, int assignment_id) {
 
     QSqlQuery query(db);
 
@@ -36,7 +36,7 @@ bool SubmissionDB::add(int student_id, int assignment_id) {
         return false;
     }
 
-    return true;
+    return query.lastInsertId().toInt();
 }
 
 
@@ -46,7 +46,7 @@ bool SubmissionDB::add(int student_id, int assignment_id) {
  * @param assignment_id the assignment this submission belongs to
  * @return true if the query succeded
  */
-bool SubmissionDB::add_file(int submission_id, QString filename) {
+int SubmissionDB::add_file(int submission_id, QString filename) {
 
     QSqlQuery query(db);
 
@@ -60,7 +60,7 @@ bool SubmissionDB::add_file(int submission_id, QString filename) {
         return false;
     }
 
-    return true;
+    return query.lastInsertId().toInt();
 }
 
 /**
@@ -96,76 +96,20 @@ int SubmissionDB::select(int student_id, int assignment_id) {
 
 
 /**
- * @brief SubmissionDB::load_all loads all database records
- * to the controller
+ * @brief SubmissionDB::load_all loads all submissions
+ * for a specific student
  */
-void SubmissionDB::load_all() {
+void SubmissionDB::load_all(Student *student) {
     QSqlQuery query(db);
 
     query.prepare("SELECT "
-                  "submission.id,"
-                  "course.name AS course_name, "
-                  "section.name AS section_name, "
-                  "student.name AS student_name, "
-                  "student.username AS student_username, "
+                  "submission.id AS submission_id,"
                   "assignment.name AS assignment_name "
-                  "FROM submission, course, section, student, assignment, assignment_section "
-                  "WHERE assignment.id = assignment_section.assignment "
-                  "AND assignment_section.assignment = submission.assignment "
-                  "AND student.id = submission.student "
-                  "AND section.id = assignment_section.section "
-                  "AND course.id = section.course_id ");
-
-    // Execute the query
-    if (!query.exec()) {
-        qDebug() << "Failed to select from table 'submission' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
-        return ;
-    }
-
-    int assignment_name_field = query.record().indexOf("assignment_name");
-    int section_name_field = query.record().indexOf("section_name");
-    int course_name_field = query.record().indexOf("course_name");
-    int student_name_field = query.record().indexOf("student_name");
-    int student_username_field = query.record().indexOf("student_username");
-
-    while(query.next()) {
-
-        _controller->add_submission(query.value(course_name_field).toString(),
-                                              query.value(section_name_field).toString(),
-                                              query.value(student_name_field).toString(),
-                                              query.value(student_username_field).toString(),
-                                              query.value(assignment_name_field).toString(),
-                                              true);
-
-    }
-}
-
-
-
-/**
- * @brief SubmissionDB::load_student_submissions loads a specific student's submissions
- * @param student_id the student's identifier in the database
- */
-void SubmissionDB::load_student_submissions(int student_id) {
-
-    QSqlQuery query(db);
-
-    query.prepare("SELECT "
-                  "submission.id,"
-                  "course.name AS course_name, "
-                  "section.name AS section_name, "
-                  "student.name AS student_name, "
-                  "student.username AS student_username, "
-                  "assignment.name AS assignment_name "
-                  "FROM submission, course, section, student, assignment, assignment_section "
-                  "WHERE assignment.id = assignment_section.assignment "
-                  "AND assignment_section.assignment = submission.assignment "
-                  "AND student.id = submission.student "
-                  "AND section.id = assignment_section.section "
-                  "AND course.id = section.course_id "
+                  "FROM submission, assignment "
+                  "WHERE assignment.id = submission.assignment "
                   "AND submission.student = ?");
 
-    query.addBindValue(student_id);
+    query.addBindValue(student->_id);
 
     // Execute the query
     if (!query.exec()) {
@@ -174,19 +118,10 @@ void SubmissionDB::load_student_submissions(int student_id) {
     }
 
     int assignment_name_field = query.record().indexOf("assignment_name");
-    int section_name_field = query.record().indexOf("section_name");
-    int course_name_field = query.record().indexOf("course_name");
-    int student_name_field = query.record().indexOf("student_name");
-    int student_username_field = query.record().indexOf("student_username");
+    int submission_id_field = query.record().indexOf("submission_id");
 
     while(query.next()) {
-
-        _controller->add_submission(query.value(course_name_field).toString(),
-                                              query.value(section_name_field).toString(),
-                                              query.value(student_name_field).toString(),
-                                              query.value(student_username_field).toString(),
-                                              query.value(assignment_name_field).toString(),
-                                              true);
-
+        student->add_submission(query.value(submission_id_field).toInt(),
+                                _controller->get_assignment(query.value(assignment_name_field).toString()));
     }
 }

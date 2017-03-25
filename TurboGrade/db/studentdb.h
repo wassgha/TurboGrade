@@ -9,8 +9,10 @@
 
 #include "dbengine.h"
 #include "../engine/controller.h"
+#include "../engine/section.h"
 
 class Controller;
+class Section;
 
 class StudentDB : public DBEngine
 {
@@ -26,14 +28,11 @@ public:
 
 
     // Adds a row to the table
-    bool add(int section_id, const QString name, const QString username);
+    int add(int section_id, const QString name, const QString username);
     // Gets row id matching student
     int select(const QString course_name, const QString section_name, const QString name, const QString username);
-    // Load all students to controller
-    void load_all();
     // Load students for a specific section to controller
-    void load_section_students(int section_id);
-
+    void load_all(Section* section);
     // Controller
     Controller* _controller;
 };
