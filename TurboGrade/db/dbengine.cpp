@@ -62,28 +62,17 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
               FOREIGN KEY(student) REFERENCES student(id),\
               FOREIGN KEY(assignment) REFERENCES assignment(id))");
 
-    // File Table
-    sql_query("CREATE TABLE IF NOT EXISTS file (id INTEGER PRIMARY KEY, \
-               submission INTEGER,\
-               filename VARCHAR(255),\
-              FOREIGN KEY(submission) REFERENCES submission(id))");
-
-
-    // CommentText Table
-    sql_query("CREATE TABLE IF NOT EXISTS comment_text (id INTEGER PRIMARY KEY, \
-               comment_text TEXT)");
-
     // Comment Table
     sql_query("CREATE TABLE IF NOT EXISTS comment (id INTEGER PRIMARY KEY, \
-               file INTEGER,\
+               submission INTEGER, \
+               filename VARCHAR(50),\
                rubric INTEGER,\
-               comment_text INTEGER,\
+               comment_text TEXT,\
                grade INT,\
                start_pos INT,\
                end_pos INT,\
-              FOREIGN KEY(file) REFERENCES file(id),\
-              FOREIGN KEY(rubric) REFERENCES rubric(id),\
-              FOREIGN KEY(comment_text) REFERENCES comment_text(id))");
+              FOREIGN KEY(submission) REFERENCES submission(id),\
+              FOREIGN KEY(rubric) REFERENCES rubric(id))");
 
     // Rubric Table
     // Note: A rubric section is auto-suggested when it has no parent
