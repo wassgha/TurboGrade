@@ -27,7 +27,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-    Controller *controller;
+    Controller *_controller;
     GradeSubmission *grade_submission;
     Dashboard *dashboard;
     QFont roboto;

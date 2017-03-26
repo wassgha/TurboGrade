@@ -1,28 +1,34 @@
 #include "courses.h"
 #include "ui_courses.h"
 
-Courses::Courses(QWidget *parent) :
+Courses::Courses(QWidget *parent, Controller *controller) :
     QWidget(parent),
     ui(new Ui::Courses)
 {
     ui->setupUi(this);
 
+    setAttribute(Qt::WA_StyledBackground, true);
+
+    _controller = controller;
+
     QPushButton *add_course_btn = new QPushButton("Add course");
     add_course_btn->setObjectName("add_course");
     add_course(add_course_btn);
-    QPushButton *btn2 = new QPushButton("test course");
-    add_course(btn2);
-    QPushButton *btn3 = new QPushButton("test course");
-    add_course(btn3);
-    QPushButton *btn4 = new QPushButton("test course");
-    add_course(btn4);
+    show_courses();
 
-    setAttribute(Qt::WA_StyledBackground, true);
 }
 
 Courses::~Courses()
 {
     delete ui;
+}
+
+void Courses::show_courses() {
+    std::cout<<"Reading from database (found "<<_controller->get_courses()->size()<< ")"<<std::endl;
+    for(Course* course : *_controller->get_courses()) {
+        std::cout<<"Course : "<<course->_name.toStdString()<<std::endl;
+        add_course(new QPushButton(course->_name));
+    }
 }
 
 void Courses::add_course(QWidget *course) {

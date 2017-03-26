@@ -144,8 +144,6 @@ void AssignmentDB::load_all(Section *section) {
 
     while(query.next()) {
 
-        std::cout<<"Adding assignment "<<query.value(assignment_id_field).toInt()<<" to section "<< section->_course->_name.toStdString() << section->_name.toStdString()<<std::endl;
-
         section->add_assignment(_controller->get_assignment(query.value(assignment_id_field).toInt()),
                                 query.value(folder_field).toString(),
                                 true);

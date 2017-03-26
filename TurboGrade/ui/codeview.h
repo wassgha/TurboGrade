@@ -1,11 +1,17 @@
 #ifndef CODEVIEW_H
 #define CODEVIEW_H
 
+#include "../engine/controller.h"
+#include "../engine/controller.h"
+
 #include "../tools/codeeditor.h"
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+
 #include "commentpopup.h"
 #include "ui_commentpopup.h"
+
 #include "gradeview.h"
 #include "ui_gradeoverview.h"
 
@@ -26,9 +32,10 @@ class CodeView : public QWidget
     Q_OBJECT
 
 public:
-    explicit CodeView(QWidget *parent);
+    explicit CodeView(QWidget *parent, Controller* controller = nullptr);
     ~CodeView();
     Ui::CodeView *ui;
+    Controller *_controller;
 
 public slots:
     void getSelection();

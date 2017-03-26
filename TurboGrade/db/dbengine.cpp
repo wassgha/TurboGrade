@@ -17,9 +17,10 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
         db = QSqlDatabase::database(_connectionName);
 
     db.setDatabaseName(dbname);
+    QDir dir(QCoreApplication::applicationDirPath());
 
     if (!db.open()) {
-        std::cerr<<"Cannot open database"<<std::endl;
+        std::cerr<<"Cannot open database : "<<dir.absoluteFilePath(dbname).toStdString().c_str()<<std::endl;
         return;
     }
 

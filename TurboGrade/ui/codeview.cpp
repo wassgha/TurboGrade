@@ -1,11 +1,13 @@
 #include "codeview.h"
 #include "ui_codeview.h"
 
-CodeView::CodeView(QWidget *parent) :
+CodeView::CodeView(QWidget *parent, Controller *controller) :
     QWidget(parent),
     ui(new Ui::CodeView)
 {
     ui->setupUi(this);
+
+    _controller = controller;
 
     setupCodeEditor("MainWindow.cpp");
 

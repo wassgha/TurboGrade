@@ -25,6 +25,39 @@
 	border-radius: 18px;
 	color: white;
 	background: #61b4ff;
+}
+#tutorial {
+	background: #63c46b;
+	color: white;
+	border : none;
+	text-align: center;
+}
+#tutorial &gt; #tutorial_head, #tutorial &gt; #tutorial_text {
+	color: white;
+	font-size: 16px;
+	text-align: center;
+}
+
+#tutorial &gt; #tutorial_head {
+	font-weight: bold;
+	font-size: 22px;
+}
+
+#tutorial_btn, #dismiss_btn {
+	border-radius: 3px;
+	background: transparent;
+	color: white;
+	border: 1px solid white;
+	text-transform: uppercase;
+	max-width: 100px;
+	padding: 8px;
+	text-align:center;
+	font-size: 12px;
+}
+
+#dismiss_btn {
+	border: 1px solid rgba(255, 255, 255, 160);
+	color: rgba(255, 255, 255, 160);
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -127,6 +160,91 @@
     </layout>
    </item>
    <item>
+    <widget class="QGroupBox" name="tutorial">
+     <property name="title">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="flat">
+      <bool>true</bool>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="tutorial_head">
+        <property name="text">
+         <string>New to TurboGrade?</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="tutorial_text">
+        <property name="text">
+         <string>Take a look at our tutorials on Youtube.</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="tutorial_btns">
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tutorial_btn">
+          <property name="text">
+           <string>TUTORIALS</string>
+          </property>
+          <property name="flat">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="dismiss_btn">
+          <property name="text">
+           <string>DISMISS</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <widget class="QStackedWidget" name="mainWidget">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -138,7 +256,9 @@
       <string notr="true"/>
      </property>
      <widget class="QWidget" name="page"/>
-     <widget class="QWidget" name="page_2"/>
+     <widget class="QWidget" name="page_2">
+      <zorder>tutorial</zorder>
+     </widget>
     </widget>
    </item>
   </layout>

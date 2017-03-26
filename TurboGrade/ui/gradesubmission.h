@@ -3,8 +3,12 @@
 
 #include <QWidget>
 
+#include "../engine/controller.h"
+#include "../engine/controller.h"
+
 #include "codeview.h"
 #include "ui_codeview.h"
+
 #include "gradeview.h"
 #include "ui_gradeview.h"
 
@@ -20,10 +24,11 @@ class GradeSubmission : public QWidget
     Q_OBJECT
 
 public:
-    explicit GradeSubmission(QWidget *parent = 0);
+    explicit GradeSubmission(QWidget *parent = 0, Controller* controller = nullptr);
     ~GradeSubmission();
     CodeView *code_view;
     GradeView *grade_view;
+    Controller *_controller;
 
 private slots:
     void on_run_clicked();

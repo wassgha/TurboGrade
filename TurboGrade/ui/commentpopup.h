@@ -3,6 +3,10 @@
 
 #include <QWidget>
 
+#include "../engine/controller.h"
+#include "../engine/controller.h"
+
+
 namespace Ui {
 class CommentPopup;
 }
@@ -12,9 +16,11 @@ class CommentPopup : public QWidget
     Q_OBJECT
 
 public:
-    explicit CommentPopup(QWidget *parent = 0);
+    explicit CommentPopup(QWidget *parent = 0, Controller* controller = nullptr);
     ~CommentPopup();
     Ui::CommentPopup *ui;
+    Controller *_controller;
+
 private slots:
     void on_add_btn_clicked();
 };

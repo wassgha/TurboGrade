@@ -78,7 +78,6 @@ void CommentDB::load_all(Submission *submission) {
     int end_pos_field = query.record().indexOf("end_pos");
 
     while(query.next()) {
-        std::cout << "Read from database : " << query.value(grade_field).toInt()<< std::endl;
         submission->add_comment(query.value(id_field).toInt(),
                                 query.value(filename_field).toString(),
                                 submission->_assignment->_rubric->get_criterion(query.value(criterion_field).toInt()),

@@ -44,7 +44,7 @@ class Controller : public ObjectIdentifier
 public:
 
     // Constructor used to initialize database
-    Controller(bool drop_tables = false, QString dbname = "../db/turbograde.sqlite");
+    Controller(bool drop_tables = false, QString dbname = "turbograde.sqlite");
     // Destructor
     ~Controller();
 
