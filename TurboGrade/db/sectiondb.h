@@ -16,8 +16,8 @@ class SectionDB : public DBEngine
 {
 public:
     // Constructor
-    SectionDB(Controller *controller):
-        DBEngine("SectionDB"),
+    SectionDB(Controller *controller, QString dbname):
+        DBEngine("SectionDB", dbname),
         _controller(controller){}
     // Destructor
     ~SectionDB();

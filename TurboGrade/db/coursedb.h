@@ -16,8 +16,8 @@ class CourseDB : public DBEngine
 {
 public:
     // Constructor
-    CourseDB(Controller *controller):
-        DBEngine("CourseDB"),
+    CourseDB(Controller *controller, QString dbname):
+        DBEngine("CourseDB", dbname),
         _controller(controller){}
     // Destructor
     ~CourseDB();

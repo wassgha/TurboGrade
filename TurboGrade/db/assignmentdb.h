@@ -16,8 +16,8 @@ class AssignmentDB : public DBEngine
 {
 public:
     // Constructor
-    AssignmentDB(Controller *controller):
-        DBEngine("AssignmentDB"),
+    AssignmentDB(Controller *controller, QString dbname):
+        DBEngine("AssignmentDB", dbname),
         _controller(controller){}
     // Destructor
     ~AssignmentDB();

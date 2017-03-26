@@ -39,7 +39,10 @@ class RubricDB;
 class Controller : public ObjectIdentifier
 {
 public:
-    Controller();
+
+    // Constructor used to initialize database
+    Controller(bool drop_tables = false, QString dbname = "../db/turbograde.sqlite");
+    // Destructor
     ~Controller();
 
     /**********************************

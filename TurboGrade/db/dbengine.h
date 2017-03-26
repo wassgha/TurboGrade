@@ -19,7 +19,7 @@ class DBEngine
 {
 public:
     // Constructor
-    DBEngine(QString connectionName = "EngineDB");
+    DBEngine(QString connectionName = "EngineDB", QString dbname = "db.sqlite");
     // Destructor
     ~DBEngine();
 

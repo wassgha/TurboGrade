@@ -6,7 +6,7 @@
  * already exist
  */
 
-DBEngine::DBEngine(QString connectionName)
+DBEngine::DBEngine(QString connectionName, QString dbname)
 {
 
     _connectionName.append(connectionName);
@@ -16,7 +16,7 @@ DBEngine::DBEngine(QString connectionName)
     else
         db = QSqlDatabase::database(_connectionName);
 
-    db.setDatabaseName("../db/turbograde.sqlite");
+    db.setDatabaseName(dbname);
 
     if (!db.open()) {
         std::cerr<<"Cannot open database"<<std::endl;

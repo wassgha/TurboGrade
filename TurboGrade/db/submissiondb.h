@@ -18,8 +18,8 @@ public:
     // Constructor
     SubmissionDB();
     // Parametrized constructor
-    SubmissionDB(Controller *controller):
-        DBEngine("SubmissionDB"),
+    SubmissionDB(Controller *controller, QString dbname):
+        DBEngine("SubmissionDB", dbname),
         _controller(controller){}
     // Destructor
     ~SubmissionDB();

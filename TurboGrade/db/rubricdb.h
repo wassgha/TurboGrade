@@ -18,8 +18,8 @@ public:
     // Constructor
     RubricDB();
     // Parametrized constructor
-    RubricDB(Controller *controller):
-        DBEngine("RubricDB"),
+    RubricDB(Controller *controller, QString dbname):
+        DBEngine("RubricDB", dbname),
         _controller(controller){}
     // Destructor
     ~RubricDB();

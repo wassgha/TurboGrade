@@ -1,18 +1,28 @@
 #include "controller.h"
 
-Controller::Controller()
+/**
+ * @brief Controller::Controller constructor used to create tables
+ * and load information from the database
+ * @param drop_tables pass true to delete all information from the database
+ * @param dbname the name of the database to connect to
+ */
+Controller::Controller(bool drop_tables, QString dbname)
 {
 
     SHOW_WHERE;
 
-    _courseDB           = new CourseDB(this);
-//    _courseDB->drop_tables();
+    if (drop_tables) {
+        DBEngine *_tmpDB = new DBEngine("DropConnection", dbname);
+        _tmpDB->drop_tables();
+        delete _tmpDB;
+    }
 
-    _sectionDB          = new SectionDB(this);
-    _studentDB          = new StudentDB(this);
-    _assignmentDB       = new AssignmentDB(this);
-    _submissionDB       = new SubmissionDB(this);
-    _rubricDB           = new RubricDB(this);
+    _courseDB           = new CourseDB(this, dbname);
+    _sectionDB          = new SectionDB(this, dbname);
+    _studentDB          = new StudentDB(this, dbname);
+    _assignmentDB       = new AssignmentDB(this, dbname);
+    _submissionDB       = new SubmissionDB(this, dbname);
+    _rubricDB           = new RubricDB(this, dbname);
 
 
     _courses = new std::vector<Course*>();

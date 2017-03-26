@@ -13,8 +13,8 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
+    // Use new Controller(true) to drop tables
     Controller* controller = new Controller();
-
 
 //    Course* cs105 = controller->add_course(-1, "CS 105");
 //    controller->add_course(-1, "CS 150");

@@ -20,8 +20,8 @@ public:
     // Constructor
     StudentDB();
     // Parametrized constructor
-    StudentDB(Controller *controller):
-        DBEngine("StudentDB"),
+    StudentDB(Controller *controller, QString dbname):
+        DBEngine("StudentDB", dbname),
         _controller(controller){}
     // Destructor
     ~StudentDB();
