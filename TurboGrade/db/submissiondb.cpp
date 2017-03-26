@@ -39,30 +39,6 @@ int SubmissionDB::add(int student_id, int assignment_id) {
     return query.lastInsertId().toInt();
 }
 
-
-/**
- * @brief SubmissionDB::add_file Insert a row to the database
- * @param student_id the student's unique identifier
- * @param assignment_id the assignment this submission belongs to
- * @return true if the query succeded
- */
-int SubmissionDB::add_file(int submission_id, QString filename) {
-
-    QSqlQuery query(db);
-
-    query.prepare("INSERT INTO file (id, submission, filename) "
-                  "VALUES (NULL, ?, ?)");
-    query.addBindValue(submission_id);
-    query.addBindValue(filename);
-
-    if (!query.exec()) {
-        qDebug() << "Failed to insert to 'file' table" << endl << "SQL ERROR: " << query.lastError();
-        return false;
-    }
-
-    return query.lastInsertId().toInt();
-}
-
 /**
  * @brief SubmissionDB::select Returns id of the row
  * that matches given information

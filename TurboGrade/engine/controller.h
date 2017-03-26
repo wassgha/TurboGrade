@@ -21,6 +21,7 @@
 #include "submission.h"
 #include "rubric.h"
 #include "criterion.h"
+#include "comment.h"
 
 #include "../db/assignmentdb.h"
 #include "../db/submissiondb.h"
@@ -28,6 +29,7 @@
 #include "../db/coursedb.h"
 #include "../db/sectiondb.h"
 #include "../db/studentdb.h"
+#include "../db/commentdb.h"
 
 class CourseDB;
 class SectionDB;
@@ -35,6 +37,7 @@ class StudentDB;
 class AssignmentDB;
 class SubmissionDB;
 class RubricDB;
+class CommentDB;
 
 class Controller : public ObjectIdentifier
 {
@@ -92,6 +95,8 @@ public:
     SubmissionDB *_submissionDB;
     // Rubric database table
     RubricDB *_rubricDB;
+    // Comment database table
+    CommentDB *_commentDB;
 
 private:
 

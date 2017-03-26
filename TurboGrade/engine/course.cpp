@@ -1,11 +1,5 @@
 #include "course.h"
 
-Course::Course()
-{
-    std::cerr<<"Please provide course name.";
-    exit(0);
-}
-
 Course::Course(int id, QString name, Controller* controller)
 {
     SHOW_WHERE;

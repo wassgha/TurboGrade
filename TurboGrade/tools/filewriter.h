@@ -8,7 +8,7 @@
 class FileWriter : public ObjectIdentifier
 {
 public:
-    FileWriter() = delete; //don't allow base constructor
+    FileWriter() = delete; //don't allow default constructor
 
     /**
      * @brief FileWriter constructor

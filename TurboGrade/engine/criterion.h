@@ -24,16 +24,18 @@ class Rubric;
 class Criterion : public ObjectIdentifier
 {
 public:
-    // Constructor
-    Criterion();
+
+    Criterion() = delete; //don't allow default constructor
     // Parametrized constructor
     Criterion(int id, const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller);
     // Destructor
     ~Criterion();
     // Add sub-criterion
     void add_child(Criterion* child);
-    // Find a criterion within the current hierarchy
+    // Find a criterion within the current hierarchy by name
     Criterion* find_criterion(const QString name);
+    // Find a criterion within the current hierarchy by table id
+    Criterion* find_criterion(const int id);
     // Show criteria tree
     void show_children();
 

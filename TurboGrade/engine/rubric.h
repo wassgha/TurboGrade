@@ -25,8 +25,7 @@ class Criterion;
 class Rubric : public ObjectIdentifier
 {
 public:
-    // Constructor
-    Rubric();
+    Rubric() = delete; //don't allow default constructor
     // Parametrized constructor
     Rubric(Assignment* assignment, Controller * controller);
     // Destructor
@@ -35,6 +34,8 @@ public:
     Criterion* add_criterion(int id, const QString name, Criterion* parent, int out_of);
     // Get a criterion by name
     Criterion* get_criterion(const QString name);
+    // Get a criterion by table id
+    Criterion* get_criterion(const int id);
 
     // Assignment
     Assignment* _assignment;

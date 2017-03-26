@@ -12,6 +12,7 @@ SOURCES     += \
             "../db/assignmentdb.cpp" \
             "../db/submissiondb.cpp" \
             "../db/rubricdb.cpp" \
+            "../db/commentdb.cpp" \
             main.cpp \
             course.cpp \
             section.cpp \
@@ -20,7 +21,8 @@ SOURCES     += \
             assignment.cpp \
             rubric.cpp \
             criterion.cpp \
-    controller.cpp
+            controller.cpp \
+            comment.cpp
 
 HEADERS     += \
             "../tools/macro.h" \
@@ -32,6 +34,7 @@ HEADERS     += \
             "../db/assignmentdb.h" \
             "../db/submissiondb.h" \
             "../db/rubricdb.h" \
+            "../db/commentdb.h" \
             course.h \
             section.h \
             student.h \
@@ -39,4 +42,5 @@ HEADERS     += \
             assignment.h \
             rubric.h \
             criterion.h \
-    controller.h
+            controller.h \
+            comment.h

@@ -23,6 +23,7 @@ Controller::Controller(bool drop_tables, QString dbname)
     _assignmentDB       = new AssignmentDB(this, dbname);
     _submissionDB       = new SubmissionDB(this, dbname);
     _rubricDB           = new RubricDB(this, dbname);
+    _commentDB          = new CommentDB(this, dbname);
 
 
     _courses = new std::vector<Course*>();
@@ -36,6 +37,7 @@ Controller::Controller(bool drop_tables, QString dbname)
 
 Controller::~Controller()
 {
+    delete _commentDB;
     delete _submissionDB;
     delete _assignmentDB;
     delete _rubricDB;
@@ -103,17 +105,24 @@ std::vector<Course*>* Controller::get_courses() {
  */
 void Controller::show_courses() {
     for(Course *course : *_courses) {
-        std::cout<<(course->_name).toUtf8().data()<<std::endl;
+        std::cout<<(course->_name).toStdString()<<std::endl;
             for(Section *section : *course->_sections) {
-                std::cout<<"    ->"<<(section->_name).toUtf8().data()<<std::endl;
+                std::cout<<"    ->"<< section->_name.toStdString()<<std::endl;
                 for(Student *student : *section->_students) {
-                    std::cout<<"        ->"<< (student->_name).toUtf8().data() <<" (" << (student->_username).toUtf8().data() << ")"<<std::endl;
+                    std::cout<<"        ->"<< student->_name.toStdString() <<" (" << student->_username.toStdString() << ")"<<std::endl;
                     for(Submission *submission : *student->_submissions) {
-                        std::cout<<"            -> Submission for "<< (submission->_assignment->_name).toUtf8().data() <<std::endl;
+                        std::cout<<"            -> Submission for "<< submission->_assignment->_name.toStdString() <<std::endl;
+                        for(Comment *comment : *submission->_comments) {
+                            std::cout<<"                + Comment (" << comment->_grade <<" ): \""
+                                     << (comment->_text).toStdString()
+                                     << "\" from " << comment->_start_pos << " to " << comment->_end_pos
+                                     << " about " << comment->_criterion->_name.toStdString()
+                                     <<std::endl;
+                        }
                     }
                 }
                 for(std::pair<Assignment*, QString> assignment : *section->_assignments)
-                    std::cout<<"        *"<< (assignment.first->_name).toUtf8().data() <<std::endl;
+                    std::cout<<"        *"<< (assignment.first->_name).toStdString() <<std::endl;
             }
     }
 }
@@ -184,9 +193,9 @@ void Controller::show_rubrics() {
     std::cout<<std::endl<<"Showing rubrics"<<std::endl;
 
     for(Assignment *assignment : *_assignments) {
-        std::cout<<(assignment->_name).toUtf8().data()<<std::endl;
+        std::cout<<(assignment->_name).toStdString()<<std::endl;
             for(Criterion *criterion : *assignment->_rubric->_criteria) {
-                std::cout<<"    ->"<<(criterion->_name).toUtf8().data()<< " (? / " << criterion->_out_of << ")" << std::endl;
+                std::cout<<"    ->"<<(criterion->_name).toStdString()<< " (? / " << criterion->_out_of << ")" << std::endl;
                 criterion->show_children();
             }
     }

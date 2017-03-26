@@ -1,11 +1,5 @@
 #include "student.h"
 
-Student::Student()
-{
-    std::cerr<<"Please provide student name.";
-    exit(0);
-}
-
 Student::Student(int id, QString name, QString username, Section* section, Controller * controller)
 {
 
@@ -40,11 +34,13 @@ Student::~Student()
  * @brief Student::add_submission adds a submission made by this student
  * @param assignment a pointer to the assignment the submission belongs to
  */
-void Student::add_submission(int id, Assignment* assignment) {
+Submission* Student::add_submission(int id, Assignment* assignment) {
 
     Submission *new_submission = new Submission(id, assignment, this, _controller);
 
     _submissions->push_back(new_submission);
+
+    return new_submission;
 }
 
 /**

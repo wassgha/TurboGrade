@@ -1,11 +1,5 @@
 #include "section.h"
 
-Section::Section()
-{
-    std::cerr<<"Please provide section name.";
-    exit(0);
-}
-
 Section::Section(int id, QString name, Course* course, Controller* controller)
 {
 
@@ -45,11 +39,13 @@ Section::~Section()
  * @param name name of the student
  * @param username identifier of the student
  */
-void Section::add_student(int id, const QString name, const QString username) {
+Student* Section::add_student(int id, const QString name, const QString username) {
 
     Student *new_student = new Student(id, name, username, this, _controller);
 
     _students->push_back(new_student);
+
+    return new_student;
 }
 
 /**
@@ -69,13 +65,16 @@ Student* Section::get_student(const QString username) {
  * @param assignment a pointer to the assignment
  * @param folder the folder where submissions can be found
  */
-void Section::add_assignment(Assignment* assignment, QString folder, bool load) {
+std::pair<Assignment*, QString> Section::add_assignment(Assignment* assignment, QString folder, bool load) {
 
-    _assignments->push_back(std::make_pair(assignment, folder));
+    std::pair<Assignment*, QString> new_assignment = std::make_pair(assignment, folder);
+
+    _assignments->push_back(new_assignment);
 
     if (!load)
         _controller->_assignmentDB->link(assignment->_id, _id, folder);
 
+    return new_assignment;
 }
 
 /**

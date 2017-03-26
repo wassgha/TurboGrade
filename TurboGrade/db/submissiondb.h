@@ -27,8 +27,6 @@ public:
 
     // Adds a row to the submission table
     int add(int student_id, int assignment_id);
-    // Adds a row to the file table
-    int add_file(int submission_id, QString filename);
     // Gets row id matching submission
     int select(int student_id, int assignment_id);
     // Loads submissions for a specific student

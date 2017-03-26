@@ -1,11 +1,5 @@
 #include "rubric.h"
 
-Rubric::Rubric()
-{
-    std::cerr<<"Please provide rubric information.";
-    exit(0);
-}
-
 Rubric::Rubric(Assignment* assignment, Controller * controller)
 {
     SHOW_WHERE;
@@ -52,8 +46,23 @@ Criterion* Rubric::add_criterion(int id, const QString name, Criterion* parent, 
  */
 Criterion* Rubric::get_criterion(const QString name) {
     for(Criterion* criterion:*_criteria) {
-        if (criterion->find_criterion(name) != nullptr)
-            return criterion->find_criterion(name);
+        Criterion* found_criterion = criterion->find_criterion(name);
+        if (found_criterion != nullptr)
+            return found_criterion;
+    }
+    return nullptr;
+}
+
+/**
+ * @brief Rubric::get_criterion finds a criterion by its name
+ * @param id the table id of the criterion
+ * @return the criterion found
+ */
+Criterion* Rubric::get_criterion(const int id) {
+    for(Criterion* criterion:*_criteria) {
+        Criterion* found_criterion = criterion->find_criterion(id);
+        if (found_criterion != nullptr)
+            return found_criterion;
     }
     return nullptr;
 }

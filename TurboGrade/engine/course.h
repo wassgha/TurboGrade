@@ -25,8 +25,8 @@ class CourseDB;
 class Course : public ObjectIdentifier
 {
 public:
-    // Constructor
-    Course();
+
+    Course() = delete; //don't allow default constructor
     // Parametrized constructor
     Course(int id, QString name, Controller * controller);
     // Destructor

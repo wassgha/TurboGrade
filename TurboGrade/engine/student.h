@@ -25,14 +25,13 @@ class Submission;
 class Student : public ObjectIdentifier
 {
 public:
-    // Constructor
-    Student();
+    Student() = delete; //don't allow default constructor
     // Parametrized constructor
     Student(int id, QString name, QString username, Section* section, Controller * controller);
     // Destructor
     ~Student();
     // Add a student submission
-    void add_submission(int id, Assignment* assignment);
+    Submission* add_submission(int id, Assignment* assignment);
     // Find a submission
     Submission* get_submission(Assignment* assignment);
 

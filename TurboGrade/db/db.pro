@@ -15,12 +15,14 @@ SOURCES     += \
             "../engine/submission.cpp" \
             "../engine/rubric.cpp" \
             "../engine/criterion.cpp" \
+            "../engine/comment.cpp" \
             coursedb.cpp \
             sectiondb.cpp \
             studentdb.cpp \
             assignmentdb.cpp \
             submissiondb.cpp \
-            rubricdb.cpp
+            rubricdb.cpp \
+            commentdb.cpp
 
 HEADERS     += \
             "../tools/macro.h" \
@@ -34,9 +36,11 @@ HEADERS     += \
             "../engine/submission.h" \
             "../engine/rubric.h" \
             "../engine/criterion.h" \
+            "../engine/comment.h" \
             coursedb.h \
             sectiondb.h \
             studentdb.h \
             assignmentdb.h \
             submissiondb.h \
-            rubricdb.h
+            rubricdb.h \
+            commentdb.h

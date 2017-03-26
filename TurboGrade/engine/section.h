@@ -28,16 +28,15 @@ class Assignment;
 class Section : public ObjectIdentifier
 {
 public:
-    // Constructor
-    Section();
+    Section() = delete; //don't allow default constructor
     // Parametrized constructor
     Section(int id, QString name, Course* course, Controller * controller);
     // Destructor
     ~Section();
     // Add a student to the section
-    void add_student(int id, const QString name, const QString username);
+    Student* add_student(int id, const QString name, const QString username);
     // Add an assignment to the section
-    void add_assignment(Assignment* assignment, QString folder, bool load = false);
+    std::pair<Assignment*, QString> add_assignment(Assignment* assignment, QString folder, bool load = false);
     // Find a student in the section
     Student* get_student(const QString username);
     // Find an assignment in the section

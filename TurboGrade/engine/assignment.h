@@ -24,8 +24,8 @@ class Rubric;
 class Assignment : public ObjectIdentifier
 {
 public:
-    // Constructor
-    Assignment();
+
+    Assignment() = delete; //don't allow default constructor
     // Parametrized constructor
     Assignment(int id, const QString name, const QString objective, Controller *controller);
     // Destructor

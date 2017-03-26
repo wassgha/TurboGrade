@@ -1,11 +1,5 @@
 #include "assignment.h"
 
-Assignment::Assignment()
-{
-    std::cerr<<"Please provide information about this assignment.";
-    exit(0);
-}
-
 Assignment::Assignment(int id, const QString name, const QString objective, Controller *controller)
 {
 

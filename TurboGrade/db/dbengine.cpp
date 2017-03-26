@@ -132,8 +132,6 @@ void DBEngine::drop_tables()
     sql_query("DROP TABLE assignment;");
     sql_query("DROP TABLE assignment_section;");
     sql_query("DROP TABLE submission;");
-    sql_query("DROP TABLE file;");
-    sql_query("DROP TABLE comment_text;");
     sql_query("DROP TABLE comment;");
     sql_query("DROP TABLE grade;");
     sql_query("DROP TABLE rubric;");
