@@ -1,58 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>GradeSubmission</class>
- <widget class="QWidget" name="GradeSubmission">
+ <class>Dashboard</class>
+ <widget class="QWidget" name="Dashboard">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>841</width>
-    <height>592</height>
+    <width>760</width>
+    <height>475</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#GradeSubmission {
-       /* background: rgb(55, 64, 80); */
+   <string notr="true">QWidget#Dashboard {
 	background: #434653;
 }
-
-QCheckBox#hideName {
-        color: white;
-}
-
-#run, #toggle {
+#add {
 	padding: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
 	background: white;
 	border-radius: 18px;
-}
-
-#run {
 	color: white;
-	background: #63c46b;
+	background: #61b4ff;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
+    <layout class="QHBoxLayout" name="header">
+     <property name="spacing">
+      <number>-1</number>
+     </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="leftMargin">
+      <number>12</number>
+     </property>
+     <property name="topMargin">
+      <number>12</number>
+     </property>
+     <property name="rightMargin">
+      <number>12</number>
+     </property>
+     <property name="bottomMargin">
+      <number>12</number>
      </property>
      <item>
       <widget class="QLabel" name="logo">
@@ -86,22 +95,6 @@ QCheckBox#hideName {
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="studentName">
-       <item>
-        <property name="text">
-         <string>Student Name</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item>
-      <widget class="QCheckBox" name="hideName">
-       <property name="text">
-        <string>Hide student name</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="spacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -115,39 +108,19 @@ QCheckBox#hideName {
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="run">
+      <widget class="QPushButton" name="add">
        <property name="text">
-        <string>Run</string>
+        <string>Add Course</string>
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/misc/res/play-button-white.png</normaloff>:/misc/res/play-button-white.png</iconset>
+         <normaloff>:/misc/res/course.png</normaloff>:/misc/res/course.png</iconset>
        </property>
        <property name="iconSize">
         <size>
          <width>16</width>
          <height>16</height>
         </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="toggle">
-       <property name="text">
-        <string>View Grade</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/misc/res/grade.png</normaloff>:/misc/res/grade.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
-       </property>
-       <property name="default">
-        <bool>false</bool>
        </property>
       </widget>
      </item>
@@ -155,6 +128,15 @@ QCheckBox#hideName {
    </item>
    <item>
     <widget class="QStackedWidget" name="mainWidget">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <widget class="QWidget" name="page"/>
      <widget class="QWidget" name="page_2"/>
     </widget>

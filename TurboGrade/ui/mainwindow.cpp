@@ -17,15 +17,19 @@ MainWindow::MainWindow(QWidget *parent)
     QApplication::setFont(roboto);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
+    dashboard = new Dashboard(this->parentWidget());
     grade_submission = new GradeSubmission(this->parentWidget());
 
+    ui->mainWidget->addWidget(dashboard);
     ui->mainWidget->addWidget(grade_submission);
-    ui->mainWidget->setCurrentWidget(grade_submission);
+    ui->mainWidget->setCurrentWidget(dashboard);
 }
 
 MainWindow::~MainWindow()
 {
 
+    delete dashboard;
+    delete grade_submission;
     delete ui;
 }
 

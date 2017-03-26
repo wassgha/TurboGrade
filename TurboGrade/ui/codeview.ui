@@ -14,20 +14,13 @@
    <string>CodeView</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#CodeView {
-        background: rgb(55, 64, 80);
-}
-
-#treeView {
-        background: rgb(66, 76, 96);
+   <string notr="true">#treeView {
+        /* background: rgb(66, 76, 96); */
+		background: #535663;
         border: none;
         color: white;
         padding-top: 10px;
         border-radius: 3px;
-}
-
-#editor {
-        border-radius: 6px;
 }
 
 QSplitter::handle:horizontal {
@@ -112,7 +105,7 @@ QSplitter::handle:horizontal {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>188</width>
+           <width>187</width>
            <height>408</height>
           </rect>
          </property>
@@ -125,7 +118,7 @@ QSplitter::handle:horizontal {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>188</width>
+           <width>187</width>
            <height>408</height>
           </rect>
          </property>

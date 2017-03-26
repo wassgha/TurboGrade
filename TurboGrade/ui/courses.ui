@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Courses</class>
+ <widget class="QWidget" name="Courses">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>586</width>
+    <height>252</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Courses, #scrollArea {
+	background: #f1f2f6;
+	border: none;
+}
+
+QAbstractScrollArea #scrollAreaWidgetContents  {
+ background-color:transparent;
+	border: none;
+}
+
+QPushButton {
+	background: white;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	height: 125px;
+	width: 225px;
+	max-width: 225px;
+}
+
+#add_course {
+	background: transparent;
+	padding : -3px;
+	color: rgb(174, 176, 176);
+	border: 3px dashed rgb(174, 176, 176);
+	font-size: 18px;
+}</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>586</width>
+        <height>252</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3"/>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

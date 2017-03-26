@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>737</height>
+    <height>767</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,16 +17,9 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget #GradeView {
-        background: rgb(55, 64, 80);
-}
-
-
-#export_pdf, #finalize {
+   <string notr="true">#export_pdf, #finalize {
 	color: white;
 	padding: 10px;
-	padding-right:0px;
-	padding-bottom:0px;
 }
 
 
@@ -69,7 +62,7 @@ color:white;
 
 
 #scrollArea   {
-	background-color:rgb(66, 76, 96);
+	background-color:rgb(83, 86, 99);
 	border-radius:3px;
 }
 QAbstractScrollArea #scrollAreaWidgetContents  {
@@ -132,7 +125,7 @@ QGroupBox::title {
         <x>0</x>
         <y>0</y>
         <width>659</width>
-        <height>652</height>
+        <height>666</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -497,7 +490,7 @@ QGroupBox::title {
             <item>
              <widget class="QTextBrowser" name="level1">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -509,7 +502,10 @@ QGroupBox::title {
                <enum>QFrame::Plain</enum>
               </property>
               <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
+               <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAlwaysOff</enum>
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
@@ -533,7 +529,7 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QTextBrowser" name="level2">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -545,7 +541,10 @@ p, li { white-space: pre-wrap; }
                <enum>QFrame::Plain</enum>
               </property>
               <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
+               <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAlwaysOff</enum>
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
@@ -569,7 +568,7 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QTextBrowser" name="level3">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -586,7 +585,10 @@ p, li { white-space: pre-wrap; }
                <enum>QFrame::Plain</enum>
               </property>
               <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
+               <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAlwaysOff</enum>
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>
@@ -610,7 +612,7 @@ p, li { white-space: pre-wrap; }
             <item>
              <widget class="QTextBrowser" name="level4">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="MinimumExpanding">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -627,7 +629,10 @@ p, li { white-space: pre-wrap; }
                <enum>QFrame::Plain</enum>
               </property>
               <property name="verticalScrollBarPolicy">
-               <enum>Qt::ScrollBarAsNeeded</enum>
+               <enum>Qt::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarAlwaysOff</enum>
               </property>
               <property name="sizeAdjustPolicy">
                <enum>QAbstractScrollArea::AdjustToContents</enum>

@@ -57,6 +57,8 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     QFont font;
 
+    setStyleSheet("border-radius : 3px; background: white;");
+
     font.setFamily("Courier");
     font.setStyleHint(QFont::TypeWriter);
     font.setFixedPitch(true);
@@ -137,6 +139,16 @@ void CodeEditor::highlightCurrentLine()
 void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 {
     QPainter painter(lineNumberArea);
+
+//    QPainterPath path;
+//    path.setFillRule( Qt::WindingFill );
+//    path.addRoundedRect(event->rect(), 3, 3);
+//    path.addRect(QRect(event->rect().right() - 3, event->rect().top(), 4, 4));
+//    path.addRect(QRect(event->rect().right() - 3, event->rect().bottom() - 3, 4, 4));
+//    painter.setPen(Qt::NoPen);
+//    painter.fillPath(path, QColor(220, 220, 220));
+//    painter.drawPath(path);
+
     painter.fillRect(event->rect(), QColor(220, 220, 220));
 
     QTextBlock block = firstVisibleBlock();
