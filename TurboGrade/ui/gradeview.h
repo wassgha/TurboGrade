@@ -4,8 +4,8 @@
 #include "../engine/controller.h"
 #include "../engine/controller.h"
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "dashboard.h"
+#include "ui_dashboard.h"
 
 #include <QMainWindow>
 #include <QWidget>

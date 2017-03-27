@@ -25,7 +25,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp\
             "../tools/objectidentifier.cpp" \
         "../tools/syntaxhighlight.cpp"\
         "../tools/codeeditor.cpp" \
@@ -54,7 +53,7 @@ SOURCES += main.cpp\
     courses.cpp \
     newcourse.cpp
 
-HEADERS  += mainwindow.h\
+HEADERS  +=\
         "../tools/syntaxhighlight.h"\
         "../tools/codeeditor.h" \
             "../tools/macro.h" \
@@ -84,7 +83,7 @@ HEADERS  += mainwindow.h\
     courses.h \
     newcourse.h
 
-FORMS    += mainwindow.ui \
+FORMS    += \
     commentpopup.ui \
     gradesubmission.ui \
     codeview.ui \
