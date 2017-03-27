@@ -9,6 +9,7 @@ NewCourse::NewCourse(QWidget *parent, Controller *controller) :
 
     _controller = controller;
 
+    setWindowTitle("New course");
     setAttribute(Qt::WA_StyledBackground, true);
     ui->name->setAttribute(Qt::WA_MacShowFocusRect, false);
     QWidget::setWindowModality(Qt::WindowModal);

@@ -40,6 +40,7 @@ void Courses::refresh_courses() {
         QPushButton* new_course = new QPushButton(course->_name);
         std::cout<<"Added course : "<<new_course->text().toStdString()<<std::endl;
         courses.push_back(new_course);
+        connect(new_course, SIGNAL(clicked(bool)), this, SLOT(open_editor()));
         add_course(new_course);
     }
 
@@ -70,4 +71,8 @@ void Courses::remove_courses() {
 
 void Courses::new_course() {
     new_course_dialog->show();
+}
+
+void Courses::open_editor() {
+    ((Dashboard *)parent()->parent())->grade_submission->show();
 }

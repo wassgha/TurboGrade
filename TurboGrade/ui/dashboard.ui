@@ -43,22 +43,19 @@
 	font-size: 22px;
 }
 
-#tutorial_btn, #dismiss_btn {
+#tutorial_btn {
 	border-radius: 3px;
 	background: transparent;
-	color: white;
-	border: 1px solid white;
+	color: rgb(255, 255, 255);
+	border: 1px solid rgb(255, 255, 255);
 	text-transform: uppercase;
-	max-width: 100px;
+	max-width: 170px;
 	padding: 8px;
 	text-align:center;
-	font-size: 12px;
+	height: 20px;
+	margin: 0px;
 }
 
-#dismiss_btn {
-	border: 1px solid rgba(255, 255, 255, 160);
-	color: rgba(255, 255, 255, 160);
-}
 
 #last_synced {
 	color: white;
@@ -169,7 +166,7 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="topMargin">
-       <number>20</number>
+       <number>24</number>
       </property>
       <property name="bottomMargin">
        <number>20</number>
@@ -211,18 +208,18 @@
         </item>
         <item>
          <widget class="QPushButton" name="tutorial_btn">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
-           <string>TUTORIALS</string>
+           <string>WATCH TUTORIALS</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/misc/res/play-button-white.png</normaloff>:/misc/res/play-button-white.png</iconset>
           </property>
           <property name="flat">
            <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="dismiss_btn">
-          <property name="text">
-           <string>DISMISS</string>
           </property>
          </widget>
         </item>
@@ -256,9 +253,7 @@
       <string notr="true"/>
      </property>
      <widget class="QWidget" name="page"/>
-     <widget class="QWidget" name="page_2">
-      <zorder>tutorial</zorder>
-     </widget>
+     <widget class="QWidget" name="page_2"/>
     </widget>
    </item>
   </layout>

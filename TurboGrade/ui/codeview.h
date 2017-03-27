@@ -6,8 +6,8 @@
 
 #include "../tools/codeeditor.h"
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "dashboard.h"
+#include "ui_dashboard.h"
 
 #include "commentpopup.h"
 #include "ui_commentpopup.h"

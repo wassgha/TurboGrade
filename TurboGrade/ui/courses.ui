@@ -68,7 +68,11 @@ QPushButton {
         <height>252</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_3"/>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <property name="topMargin">
+        <number>20</number>
+       </property>
+      </layout>
      </widget>
     </widget>
    </item>
