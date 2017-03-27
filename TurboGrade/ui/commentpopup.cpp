@@ -8,6 +8,10 @@ CommentPopup::CommentPopup(QWidget *parent, Controller *controller) :
     setAttribute(Qt::WA_ShowWithoutActivating);
     ui->setupUi(this);
 
+    ui->adjust_grade->setAttribute(Qt::WA_MacShowFocusRect, false);
+    ui->comment->setAttribute(Qt::WA_MacShowFocusRect, false);
+    ui->rubric->setAttribute(Qt::WA_MacShowFocusRect, false);
+
     _controller = controller;
 
 }

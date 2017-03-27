@@ -10,6 +10,9 @@
 #include "../engine/controller.h"
 #include "../engine/controller.h"
 
+#include "dashboard.h"
+#include "ui_dashboard.h"
+
 #include "newcourse.h"
 #include "ui_newcourse.h"
 
@@ -40,6 +43,7 @@ private:
 public slots:
     void new_course();
     void refresh_courses();
+    void open_editor();
 };
 
 #endif // COURSES_H

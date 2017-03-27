@@ -208,6 +208,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="tutorial_btn">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>WATCH TUTORIALS</string>
           </property>

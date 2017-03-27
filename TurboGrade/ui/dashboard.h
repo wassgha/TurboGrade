@@ -2,6 +2,7 @@
 #define DASHBOARD_H
 
 #include <QWidget>
+#include <QDesktopServices>
 
 #include "courses.h"
 #include "ui_courses.h"
@@ -13,6 +14,7 @@
 #include "ui_gradesubmission.h"
 
 class GradeSubmission;
+class Courses;
 
 namespace Ui {
 class Dashboard;
@@ -29,6 +31,9 @@ public:
     Controller *_controller;
     GradeSubmission *grade_submission;
     QFont roboto;
+
+private slots:
+    void on_tutorial_btn_clicked();
 
 private:
     Ui::Dashboard *ui;

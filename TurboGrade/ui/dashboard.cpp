@@ -62,3 +62,8 @@ Dashboard::~Dashboard()
     delete ui;
     delete courses;
 }
+
+void Dashboard::on_tutorial_btn_clicked()
+{
+    QDesktopServices::openUrl(QUrl("https://www.youtube.com/channel/UCwI9yC7wu9aIqDol47Ep2BA"));
+}

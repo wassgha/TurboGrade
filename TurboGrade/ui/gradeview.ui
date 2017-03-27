@@ -711,6 +711,9 @@ p, li { white-space: pre-wrap; }
              <bold>true</bold>
             </font>
            </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>Export to PDF</string>
            </property>
@@ -731,6 +734,9 @@ p, li { white-space: pre-wrap; }
              <bold>true</bold>
              <kerning>true</kerning>
             </font>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
            </property>
            <property name="text">
             <string>Finalize Grade</string>

@@ -136,6 +136,9 @@ QLineEdit::focus {
          <height>16777215</height>
         </size>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
@@ -158,6 +161,9 @@ QLineEdit::focus {
          <height>16777215</height>
         </size>
        </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Add Course</string>
        </property>
@@ -170,6 +176,9 @@ QLineEdit::focus {
          <width>16</width>
          <height>16</height>
         </size>
+       </property>
+       <property name="default">
+        <bool>true</bool>
        </property>
        <property name="flat">
         <bool>true</bool>
