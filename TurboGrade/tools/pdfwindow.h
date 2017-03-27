@@ -6,7 +6,9 @@
 #include <QLayout>
 #include <QPdfWriter>
 #include <QPagedPaintDevice>
-#include <iostream>5
+#include <QImageReader>
+#include <iostream>
+#include <QDir>
 namespace Ui {
 class PDFWindow;
 }

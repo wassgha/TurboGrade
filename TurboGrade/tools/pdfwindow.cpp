@@ -6,7 +6,7 @@ PDFWindow::PDFWindow(QWidget *parent) :
     ui(new Ui::PDFWindow)
 {
     ui->setupUi(this);
-    resize(512,512);
+    resize(1024,1024);
 }
 
 PDFWindow::~PDFWindow()
@@ -20,6 +20,14 @@ void PDFWindow::paintEvent(QPaintEvent *){
     int coordX = 10;
     int coordY = 100;
     painter.drawText(coordX, coordY, QString("Writing Some text"));
+
+    int coordImageX = 10;
+    int coordImageY = 200;
+    QDir dir(".");
+    std::cout << dir.absolutePath().toStdString() << std::endl;
+    QImage erik("../../TurboGrade/images/erik");
+    Q_ASSERT(!erik.isNull());
+    painter.drawImage(coordImageX, coordImageY, erik);
     painter.end();
 
     QPdfWriter writer("pdftest");
@@ -31,5 +39,7 @@ void PDFWindow::paintEvent(QPaintEvent *){
     std::cout << scalingY << std::endl;
     pdfpainter.drawText(coordX * scalingX, coordY * scalingY,
                         QString("Writing Some text"));
+    pdfpainter.drawImage(coordImageX * scalingX, coordImageY * scalingY,
+                         erik);
     pdfpainter.end();
 }
