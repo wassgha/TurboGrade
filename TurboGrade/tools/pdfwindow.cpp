@@ -40,6 +40,8 @@ void PDFWindow::paintEvent(QPaintEvent *){
     pdfpainter.drawText(coordX * scalingX, coordY * scalingY,
                         QString("Writing Some text"));
     pdfpainter.drawImage(coordImageX * scalingX, coordImageY * scalingY,
-                         erik);
+                         erik.scaled(erik.width() * scalingX,
+                                     erik.height() * scalingY,
+                                     Qt::KeepAspectRatio));
     pdfpainter.end();
 }
