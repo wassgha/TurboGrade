@@ -13,7 +13,7 @@
 #include "ui_commentpopup.h"
 
 #include "gradeview.h"
-#include "ui_gradeoverview.h"
+#include "ui_gradeview.h"
 
 #include <QMainWindow>
 #include <QWidget>
