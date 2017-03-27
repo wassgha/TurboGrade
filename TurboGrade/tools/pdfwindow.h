@@ -2,7 +2,11 @@
 #define PDFWINDOW_H
 
 #include <QMainWindow>
-
+#include <QPainter>
+#include <QLayout>
+#include <QPdfWriter>
+#include <QPagedPaintDevice>
+#include <iostream>5
 namespace Ui {
 class PDFWindow;
 }
@@ -17,6 +21,7 @@ public:
 
 private:
     Ui::PDFWindow *ui;
+    void paintEvent(QPaintEvent *);
 };
 
 #endif // PDFWINDOW_H
