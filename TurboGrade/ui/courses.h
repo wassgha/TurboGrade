@@ -1,6 +1,7 @@
 #ifndef COURSES_H
 #define COURSES_H
 
+#include <vector>
 #include <QWidget>
 #include <QPushButton>
 #include <QGroupBox>
@@ -24,7 +25,7 @@ public:
     explicit Courses(QWidget *parent = 0, Controller* controller = nullptr);
     ~Courses();
     void add_course(QWidget *course);
-    void show_courses();
+    void remove_courses();
     Controller *_controller;
 
 private:
@@ -34,9 +35,11 @@ private:
     int max_col = 3;
     int cur_col = 0;
     int cur_row = 0;
+    std::vector<QPushButton*> courses;
 
 public slots:
     void new_course();
+    void refresh_courses();
 };
 
 #endif // COURSES_H

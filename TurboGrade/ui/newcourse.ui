@@ -41,8 +41,8 @@ QLineEdit::focus {
 	background:transparent;
 	color: black;
 	text-transform: uppercase;
-	max-width: 120px;
-	max-height: 30px;
+	width: 80px;
+	height: 18px;
 }
 
 #ok_btn {
@@ -55,6 +55,8 @@ QLineEdit::focus {
 	border-radius: 18px;
 	color: white;
 	background: #61b4ff;
+	width: 100px;
+	height: 18px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -130,12 +132,15 @@ QLineEdit::focus {
        </property>
        <property name="maximumSize">
         <size>
-         <width>120</width>
-         <height>30</height>
+         <width>16777215</width>
+         <height>16777215</height>
         </size>
        </property>
        <property name="text">
         <string>Cancel</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
@@ -149,8 +154,8 @@ QLineEdit::focus {
        </property>
        <property name="maximumSize">
         <size>
-         <width>160</width>
-         <height>40</height>
+         <width>16777215</width>
+         <height>16777215</height>
         </size>
        </property>
        <property name="text">
@@ -165,6 +170,9 @@ QLineEdit::focus {
          <width>16</width>
          <height>16</height>
         </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
        </property>
       </widget>
      </item>
