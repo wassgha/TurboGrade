@@ -11,9 +11,12 @@ Courses::Courses(QWidget *parent, Controller *controller) :
 
     _controller = controller;
 
-    QPushButton *add_course_btn = new QPushButton("Add course");
+    new_course_dialog = new NewCourse(this);
+
+    add_course_btn = new QPushButton("Add course");
     add_course_btn->setObjectName("add_course");
     add_course(add_course_btn);
+    connect(add_course_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
     show_courses();
 
 }
@@ -39,4 +42,8 @@ void Courses::add_course(QWidget *course) {
     QGridLayout *grid =  (QGridLayout*) ui->scrollAreaWidgetContents->layout();
     grid->addWidget(course, cur_row, cur_col);
     cur_col++;
+}
+
+void Courses::new_course() {
+    new_course_dialog->show();
 }

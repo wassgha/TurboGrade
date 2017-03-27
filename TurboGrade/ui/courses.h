@@ -9,6 +9,9 @@
 #include "../engine/controller.h"
 #include "../engine/controller.h"
 
+#include "newcourse.h"
+#include "ui_newcourse.h"
+
 namespace Ui {
 class Courses;
 }
@@ -26,9 +29,14 @@ public:
 
 private:
     Ui::Courses *ui;
+    QPushButton *add_course_btn;
+    NewCourse *new_course_dialog;
     int max_col = 3;
     int cur_col = 0;
     int cur_row = 0;
+
+public slots:
+    void new_course();
 };
 
 #endif // COURSES_H
