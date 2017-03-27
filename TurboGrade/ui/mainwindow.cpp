@@ -41,15 +41,13 @@ MainWindow::MainWindow(QWidget *parent)
     int id = QFontDatabase::addApplicationFont(":/fonts/res/Roboto-Regular.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
     roboto = QFont(family);
-    roboto.setPointSize(14);
+    roboto.setPointSize(12);
 
     QApplication::setFont(roboto);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     dashboard = new Dashboard(this->parentWidget(), _controller);
-    dashboard->setFont(roboto);
     grade_submission = new GradeSubmission(this->parentWidget(), _controller);
-    grade_submission->setFont(roboto);
 
     ui->mainWidget->addWidget(dashboard);
     ui->mainWidget->addWidget(grade_submission);
