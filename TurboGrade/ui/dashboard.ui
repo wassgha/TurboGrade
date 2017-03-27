@@ -58,6 +58,10 @@
 #dismiss_btn {
 	border: 1px solid rgba(255, 255, 255, 160);
 	color: rgba(255, 255, 255, 160);
+}
+
+#last_synced {
+	color: white;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -141,19 +145,9 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="add">
+      <widget class="QLabel" name="last_synced">
        <property name="text">
-        <string>Add Course</string>
-       </property>
-       <property name="icon">
-        <iconset resource="resources.qrc">
-         <normaloff>:/misc/res/course.png</normaloff>:/misc/res/course.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>16</width>
-         <height>16</height>
-        </size>
+        <string>Last synced : 5 seconds ago</string>
        </property>
       </widget>
      </item>
