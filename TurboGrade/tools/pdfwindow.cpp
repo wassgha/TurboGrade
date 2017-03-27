@@ -25,12 +25,12 @@ void PDFWindow::paintEvent(QPaintEvent *){
     int coordImageY = 200;
     QDir dir(".");
     std::cout << dir.absolutePath().toStdString() << std::endl;
-    QImage erik("../../TurboGrade/images/erik");
+    QImage erik("../../TurboGrade/images/erik.jpg");
     Q_ASSERT(!erik.isNull());
     painter.drawImage(coordImageX, coordImageY, erik);
     painter.end();
 
-    QPdfWriter writer("pdftest");
+    QPdfWriter writer("pdftest.pdf");
     QPainter pdfpainter(&writer);
     writer.setPageSize(QPagedPaintDevice::Letter);
     float scalingX = writer.logicalDpiX() * 8.5 / this->size().width();
