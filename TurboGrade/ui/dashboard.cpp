@@ -48,7 +48,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
     grade_submission = new GradeSubmission(this->parentWidget(), _controller);
 
-    courses = new Courses(this->parentWidget(), _controller);
+    courses = new CardsView(this->parentWidget(), _controller);
 
     ui->mainWidget->addWidget(courses);
     ui->mainWidget->setCurrentWidget(courses);

@@ -1,5 +1,5 @@
-#ifndef NEWCOURSE_H
-#define NEWCOURSE_H
+#ifndef ADDDIALOG_H
+#define ADDDIALOG_H
 
 #include "../engine/controller.h"
 #include "../engine/controller.h"
@@ -7,16 +7,16 @@
 #include <QDialog>
 
 namespace Ui {
-class NewCourse;
+class AddDialog;
 }
 
-class NewCourse : public QDialog
+class AddDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit NewCourse(QWidget *parent = 0, Controller *controller = nullptr);
-    ~NewCourse();
+    explicit AddDialog(QWidget *parent = 0, Controller *controller = nullptr);
+    ~AddDialog();
     Controller *_controller;
 
 private slots:
@@ -25,11 +25,11 @@ private slots:
     void on_ok_btn_clicked();
 
 private:
-    Ui::NewCourse *ui;
+    Ui::AddDialog *ui;
 
 signals:
-    void added_course();
+    void submit();
 
 };
 
-#endif // NEWCOURSE_H
+#endif // ADDDIALOG_H

@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QDesktopServices>
 
-#include "courses.h"
+#include "cardsview.h"
 #include "ui_courses.h"
 
 #include "../engine/controller.h"
@@ -14,7 +14,7 @@
 #include "ui_gradesubmission.h"
 
 class GradeSubmission;
-class Courses;
+class CardsView;
 
 namespace Ui {
 class Dashboard;
@@ -27,7 +27,7 @@ class Dashboard : public QWidget
 public:
     explicit Dashboard(QWidget *parent = 0);
     ~Dashboard();
-    Courses *courses;
+    CardsView *courses;
     Controller *_controller;
     GradeSubmission *grade_submission;
     QFont roboto;

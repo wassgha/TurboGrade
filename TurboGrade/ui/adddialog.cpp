@@ -1,9 +1,9 @@
-#include "newcourse.h"
-#include "ui_newcourse.h"
+#include "adddialog.h"
+#include "ui_adddialog.h"
 
-NewCourse::NewCourse(QWidget *parent, Controller *controller) :
+AddDialog::AddDialog(QWidget *parent, Controller *controller) :
     QDialog(parent, Qt::Sheet),
-    ui(new Ui::NewCourse)
+    ui(new Ui::AddDialog)
 {
     ui->setupUi(this);
 
@@ -16,21 +16,21 @@ NewCourse::NewCourse(QWidget *parent, Controller *controller) :
 
 }
 
-NewCourse::~NewCourse()
+AddDialog::~AddDialog()
 {
     delete ui;
 }
 
-void NewCourse::on_cancel_btn_clicked()
+void AddDialog::on_cancel_btn_clicked()
 {
     hide();
 }
 
-void NewCourse::on_ok_btn_clicked()
+void AddDialog::on_ok_btn_clicked()
 {
     _controller->add_course(-1, ui->name->text());
 
     ui->name->clear();
-    emit added_course();
+    emit submit();
     hide();
 }

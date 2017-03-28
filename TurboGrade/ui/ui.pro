@@ -50,9 +50,9 @@ SOURCES += main.cpp\
     codeview.cpp \
     gradeview.cpp \
     dashboard.cpp \
-    courses.cpp \
-    newcourse.cpp \
-    card.cpp
+    card.cpp \
+    cardsview.cpp \
+    adddialog.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -81,9 +81,9 @@ HEADERS  +=\
     codeview.h \
     gradeview.h \
     dashboard.h \
-    courses.h \
-    newcourse.h \
-    card.h
+    card.h \
+    cardsview.h \
+    adddialog.h
 
 FORMS    += \
     commentpopup.ui \
@@ -91,9 +91,9 @@ FORMS    += \
     codeview.ui \
     gradeview.ui \
     dashboard.ui \
-    courses.ui \
-    newcourse.ui \
-    card.ui
+    card.ui \
+    cardsview.ui \
+    adddialog.ui
 
 RESOURCES += \
     resources.qrc

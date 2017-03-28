@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Courses</class>
- <widget class="QWidget" name="Courses">
+ <class>CardsView</class>
+ <widget class="QWidget" name="CardsView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Courses, #scrollArea {
+   <string notr="true">#CardsView, #scrollArea {
 	background: #f1f2f6;
 	border: none;
 }
@@ -70,7 +70,7 @@ Card {
         <height>252</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_3">
+      <layout class="QGridLayout" name="gridLayout_3" columnstretch="0,0">
        <property name="topMargin">
         <number>20</number>
        </property>

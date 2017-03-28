@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NewCourse</class>
- <widget class="QWidget" name="NewCourse">
+ <class>AddDialog</class>
+ <widget class="QWidget" name="AddDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,7 +14,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#NewCourse
+   <string notr="true">#AddDialog
 {
 	background: white;
 }

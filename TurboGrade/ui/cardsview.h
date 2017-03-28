@@ -1,5 +1,5 @@
-#ifndef COURSES_H
-#define COURSES_H
+#ifndef CARDSVIEW_H
+#define CARDSVIEW_H
 
 #include <vector>
 #include <QWidget>
@@ -13,31 +13,31 @@
 #include "dashboard.h"
 #include "ui_dashboard.h"
 
-#include "newcourse.h"
+#include "adddialog.h"
 #include "ui_newcourse.h"
 
 #include "card.h"
 #include "ui_card.h"
 
 namespace Ui {
-class Courses;
+class CardsView;
 }
 
-class Courses : public QWidget
+class CardsView : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Courses(QWidget *parent = 0, Controller* controller = nullptr);
-    ~Courses();
-    void add_course(QWidget *course);
-    void remove_courses();
+    explicit CardsView(QWidget *parent = 0, Controller* controller = nullptr);
+    ~CardsView();
+    void add_card(QWidget *course);
+    void remove_cards();
     Controller *_controller;
 
 private:
-    Ui::Courses *ui;
-    QPushButton *add_course_btn;
-    NewCourse *new_course_dialog;
+    Ui::CardsView *ui;
+    QPushButton *add_btn;
+    AddDialog *add_dialog;
     int max_col = 3;
     int cur_col = 0;
     int cur_row = 0;
@@ -45,8 +45,8 @@ private:
 
 public slots:
     void new_course();
-    void refresh_courses();
+    void refresh_cards();
     void open_editor();
 };
 
-#endif // COURSES_H
+#endif // CARDSVIEW_H
