@@ -46,6 +46,8 @@ public:
     std::vector<Section*> *_sections;
     // Controller
     Controller *_controller;
+    // Color (for UI)
+    QString _color;
 };
 
 #endif // COURSE_H

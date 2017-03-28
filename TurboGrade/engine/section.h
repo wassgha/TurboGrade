@@ -52,6 +52,8 @@ public:
     std::vector<Student*> *_students;
     // Section assignments (assignment and folder)
     std::vector<std::pair<Assignment*, QString>> *_assignments;
+    // Color (for UI)
+    QString _color;
     // Controller
     Controller *_controller;
 };

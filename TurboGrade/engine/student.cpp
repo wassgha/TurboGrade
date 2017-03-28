@@ -19,6 +19,8 @@ Student::Student(int id, QString name, QString username, Section* section, Contr
     // Student submissions
     _submissions = new std::vector<Submission*>();
 
+    _color = _controller->rand_color();
+
     _controller->_submissionDB->load_all(this);
 }
 

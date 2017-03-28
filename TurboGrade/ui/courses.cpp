@@ -19,8 +19,6 @@ Courses::Courses(QWidget *parent, Controller *controller) :
     connect(add_course_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
     refresh_courses();
-    refresh_courses();
-
 }
 
 Courses::~Courses()
@@ -37,9 +35,7 @@ void Courses::refresh_courses() {
 
     add_course(add_course_btn);
     for(Course* course : *_controller->get_courses()) {
-        Dashboard *dashboard = qobject_cast<Dashboard*> (this->parent());
-        QString color = dashboard->flat_colors.at(qrand() % dashboard->flat_colors.count());
-        Card* new_course = new Card(course->_name, "2 sections", color);
+        Card* new_course = new Card(course->_name, "2 sections", course->_color);
         courses.push_back(new_course);
         connect(new_course, SIGNAL(clicked()), this, SLOT(open_editor()));
         add_course(new_course);

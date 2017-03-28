@@ -14,6 +14,8 @@ Assignment::Assignment(int id, const QString name, const QString objective, Cont
 
     _name = name;
     _objective = objective;
+
+    _color = _controller->rand_color();
     _rubric = new Rubric(this, controller);
 }
 

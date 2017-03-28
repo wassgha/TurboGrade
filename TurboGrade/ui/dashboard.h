@@ -31,7 +31,6 @@ public:
     Controller *_controller;
     GradeSubmission *grade_submission;
     QFont roboto;
-    QStringList flat_colors;
 
 private slots:
     void on_tutorial_btn_clicked();

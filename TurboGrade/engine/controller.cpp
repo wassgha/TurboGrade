@@ -11,12 +11,17 @@ Controller::Controller(bool drop_tables, QString dbname)
 
     SHOW_WHERE;
 
+    // Initialize random number generator
+    qsrand(QTime::currentTime().msec());
+
+    // If tables are to be dropped then drop them
     if (drop_tables) {
         DBEngine *_tmpDB = new DBEngine("DropConnection", dbname);
         _tmpDB->drop_tables();
         delete _tmpDB;
     }
 
+    // Create database connections
     _courseDB           = new CourseDB(this, dbname);
     _sectionDB          = new SectionDB(this, dbname);
     _studentDB          = new StudentDB(this, dbname);
@@ -25,10 +30,11 @@ Controller::Controller(bool drop_tables, QString dbname)
     _rubricDB           = new RubricDB(this, dbname);
     _commentDB          = new CommentDB(this, dbname);
 
-
+    // Initialize containers
     _courses = new std::vector<Course*>();
     _assignments = new std::vector<Assignment*>();
 
+    // Load from database
     _assignmentDB->load_all();
     _courseDB->load_all();
 
@@ -200,4 +206,12 @@ void Controller::show_rubrics() {
             }
     }
 
+}
+
+/**
+ * @brief Controller::rand_color returns a random
+ * flat color
+ */
+QString Controller::rand_color() {
+    return _flat_colors.at(qrand() % _flat_colors.count());
 }

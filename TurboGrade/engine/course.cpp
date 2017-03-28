@@ -3,6 +3,7 @@
 Course::Course(int id, QString name, Controller* controller)
 {
     SHOW_WHERE;
+
     _controller = controller;
 
     if (id == -1)
@@ -12,6 +13,7 @@ Course::Course(int id, QString name, Controller* controller)
 
     _name = name;
     _sections = new std::vector<Section*>();
+    _color = _controller->rand_color();
 
     _controller->_sectionDB->load_all(this);
 }

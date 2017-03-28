@@ -32,9 +32,14 @@ public:
     ~Assignment();
 
     int _id;
+    // Name of the assignment
     QString _name;
+    // Brief objective of the assignment
     QString _objective;
+    // The rubric corresponding to this Assignment
     Rubric* _rubric;
+    // Color (for UI)
+    QString _color;
     // Controller
     Controller *_controller;
 };

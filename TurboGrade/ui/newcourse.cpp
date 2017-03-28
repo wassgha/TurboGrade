@@ -29,6 +29,7 @@ void NewCourse::on_cancel_btn_clicked()
 void NewCourse::on_ok_btn_clicked()
 {
     _controller->add_course(-1, ui->name->text());
+
     ui->name->clear();
     emit added_course();
     hide();

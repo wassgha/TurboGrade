@@ -45,6 +45,8 @@ public:
     QString _username;
     // Student submissions
     std::vector<Submission*> *_submissions;
+    // Color (for UI)
+    QString _color;
     // Controller
     Controller *_controller;
 };

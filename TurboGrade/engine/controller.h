@@ -78,6 +78,10 @@ public:
     // Shows rubric for all assignments
     void show_rubrics();
 
+    /**********************************
+     *       UI Related Operations    *
+     **********************************/
+    QString rand_color();
 
     /*
      * Database containers
@@ -97,6 +101,17 @@ public:
     RubricDB *_rubricDB;
     // Comment database table
     CommentDB *_commentDB;
+
+    /*
+     * UI variables
+     */
+    const QStringList _flat_colors = QStringList()  <<"#63c46b"<<"#3498db"
+                                                    <<"#9b59b6"<<"#34495e"
+                                                    <<"#c0392b"<<"#f39c12"
+                                                    <<"#2980b9"<<"#D44A59"
+                                                    <<"#462446"<<"#FFC153"
+                                                    <<"#47B39D"<<"#897FBA"
+                                                    <<"#60646D"<<"#65878F";
 
 private:
 

@@ -60,6 +60,8 @@ public:
     // Position in file (start and end positions)
     int _start_pos;
     int _end_pos;
+    // Color (for UI)
+    QString _color;
     // Controller
     Controller *_controller;
 };

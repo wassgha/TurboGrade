@@ -20,6 +20,8 @@ Section::Section(int id, QString name, Course* course, Controller* controller)
     // Section assignments (assignment and folder)
     _assignments = new std::vector<std::pair<Assignment*, QString>>();
 
+    _color = _controller->rand_color();
+
     _controller->_assignmentDB->load_all(this);
     _controller->_studentDB->load_all(this);
 }
