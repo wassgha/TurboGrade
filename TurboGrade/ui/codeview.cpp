@@ -9,7 +9,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
 
     _controller = controller;
 
-    setupCodeEditor("MainWindow.cpp");
+    setupCodeEditor(QDir::currentPath()+ "/../../../../../yikyak/Yak.java");
 
     _model = new QFileSystemModel;
     _model->setRootPath(QDir::currentPath()+ "/../../../../../yikyak");

@@ -16,6 +16,9 @@
 #include "newcourse.h"
 #include "ui_newcourse.h"
 
+#include "card.h"
+#include "ui_card.h"
+
 namespace Ui {
 class Courses;
 }
@@ -38,7 +41,7 @@ private:
     int max_col = 3;
     int cur_col = 0;
     int cur_row = 0;
-    std::vector<QPushButton*> courses;
+    std::vector<Card*> courses;
 
 public slots:
     void new_course();

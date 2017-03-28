@@ -10,6 +10,8 @@ Dashboard::Dashboard(QWidget *parent) :
     setWindowTitle("TurboGrade Dashboard");
     setAttribute(Qt::WA_StyledBackground, true);
 
+    flat_colors = QStringList()<<"#63c46b"<<"#3498db"<<"#9b59b6"<<"#34495e"<<"#c0392b"<<"#f39c12"<<"#2980b9";
+
     _controller = new Controller();
 
 //    Course* cs105 = _controller->add_course(-1, "CS 105");
@@ -49,7 +51,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
     grade_submission = new GradeSubmission(this->parentWidget(), _controller);
 
-    courses = new Courses(this->parentWidget(), _controller);
+    courses = new Courses(this, _controller);
 
     ui->mainWidget->addWidget(courses);
     ui->mainWidget->setCurrentWidget(courses);

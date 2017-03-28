@@ -25,7 +25,7 @@ Courses::Courses(QWidget *parent, Controller *controller) :
 
 Courses::~Courses()
 {
-    for (QPushButton* course: courses) {
+    for (Card* course: courses) {
         delete course;
     }
     delete ui;
@@ -37,10 +37,11 @@ void Courses::refresh_courses() {
 
     add_course(add_course_btn);
     for(Course* course : *_controller->get_courses()) {
-        QPushButton* new_course = new QPushButton(course->_name);
-        std::cout<<"Added course : "<<new_course->text().toStdString()<<std::endl;
+        Dashboard *dashboard = qobject_cast<Dashboard*> (this->parent());
+        QString color = dashboard->flat_colors.at(qrand() % dashboard->flat_colors.count());
+        Card* new_course = new Card(course->_name, "2 sections", color);
         courses.push_back(new_course);
-        connect(new_course, SIGNAL(clicked(bool)), this, SLOT(open_editor()));
+        connect(new_course, SIGNAL(clicked()), this, SLOT(open_editor()));
         add_course(new_course);
     }
 
@@ -59,8 +60,7 @@ void Courses::add_course(QWidget *course) {
 void Courses::remove_courses() {
     QGridLayout *grid =  (QGridLayout*) ui->scrollAreaWidgetContents->layout();
     grid->removeWidget(add_course_btn);
-    for (QPushButton* course: courses) {
-        std::cout<<"Removed Course : "<<course->text().toStdString()<<std::endl;
+    for (Card* course: courses) {
         grid->removeWidget(course);
         delete course;
     }
