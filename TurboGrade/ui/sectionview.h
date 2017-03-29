@@ -1,8 +1,12 @@
 #ifndef SECTIONVIEW_H
 #define SECTIONVIEW_H
 
+#include "clickablelabel.h"
+
 #include "cardsview.h"
 #include "ui_cardsview.h"
+
+#include "breadcrumb.h"
 
 class CardsView;
 
@@ -23,7 +27,14 @@ public:
         add_btn->setObjectName("add_btn");
         connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
+        _breadcrumb = new Breadcrumb();
+        _breadcrumb->add_item(_course->_name, parent, SLOT(show_courses()));
+        ui->verticalLayout->insertWidget(0, _breadcrumb);
         refresh_cards();
+    }
+
+    ~SectionView() {
+        delete _breadcrumb;
     }
 
 public slots:
@@ -52,6 +63,7 @@ public slots:
 private:
     Controller *_controller;
     Course* _course;
+    Breadcrumb* _breadcrumb;
 
 };
 

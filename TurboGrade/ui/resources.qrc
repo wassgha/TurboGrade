@@ -12,6 +12,7 @@
         <file>res/grade@2X.png</file>
         <file>res/code@2X.png</file>
         <file>res/course.png</file>
+        <file>res/home.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>
