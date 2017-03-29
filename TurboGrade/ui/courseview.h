@@ -38,7 +38,7 @@ public slots:
                                         QString::number(course->get_sections()->size()) + " section(s)",
                                         course->_color, course);
             cards.push_back(new_course);
-            connect(new_course, SIGNAL(clicked(QObject*)), parent(), SLOT(show_sections(QObject*)));
+            connect(new_course, SIGNAL(clicked(QObject*)), _parent, SLOT(show_sections(QObject*)));
             add_card(new_course);
         }
 

@@ -6,6 +6,7 @@ CardsView::CardsView(QWidget *parent) :
     ui(new Ui::CardsView)
 {
     ui->setupUi(this);
+    _parent = parent;
 
     setAttribute(Qt::WA_StyledBackground, true);
 

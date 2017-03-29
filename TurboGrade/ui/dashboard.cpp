@@ -9,7 +9,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
     setWindowTitle("TurboGrade Dashboard");
     setAttribute(Qt::WA_StyledBackground, true);
-    _controller = new Controller();
+    _controller = new Controller(true);
 
 //    Course* cs105 = _controller->add_course(-1, "CS 105");
 //    _controller->add_course(-1, "CS 150");

@@ -41,7 +41,7 @@ public slots:
                                          assignment.first->_objective,
                                          assignment.first->_color, assignment.first);
             cards.push_back(new_assignment);
-            connect(new_assignment, SIGNAL(clicked(void *)), parent()->parent(), SLOT(show_submissions(QObject *)));
+            connect(new_assignment, SIGNAL(clicked(void *)), _parent, SLOT(show_submissions(QObject *)));
             add_card(new_assignment);
         }
 

@@ -18,12 +18,13 @@ class Breadcrumb : public QWidget
 public:
     explicit Breadcrumb(QWidget *parent = 0);
     ~Breadcrumb();
-    void add_item(const QString text, const char* slot, void* arg);
+    void add_item(const QString text, const char* slot, QObject* arg);
     void add_home();
 
 private:
     Ui::Breadcrumb *ui;
     std::vector<QLabel*> items;
+    QWidget* _parent;
 };
 
 #endif // BREADCRUMB_H

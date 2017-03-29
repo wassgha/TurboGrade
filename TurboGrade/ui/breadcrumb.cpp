@@ -5,6 +5,7 @@ Breadcrumb::Breadcrumb(QWidget *parent) :
     ui(new Ui::Breadcrumb)
 {
     ui->setupUi(this);
+    _parent = parent;
     add_home();
 }
 
@@ -21,7 +22,7 @@ void Breadcrumb::add_home() {
     items.push_back(separator);
     ui->horizontalLayout->addWidget(new_item);
     ui->horizontalLayout->addWidget(separator);
-    connect (new_item, SIGNAL(clicked()), parentWidget(), SLOT(show_courses())) ;
+    connect (new_item, SIGNAL(clicked()), _parent, SLOT(show_courses())) ;
 }
 
 void Breadcrumb::add_item(const QString text, const char* slot, QObject* arg) {
@@ -35,7 +36,11 @@ void Breadcrumb::add_item(const QString text, const char* slot, QObject* arg) {
     items.push_back(separator);
     ui->horizontalLayout->addWidget(new_item);
     ui->horizontalLayout->addWidget(separator);
-    connect (new_item, SIGNAL(clicked()), parentWidget(), slot) ;
+    QSignalMapper* signalMapper = new QSignalMapper();
+    connect(new_item, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    signalMapper->setMapping(new_item, arg);
+    connect(signalMapper, SIGNAL(mapped(QObject*)),
+            _parent, slot);
 }
 
 Breadcrumb::~Breadcrumb()
