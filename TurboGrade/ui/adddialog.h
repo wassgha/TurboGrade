@@ -15,17 +15,15 @@ class AddDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddDialog(QWidget *parent = 0, Controller *controller = nullptr);
+    explicit AddDialog(QWidget *parent = 0, QString name = "", Controller *controller = nullptr);
     ~AddDialog();
     Controller *_controller;
+    Ui::AddDialog *ui;
 
 private slots:
     void on_cancel_btn_clicked();
 
     void on_ok_btn_clicked();
-
-private:
-    Ui::AddDialog *ui;
 
 signals:
     void submit();

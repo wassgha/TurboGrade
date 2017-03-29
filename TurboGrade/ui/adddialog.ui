@@ -19,7 +19,12 @@
 	background: white;
 }
 
+#name_label {
+	text-transform: capitalize;
+}
+
 #title {
+	text-transform: capitalize;
 	font-size: 16px;
 	font-weight: bold;
 }

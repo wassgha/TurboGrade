@@ -3,9 +3,7 @@
 
 #include <QWidget>
 #include <QDesktopServices>
-
-#include "cardsview.h"
-#include "ui_courses.h"
+#include <QFontDatabase>
 
 #include "../engine/controller.h"
 #include "../engine/controller.h"
@@ -13,8 +11,14 @@
 #include "gradesubmission.h"
 #include "ui_gradesubmission.h"
 
+#include "courseview.h"
+#include "sectionview.h"
+#include "assignmentview.h"
+
+class CourseView;
+class SectionView;
+class AssignmentView;
 class GradeSubmission;
-class CardsView;
 
 namespace Ui {
 class Dashboard;
@@ -27,13 +31,19 @@ class Dashboard : public QWidget
 public:
     explicit Dashboard(QWidget *parent = 0);
     ~Dashboard();
-    CardsView *courses;
-    Controller *_controller;
-    GradeSubmission *grade_submission;
+    CourseView *courses = nullptr;
+    SectionView *sections = nullptr;
+    AssignmentView *assignments = nullptr;
+    Controller *_controller = nullptr;
+    GradeSubmission *grade_submission = nullptr;
     QFont roboto;
 
 private slots:
     void on_tutorial_btn_clicked();
+
+public slots:
+    void show_sections(void* course);
+    void show_assignments(void* section);
 
 private:
     Ui::Dashboard *ui;

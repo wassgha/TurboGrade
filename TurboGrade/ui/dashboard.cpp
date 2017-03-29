@@ -9,7 +9,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
     setWindowTitle("TurboGrade Dashboard");
     setAttribute(Qt::WA_StyledBackground, true);
-    _controller = new Controller(true);
+    _controller = new Controller();
 
 //    Course* cs105 = _controller->add_course(-1, "CS 105");
 //    _controller->add_course(-1, "CS 150");
@@ -46,9 +46,10 @@ Dashboard::Dashboard(QWidget *parent) :
     QApplication::setFont(roboto);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
-    grade_submission = new GradeSubmission(this->parentWidget(), _controller);
+    grade_submission = new GradeSubmission(this, _controller);
+    grade_submission->hide();
 
-    courses = new CardsView(this->parentWidget(), _controller);
+    courses = new CourseView(this, _controller);
 
     ui->mainWidget->addWidget(courses);
     ui->mainWidget->setCurrentWidget(courses);
@@ -60,9 +61,35 @@ Dashboard::~Dashboard()
     delete grade_submission;
     delete ui;
     delete courses;
+    if (sections != nullptr)
+        delete sections;
 }
 
 void Dashboard::on_tutorial_btn_clicked()
 {
     QDesktopServices::openUrl(QUrl("https://www.youtube.com/channel/UCwI9yC7wu9aIqDol47Ep2BA"));
+}
+
+void Dashboard::show_sections(void* course) {
+
+    if (sections != nullptr) {
+        ui->mainWidget->removeWidget(sections);
+        delete sections;
+    }
+    sections = new SectionView(this, course, _controller);
+    ui->mainWidget->addWidget(sections);
+    ui->mainWidget->setCurrentWidget(sections);
+
+}
+
+void Dashboard::show_assignments(void* section) {
+
+    if (assignments != nullptr) {
+        ui->mainWidget->removeWidget(assignments);
+        delete assignments;
+    }
+    assignments = new AssignmentView(this, section, _controller);
+    ui->mainWidget->addWidget(assignments);
+    ui->mainWidget->setCurrentWidget(assignments);
+
 }

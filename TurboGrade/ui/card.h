@@ -14,7 +14,7 @@ class Card : public QWidget
     Q_OBJECT
 
 public:
-    explicit Card(QString title, QString info, QString color);
+    explicit Card(QString title, QString info, QString color, void* obj);
     ~Card();
 
 protected:
@@ -22,9 +22,10 @@ protected:
 
 private:
     Ui::Card *ui;
+    void* _obj;
 
 signals:
-    void clicked();
+    void clicked(void* obj);
 };
 
 #endif // CARD_H

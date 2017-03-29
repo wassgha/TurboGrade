@@ -13,8 +13,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Controller *controller) :
 
     setWindowTitle(tr("TurboGrade - Grading submission"));
 
-    code_view = new CodeView(this->parentWidget());
-    grade_view = new GradeView(this->parentWidget());
+    code_view = new CodeView(this);
+    grade_view = new GradeView(this);
 
     ui->mainWidget->addWidget(code_view);
     ui->mainWidget->addWidget(grade_view);

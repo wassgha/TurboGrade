@@ -83,7 +83,10 @@ HEADERS  +=\
     dashboard.h \
     card.h \
     cardsview.h \
-    adddialog.h
+    adddialog.h \
+    courseview.h \
+    sectionview.h \
+    assignmentview.h
 
 FORMS    += \
     commentpopup.ui \

@@ -1,7 +1,8 @@
 #include "card.h"
 #include "ui_card.h"
 
-Card::Card(QString title, QString info, QString color) :
+
+Card::Card(QString title, QString info, QString color, void* obj) :
     QWidget(0),
     ui(new Ui::Card)
 {
@@ -10,6 +11,7 @@ Card::Card(QString title, QString info, QString color) :
     ui->info->setText(info);
     ui->logo->setStyleSheet("background: " + color + ";");
     ui->logo->setText(title.left(2).toUpper());
+    _obj = obj;
 }
 
 Card::~Card()
@@ -20,6 +22,6 @@ Card::~Card()
 void Card::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        emit clicked();
+        emit clicked(_obj);
     }
 }
