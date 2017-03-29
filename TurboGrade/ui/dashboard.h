@@ -42,6 +42,7 @@ private slots:
     void on_tutorial_btn_clicked();
 
 public slots:
+    void show_courses();
     void show_sections(void* course);
     void show_assignments(void* section);
 

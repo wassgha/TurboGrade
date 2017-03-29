@@ -52,7 +52,8 @@ SOURCES += main.cpp\
     dashboard.cpp \
     card.cpp \
     cardsview.cpp \
-    adddialog.cpp
+    adddialog.cpp \
+    clickablelabel.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -86,7 +87,8 @@ HEADERS  +=\
     adddialog.h \
     courseview.h \
     sectionview.h \
-    assignmentview.h
+    assignmentview.h \
+    clickablelabel.h
 
 FORMS    += \
     commentpopup.ui \

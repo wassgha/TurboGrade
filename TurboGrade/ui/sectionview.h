@@ -37,7 +37,7 @@ public slots:
                                          QString::number(section->_assignments->size()) + " assignment(s)",
                                          section->_color, section);
             cards.push_back(new_section);
-            connect(new_section, SIGNAL(clicked(void *)), parent()->parent(), SLOT(show_assignments(void *)));
+            connect(new_section, SIGNAL(clicked(void *)), parent(), SLOT(show_assignments(void *)));
             add_card(new_section);
         }
 

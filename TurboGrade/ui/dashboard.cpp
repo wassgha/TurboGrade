@@ -53,6 +53,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
     ui->mainWidget->addWidget(courses);
     ui->mainWidget->setCurrentWidget(courses);
+
+    connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_courses()));
 }
 
 Dashboard::~Dashboard()
@@ -68,6 +70,18 @@ Dashboard::~Dashboard()
 void Dashboard::on_tutorial_btn_clicked()
 {
     QDesktopServices::openUrl(QUrl("https://www.youtube.com/channel/UCwI9yC7wu9aIqDol47Ep2BA"));
+}
+
+void Dashboard::show_courses() {
+
+    if (courses != nullptr) {
+        ui->mainWidget->removeWidget(courses);
+        delete courses;
+    }
+    courses = new CourseView(this, _controller);
+    ui->mainWidget->addWidget(courses);
+    ui->mainWidget->setCurrentWidget(courses);
+
 }
 
 void Dashboard::show_sections(void* course) {
