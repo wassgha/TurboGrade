@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+#include <QObject>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"
@@ -21,7 +22,7 @@
 class Controller;
 class Rubric;
 
-class Criterion : public ObjectIdentifier
+class Criterion : public ObjectIdentifier, public QObject
 {
 public:
 

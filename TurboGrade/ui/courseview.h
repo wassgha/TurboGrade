@@ -22,6 +22,8 @@ public:
         add_btn->setObjectName("add_btn");
         connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
+        _breadcrumb = new Breadcrumb(parent);
+        ui->verticalLayout->insertWidget(0, _breadcrumb);
         refresh_cards();
     }
 
@@ -36,7 +38,7 @@ public slots:
                                         QString::number(course->get_sections()->size()) + " section(s)",
                                         course->_color, course);
             cards.push_back(new_course);
-            connect(new_course, SIGNAL(clicked(void*)), parent(), SLOT(show_sections(void*)));
+            connect(new_course, SIGNAL(clicked(QObject*)), parent(), SLOT(show_sections(QObject*)));
             add_card(new_course);
         }
 

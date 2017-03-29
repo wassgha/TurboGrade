@@ -84,7 +84,7 @@ void Dashboard::show_courses() {
 
 }
 
-void Dashboard::show_sections(void* course) {
+void Dashboard::show_sections(QObject* course) {
 
     if (sections != nullptr) {
         ui->mainWidget->removeWidget(sections);
@@ -96,7 +96,7 @@ void Dashboard::show_sections(void* course) {
 
 }
 
-void Dashboard::show_assignments(void* section) {
+void Dashboard::show_assignments(QObject* section) {
 
     if (assignments != nullptr) {
         ui->mainWidget->removeWidget(assignments);

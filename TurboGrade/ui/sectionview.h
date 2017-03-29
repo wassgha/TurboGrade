@@ -6,14 +6,12 @@
 #include "cardsview.h"
 #include "ui_cardsview.h"
 
-#include "breadcrumb.h"
-
 class CardsView;
 
 class SectionView: public CardsView
 {
 public:
-    SectionView(QWidget* parent = 0, void* course = nullptr, Controller* controller = nullptr):
+    SectionView(QWidget* parent = 0, QObject* course = nullptr, Controller* controller = nullptr):
         CardsView(parent)
     {
 
@@ -27,8 +25,8 @@ public:
         add_btn->setObjectName("add_btn");
         connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
-        _breadcrumb = new Breadcrumb();
-        _breadcrumb->add_item(_course->_name, parent, SLOT(show_courses()));
+        _breadcrumb = new Breadcrumb(parent);
+        _breadcrumb->add_item(_course->_name, SLOT(show_sections(QObject *)), _course);
         ui->verticalLayout->insertWidget(0, _breadcrumb);
         refresh_cards();
     }
@@ -48,7 +46,7 @@ public slots:
                                          QString::number(section->_assignments->size()) + " assignment(s)",
                                          section->_color, section);
             cards.push_back(new_section);
-            connect(new_section, SIGNAL(clicked(void *)), parent(), SLOT(show_assignments(void *)));
+            connect(new_section, SIGNAL(clicked(QObject *)), parent(), SLOT(show_assignments(QObject *)));
             add_card(new_section);
         }
 
@@ -63,7 +61,6 @@ public slots:
 private:
     Controller *_controller;
     Course* _course;
-    Breadcrumb* _breadcrumb;
 
 };
 

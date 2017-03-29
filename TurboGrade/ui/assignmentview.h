@@ -9,7 +9,7 @@ class CardsView;
 class AssignmentView: public CardsView
 {
 public:
-    AssignmentView(QWidget* parent = 0, void* section = nullptr, Controller* controller = nullptr):
+    AssignmentView(QWidget* parent = 0, QObject* section = nullptr, Controller* controller = nullptr):
         CardsView(parent)
     {
 
@@ -23,6 +23,10 @@ public:
         add_btn->setObjectName("add_btn");
         connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
+        _breadcrumb = new Breadcrumb(parent);
+        _breadcrumb->add_item(_section->_course->_name, SLOT(show_sections(QObject*)), _section->_course);
+        _breadcrumb->add_item(_section->_name, SLOT(show_assignments(QObject*)), _section);
+        ui->verticalLayout->insertWidget(0, _breadcrumb);
         refresh_cards();
     }
 
@@ -35,9 +39,9 @@ public slots:
         for(std::pair<Assignment*, QString> assignment : *_section->_assignments) {
             Card* new_assignment = new Card(assignment.first->_name,
                                          assignment.first->_objective,
-                                         assignment.first->_color, &assignment);
+                                         assignment.first->_color, assignment.first);
             cards.push_back(new_assignment);
-            connect(new_assignment, SIGNAL(clicked(void *)), parent()->parent(), SLOT(show_submissions(void *)));
+            connect(new_assignment, SIGNAL(clicked(void *)), parent()->parent(), SLOT(show_submissions(QObject *)));
             add_card(new_assignment);
         }
 

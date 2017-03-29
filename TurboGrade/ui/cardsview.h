@@ -7,6 +7,8 @@
 #include <QGroupBox>
 #include <QLabel>
 
+#include "breadcrumb.h"
+
 #include "adddialog.h"
 #include "ui_adddialog.h"
 
@@ -35,6 +37,7 @@ protected:
     std::vector<Card*> cards;
     QPushButton *add_btn;
     AddDialog *add_dialog;
+    Breadcrumb* _breadcrumb;
 
 public slots:
     virtual void new_course();

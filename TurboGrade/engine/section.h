@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+#include <QObject>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"
@@ -25,7 +26,7 @@ class Course;
 class Student;
 class Assignment;
 
-class Section : public ObjectIdentifier
+class Section : public ObjectIdentifier, public QObject
 {
 public:
     Section() = delete; //don't allow default constructor

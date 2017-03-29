@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <QObject>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"

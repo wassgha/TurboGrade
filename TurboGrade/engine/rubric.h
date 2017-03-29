@@ -10,6 +10,7 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+#include <QObject>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"
@@ -22,7 +23,7 @@ class Controller;
 class Assignment;
 class Criterion;
 
-class Rubric : public ObjectIdentifier
+class Rubric : public ObjectIdentifier, public QObject
 {
 public:
     Rubric() = delete; //don't allow default constructor

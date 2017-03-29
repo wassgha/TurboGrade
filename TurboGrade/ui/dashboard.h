@@ -43,8 +43,8 @@ private slots:
 
 public slots:
     void show_courses();
-    void show_sections(void* course);
-    void show_assignments(void* section);
+    void show_sections(QObject* course);
+    void show_assignments(QObject* section);
 
 private:
     Ui::Dashboard *ui;

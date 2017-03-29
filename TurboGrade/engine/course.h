@@ -11,6 +11,7 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+#include <QObject>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"
@@ -22,7 +23,7 @@ class Controller;
 class Section;
 class CourseDB;
 
-class Course : public ObjectIdentifier
+class Course : public ObjectIdentifier, public QObject
 {
 public:
 

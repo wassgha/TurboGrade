@@ -21,7 +21,7 @@
 class Controller;
 class Rubric;
 
-class Assignment : public ObjectIdentifier
+class Assignment : public ObjectIdentifier, public QObject
 {
 public:
 

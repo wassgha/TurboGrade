@@ -2,7 +2,7 @@
 #include "ui_card.h"
 
 
-Card::Card(QString title, QString info, QString color, void* obj) :
+Card::Card(QString title, QString info, QString color, QObject* obj) :
     QWidget(0),
     ui(new Ui::Card)
 {

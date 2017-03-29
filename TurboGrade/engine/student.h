@@ -9,6 +9,7 @@
 #include <iostream>
 #include <vector>
 #include <QString>
+#include <QObject>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"
@@ -22,7 +23,7 @@ class Controller;
 class Section;
 class Submission;
 
-class Student : public ObjectIdentifier
+class Student : public ObjectIdentifier, public QObject
 {
 public:
     Student() = delete; //don't allow default constructor
