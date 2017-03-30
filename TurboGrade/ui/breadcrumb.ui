@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>439</width>
+    <width>638</width>
     <height>37</height>
    </rect>
   </property>
@@ -52,7 +52,9 @@ QLabel {
 	max-height: 20px;
 	
 }
-</string>
+#switch_left, #switch_right {
+	margin: 5px;
+}</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <property name="leftMargin">
@@ -84,7 +86,21 @@ QLabel {
     </spacer>
    </item>
    <item>
+    <widget class="QLabel" name="switch_left">
+     <property name="text">
+      <string>Students</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="Switcher" name="switcher" native="true"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="switch_right">
+     <property name="text">
+      <string>Assignments</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

@@ -1,6 +1,6 @@
 #include "switcher.h"
 
-Switcher::Switcher(QWidget *parent) : QWidget(parent),
+Switcher::Switcher(bool const_color, QWidget *parent) : QWidget(parent),
 _height(16),
 _opacity(0.000),
 _disabled(false),
@@ -8,12 +8,13 @@ _switch(false),
 _radius(8.0),
 _margin(3),
 _brush("#63c46b"),
-_thumb("#BDBDBD")
+_const_color(const_color),
+_thumb(_const_color?_brush:"#BDBDBD")
 {
     connect(&_timer, SIGNAL(timeout()), this, SLOT(timercall()));
 }
 
-Switcher::Switcher(const QColor &color, QWidget *parent) : QWidget(parent),
+Switcher::Switcher(const QColor &color, bool const_color, QWidget *parent) : QWidget(parent),
 _height(16),
 _disabled(false),
 _switch(false),
@@ -21,7 +22,8 @@ _opacity(0.000),
 _radius(8.0),
 _margin(3),
 _brush(color),
-_thumb("#BDBDBD")
+_const_color(const_color),
+_thumb(_const_color?_brush:"#BDBDBD")
 {
     connect(&_timer, SIGNAL(timeout()), this, SLOT(timercall()));
 }
@@ -33,7 +35,7 @@ void Switcher::paintEvent(QPaintEvent *e) {
 
     QPainterPath _primary, _secoundry;
     if (!_disabled) {
-        if (_switch) {
+        if (_switch || _const_color) {
             p.setBrush(_brush);
             p.setOpacity(0.500);
         } else {
@@ -74,7 +76,10 @@ void Switcher::mouseReleaseEvent(QMouseEvent *e) {
             e->accept();
             emit toggled();
             _switch = _switch ? false : true;
-            _thumb = _switch ? _brush : QBrush("#BDBDBD");
+            if (_const_color)
+                _thumb = _brush;
+            else
+                _thumb = _switch ? _brush : QBrush("#BDBDBD");
             _timer.start(5);
         }  else {
             e->ignore();
@@ -103,7 +108,7 @@ void Switcher::resizeEvent(QResizeEvent *e) {
 void Switcher::timercall() {
     if (_switch) {
         _x += 1;
-        if (_x >= width() - _height) {
+        if (_x >= width() - _height + 2) {
             _timer.stop();
         }
         repaint();

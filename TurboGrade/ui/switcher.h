@@ -20,14 +20,15 @@ class Switcher : public QWidget
     Q_OBJECT
 
 public:
-    explicit Switcher(QWidget *parent = 0);
-    explicit Switcher(const QColor &color, QWidget *parent = 0);
+    explicit Switcher(bool const_color = true, QWidget *parent = 0);
+    explicit Switcher(const QColor &color, bool const_color = true, QWidget *parent = 0);
     bool isToggled() const;
     void setToggle(bool set);
     void setDisable(bool set);
     bool isDisable() const;
 
 private:
+    bool _const_color;
     bool _disabled;
     bool _switch;
     QColor _brush;
