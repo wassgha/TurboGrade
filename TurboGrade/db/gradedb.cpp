@@ -5,6 +5,14 @@ GradeDB::GradeDB()
 
 }
 
+/**
+ * @brief GradeDB::add Adds a mapping from rubric_id, submission_id to a grade
+ * value
+ * @param rubric_id the rubric (criterion) id
+ * @param submission_id the submission id
+ * @param grade the value for the grade
+ * @return the grade's key
+ */
 int GradeDB::add(int rubric_id, int submission_id, int grade){
     QSqlQuery query(db);
 
@@ -23,6 +31,13 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
     return query.lastInsertId().toInt();
 }
 
+/**
+ * @brief GradeDB::select retrieves the grade value denoted by the rubric id,
+ * submission id pair
+ * @param rubric_id the rubric id
+ * @param submission_id the submission id
+ * @return the key of the grade, -1 if non-existant
+ */
 int GradeDB::select(int rubric_id, int submission_id){
     QSqlQuery query(db);
 
@@ -46,6 +61,12 @@ int GradeDB::select(int rubric_id, int submission_id){
     return -1;
 }
 
+/**
+ * @brief GradeDB::load_all given a submission and a set of criterion, load all
+ * of the criterion, grade mappings to the controller.
+ * @param submission the submission
+ * @param criteria the set of criterion
+ */
 void GradeDB::load_all(Submission *submission, std::vector<Criterion *> *criteria){
     int submission_id = submission->_id;
     for(Criterion *criterion : *criteria){
