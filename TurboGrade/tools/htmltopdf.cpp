@@ -3,6 +3,8 @@
 HTMLToPDF::HTMLToPDF(QWidget *parent) : QWidget(parent)
 {
 
+    QFont font;
+    font.setFamily(font.defaultFamily());
 
     document = new QTextDocument();
     document->setHtml(""
@@ -19,6 +21,7 @@ HTMLToPDF::HTMLToPDF(QWidget *parent) : QWidget(parent)
                       " </li>"
                       " <li>Rubric Category 2</li>"
                       "</ul>");
+    document->setDefaultFont(font);
 
     QPrinter printer(QPrinter::HighResolution);
     printer.setPageSize(QPrinter::A4);

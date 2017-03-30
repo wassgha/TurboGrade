@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QTextDocument>
 #include <QPrinter>
+#include <QFont>
 #include <QPrintPreviewDialog>
 #include <QHBoxLayout>
 
