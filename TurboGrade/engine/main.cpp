@@ -13,6 +13,8 @@ using namespace std;
 int main(int argc, char *argv[])
 {
 
+    QCoreApplication a(argc, argv);
+
     // Use new Controller(true) to drop tables
     Controller* controller = new Controller(true);
 
