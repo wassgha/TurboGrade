@@ -16,7 +16,7 @@ GradeDB::GradeDB()
 int GradeDB::add(int rubric_id, int submission_id, int grade){
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO grades (id, rubric, submission, grade) "
+    query.prepare("INSERT INTO grade (id, rubric, submission, grade) "
                   "VALUES (NULL, ?, ?, ?) ON DUPLICATE KEY UPDATE grade = ?");
 
     query.addBindValue(rubric_id);
@@ -25,7 +25,7 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
     query.addBindValue(grade);
 
     if (!query.exec()) {
-        qDebug() << "Failed to insert to 'grades' table" << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to insert to 'grade' table" << endl << "SQL ERROR: " << query.lastError();
         return -1;
     }
 
@@ -42,13 +42,13 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
 int GradeDB::select(int rubric_id, int submission_id){
     QSqlQuery query(db);
 
-    query.prepare("SELECT * FROM grades WHERE rubric = ? AND submission_id = ?");
+    query.prepare("SELECT * FROM grade WHERE rubric = ? AND submission = ?");
     query.addBindValue(rubric_id);
     query.addBindValue(submission_id);
 
     // Execute the query
     if (!query.exec()) {
-        qDebug() << "Failed to select from table 'grades'" << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to select from table 'grade'" << endl << "SQL ERROR: " << query.lastError();
         return -1;
     }
 
@@ -73,12 +73,12 @@ void GradeDB::load_all(Submission *submission, std::vector<Criterion*>* criteria
     for(Criterion *criterion : *criteria){
         QSqlQuery query(db);
         int rubric_id = criterion->_id;
-        query.prepare("SELECT * FROM grades WHERE submission = ? AND rubric = ?");
+        query.prepare("SELECT * FROM grade WHERE submission = ? AND rubric = ?");
         query.addBindValue(submission_id);
         query.addBindValue(rubric_id);
         // Execute the query
         if (!query.exec()) {
-            qDebug() << "Failed to select from table 'grades'" << endl << "SQL ERROR: " << query.lastError();
+            qDebug() << "Failed to select from table 'grades' (load_all)" << endl << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
             return;
         }
 

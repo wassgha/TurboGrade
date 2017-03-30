@@ -33,8 +33,6 @@ int main(int argc, char *argv[])
     Section* cs105_01 = cs105->_sections->at(0);
     cs105_01->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS105_01");
 
-
-
     bst_assignment->_rubric->add_criterion(-1, "Correctness", NULL, 10);
     bst_assignment->_rubric->add_criterion(-1, "Design", NULL, 5);
     Criterion* comments = bst_assignment->_rubric->add_criterion(-1, "Comments", NULL, 2);
@@ -44,6 +42,10 @@ int main(int argc, char *argv[])
     Submission* gharbiw_01 = gharbiw->add_submission(-1, bst_assignment);
     gharbiw_01->add_comment(-1, "main.java", bst_assignment->_rubric->get_criterion("Correctness"),
                             "You screwed up bro", -2, 20, 150);
+    controller->set_curr_submission(gharbiw_01);
+    controller->add_grade(bst_assignment->_rubric->get_criterion("Correctness"), 4);
+    controller->add_grade(bst_assignment->_rubric->get_criterion("Design"), 3);
+    controller->add_grade(bst_assignment->_rubric->get_criterion("JavaDoc"), 2);
 
     controller->show_courses();
     controller->show_rubrics();

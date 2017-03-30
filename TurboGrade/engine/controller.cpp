@@ -133,6 +133,11 @@ void Controller::show_courses() {
                                      << " about " << comment->_criterion->_name.toStdString()
                                      <<std::endl;
                         }
+                        set_curr_submission(submission);
+                        for(Criterion *criterion : *submission->_assignment->_rubric->_criteria) {
+                            std::cout<<"                * Grade on " << criterion->_name.toStdString() << ":";
+                            std::cout<< get_grade(criterion) << " out of " << criterion->_out_of <<" "<<std::endl;
+                        }
                     }
                 }
                 for(std::pair<Assignment*, QString> assignment : *section->_assignments)
@@ -246,8 +251,6 @@ void Controller::refresh_grades_map(Submission *submission){
  * @param submission the submission to refresh with
  */
 void Controller::refresh_criteria_vec(Submission *submission){
-    //TODO CLEANUP OLD CRITERIA
-    _criteria->clear();
     //refresh the critera vector to contain the vector for current submission
     _criteria = submission->_assignment->_rubric->_criteria;
 }
@@ -260,6 +263,7 @@ void Controller::refresh_criteria_vec(Submission *submission){
  */
 void Controller::add_grade(Criterion *criterion, int grade){
     _grades->emplace(std::make_pair(criterion, grade));
+    _gradeDB->add(criterion->_id, _curr_submission->_id, grade);
 }
 
 /**
@@ -298,7 +302,7 @@ void Controller::show_rubrics() {
     std::cout<<std::endl<<"Showing rubrics"<<std::endl;
 
     for(Assignment *assignment : *_assignments) {
-        std::cout<<(assignment->_name).toStdString()<<std::endl;
+        std::cout<<(assignment->_name).toStdString()<<" has "<< QString::number(assignment->_rubric->_criteria->size()).toStdString()<< " criteria " << std::endl;
             for(Criterion *criterion : *assignment->_rubric->_criteria) {
                 std::cout<<"    ->"<<(criterion->_name).toStdString()<< " (? / " << criterion->_out_of << ")" << std::endl;
                 criterion->show_children();
