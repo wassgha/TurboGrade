@@ -6,7 +6,11 @@ SectionView::SectionView(QWidget* parent, QObject* course, Controller* controlle
 
     _controller = controller;
     _course = (Course*)course;
-    add_dialog = new AddDialog(this, "section", _controller);
+    add_dialog = new FormDialog(this, "New Section");
+    add_dialog->add_field("QLineEdit",
+                          "name",
+                           _course->_name + "  .",
+                          "01");
     connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
 
     add_btn = new QPushButton("Add section");
@@ -36,7 +40,6 @@ void SectionView::refresh_cards() {
 }
 
 void SectionView::save_new() {
-    _course->add_section(-1, add_dialog->ui->name->text());
-    add_dialog->ui->name->clear();
+    _course->add_section(-1, add_dialog->val("name"));
     refresh_cards();
 }

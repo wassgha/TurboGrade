@@ -5,7 +5,7 @@ StudentView::StudentView(QWidget* parent, Controller* controller):
 {
 
     _controller = controller;
-    add_dialog = new AddDialog(this, "course", _controller);
+    add_dialog = new FormDialog(this, "New Student");
     connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
 
     add_btn = new QPushButton("Add course");
@@ -34,7 +34,6 @@ void StudentView::refresh_cards() {
 }
 
 void StudentView::save_new() {
-    _controller->add_course(-1, add_dialog->ui->name->text());
-    add_dialog->ui->name->clear();
+    _controller->add_course(-1, add_dialog->val("name"));
     refresh_cards();
 }

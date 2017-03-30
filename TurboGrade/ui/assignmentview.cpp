@@ -6,7 +6,9 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
 
     _controller = controller;
     _section = (Section*)section;
-    add_dialog = new AddDialog(this, "assignment", _controller);
+
+    add_dialog = new FormDialog(this, "New Assignment");
+    add_dialog->add_field("QLineEdit", "name", "Assignment Name :", "Binary Search Tree");
     connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
 
     add_btn = new QPushButton("Add assignment");
@@ -40,6 +42,5 @@ void AssignmentView::refresh_cards() {
 void AssignmentView::save_new() {
 //        Assignment *assignment = _controller->add_assignment(-1, add_dialog->ui->name->text(), add_dialog->ui->objective->text())
 //        _section->add_assignment(assignment, add_dialog->ui->folder->text(), false);
-    add_dialog->ui->name->clear();
     refresh_cards();
 }

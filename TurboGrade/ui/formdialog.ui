@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddDialog</class>
- <widget class="QWidget" name="AddDialog">
+ <class>FormDialog</class>
+ <widget class="QWidget" name="FormDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>147</height>
+    <height>144</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#AddDialog
+   <string notr="true">#FormDialog
 {
 	background: white;
 }
 
-#name_label {
+QLabel {
 	text-transform: capitalize;
 }
 
@@ -86,18 +86,7 @@ QLineEdit::focus {
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="name_label">
-       <property name="text">
-        <string>Course name</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="name"/>
-     </item>
-    </layout>
+    <layout class="QFormLayout" name="formLayout"/>
    </item>
    <item>
     <spacer name="verticalSpacer_2">
@@ -170,11 +159,11 @@ QLineEdit::focus {
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="text">
-        <string>Add Course</string>
+        <string> CONFIRM</string>
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/misc/res/course.png</normaloff>:/misc/res/course.png</iconset>
+         <normaloff>:/misc/res/confirm.png</normaloff>:/misc/res/confirm.png</iconset>
        </property>
        <property name="iconSize">
         <size>

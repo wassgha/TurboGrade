@@ -9,8 +9,8 @@
 
 #include "breadcrumb.h"
 
-#include "adddialog.h"
-#include "ui_adddialog.h"
+#include "formdialog.h"
+#include "ui_formdialog.h"
 
 #include "card.h"
 #include "ui_card.h"
@@ -36,7 +36,7 @@ protected:
     int cur_row = 0;
     std::vector<Card*> cards;
     QPushButton *add_btn;
-    AddDialog *add_dialog;
+    FormDialog *add_dialog;
     Breadcrumb* _breadcrumb = nullptr;
     QWidget* _parent = nullptr;
 

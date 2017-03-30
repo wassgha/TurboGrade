@@ -53,7 +53,6 @@ SOURCES += main.cpp\
     dashboard.cpp \
     card.cpp \
     cardsview.cpp \
-    adddialog.cpp \
     clickablelabel.cpp \
     breadcrumb.cpp \
     courseview.cpp \
@@ -61,7 +60,8 @@ SOURCES += main.cpp\
     assignmentview.cpp \
     listview.cpp \
     studentview.cpp \
-    switcher.cpp
+    switcher.cpp \
+    formdialog.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -93,7 +93,6 @@ HEADERS  +=\
     dashboard.h \
     card.h \
     cardsview.h \
-    adddialog.h \
     courseview.h \
     sectionview.h \
     assignmentview.h \
@@ -101,7 +100,8 @@ HEADERS  +=\
     breadcrumb.h \
     listview.h \
     studentview.h \
-    switcher.h
+    switcher.h \
+    formdialog.h
 
 FORMS    += \
     commentpopup.ui \
@@ -111,9 +111,9 @@ FORMS    += \
     dashboard.ui \
     card.ui \
     cardsview.ui \
-    adddialog.ui \
     breadcrumb.ui \
-    listview.ui
+    listview.ui \
+    formdialog.ui
 
 RESOURCES += \
     resources.qrc

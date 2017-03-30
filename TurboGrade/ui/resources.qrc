@@ -15,6 +15,8 @@
         <file>res/home.png</file>
         <file>res/home-white.png</file>
         <file>res/home-gray.png</file>
+        <file>res/save.png</file>
+        <file>res/confirm.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>
