@@ -67,7 +67,7 @@ int GradeDB::select(int rubric_id, int submission_id){
  * @param submission the submission
  * @param criteria the set of criterion
  */
-void GradeDB::load_all(Submission *submission, std::vector<Criterion *> *criteria){
+void GradeDB::load_all(Submission *submission, std::vector<Criterion*>* criteria){
     int submission_id = submission->_id;
     for(Criterion *criterion : *criteria){
         QSqlQuery query(db);

@@ -36,6 +36,7 @@ SOURCES += main.cpp\
             "../db/submissiondb.cpp" \
             "../db/rubricdb.cpp" \
             "../db/commentdb.cpp" \
+            "../db/gradedb.cpp" \
             "../engine/controller.cpp" \
             "../engine/course.cpp" \
             "../engine/section.cpp" \
@@ -75,6 +76,7 @@ HEADERS  +=\
             "../db/submissiondb.h" \
             "../db/rubricdb.h" \
             "../db/commentdb.h" \
+            "../db/gradedb.h" \
             "../engine/controller.h" \
             "../engine/course.h" \
             "../engine/section.h" \

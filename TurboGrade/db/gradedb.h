@@ -2,6 +2,10 @@
 #define GRADEDB_H
 #include "../engine/submission.h"
 #include "../engine/criterion.h"
+#include <vector>
+#include "dbengine.h"
+#include "../engine/controller.h"
+class Controller;
 
 class GradeDB : public DBEngine
 {
