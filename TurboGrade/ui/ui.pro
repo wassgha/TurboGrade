@@ -57,7 +57,9 @@ SOURCES += main.cpp\
     breadcrumb.cpp \
     courseview.cpp \
     sectionview.cpp \
-    assignmentview.cpp
+    assignmentview.cpp \
+    listview.cpp \
+    studentview.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -93,7 +95,9 @@ HEADERS  +=\
     sectionview.h \
     assignmentview.h \
     clickablelabel.h \
-    breadcrumb.h
+    breadcrumb.h \
+    listview.h \
+    studentview.h
 
 FORMS    += \
     commentpopup.ui \
@@ -104,7 +108,8 @@ FORMS    += \
     card.ui \
     cardsview.ui \
     adddialog.ui \
-    breadcrumb.ui
+    breadcrumb.ui \
+    listview.ui
 
 RESOURCES += \
     resources.qrc

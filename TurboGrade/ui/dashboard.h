@@ -14,6 +14,7 @@
 #include "courseview.h"
 #include "sectionview.h"
 #include "assignmentview.h"
+#include "studentview.h"
 
 class CourseView;
 class SectionView;

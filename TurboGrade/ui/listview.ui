@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CardsView</class>
- <widget class="QWidget" name="CardsView">
+ <class>ListView</class>
+ <widget class="QWidget" name="ListView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,34 +13,33 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="accessibleName">
+   <string/>
+  </property>
   <property name="styleSheet">
-   <string notr="true">#CardsView, #scrollArea {
-	background: #f1f2f6;
-	border: none;
+   <string notr="true">#ListView, #scrollArea {
+        background: #f1f2f6;
+        border: none;
 }
 
 QAbstractScrollArea #scrollAreaWidgetContents  {
  background-color:transparent;
-	border: none;
+        border: none;
 }
 
 Card {
-	height: 70px;
-	width: 225px;
-	max-width: 225px;
-	max-height: 70px;
+        height: 70px;
+        max-height: 70px;
 }
 
 #add_btn {
-	height: 70px;
-	width: 225px;
-	max-width: 225px;
-	max-height: 70px;
-	background: transparent;
-	padding : -3px;
-	color: rgb(174, 176, 176);
-	border: 3px dashed rgb(174, 176, 176);
-	font-size: 18px;
+        height: 70px;
+        max-height: 70px;
+        background: transparent;
+        padding : -3px;
+        color: rgb(174, 176, 176);
+        border: 3px dashed rgb(174, 176, 176);
+        font-size: 18px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -73,7 +72,7 @@ Card {
         <height>252</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_2"/>
+      <layout class="QVBoxLayout" name="verticalLayout_2"/>
      </widget>
     </widget>
    </item>

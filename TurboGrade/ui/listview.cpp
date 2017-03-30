@@ -1,11 +1,13 @@
-#include "cardsview.h"
-#include "ui_cardsview.h"
+#include "listview.h"
+#include "ui_listview.h"
 
-CardsView::CardsView(QWidget *parent) :
+ListView::ListView(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::CardsView)
+    ui(new Ui::ListView)
 {
     ui->setupUi(this);
+
+    ui->scrollAreaWidgetContents->layout()->setAlignment(Qt::AlignTop);
 
     _parent = parent;
     _breadcrumb = new Breadcrumb(parent);
@@ -14,7 +16,7 @@ CardsView::CardsView(QWidget *parent) :
 
 }
 
-CardsView::~CardsView()
+ListView::~ListView()
 {
     for (Card* card: cards) {
         delete card;
@@ -24,25 +26,25 @@ CardsView::~CardsView()
         delete _breadcrumb;
 }
 
-void CardsView::add_card(QWidget *card) {
+void ListView::add_card(QWidget *card) {
     if (cur_col >= max_col) {
         cur_col = 0;
         cur_row++;
     }
-    QGridLayout *grid =  (QGridLayout*) ui->scrollAreaWidgetContents->layout();
-    grid->addWidget(card, cur_row, cur_col);
+    QVBoxLayout *box =  (QVBoxLayout*) ui->scrollAreaWidgetContents->layout();
+    box->addWidget(card);
     cur_col++;
 }
 
-void CardsView::refresh_cards() {
+void ListView::refresh_cards() {
 
 }
 
-void CardsView::save_new() {
+void ListView::save_new() {
 
 }
 
-void CardsView::remove_cards() {
+void ListView::remove_cards() {
     QGridLayout *grid =  (QGridLayout*) ui->scrollAreaWidgetContents->layout();
     grid->removeWidget(add_btn);
     for (Card* card: cards) {
@@ -54,6 +56,6 @@ void CardsView::remove_cards() {
     cur_row = 0;
 }
 
-void CardsView::new_course() {
+void ListView::new_course() {
     add_dialog->show();
 }
