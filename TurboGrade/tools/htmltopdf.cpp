@@ -8,6 +8,9 @@ HTMLToPDF::HTMLToPDF(QWidget *parent) : QWidget(parent)
 
     document = new QTextDocument();
     document->setHtml(""
+                      "<head>"
+                      "<link rel=\"stylesheet\" type=\"text/css\" href=\"../../TurboGrade/tools/example.css\">"
+                      "</head>"
                       "<h1>Student's Name</h1><br>"
                       "<p> Course Name - Professor's name</p>"
                       "<span>Final Grade:</span>"

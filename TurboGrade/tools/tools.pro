@@ -22,3 +22,6 @@ HEADERS     += \
 
 FORMS += \
     pdfwindow.ui
+
+DISTFILES += \
+    example.css
