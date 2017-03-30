@@ -22,7 +22,8 @@ SOURCES     += \
             assignmentdb.cpp \
             submissiondb.cpp \
             rubricdb.cpp \
-            commentdb.cpp
+            commentdb.cpp \
+    gradedb.cpp
 
 HEADERS     += \
             "../tools/macro.h" \
@@ -43,4 +44,5 @@ HEADERS     += \
             assignmentdb.h \
             submissiondb.h \
             rubricdb.h \
-            commentdb.h
+            commentdb.h \
+    gradedb.h
