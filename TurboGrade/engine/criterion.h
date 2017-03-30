@@ -25,7 +25,6 @@ class Rubric;
 class Criterion : public ObjectIdentifier, public QObject
 {
 public:
-
     Criterion() = delete; //don't allow default constructor
     // Parametrized constructor
     Criterion(int id, const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller);

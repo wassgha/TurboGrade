@@ -85,6 +85,12 @@ public:
     /**********************************
      *    Grade Related Operations    *
      **********************************/
+    void set_curr_submission(Submission *submission);
+
+    void refresh_grades_map(Submission *submission);
+
+    void refresh_criteria_vec(Submission *submission);
+
     //ASSUMING ONLY 1 SUBMISSION BEING WORKED ON AT ONCE
 
     //returns map of all criterion and their corresp. grades
@@ -145,7 +151,13 @@ private:
     // All assignments in the engine
     std::vector<Assignment*> *_assignments;
 
-    // All criterion and their grades
+    // The current submission
+    Submission* _curr_submission;
+
+    // The list of criteria for the current submission (the rubric)
+    std::vector<Criterion*> *_criteria;
+
+    // The collection of criterion and their grades for the current submission
     std::map<Criterion*, int> *_grades;
 };
 
