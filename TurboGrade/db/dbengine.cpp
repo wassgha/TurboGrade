@@ -92,7 +92,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                submission INTEGER,\
                grade INT,\
                FOREIGN KEY(rubric) REFERENCES rubric(id),\
-               FOREIGN KEY(submission) REFERENCES submission(id))");
+               FOREIGN KEY(submission) REFERENCES submission(id),\
+               CONSTRAINT unq UNIQUE (rubric, submission))");
 }
 
 /**

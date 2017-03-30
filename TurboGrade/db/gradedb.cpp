@@ -17,10 +17,11 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO grades (id, rubric, submission, grade) "
-                  "VALUES (NULL, ?, ?, ?)");
+                  "VALUES (NULL, ?, ?, ?) ON DUPLICATE KEY UPDATE grade = ?");
 
     query.addBindValue(rubric_id);
     query.addBindValue(submission_id);
+    query.addBindValue(grade);
     query.addBindValue(grade);
 
     if (!query.exec()) {
