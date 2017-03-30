@@ -202,11 +202,22 @@ std::vector<Assignment*>* Controller::get_assignments() {
  *        Grading Operations          *
  **************************************/
 
+/**
+ * @brief Controller::set_curr_submission sets the current submission and
+ * refreshes the _grades map with the new information regarding the submission
+ * @param submission the new submission
+ */
 void Controller::set_curr_submission(Submission *submission){
     _curr_submission = submission;
     refresh_grades_map(submission);
 }
 
+/**
+ * @brief Controller::refresh_grades_map refreshes the _grades map and the
+ * _criteria vec. Here we reconcile the professor's overrides and the
+ * aggregation of grading points from comments
+ * @param submission the submission to refresh with
+ */
 void Controller::refresh_grades_map(Submission *submission){
     //TODO CLEANUP OLD CRITERIA -> GRADES MAPPING
     _grades->clear();
@@ -229,6 +240,11 @@ void Controller::refresh_grades_map(Submission *submission){
     _gradeDB->load_all(submission, _criteria);
 }
 
+/**
+ * @brief Controller::refresh_criteria_vec refreshes the _criteria vector using
+ * the Submissions rubric
+ * @param submission the submission to refresh with
+ */
 void Controller::refresh_criteria_vec(Submission *submission){
     //TODO CLEANUP OLD CRITERIA
     _criteria->clear();
