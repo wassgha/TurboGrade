@@ -38,10 +38,10 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
 
     // Student Table
     sql_query("CREATE TABLE IF NOT EXISTS student (id INTEGER PRIMARY KEY, \
-                section_id INTEGER, \
-                name VARCHAR(50),\
-                username VARCHAR(50),\
-                FOREIGN KEY(section_id) REFERENCES section(id))");
+               section_id INTEGER, \
+               name VARCHAR(50),\
+               username VARCHAR(50),\
+               FOREIGN KEY(section_id) REFERENCES section(id))");
 
     // Assignment Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment (id INTEGER PRIMARY KEY, \
@@ -53,15 +53,15 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                assignment INTEGER,\
                section INTEGER,\
                folder TEXT,\
-              FOREIGN KEY(assignment) REFERENCES assignment(id),\
-              FOREIGN KEY(section) REFERENCES section(id))");
+               FOREIGN KEY(assignment) REFERENCES assignment(id),\
+               FOREIGN KEY(section) REFERENCES section(id))");
 
     // Submission Table
     sql_query("CREATE TABLE IF NOT EXISTS submission (id INTEGER PRIMARY KEY, \
                student INTEGER,\
                assignment INTEGER,\
-              FOREIGN KEY(student) REFERENCES student(id),\
-              FOREIGN KEY(assignment) REFERENCES assignment(id))");
+               FOREIGN KEY(student) REFERENCES student(id),\
+               FOREIGN KEY(assignment) REFERENCES assignment(id))");
 
     // Comment Table
     sql_query("CREATE TABLE IF NOT EXISTS comment (id INTEGER PRIMARY KEY, \
@@ -72,8 +72,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                grade INT,\
                start_pos INT,\
                end_pos INT,\
-              FOREIGN KEY(submission) REFERENCES submission(id),\
-              FOREIGN KEY(rubric) REFERENCES rubric(id))");
+               FOREIGN KEY(submission) REFERENCES submission(id),\
+               FOREIGN KEY(rubric) REFERENCES rubric(id))");
 
     // Rubric Table
     // Note: A rubric section is auto-suggested when it has no parent
@@ -91,8 +91,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                rubric INTEGER,\
                submission INTEGER,\
                grade INT,\
-              FOREIGN KEY(rubric) REFERENCES rubric(id),\
-              FOREIGN KEY(submission) REFERENCES submission(id))");
+               FOREIGN KEY(rubric) REFERENCES rubric(id),\
+               FOREIGN KEY(submission) REFERENCES submission(id))");
 }
 
 /**
