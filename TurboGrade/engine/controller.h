@@ -11,6 +11,7 @@
 #include <vector>
 #include <algorithm>
 #include <QObject>
+#include <map>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"
@@ -80,6 +81,17 @@ public:
     void show_rubrics();
 
     /**********************************
+     *    Grade Related Operations    *
+     **********************************/
+    //ASSUMING ONLY 1 SUBMISSION BEING WORKED ON AT ONCE
+
+    //returns vector of all criterion and their corresp. grades
+    std::map<Criterion*, int> *get_grades();
+
+    //adds a grade to the map, adjusts it if already in map
+    void add_grade(Criterion* criterion, int grade);
+
+    /**********************************
      *       UI Related Operations    *
      **********************************/
     QString rand_color();
@@ -125,6 +137,9 @@ private:
 
     // All assignments in the engine
     std::vector<Assignment*> *_assignments;
+
+    // All criterion and their grades
+    std::map<Criterion*, int> *_grades;
 };
 
 #endif // CONTROLLER_H

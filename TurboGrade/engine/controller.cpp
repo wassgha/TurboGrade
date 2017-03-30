@@ -33,6 +33,7 @@ Controller::Controller(bool drop_tables, QString dbname)
     // Initialize containers
     _courses = new std::vector<Course*>();
     _assignments = new std::vector<Assignment*>();
+    _grades = new std::map<Criterion*, int>();
 
     // Load from database
     _assignmentDB->load_all();
@@ -56,6 +57,11 @@ Controller::~Controller()
 
     for(Assignment* assignment:*_assignments)
         delete assignment;
+
+    for(std::pair<Criterion*, int> grade : *_grades){
+        delete grade.first;
+    }
+    delete _grades;
 
 }
 
@@ -190,6 +196,21 @@ std::vector<Assignment*>* Controller::get_assignments() {
 
 }
 
+/**************************************
+ *        Grading Operations          *
+ **************************************/
+
+void Controller::add_grade(Criterion *criterion, int grade){
+    _grades->emplace(std::make_pair(criterion, grade));
+}
+
+std::map<Criterion*, int> *Controller::get_grades(){
+    return _grades;
+}
+
+/**************************************
+ *        UI Operations               *
+ **************************************/
 
 /**
  * @brief Controller::show_rubric prints the rubrics for assignments
