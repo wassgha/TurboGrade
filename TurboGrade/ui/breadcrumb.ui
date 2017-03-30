@@ -28,8 +28,15 @@
   <property name="styleSheet">
    <string notr="true">#Breadcrumb {
 	max-height: 40px;
+	background: white;
 }
+
 QLabel {
+	color:gray;
+}
+
+#last {
+	color: black;
 }
 
 #home {

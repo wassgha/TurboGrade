@@ -7,6 +7,7 @@ CardsView::CardsView(QWidget *parent) :
 {
     ui->setupUi(this);
     _parent = parent;
+    _breadcrumb = new Breadcrumb(parent);
 
     setAttribute(Qt::WA_StyledBackground, true);
 
@@ -18,6 +19,8 @@ CardsView::~CardsView()
         delete card;
     }
     delete ui;
+    if (_breadcrumb != nullptr)
+        delete _breadcrumb;
 }
 
 void CardsView::add_card(QWidget *card) {

@@ -13,6 +13,8 @@
         <file>res/code@2X.png</file>
         <file>res/course.png</file>
         <file>res/home.png</file>
+        <file>res/home-white.png</file>
+        <file>res/home-gray.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

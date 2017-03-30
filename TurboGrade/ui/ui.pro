@@ -54,7 +54,10 @@ SOURCES += main.cpp\
     cardsview.cpp \
     adddialog.cpp \
     clickablelabel.cpp \
-    breadcrumb.cpp
+    breadcrumb.cpp \
+    courseview.cpp \
+    sectionview.cpp \
+    assignmentview.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\

@@ -37,7 +37,7 @@ protected:
     std::vector<Card*> cards;
     QPushButton *add_btn;
     AddDialog *add_dialog;
-    Breadcrumb* _breadcrumb;
+    Breadcrumb* _breadcrumb = nullptr;
     QWidget* _parent = nullptr;
 
 public slots:
