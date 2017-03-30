@@ -16,16 +16,22 @@ GradeDB::GradeDB()
 int GradeDB::add(int rubric_id, int submission_id, int grade){
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO grade (id, rubric, submission, grade) "
-                  "VALUES (NULL, ?, ?, ?) ON DUPLICATE KEY UPDATE grade = ?");
+    query.prepare("INSERT OR REPLACE INTO grade (id, rubric, submission, score) "
+                  "VALUES (NULL, :rubric_id, :submission_id, :grade)");
 
-    query.addBindValue(rubric_id);
-    query.addBindValue(submission_id);
-    query.addBindValue(grade);
-    query.addBindValue(grade);
+    query.bindValue(":rubric_id", rubric_id);
+    query.bindValue(":submission_id", submission_id);
+    query.bindValue(":grade", grade);
+
+    qDebug() << "Insert called "
+             << query.lastQuery() << endl
+             << "(" << rubric_id << ", " << submission_id << "," << grade << ")";
 
     if (!query.exec()) {
-        qDebug() << "Failed to insert to 'grade' table" << endl << "SQL ERROR: " << query.lastError();
+        qDebug() << "Failed to insert to 'grade' table"
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError()
+                 << "(" << rubric_id << ", " << submission_id << "," << grade << ")";
         return -1;
     }
 
@@ -33,7 +39,7 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
 }
 
 /**
- * @brief GradeDB::select retrieves the grade value denoted by the rubric id,
+ * @brief GradeDB::select retrieves the grade id denoted by the rubric id,
  * submission id pair
  * @param rubric_id the rubric id
  * @param submission_id the submission id
@@ -82,7 +88,7 @@ void GradeDB::load_all(Submission *submission, std::vector<Criterion*>* criteria
             return;
         }
 
-        int grade_field = query.record().indexOf("grade");
+        int grade_field = query.record().indexOf("score");
         while(query.next()) {
             _controller->add_grade(criterion,query.value(grade_field).toInt());
         }

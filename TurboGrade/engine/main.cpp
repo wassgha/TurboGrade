@@ -33,6 +33,7 @@ int main(int argc, char *argv[])
     Section* cs105_01 = cs105->_sections->at(0);
     cs105_01->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS105_01");
 
+
     bst_assignment->_rubric->add_criterion(-1, "Correctness", NULL, 10);
     bst_assignment->_rubric->add_criterion(-1, "Design", NULL, 5);
     Criterion* comments = bst_assignment->_rubric->add_criterion(-1, "Comments", NULL, 2);

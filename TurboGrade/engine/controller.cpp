@@ -228,10 +228,17 @@ void Controller::refresh_grades_map(Submission *submission){
     _grades->clear();
     //Refreshes the _criteria map
     refresh_criteria_vec(submission);
-    //Add the criterion to the map with a score of 0
+
+    //load all of the grades from the db... If a grade has been overwritten in db,
+    //it will overwrite the expected grade here
+    _gradeDB->load_all(submission, _criteria);
+
+    //If a grade doesn't exist the initialize it with a score of 0
     for(Criterion* criterion: *_criteria){
-        add_grade(criterion,0);
+        if (get_grade(criterion) == -1)
+            add_grade(criterion,0);
     }
+
     //For each comment, update the grade value in the table to its current value,
     //plus the comments grade value. Since we start at 0, this computes final grade
     std::vector<Comment*> *com = submission->_comments;
@@ -240,9 +247,6 @@ void Controller::refresh_grades_map(Submission *submission){
         add_grade(crit, get_grade(crit) + comment->_grade);
     }
 
-    //load all of the grades from the db... If a grade has been overwritten in db,
-    //it will overwrite the expected grade here
-    _gradeDB->load_all(submission, _criteria);
 }
 
 /**
@@ -262,6 +266,8 @@ void Controller::refresh_criteria_vec(Submission *submission){
  * @param grade the value to set the grade to
  */
 void Controller::add_grade(Criterion *criterion, int grade){
+    std::cout<<"Insert grade "<<grade<<" for "<< criterion->_name.toStdString()<<std::endl;
+    _grades->erase(criterion);
     _grades->emplace(std::make_pair(criterion, grade));
     _gradeDB->add(criterion->_id, _curr_submission->_id, grade);
 }

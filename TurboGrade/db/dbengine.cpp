@@ -90,7 +90,7 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     sql_query("CREATE TABLE IF NOT EXISTS grade (id INTEGER PRIMARY KEY, \
                rubric INTEGER,\
                submission INTEGER,\
-               grade INT,\
+               score INT,\
                FOREIGN KEY(rubric) REFERENCES rubric(id),\
                FOREIGN KEY(submission) REFERENCES submission(id),\
                CONSTRAINT unq UNIQUE (rubric, submission))");
