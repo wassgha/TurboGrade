@@ -200,14 +200,30 @@ std::vector<Assignment*>* Controller::get_assignments() {
  *        Grading Operations          *
  **************************************/
 
+/**
+ * @brief Controller::add_grade adds a grade to a specific criterion,
+ * ASSUMES WE KNOW THE SUBMISSION
+ * @param criterion the criterion
+ * @param grade the value to set the grade to
+ */
 void Controller::add_grade(Criterion *criterion, int grade){
     _grades->emplace(std::make_pair(criterion, grade));
 }
 
+/**
+ * @brief Controller::get_grades getter for the _grades map
+ * @return the _grades map containing Criterion, grade mappings
+ */
 std::map<Criterion*, int> *Controller::get_grades(){
     return _grades;
 }
 
+/**
+ * @brief Controller::get_grade retrieves the grade for the given criterion
+ * ASSUMES WE KNOW THE SUBMISSION
+ * @param criterion the criterion in question
+ * @return the grade for that criterion, -1 if non existant
+ */
 int Controller::get_grade(Criterion *criterion){
     try {
         return _grades->at(criterion);
