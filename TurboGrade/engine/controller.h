@@ -32,6 +32,7 @@
 #include "../db/sectiondb.h"
 #include "../db/studentdb.h"
 #include "../db/commentdb.h"
+#include "../db/gradedb.h"
 
 class CourseDB;
 class SectionDB;
@@ -40,6 +41,7 @@ class AssignmentDB;
 class SubmissionDB;
 class RubricDB;
 class CommentDB;
+class GradeDB;
 
 class Controller : public ObjectIdentifier
 {
@@ -85,11 +87,14 @@ public:
      **********************************/
     //ASSUMING ONLY 1 SUBMISSION BEING WORKED ON AT ONCE
 
-    //returns vector of all criterion and their corresp. grades
+    //returns map of all criterion and their corresp. grades
     std::map<Criterion*, int> *get_grades();
 
     //adds a grade to the map, adjusts it if already in map
     void add_grade(Criterion* criterion, int grade);
+
+    //retrieves the grade for the criterion on the current submission
+    int get_grade(Criterion* criterion);
 
     /**********************************
      *       UI Related Operations    *
@@ -114,6 +119,8 @@ public:
     RubricDB *_rubricDB;
     // Comment database table
     CommentDB *_commentDB;
+    // Grade database table
+    GradeDB *_gradeDB;
 
     /*
      * UI variables

@@ -208,6 +208,16 @@ std::map<Criterion*, int> *Controller::get_grades(){
     return _grades;
 }
 
+int Controller::get_grade(Criterion *criterion){
+    try {
+        return _grades->at(criterion);
+    }
+    catch (std::out_of_range& e) {
+        qDebug() << "Tried to access grade for criterion not in map.";
+        return -1;
+    }
+}
+
 /**************************************
  *        UI Operations               *
  **************************************/
