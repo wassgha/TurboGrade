@@ -1,14 +1,15 @@
 #ifndef PDFWINDOW_H
 #define PDFWINDOW_H
 
+#include <iostream>
 #include <QMainWindow>
 #include <QPainter>
 #include <QLayout>
 #include <QPdfWriter>
 #include <QPagedPaintDevice>
 #include <QImageReader>
-#include <iostream>
 #include <QDir>
+
 namespace Ui {
 class PDFWindow;
 }

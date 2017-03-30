@@ -1,14 +1,15 @@
 TEMPLATE    = app
 CONFIG      += console c++11
 CONFIG      -= app_bundle
-QT          += widgets
+QT          += widgets printsupport
 
 SOURCES     +=  main.cpp \
                 syntaxhighlight.cpp \
                 codeeditor.cpp \
                 objectidentifier.cpp \
                 filewriter.cpp \
-    pdfwindow.cpp
+    pdfwindow.cpp \
+    htmltopdf.cpp
 
 HEADERS     += \
                 syntaxhighlight.h \
@@ -16,7 +17,8 @@ HEADERS     += \
                 objectidentifier.h \
                 macro.h \
                 filewriter.h \
-    pdfwindow.h
+    pdfwindow.h \
+    htmltopdf.h
 
 FORMS += \
     pdfwindow.ui
