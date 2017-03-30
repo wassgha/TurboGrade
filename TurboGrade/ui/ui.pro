@@ -59,7 +59,8 @@ SOURCES += main.cpp\
     sectionview.cpp \
     assignmentview.cpp \
     listview.cpp \
-    studentview.cpp
+    studentview.cpp \
+    switcher.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -97,7 +98,8 @@ HEADERS  +=\
     clickablelabel.h \
     breadcrumb.h \
     listview.h \
-    studentview.h
+    studentview.h \
+    switcher.h
 
 FORMS    += \
     commentpopup.ui \

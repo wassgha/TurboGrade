@@ -46,6 +46,12 @@ QLabel {
 	max-height: 35px;
 	margin: 10px;
 }
+
+#switcher {
+	min-width: 35px;
+	max-height: 20px;
+	
+}
 </string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -77,8 +83,19 @@ QLabel {
      </property>
     </spacer>
    </item>
+   <item>
+    <widget class="Switcher" name="switcher" native="true"/>
+   </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Switcher</class>
+   <extends>QWidget</extends>
+   <header>switcher.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
