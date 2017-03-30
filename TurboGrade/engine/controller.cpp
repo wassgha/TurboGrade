@@ -29,11 +29,13 @@ Controller::Controller(bool drop_tables, QString dbname)
     _submissionDB       = new SubmissionDB(this, dbname);
     _rubricDB           = new RubricDB(this, dbname);
     _commentDB          = new CommentDB(this, dbname);
+    _gradeDB            = new GradeDB(this, dbname);
 
     // Initialize containers
     _courses = new std::vector<Course*>();
     _assignments = new std::vector<Assignment*>();
     _grades = new std::map<Criterion*, int>();
+    _criteria = new std::vector<Criterion*>();
 
     // Load from database
     _assignmentDB->load_all();
@@ -199,6 +201,40 @@ std::vector<Assignment*>* Controller::get_assignments() {
 /**************************************
  *        Grading Operations          *
  **************************************/
+
+void Controller::set_curr_submission(Submission *submission){
+    _curr_submission = submission;
+    refresh_grades_map(submission);
+}
+
+void Controller::refresh_grades_map(Submission *submission){
+    //TODO CLEANUP OLD CRITERIA -> GRADES MAPPING
+    _grades->clear();
+    //Refreshes the _criteria map
+    refresh_criteria_vec(submission);
+    //Add the criterion to the map with a score of 0
+    for(Criterion* criterion: *_criteria){
+        add_grade(criterion,0);
+    }
+    //For each comment, update the grade value in the table to its current value,
+    //plus the comments grade value. Since we start at 0, this computes final grade
+    std::vector<Comment*> *com = submission->_comments;
+    for(Comment* comment : *com){
+        Criterion *crit = comment->_criterion;
+        add_grade(crit, get_grade(crit) + comment->_grade);
+    }
+
+    //load all of the grades from the db... If a grade has been overwritten in db,
+    //it will overwrite the expected grade here
+    _gradeDB->load_all(submission, _criteria);
+}
+
+void Controller::refresh_criteria_vec(Submission *submission){
+    //TODO CLEANUP OLD CRITERIA
+    _criteria->clear();
+    //refresh the critera vector to contain the vector for current submission
+    _criteria = submission->_assignment->_rubric->_criteria;
+}
 
 /**
  * @brief Controller::add_grade adds a grade to a specific criterion,
