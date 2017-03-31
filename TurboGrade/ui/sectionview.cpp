@@ -34,7 +34,7 @@ void SectionView::refresh_cards() {
                                      + QString::number(section->_assignments->size()) + " assignment(s)",
                                      section->_color, section);
         cards.push_back(new_section);
-        connect(new_section, SIGNAL(clicked(QObject *)), _parent, SLOT(show_students(QObject *)));
+        connect(new_section, SIGNAL(clicked(QObject *)), _parent, SLOT(show_assignments(QObject *)));
         add_card(new_section);
     }
 
