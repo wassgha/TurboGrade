@@ -21,7 +21,7 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
      ***************************************/
     _breadcrumb->add_item(_section->_course->_name, SLOT(show_sections(QObject*)), _section->_course);
     _breadcrumb->add_item(_section->_name, SLOT(show_assignments(QObject*)), _section);
-    _breadcrumb->add_switcher("Students", "Assignments", true);
+    _breadcrumb->add_switcher("Assignments", "Students", false);
     connect(_breadcrumb, SIGNAL(switcher_toggled()), dynamic_cast<AssignmentView*>(this), SLOT(show_students()));
 
     ui->verticalLayout->insertWidget(0, _breadcrumb);
