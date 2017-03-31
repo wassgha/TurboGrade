@@ -1,10 +1,10 @@
 #include "switcher.h"
 
-Switcher::Switcher(bool const_color, QWidget *parent) : QWidget(parent),
+Switcher::Switcher(bool default_state, bool const_color, QWidget *parent) : QWidget(parent),
 _height(16),
 _opacity(0.000),
 _disabled(false),
-_switch(false),
+_switch(default_state),
 _radius(8.0),
 _margin(3),
 _brush("#63c46b"),
@@ -12,6 +12,9 @@ _const_color(const_color),
 _thumb(_const_color?_brush:"#BDBDBD")
 {
     connect(&_timer, SIGNAL(timeout()), this, SLOT(timercall()));
+    if(_switch) {
+        _timer.start(5);
+    }
 }
 
 Switcher::Switcher(const QColor &color, bool const_color, QWidget *parent) : QWidget(parent),
@@ -26,6 +29,9 @@ _const_color(const_color),
 _thumb(_const_color?_brush:"#BDBDBD")
 {
     connect(&_timer, SIGNAL(timeout()), this, SLOT(timercall()));
+    if(_switch) {
+        _timer.start(5);
+    }
 }
 
 void Switcher::paintEvent(QPaintEvent *e) {

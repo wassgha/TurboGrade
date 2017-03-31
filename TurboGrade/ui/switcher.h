@@ -11,8 +11,8 @@
 
 /**
  * @brief Switcher widget (on/off toggle)
- * Source: https://gist.github.com/IMAN4K/23d7af03936c3dc8deb3c528126c1610
- * (No license provided)
+ * Source: https://gist.github.com/IMAN4K/23d7af03936c3dc8deb3c528126c1610 (No license provided)
+ * Modified as needed
  */
 
 class Switcher : public QWidget
@@ -20,7 +20,7 @@ class Switcher : public QWidget
     Q_OBJECT
 
 public:
-    explicit Switcher(bool const_color = true, QWidget *parent = 0);
+    explicit Switcher(bool default_state = true, bool const_color = true, QWidget *parent = 0);
     explicit Switcher(const QColor &color, bool const_color = true, QWidget *parent = 0);
     bool isToggled() const;
     void setToggle(bool set);

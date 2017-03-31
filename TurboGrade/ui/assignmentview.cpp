@@ -16,9 +16,12 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
     add_btn->setObjectName("add_btn");
     connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
+    /***************************************
+     *        Breadcrumb Trail             *
+     ***************************************/
     _breadcrumb->add_item(_section->_course->_name, SLOT(show_sections(QObject*)), _section->_course);
     _breadcrumb->add_item(_section->_name, SLOT(show_assignments(QObject*)), _section);
-    _breadcrumb->add_switcher("Students", "Assignments");
+    _breadcrumb->add_switcher("Students", "Assignments", true);
     connect(_breadcrumb, SIGNAL(switcher_toggled()), dynamic_cast<AssignmentView*>(this), SLOT(show_students()));
 
     ui->verticalLayout->insertWidget(0, _breadcrumb);

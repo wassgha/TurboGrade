@@ -22,7 +22,7 @@ public:
     ~Breadcrumb();
     void add_item(const QString text, const char* slot, QObject* arg);
     void add_home();
-    void add_switcher(QString left, QString right);
+    void add_switcher(QString left, QString right, bool default_state);
 
 private:
     Ui::Breadcrumb *ui;
