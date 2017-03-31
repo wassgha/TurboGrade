@@ -8,6 +8,7 @@ Breadcrumb::Breadcrumb(QWidget *parent) :
     setAttribute(Qt::WA_StyledBackground, true);
 
     _parent = parent;
+
     add_home();
 }
 
@@ -33,6 +34,24 @@ void Breadcrumb::add_home() {
 
     // Make home icon clickable
     connect (home_icon, SIGNAL(clicked()), _parent, SLOT(show_courses())) ;
+}
+
+void Breadcrumb::add_switcher(QString left, QString right) {
+
+    // Create the switcher
+    Switcher* switcher = new Switcher();
+    switcher->setObjectName("switcher");
+    QLabel* switcher_left = new QLabel(left);
+    switcher_left->setObjectName("switcher_left");
+    QLabel* switcher_right = new QLabel(right);
+    switcher_right->setObjectName("switcher_left");
+    ui->switcher_group->addWidget(switcher_left);
+    ui->switcher_group->addWidget(switcher);
+    ui->switcher_group->addWidget(switcher_right);
+
+
+    // Make home icon clickable
+    connect (switcher, SIGNAL(toggled()), this, SIGNAL(switcher_toggled())) ;
 }
 
 void Breadcrumb::add_item(const QString text, const char* slot, QObject* arg) {

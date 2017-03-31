@@ -30,10 +30,11 @@ void SectionView::refresh_cards() {
     add_card(add_btn);
     for(Section* section : *_course->get_sections()) {
         Card* new_section = new Card(section->_course->_name + "." + section->_name,
-                                     QString::number(section->_assignments->size()) + " assignment(s)",
+                                     QString::number(section->_students->size()) + " student(s) \n"
+                                     + QString::number(section->_assignments->size()) + " assignment(s)",
                                      section->_color, section);
         cards.push_back(new_section);
-        connect(new_section, SIGNAL(clicked(QObject *)), _parent, SLOT(show_assignments(QObject *)));
+        connect(new_section, SIGNAL(clicked(QObject *)), _parent, SLOT(show_students(QObject *)));
         add_card(new_section);
     }
 

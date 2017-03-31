@@ -4,19 +4,24 @@
 #include "listview.h"
 #include "ui_listview.h"
 
+#include "dashboard.h"
+
 class StudentView;
 
 class StudentView: public ListView
 {
+    Q_OBJECT
 public:
-    StudentView(QWidget* parent = 0, Controller* controller = nullptr);
+    StudentView(QWidget* parent = 0, QObject* section = nullptr, Controller* controller = nullptr);
 
 public slots:
     void refresh_cards() override;
     void save_new() override;
+    void show_assignments();
 
 private:
     Controller *_controller;
+    Section* _section;
 
 };
 

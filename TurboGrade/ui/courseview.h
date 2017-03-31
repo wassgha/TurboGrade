@@ -8,6 +8,7 @@ class CardsView;
 
 class CourseView: public CardsView
 {
+    Q_OBJECT
 public:
     CourseView(QWidget* parent = 0, Controller* controller = nullptr);
 

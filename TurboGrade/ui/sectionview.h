@@ -10,6 +10,7 @@ class CardsView;
 
 class SectionView: public CardsView
 {
+    Q_OBJECT
 public:
     SectionView(QWidget* parent = 0, QObject* course = nullptr, Controller* controller = nullptr);
 

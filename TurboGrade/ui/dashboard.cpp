@@ -107,3 +107,16 @@ void Dashboard::show_assignments(QObject* section) {
     ui->mainWidget->setCurrentWidget(assignments);
 
 }
+
+
+void Dashboard::show_students(QObject* section) {
+
+    if (assignments != nullptr) {
+        ui->mainWidget->removeWidget(students);
+        delete students;
+    }
+    students = new StudentView(this, section, _controller);
+    ui->mainWidget->addWidget(students);
+    ui->mainWidget->setCurrentWidget(students);
+
+}

@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QSignalMapper>
 
+#include "switcher.h"
+
 #include "ui_breadcrumb.h"
 #include "clickablelabel.h"
 
@@ -20,11 +22,15 @@ public:
     ~Breadcrumb();
     void add_item(const QString text, const char* slot, QObject* arg);
     void add_home();
+    void add_switcher(QString left, QString right);
 
 private:
     Ui::Breadcrumb *ui;
     std::vector<QLabel*> items;
     QWidget* _parent;
+
+signals:
+    void switcher_toggled();
 };
 
 #endif // BREADCRUMB_H

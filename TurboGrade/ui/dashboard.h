@@ -16,9 +16,14 @@
 #include "assignmentview.h"
 #include "studentview.h"
 
+class CardsView;
+class ListView;
+
+
 class CourseView;
 class SectionView;
 class AssignmentView;
+class StudentView;
 class GradeSubmission;
 
 namespace Ui {
@@ -35,6 +40,7 @@ public:
     CourseView *courses = nullptr;
     SectionView *sections = nullptr;
     AssignmentView *assignments = nullptr;
+    StudentView *students = nullptr;
     Controller *_controller = nullptr;
     GradeSubmission *grade_submission = nullptr;
     QFont roboto;
@@ -46,6 +52,7 @@ public slots:
     void show_courses();
     void show_sections(QObject* course);
     void show_assignments(QObject* section);
+    void show_students(QObject* section);
 
 private:
     Ui::Dashboard *ui;
