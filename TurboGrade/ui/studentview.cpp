@@ -37,7 +37,7 @@ void StudentView::refresh_cards() {
     add_card(add_btn);
     for(Student* student : *_section->_students) {
         Card* new_student = new Card(student->_name,
-                                    "Avg. Grade : ",
+                                    "Avg. Grade : 96%",
                                     student->_color, student);
         cards.push_back(new_student);
 //      connect(new_student, SIGNAL(clicked(QObject*)), _parent, SLOT(show_sections(QObject*)));

@@ -25,17 +25,17 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
 }
 
 Card {
-	height: 70px;
+	height: 75px;
 	width: 225px;
 	max-width: 225px;
-	max-height: 70px;
+	max-height: 75px;
 }
 
 #add_btn {
-	height: 70px;
+	height: 75px;
 	width: 225px;
 	max-width: 225px;
-	max-height: 70px;
+	max-height: 75px;
 	background: transparent;
 	padding : -3px;
 	color: rgb(174, 176, 176);
