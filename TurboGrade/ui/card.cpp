@@ -6,6 +6,7 @@ Card::Card(QString title, QString info, QString color, QObject* obj) :
     QWidget(0),
     ui(new Ui::Card)
 {
+    setCursor(Qt::PointingHandCursor);
     ui->setupUi(this);
     ui->title->setText(title);
     ui->info->setText(info);
