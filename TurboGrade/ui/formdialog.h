@@ -23,7 +23,7 @@ public:
     void add_field(QString type,
                    QString name,
                    QString label,
-                   QString placeholder);
+                   QString placeholder = "");
     QString val(QString name);
 
     Ui::FormDialog *ui;

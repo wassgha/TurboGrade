@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>144</height>
+    <height>161</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,12 +56,21 @@ QLineEdit::focus {
 	padding: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
-	background: white;
 	border-radius: 18px;
 	color: white;
 	background: #61b4ff;
 	width: 100px;
 	height: 18px;
+}
+
+#warning {
+	border:none;
+	text-transform: capitalize;
+	padding: 10px;
+	border-radius: 3px;
+	color: white;
+	background: #f39c12;
+	text-align: center;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -86,7 +95,20 @@ QLineEdit::focus {
     </spacer>
    </item>
    <item>
-    <layout class="QFormLayout" name="formLayout"/>
+    <layout class="QFormLayout" name="formLayout">
+     <property name="horizontalSpacing">
+      <number>-1</number>
+     </property>
+     <property name="verticalSpacing">
+      <number>20</number>
+     </property>
+     <property name="topMargin">
+      <number>20</number>
+     </property>
+     <property name="bottomMargin">
+      <number>20</number>
+     </property>
+    </layout>
    </item>
    <item>
     <spacer name="verticalSpacer_2">

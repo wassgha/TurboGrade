@@ -29,17 +29,32 @@ FormDialog::~FormDialog()
 
 void FormDialog::add_field(QString type, QString name,
                            QString label, QString placeholder) {
+
+    QWidget* field;
+
     if (type == "QLineEdit") {
 
-        QLineEdit* field = new QLineEdit();
-        field->setAttribute(Qt::WA_MacShowFocusRect, false);
-        field->setObjectName(name);
-        field->setPlaceholderText(placeholder);
-        _fields[name] = field;
-        _field_types[name] = type;
+        field = new QLineEdit();
+        dynamic_cast<QLineEdit*>(field)->setAttribute(Qt::WA_MacShowFocusRect, false);
+        dynamic_cast<QLineEdit*>(field)->setObjectName(name);
+        dynamic_cast<QLineEdit*>(field)->setPlaceholderText(placeholder);
         ui->formLayout->addRow(label, field);
 
+    } else if (type == "QLabel") {
+
+        field = new QLabel(label);
+        dynamic_cast<QLabel*>(field)->setAttribute(Qt::WA_MacShowFocusRect, false);
+        dynamic_cast<QLabel*>(field)->setObjectName(name);
+        ui->formLayout->addRow(field);
+
+    } else {
+
+        return;
+
     }
+
+    _fields[name] = field;
+    _field_types[name] = type;
 }
 
 QString FormDialog::val(QString name) {
@@ -49,6 +64,8 @@ QString FormDialog::val(QString name) {
         QString text = field->text();
         field->clear();
         return text;
+    } else {
+        return QString();
     }
 }
 

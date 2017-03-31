@@ -8,6 +8,8 @@ StudentView::StudentView(QWidget* parent, QObject* section, Controller* controll
     _section = (Section*)section;
 
     add_dialog = new FormDialog(this, "New Student");
+    add_dialog->add_field("QLabel", "warning", "Please be aware that students are added automatically when you import \n"
+                                               "submissions. Only manually add students if they do not have a submission.");
     add_dialog->add_field("QLineEdit", "name", "Student's name :", "John Appleseed");
     add_dialog->add_field("QLineEdit", "username", "Student's username :", "applesej");
     connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
