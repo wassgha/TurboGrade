@@ -26,7 +26,10 @@ Submission::Submission(int id, Assignment *assignment,
 
     // Submission comments
     _comments = new std::vector<Comment*>();
+    // Submission grades
+    _grades = new std::map<Criterion*, int>();
 
+    _controller->_gradeDB->load_all(this, _assignment->_rubric->_criteria);
     _controller->_commentDB->load_all(this);
 }
 
@@ -42,11 +45,56 @@ void Submission::add_comment(int id, QString filename,
     Comment *new_comment = new Comment(id, this, filename, criterion, text, grade, start_pos, end_pos, _controller);
 
     _comments->push_back(new_comment);
+
 }
+
+
+/**
+ * @brief Submission::add_grade adds a grade to a specific criterion,
+ * @param criterion the criterion
+ * @param grade the value to set the grade to
+ */
+void Submission::add_grade(Criterion *criterion, int grade){
+    _grades->erase(criterion);
+    _grades->emplace(std::make_pair(criterion, grade));
+    _controller->_gradeDB->add(criterion->_id, _id, grade);
+}
+
+/**
+ * @brief Submission::get_grades getter for the _grades map
+ * @return the _grades map containing Criterion, grade mappings
+ */
+std::map<Criterion*, int> *Submission::get_grades(){
+    return _grades;
+}
+
+/**
+ * @brief Submission::get_grade retrieves the grade for the given criterion
+ * @param criterion the criterion in question
+ * @return the grade for that criterion, -1 if non existant
+ */
+int Submission::get_grade(Criterion *criterion){
+    try {
+        if (!criterion->has_children()) {
+            return _grades->at(criterion);
+        }
+        int grade = 0;
+        for(Criterion* child : criterion->children()) {
+            grade += get_grade(child);
+        }
+        return grade;
+    }
+    catch (std::out_of_range& e) {
+        qDebug() << "Tried to access grade for criterion not in map.";
+        return -1;
+    }
+}
+
 
 Submission::~Submission()
 {
     for (Comment* comment : *_comments)
         delete comment;
     delete _comments;
+    delete _grades;
 }

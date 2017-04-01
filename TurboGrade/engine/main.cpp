@@ -43,10 +43,9 @@ int main(int argc, char *argv[])
     Submission* gharbiw_01 = gharbiw->add_submission(-1, bst_assignment);
     gharbiw_01->add_comment(-1, "main.java", bst_assignment->_rubric->get_criterion("Correctness"),
                             "You screwed up bro", -2, 20, 150);
-    controller->set_curr_submission(gharbiw_01);
-    controller->add_grade(bst_assignment->_rubric->get_criterion("Correctness"), 4);
-    controller->add_grade(bst_assignment->_rubric->get_criterion("Design"), 3);
-    controller->add_grade(bst_assignment->_rubric->get_criterion("JavaDoc"), 2);
+    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Correctness"), 4);
+    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Design"), 3);
+    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("JavaDoc"), 2);
 
     controller->show_courses();
     controller->show_rubrics();

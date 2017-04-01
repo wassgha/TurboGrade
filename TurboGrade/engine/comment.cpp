@@ -23,21 +23,27 @@ Comment::Comment(int id, Submission* submission,
     SHOW_WHERE;
 
     _controller = controller;
-
-    if (id == -1)
-        _id = _controller->_commentDB->add(submission->_id, filename,
-                                           criterion->_id, text, grade,
-                                           start_pos, end_pos);
-    else
-        _id = id;
-
+    _submission = submission;
     _filename = filename;
     _text = text;
     _grade = grade;
-    _submission = submission;
     _criterion = criterion;
     _start_pos = start_pos;
     _end_pos = end_pos;
+
+    if (id == -1) {
+        _id = _controller->_commentDB->add(submission->_id, filename,
+                                           criterion->_id, text, grade,
+                                           start_pos, end_pos);
+        _submission->add_grade(_criterion,
+                  (
+                  _submission->get_grade(_criterion) == -1 ?
+                        0 : _submission->get_grade(_criterion)
+                   ) + _grade);
+    } else {
+        _id = id;
+    }
+
 }
 
 Comment::~Comment()

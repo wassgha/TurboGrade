@@ -31,7 +31,11 @@ public:
     // Destructor
     ~Criterion();
     // Add sub-criterion
-    void add_child(Criterion* child);
+    Criterion* add_child(int id, const QString name, Criterion* parent, int out_of);
+    // Returns whether this criterion has children or not
+    bool has_children();
+    // Returns this criterion's children
+    std::vector<Criterion*> children();
     // Find a criterion within the current hierarchy by name
     Criterion* find_criterion(const QString name);
     // Find a criterion within the current hierarchy by table id

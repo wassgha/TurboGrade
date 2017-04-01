@@ -29,12 +29,14 @@ Rubric::~Rubric()
  */
 Criterion* Rubric::add_criterion(int id, const QString name, Criterion* parent, int out_of) {
 
-    Criterion *new_criterion = new Criterion(id, name, parent, out_of, this, _controller);
+    Criterion *new_criterion = nullptr;
 
-    if (parent != nullptr)
-        parent->add_child(new_criterion);
-    else
+    if (parent != nullptr) {
+        new_criterion = parent->add_child(id, name, parent, out_of);
+    } else {
+        new_criterion = new Criterion(id, name, parent, out_of, this, _controller);
         _criteria->push_back(new_criterion);
+    }
 
     return new_criterion;
 }

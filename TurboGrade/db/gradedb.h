@@ -28,6 +28,9 @@ public:
     // Load all grades to controller for the submission and criterion
     void load_all(Submission* submission, std::vector<Criterion*> *criteria);
 
+    // Load grade for a single criterion
+    void load_criterion(Submission* submission, Criterion* criterion);
+
     //Controller
     Controller *_controller;
 };

@@ -34,8 +34,6 @@ Controller::Controller(bool drop_tables, QString dbname)
     // Initialize containers
     _courses = new std::vector<Course*>();
     _assignments = new std::vector<Assignment*>();
-    _grades = new std::map<Criterion*, int>();
-    _criteria = new std::vector<Criterion*>();
 
     // Load from database
     _assignmentDB->load_all();
@@ -59,11 +57,6 @@ Controller::~Controller()
 
     for(Assignment* assignment:*_assignments)
         delete assignment;
-
-    for(std::pair<Criterion*, int> grade : *_grades){
-        delete grade.first;
-    }
-    delete _grades;
 
 }
 
@@ -133,10 +126,9 @@ void Controller::show_courses() {
                                      << " about " << comment->_criterion->_name.toStdString()
                                      <<std::endl;
                         }
-                        set_curr_submission(submission);
                         for(Criterion *criterion : *submission->_assignment->_rubric->_criteria) {
                             std::cout<<"                * Grade on " << criterion->_name.toStdString() << ":";
-                            std::cout<< get_grade(criterion) << " out of " << criterion->_out_of <<" "<<std::endl;
+                            std::cout<< submission->get_grade(criterion) << " out of " << criterion->_out_of <<" "<<std::endl;
                         }
                     }
                 }
@@ -201,99 +193,6 @@ std::vector<Assignment*>* Controller::get_assignments() {
 
     return _assignments;
 
-}
-
-/**************************************
- *        Grading Operations          *
- **************************************/
-
-/**
- * @brief Controller::set_curr_submission sets the current submission and
- * refreshes the _grades map with the new information regarding the submission
- * @param submission the new submission
- */
-void Controller::set_curr_submission(Submission *submission){
-    _curr_submission = submission;
-    refresh_grades_map(submission);
-}
-
-/**
- * @brief Controller::refresh_grades_map refreshes the _grades map and the
- * _criteria vec. Here we reconcile the professor's overrides and the
- * aggregation of grading points from comments
- * @param submission the submission to refresh with
- */
-void Controller::refresh_grades_map(Submission *submission){
-    //TODO CLEANUP OLD CRITERIA -> GRADES MAPPING
-    _grades->clear();
-    //Refreshes the _criteria map
-    refresh_criteria_vec(submission);
-
-    //load all of the grades from the db... If a grade has been overwritten in db,
-    //it will overwrite the expected grade here
-    _gradeDB->load_all(submission, _criteria);
-
-    //If a grade doesn't exist the initialize it with a score of 0
-    for(Criterion* criterion: *_criteria){
-        if (get_grade(criterion) == -1)
-            add_grade(criterion,0);
-    }
-
-    //For each comment, update the grade value in the table to its current value,
-    //plus the comments grade value. Since we start at 0, this computes final grade
-    std::vector<Comment*> *com = submission->_comments;
-    for(Comment* comment : *com){
-        Criterion *crit = comment->_criterion;
-        add_grade(crit, get_grade(crit) + comment->_grade);
-    }
-
-}
-
-/**
- * @brief Controller::refresh_criteria_vec refreshes the _criteria vector using
- * the Submissions rubric
- * @param submission the submission to refresh with
- */
-void Controller::refresh_criteria_vec(Submission *submission){
-    //refresh the critera vector to contain the vector for current submission
-    _criteria = submission->_assignment->_rubric->_criteria;
-}
-
-/**
- * @brief Controller::add_grade adds a grade to a specific criterion,
- * ASSUMES WE KNOW THE SUBMISSION
- * @param criterion the criterion
- * @param grade the value to set the grade to
- */
-void Controller::add_grade(Criterion *criterion, int grade){
-    std::cout<<"Insert grade "<<grade<<" for "<< criterion->_name.toStdString()<<std::endl;
-    _grades->erase(criterion);
-    _grades->emplace(std::make_pair(criterion, grade));
-    _gradeDB->add(criterion->_id, _curr_submission->_id, grade);
-}
-
-/**
- * @brief Controller::get_grades getter for the _grades map
- * @return the _grades map containing Criterion, grade mappings
- */
-std::map<Criterion*, int> *Controller::get_grades(){
-    return _grades;
-}
-
-/**
- * @brief Controller::get_grade retrieves the grade for the given criterion
- * ASSUMES WE KNOW THE SUBMISSION
- * @param criterion the criterion in question
- * @return the grade for that criterion, -1 if non existant
- */
-int Controller::get_grade(Criterion *criterion){
-    try {
-        return _grades->at(criterion);
-    }
-    catch (std::out_of_range& e) {
-        qDebug() << "Tried to access grade for criterion not in map.";
-        return -1;
-    }
 }
 
 /**************************************

@@ -38,9 +38,32 @@ Criterion::~Criterion()
  * @param child a pointer to the child criterion
  */
 
-void Criterion::add_child(Criterion *child)
+Criterion* Criterion::add_child(int id, const QString name, Criterion* parent, int out_of)
 {
-    _sub_criteria->push_back(child);
+    if (_parent == nullptr) {
+        Criterion* new_criterion = new Criterion(id, name, parent, out_of, _rubric, _controller);
+        _sub_criteria->push_back(new_criterion);
+        return new_criterion;
+    } else {
+        qDebug()<<"Can't add child criterion to a criterion that has a parent.";
+        return nullptr;
+    }
+}
+
+/**
+ * @brief Criterion::has_children
+ * @return whether this criterion has children or not
+ */
+bool Criterion::has_children() {
+    return !_sub_criteria->empty();
+}
+
+/**
+ * @brief Criterion::children
+ * @return this criterion's children criteria
+ */
+std::vector<Criterion*> Criterion::children() {
+    return *_sub_criteria;
 }
 
 /**

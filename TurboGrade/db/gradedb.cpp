@@ -75,22 +75,39 @@ int GradeDB::select(int rubric_id, int submission_id){
  * @param criteria the set of criterion
  */
 void GradeDB::load_all(Submission *submission, std::vector<Criterion*>* criteria){
-    int submission_id = submission->_id;
     for(Criterion *criterion : *criteria){
-        QSqlQuery query(db);
-        int rubric_id = criterion->_id;
-        query.prepare("SELECT * FROM grade WHERE submission = ? AND rubric = ?");
-        query.addBindValue(submission_id);
-        query.addBindValue(rubric_id);
-        // Execute the query
-        if (!query.exec()) {
-            qDebug() << "Failed to select from table 'grades' (load_all)" << endl << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
-            return;
-        }
-
-        int grade_field = query.record().indexOf("score");
-        while(query.next()) {
-            _controller->add_grade(criterion,query.value(grade_field).toInt());
+        load_criterion(submission, criterion);
+        if (criterion->has_children()) {
+            for (Criterion *child : criterion->children()) {
+                load_criterion(submission, child);
+            }
         }
     }
+}
+
+void GradeDB::load_criterion(Submission *submission, Criterion* criterion) {
+
+    int submission_id = submission->_id;
+
+    QSqlQuery query(db);
+    int rubric_id = criterion->_id;
+    query.prepare("SELECT * FROM grade WHERE submission = ? AND rubric = ?");
+    query.addBindValue(submission_id);
+    query.addBindValue(rubric_id);
+    // Execute the query
+    if (!query.exec()) {
+        qDebug() << "Failed to select from table 'grades' (load_all)" << endl << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
+        return;
+    }
+
+    int grade_field = query.record().indexOf("score");
+    while(query.next()) {
+        submission->add_grade(criterion,query.value(grade_field).toInt());
+    }
+
+
+    //If a grade still doesn't exist the initialize it with a score of 0
+    if (submission->get_grade(criterion) == -1)
+        submission->add_grade(criterion,0);
+
 }

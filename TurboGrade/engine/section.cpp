@@ -22,6 +22,7 @@ Section::Section(int id, QString name, Course* course, Controller* controller)
 
     _color = _controller->rand_color();
 
+
     _controller->_assignmentDB->load_all(this);
     _controller->_studentDB->load_all(this);
 }
