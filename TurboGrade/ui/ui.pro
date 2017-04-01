@@ -61,7 +61,8 @@ SOURCES += main.cpp\
     listview.cpp \
     studentview.cpp \
     switcher.cpp \
-    formdialog.cpp
+    formdialog.cpp \
+    rubricview.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -101,7 +102,8 @@ HEADERS  +=\
     listview.h \
     studentview.h \
     switcher.h \
-    formdialog.h
+    formdialog.h \
+    rubricview.h
 
 FORMS    += \
     commentpopup.ui \
@@ -113,7 +115,8 @@ FORMS    += \
     cardsview.ui \
     breadcrumb.ui \
     listview.ui \
-    formdialog.ui
+    formdialog.ui \
+    rubricview.ui
 
 RESOURCES += \
     resources.qrc
