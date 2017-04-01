@@ -35,7 +35,11 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
         return -1;
     }
 
-    return query.lastInsertId().toInt();
+    int last_id = query.lastInsertId().toInt();
+
+    query.finish();
+
+    return last_id;
 }
 
 /**
@@ -102,12 +106,17 @@ void GradeDB::load_criterion(Submission *submission, Criterion* criterion) {
 
     int grade_field = query.record().indexOf("score");
     while(query.next()) {
+        std::cout<<"Loading grade "<<std::endl;
         submission->add_grade(criterion,query.value(grade_field).toInt());
     }
 
 
     //If a grade still doesn't exist the initialize it with a score of 0
-    if (submission->get_grade(criterion) == -1)
+    if (submission->get_grade(criterion) == -1) {
+        std::cout<<"Inserting empty grade "<<std::endl;
         submission->add_grade(criterion,0);
+    }
+
+    query.finish();
 
 }

@@ -9,6 +9,8 @@ Dashboard::Dashboard(QWidget *parent) :
 
     setWindowTitle("TurboGrade Dashboard");
     setAttribute(Qt::WA_StyledBackground, true);
+
+    // Use new Controller(true) to drop tables
     _controller = new Controller();
 
 //    Course* cs105 = _controller->add_course(-1, "CS 105");
@@ -27,7 +29,6 @@ Dashboard::Dashboard(QWidget *parent) :
 //    cs105_01->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS105_01");
 
 
-
 //    bst_assignment->_rubric->add_criterion(-1, "Correctness", NULL, 10);
 //    bst_assignment->_rubric->add_criterion(-1, "Design", NULL, 5);
 //    Criterion* comments = bst_assignment->_rubric->add_criterion(-1, "Comments", NULL, 2);
@@ -37,6 +38,9 @@ Dashboard::Dashboard(QWidget *parent) :
 //    Submission* gharbiw_01 = gharbiw->add_submission(-1, bst_assignment);
 //    gharbiw_01->add_comment(-1, "main.java", bst_assignment->_rubric->get_criterion("Correctness"),
 //                            "You screwed up bro", -2, 20, 150);
+//    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Correctness"), 4);
+//    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Design"), 3);
+//    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("JavaDoc"), 2);
 
     int id = QFontDatabase::addApplicationFont(":/fonts/res/Roboto-Regular.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
