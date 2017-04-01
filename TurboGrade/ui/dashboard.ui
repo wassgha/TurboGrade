@@ -17,6 +17,19 @@
    <string notr="true">QWidget#Dashboard {
 	background: #434653;
 }
+
+#network_indicator {
+	background: rgb(36, 255, 6);
+	width: 6px;
+	height: 6px;
+	min-width: 6px;
+	min-height: 6px;
+	max-width: 6px;
+	max-height: 6px;
+	border-radius: 3px;
+	margin: 5px;
+}
+
 #add {
 	padding: 10px;
 	padding-left: 15px;
@@ -148,6 +161,13 @@
       <widget class="QLabel" name="last_synced">
        <property name="text">
         <string>Last synced : 5 seconds ago</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="network_indicator">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>
