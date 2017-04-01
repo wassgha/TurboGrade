@@ -8,6 +8,8 @@
  * as a parent to all table classes
  */
 
+#include "../tools/objectidentifier.h"
+
 #include <iostream>
 #include <QMessageBox>
 #include <QSqlDatabase>
@@ -15,7 +17,7 @@
 #include <QSqlQuery>
 #include <QtSql>
 
-class DBEngine
+class DBEngine: public ObjectIdentifier
 {
 public:
     // Constructor

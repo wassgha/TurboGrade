@@ -22,6 +22,9 @@ public:
     // Adds a row to the table
     int add(int rubric_id, int submission_id, int grade);
 
+    // Updates a row in the table
+    int update(int rubric_id, int submission_id, int grade);
+
     // Gets row id matching rubric and submission
     int select(int rubric_id, int submission_id);
 

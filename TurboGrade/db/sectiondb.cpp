@@ -16,6 +16,8 @@ SectionDB::~SectionDB() {
  */
 int SectionDB::add(int course_id, const QString name) {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO section (id, course_id, name) "
@@ -28,7 +30,10 @@ int SectionDB::add(int course_id, const QString name) {
         return false;
     }
 
-    return query.lastInsertId().toInt();
+    int last_insert_id = query.lastInsertId().toInt();
+    query.finish();
+
+    return last_insert_id;
 }
 
 
@@ -70,6 +75,8 @@ int SectionDB::select(const QString course_name, const QString name) {
  */
 void SectionDB::load_all(Course *course) {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("SELECT section.id AS section_id, section.name AS section_name"
@@ -93,4 +100,6 @@ void SectionDB::load_all(Course *course) {
                             query.value(section_name_field).toString());
 
     }
+
+    query.finish();
 }

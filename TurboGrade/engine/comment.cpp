@@ -36,7 +36,7 @@ Comment::Comment(int id, Submission* submission,
                                            criterion->_id, text, grade,
                                            start_pos, end_pos);
         std::cout<<"Adjusting grade for comment"<<std::endl;
-        _submission->add_grade(_criterion,
+        _submission->update_grade(_criterion,
                   (
                   _submission->get_grade(_criterion) == -1 ?
                         0 : _submission->get_grade(_criterion)

@@ -26,6 +26,8 @@ RubricDB::~RubricDB() {
  */
 int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id, int out_of) {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO rubric (id, name, assignment, parent, grade_out_of) "
@@ -40,7 +42,10 @@ int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id
         return false;
     }
 
-    return query.lastInsertId().toInt();
+    int last_insert_id = query.lastInsertId().toInt();
+    query.finish();
+
+    return last_insert_id;
 }
 
 /**
@@ -81,6 +86,8 @@ int RubricDB::select(int assignment_id, const QString name) {
  */
 void RubricDB::load_parent_criteria(Rubric *rubric) {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("SELECT "
@@ -107,6 +114,8 @@ void RubricDB::load_parent_criteria(Rubric *rubric) {
     while(query.next()) {
         rubric->add_criterion(query.value(criterion_id_field).toInt(), query.value(criterion_name_field).toString(), NULL, query.value(out_of_field).toInt());
     }
+
+    query.finish();
 }
 
 
@@ -116,6 +125,8 @@ void RubricDB::load_parent_criteria(Rubric *rubric) {
  * criteria records related to a parent criterion
  */
 void RubricDB::load_sub_criteria(Criterion *criterion) {
+
+    SHOW_WHERE;
 
     QSqlQuery query(db);
 
@@ -141,4 +152,6 @@ void RubricDB::load_sub_criteria(Criterion *criterion) {
     while(query.next()) {
         criterion->_rubric->add_criterion(query.value(criterion_id_field).toInt(), query.value(criterion_name_field).toString(), criterion, query.value(out_of_field).toInt());
     }
+
+    query.finish();
 }

@@ -56,8 +56,11 @@ public:
     //returns map of all criterion and their corresp. grades
     std::map<Criterion*, int> *get_grades();
 
-    //adds a grade to the map, adjusts it if already in map
-    void add_grade(Criterion* criterion, int grade);
+    //adds a grade to the map
+    void add_grade(Criterion* criterion, int grade, bool load = false);
+
+    //updates a grade in the map
+    void update_grade(Criterion* criterion, int grade, bool load = false);
 
     //retrieves the grade for the criterion on the current submission
     int get_grade(Criterion* criterion);

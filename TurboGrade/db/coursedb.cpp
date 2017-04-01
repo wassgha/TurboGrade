@@ -26,7 +26,10 @@ int CourseDB::add(const QString name) {
         return -1;
     }
 
-    return query.lastInsertId().toInt();
+    int last_insert_id = query.lastInsertId().toInt();
+    query.finish();
+
+    return last_insert_id;
 }
 
 
@@ -37,6 +40,8 @@ int CourseDB::add(const QString name) {
  * @return the resulting ID
  */
 int CourseDB::select(const QString name) {
+
+    SHOW_WHERE;
 
     QSqlQuery query(db);
 
@@ -65,6 +70,8 @@ int CourseDB::select(const QString name) {
  */
 void CourseDB::load_all() {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("SELECT * FROM course");
@@ -80,5 +87,7 @@ void CourseDB::load_all() {
     while(query.next()) {
         _controller->add_course(query.value(id_field).toInt(), query.value(name_field).toString());
     }
+
+    query.finish();
 }
 

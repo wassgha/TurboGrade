@@ -29,7 +29,9 @@ Submission::Submission(int id, Assignment *assignment,
     // Submission grades
     _grades = new std::map<Criterion*, int>();
 
+    std::cout<<"Loading grades..";
     _controller->_gradeDB->load_all(this, _assignment->_rubric->_criteria);
+    std::cout<<"Loading comments..";
     _controller->_commentDB->load_all(this);
 }
 
@@ -54,10 +56,23 @@ void Submission::add_comment(int id, QString filename,
  * @param criterion the criterion
  * @param grade the value to set the grade to
  */
-void Submission::add_grade(Criterion *criterion, int grade){
+void Submission::add_grade(Criterion *criterion, int grade, bool load){
     _grades->erase(criterion);
     _grades->emplace(std::make_pair(criterion, grade));
-    _controller->_gradeDB->add(criterion->_id, _id, grade);
+    if (!load)
+        _controller->_gradeDB->add(criterion->_id, _id, grade);
+}
+
+/**
+ * @brief Submission::update_grade updates the grade for a specific criterion,
+ * @param criterion the criterion
+ * @param grade the value to set the grade to
+ */
+void Submission::update_grade(Criterion *criterion, int grade, bool load){
+    _grades->erase(criterion);
+    _grades->emplace(std::make_pair(criterion, grade));
+    if (!load)
+        _controller->_gradeDB->update(criterion->_id, _id, grade);
 }
 
 /**

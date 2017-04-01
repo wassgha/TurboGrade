@@ -24,6 +24,8 @@ StudentDB::~StudentDB() {
  */
 int StudentDB::add(int section_id, const QString name, const QString username) {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO student (id, section_id, name, username) "
@@ -37,7 +39,10 @@ int StudentDB::add(int section_id, const QString name, const QString username) {
         return false;
     }
 
-    return query.lastInsertId().toInt();
+    int last_insert_id = query.lastInsertId().toInt();
+    query.finish();
+
+    return last_insert_id;
 }
 
 
@@ -83,6 +88,9 @@ int StudentDB::select(const QString course_name, const QString section_name, con
  * to the controller
  */
 void StudentDB::load_all(Section* section) {
+
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("SELECT student.name, student.username, student.id "
@@ -106,4 +114,6 @@ void StudentDB::load_all(Section* section) {
                              query.value(name_field).toString(),
                              query.value(username_field).toString());
     }
+
+    query.finish();
 }

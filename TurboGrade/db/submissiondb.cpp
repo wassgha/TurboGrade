@@ -24,6 +24,8 @@ SubmissionDB::~SubmissionDB() {
  */
 int SubmissionDB::add(int student_id, int assignment_id) {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO submission (id, student, assignment) "
@@ -36,7 +38,10 @@ int SubmissionDB::add(int student_id, int assignment_id) {
         return false;
     }
 
-    return query.lastInsertId().toInt();
+    int last_insert_id = query.lastInsertId().toInt();
+    query.finish();
+
+    return last_insert_id;
 }
 
 /**
@@ -47,6 +52,8 @@ int SubmissionDB::add(int student_id, int assignment_id) {
  * @return the resulting ID
  */
 int SubmissionDB::select(int student_id, int assignment_id) {
+
+    SHOW_WHERE;
 
     QSqlQuery query(db);
 
@@ -76,6 +83,9 @@ int SubmissionDB::select(int student_id, int assignment_id) {
  * for a specific student
  */
 void SubmissionDB::load_all(Student *student) {
+
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("SELECT "
@@ -100,4 +110,7 @@ void SubmissionDB::load_all(Student *student) {
         student->add_submission(query.value(submission_id_field).toInt(),
                                 _controller->get_assignment(query.value(assignment_name_field).toString()));
     }
+
+    query.finish();
+
 }

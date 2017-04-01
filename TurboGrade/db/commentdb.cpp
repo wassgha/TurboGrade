@@ -27,6 +27,8 @@ int CommentDB::add(int submission_id, QString filename,
                    int grade, int start_pos,
                    int end_pos) {
 
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("INSERT INTO comment (id, submission, filename, "
@@ -46,7 +48,10 @@ int CommentDB::add(int submission_id, QString filename,
         return false;
     }
 
-    return query.lastInsertId().toInt();
+    int last_insert_id = query.lastInsertId().toInt();
+    query.finish();
+
+    return last_insert_id;
 }
 
 /**
@@ -55,6 +60,9 @@ int CommentDB::add(int submission_id, QString filename,
  * @param submission the submission object
  */
 void CommentDB::load_all(Submission *submission) {
+
+    SHOW_WHERE;
+
     QSqlQuery query(db);
 
     query.prepare("SELECT * "
@@ -86,4 +94,5 @@ void CommentDB::load_all(Submission *submission) {
                                 query.value(start_pos_field).toInt(),
                                 query.value(end_pos_field).toInt());
     }
+    query.finish();
 }
