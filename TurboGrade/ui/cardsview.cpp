@@ -19,9 +19,11 @@ CardsView::~CardsView()
     for (Card* card: cards) {
         delete card;
     }
-    delete ui;
+    if (add_dialog != nullptr)
+        delete add_dialog;
     if (_breadcrumb != nullptr)
         delete _breadcrumb;
+    delete ui;
 }
 
 void CardsView::add_card(QWidget *card) {

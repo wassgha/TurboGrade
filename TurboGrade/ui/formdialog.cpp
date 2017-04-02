@@ -22,12 +22,10 @@ FormDialog::FormDialog(QWidget *parent, QString title) :
 
 FormDialog::~FormDialog()
 {
-    for(std::pair<QString, QWidget*> field: _fields)
-        delete field.second;
     delete ui;
 }
 
-void FormDialog::add_field(QString type, QString name,
+QWidget* FormDialog::add_field(QString type, QString name,
                            QString label, QString placeholder) {
 
     QWidget* field;
@@ -47,14 +45,51 @@ void FormDialog::add_field(QString type, QString name,
         dynamic_cast<QLabel*>(field)->setObjectName(name);
         ui->formLayout->addRow(field);
 
+    } else if (type == "Separator") {
+
+        field = new QFrame();
+        dynamic_cast<QFrame*>(field)->setFrameShape(QFrame::HLine);
+        dynamic_cast<QFrame*>(field)->setFrameShadow(QFrame::Sunken);
+        dynamic_cast<QFrame*>(field)->setObjectName(name);
+        ui->formLayout->addRow(field);
+
+    } else if (type == "QComboBox") {
+
+        field = new QComboBox();
+        dynamic_cast<QComboBox*>(field)->setObjectName(name);
+        ui->formLayout->addRow(label, field);
+
+    } else if (type == "QTextEdit") {
+
+        field = new QTextEdit();
+        dynamic_cast<QTextEdit*>(field)->setAttribute(Qt::WA_MacShowFocusRect, false);
+        dynamic_cast<QTextEdit*>(field)->setObjectName(name);
+        dynamic_cast<QTextEdit*>(field)->setPlaceholderText(placeholder);
+        dynamic_cast<QTextEdit*>(field)->setStyleSheet("#" + name + " {"
+                                                        "max-height: 45px;"
+                                                        "}");
+        ui->formLayout->addRow(label, field);
+
+    } else if (type == "Title") {
+
+        field = new QLabel(label);
+        dynamic_cast<QLabel*>(field)->setObjectName(name);
+        dynamic_cast<QLabel*>(field)->setStyleSheet("#" + name + " {"
+                                                        "text-transform: capitalize;"
+                                                        "font-size: 16px;"
+                                                        "font-weight: bold;"
+                                                        "}");
+        ui->formLayout->addRow(field);
+
     } else {
 
-        return;
+        return nullptr;
 
     }
 
     _fields[name] = field;
     _field_types[name] = type;
+    return field;
 }
 
 QString FormDialog::val(QString name) {
@@ -64,6 +99,15 @@ QString FormDialog::val(QString name) {
         QString text = field->text();
         field->clear();
         return text;
+    } else if (_field_types[name] == "QTextEdit") {
+        QTextEdit* field = findChild<QTextEdit*>(name);
+        QString text = field->toPlainText();
+        field->clear();
+        return text;
+    } else if (_field_types[name] == "QComboBox") {
+        QComboBox* field = findChild<QComboBox*>(name);
+        field->setCurrentIndex(0);
+        return "";
     } else {
         return QString();
     }

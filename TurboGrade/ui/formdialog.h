@@ -20,9 +20,9 @@ public:
     explicit FormDialog(QWidget *parent = 0, QString title = "New");
     ~FormDialog();
 
-    void add_field(QString type,
-                   QString name,
-                   QString label,
+    QWidget* add_field(QString type,
+                   QString name = "obj",
+                   QString label = "",
                    QString placeholder = "");
     QString val(QString name);
 

@@ -1,7 +1,7 @@
 #include "rubricview.h"
 #include "ui_rubricview.h"
 
-RubricView::RubricView(QWidget *parent) :
+RubricView::RubricView(QWidget *parent, Assignment *assignment) :
     QWidget(parent),
     ui(new Ui::RubricView)
 {
@@ -9,6 +9,8 @@ RubricView::RubricView(QWidget *parent) :
     ui->setupUi(this);
 
     setAttribute(Qt::WA_StyledBackground, true);
+
+    ui->title->setText(assignment->_name);
 
     ui->add_btn->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui->spinBox->setAttribute(Qt::WA_MacShowFocusRect, false);

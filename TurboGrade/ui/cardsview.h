@@ -36,7 +36,7 @@ protected:
     int cur_row = 0;
     std::vector<Card*> cards;
     QPushButton *add_btn;
-    FormDialog *add_dialog;
+    FormDialog *add_dialog = nullptr;
     Breadcrumb* _breadcrumb = nullptr;
     QWidget* _parent = nullptr;
 

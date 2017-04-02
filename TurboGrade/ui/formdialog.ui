@@ -29,13 +29,13 @@ QLabel {
 	font-weight: bold;
 }
 
-QLineEdit {
+QLineEdit, QTextEdit {
 	border: none;
 	border-bottom: 2px solid rgba(0,0,0,10);
 	outline:none;
 }
 
-QLineEdit::focus {
+QLineEdit::focus, QTextEdit::focus {
 	border: none;
 	border-bottom: 2px solid lightgray;
 	outline:none;

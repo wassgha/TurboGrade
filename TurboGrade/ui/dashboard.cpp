@@ -51,7 +51,6 @@ Dashboard::Dashboard(QWidget *parent) :
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
     grade_submission = new GradeSubmission(0, _controller);
-    grade_submission->show();
 
     courses = new CourseView(this, _controller);
 
