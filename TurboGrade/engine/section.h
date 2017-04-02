@@ -37,11 +37,11 @@ public:
     // Add a student to the section
     Student* add_student(int id, const QString name, const QString username);
     // Add an assignment to the section
-    std::pair<Assignment*, QString> add_assignment(Assignment* assignment, QString folder, bool load = false);
+    Assignment* add_assignment(Assignment* assignment, bool load = false);
     // Find a student in the section
     Student* get_student(const QString username);
     // Find an assignment in the section
-    std::pair<Assignment*, QString> get_assignment(const QString name);
+    Assignment* get_assignment(const QString name);
 
     // Section id
     int _id;
@@ -52,7 +52,7 @@ public:
     // Section students
     std::vector<Student*> *_students;
     // Section assignments (assignment and folder)
-    std::vector<std::pair<Assignment*, QString>> *_assignments;
+    std::vector<Assignment*> *_assignments;
     // Color (for UI)
     QString _color;
     // Controller

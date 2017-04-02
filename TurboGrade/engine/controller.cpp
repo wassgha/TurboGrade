@@ -132,8 +132,8 @@ void Controller::show_courses() {
                         }
                     }
                 }
-                for(std::pair<Assignment*, QString> assignment : *section->_assignments)
-                    std::cout<<"        *"<< (assignment.first->_name).toStdString() <<std::endl;
+                for(Assignment* assignment : *section->_assignments)
+                    std::cout<<"        *"<< (assignment->_name).toStdString() <<std::endl;
             }
     }
 }

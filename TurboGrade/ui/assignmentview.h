@@ -25,6 +25,8 @@ public slots:
     void add_existing(int id);
 
 private:
+    void refresh_combobox();
+
     Controller *_controller;
     Section* _section;
     RubricView *_rubric_view = nullptr;

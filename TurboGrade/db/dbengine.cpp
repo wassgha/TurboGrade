@@ -52,7 +52,6 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     sql_query("CREATE TABLE IF NOT EXISTS assignment_section (id INTEGER PRIMARY KEY, \
                assignment INTEGER,\
                section INTEGER,\
-               folder TEXT,\
                FOREIGN KEY(assignment) REFERENCES assignment(id),\
                FOREIGN KEY(section) REFERENCES section(id))");
 

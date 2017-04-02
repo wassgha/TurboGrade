@@ -26,7 +26,7 @@ public:
     // Adds a row to the table
     bool add(const QString name, const QString objective);
     // Link assignment to section
-    bool link(int assignment_id, int section_id, const QString folder);
+    bool link(int assignment_id, int section_id);
     // Gets row id matching name
     int select(const QString name);
     // Load to controller

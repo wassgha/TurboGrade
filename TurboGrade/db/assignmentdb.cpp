@@ -40,20 +40,17 @@ bool AssignmentDB::add(const QString name, const QString objective) {
  * @brief AssignmentDB::link Links an assignment to a section
  * @param section_id the id of the section where the assignment will be linked
  * @param assignment_id the id of the assignment to be linked
- * @param folder the path to the folder where submissions are stored
  * @return true if the query succeded
  */
 bool AssignmentDB::link(int assignment_id,
-                        int section_id,
-                        const QString folder) {
+                        int section_id) {
 
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO assignment_section (id, assignment, section, folder) "
-                  "VALUES (NULL, ?, ?, ?)");
+    query.prepare("INSERT INTO assignment_section (id, assignment, section) "
+                  "VALUES (NULL, ?, ?)");
     query.addBindValue(assignment_id);
     query.addBindValue(section_id);
-    query.addBindValue(folder);
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'assignment_section' table" << endl << "SQL ERROR: " << query.lastError();
@@ -157,12 +154,10 @@ void AssignmentDB::load_all(Section *section) {
     }
 
     int assignment_id_field = query.record().indexOf("assignment");
-    int folder_field = query.record().indexOf("folder");
 
     while(query.next()) {
 
         section->add_assignment(_controller->get_assignment(query.value(assignment_id_field).toInt()),
-                                query.value(folder_field).toString(),
                                 true);
 
     }
