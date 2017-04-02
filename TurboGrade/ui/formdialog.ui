@@ -63,14 +63,28 @@ QLineEdit::focus, QTextEdit::focus {
 	height: 18px;
 }
 
-#warning {
+#warning, #info {
 	border:none;
 	text-transform: capitalize;
 	padding: 10px;
 	border-radius: 3px;
 	color: white;
-	background: #f39c12;
 	text-align: center;
+}
+
+#warning {
+	background: #f39c12;
+}
+
+#info {
+	background: #61b4ff;
+}
+
+#select_folder {
+	background: white;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	padding: 10px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">

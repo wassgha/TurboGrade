@@ -114,12 +114,25 @@ void Dashboard::show_assignments(QObject* section) {
 
 void Dashboard::show_students(QObject* section) {
 
-    if (assignments != nullptr) {
+    if (students != nullptr) {
         ui->mainWidget->removeWidget(students);
         delete students;
     }
     students = new StudentView(this, section, _controller);
     ui->mainWidget->addWidget(students);
     ui->mainWidget->setCurrentWidget(students);
+
+}
+
+
+void Dashboard::show_submissions(QObject* section, QObject* assignment) {
+
+    if (submissions != nullptr) {
+        ui->mainWidget->removeWidget(submissions);
+        delete submissions;
+    }
+    submissions = new SubmissionView(this, section, assignment, _controller);
+    ui->mainWidget->addWidget(submissions);
+    ui->mainWidget->setCurrentWidget(submissions);
 
 }

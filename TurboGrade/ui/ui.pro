@@ -62,7 +62,8 @@ SOURCES += main.cpp\
     studentview.cpp \
     switcher.cpp \
     formdialog.cpp \
-    rubricview.cpp
+    rubricview.cpp \
+    submissionview.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -103,7 +104,8 @@ HEADERS  +=\
     studentview.h \
     switcher.h \
     formdialog.h \
-    rubricview.h
+    rubricview.h \
+    submissionview.h
 
 FORMS    += \
     commentpopup.ui \

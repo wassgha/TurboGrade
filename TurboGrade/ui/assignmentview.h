@@ -22,6 +22,7 @@ public slots:
     void refresh_cards() override;
     void add_new();
     void show_students();
+    void show_submissions(QObject* assignment);
     void add_existing(int id);
 
 private:

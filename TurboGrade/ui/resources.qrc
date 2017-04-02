@@ -20,6 +20,7 @@
         <file>res/delete.png</file>
         <file>res/circle.png</file>
         <file>res/add.png</file>
+        <file>res/folder.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

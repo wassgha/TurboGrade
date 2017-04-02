@@ -5,6 +5,7 @@
 #include "../engine/controller.h"
 
 #include <QDialog>
+#include <QFileDialog>
 #include <QLineEdit>
 #include <QTextEdit>
 
@@ -30,10 +31,14 @@ public:
     std::map<QString, QWidget*> _fields;
     std::map<QString, QString> _field_types;
 
+    QString _data = "";
+
 private slots:
     void on_cancel_btn_clicked();
 
     void on_ok_btn_clicked();
+
+    void select_folder();
 
 signals:
     void submit();

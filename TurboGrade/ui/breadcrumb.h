@@ -20,7 +20,7 @@ class Breadcrumb : public QWidget
 public:
     explicit Breadcrumb(QWidget *parent = 0);
     ~Breadcrumb();
-    void add_item(const QString text, const char* slot, QObject* arg);
+    void add_item(const QString text, const char* slot, QObject* arg, QObject* slot_holder = nullptr);
     void add_home();
     void add_switcher(QString left, QString right, bool default_state);
 

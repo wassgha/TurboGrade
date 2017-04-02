@@ -54,7 +54,10 @@ void Breadcrumb::add_switcher(QString left, QString right, bool default_state) {
     connect (switcher, SIGNAL(toggled()), this, SIGNAL(switcher_toggled())) ;
 }
 
-void Breadcrumb::add_item(const QString text, const char* slot, QObject* arg) {
+void Breadcrumb::add_item(const QString text, const char* slot, QObject* arg, QObject* slot_holder) {
+
+    if (slot_holder == nullptr)
+        slot_holder = _parent;
 
     // Highlight last node in the breadcrumb and make others gray
     if (items.size()>2)
@@ -82,7 +85,7 @@ void Breadcrumb::add_item(const QString text, const char* slot, QObject* arg) {
     QSignalMapper* signalMapper = new QSignalMapper();
     connect(new_item, SIGNAL(clicked()), signalMapper, SLOT(map()));
     signalMapper->setMapping(new_item, arg);
-    connect(signalMapper, SIGNAL(mapped(QObject*)), _parent, slot);
+    connect(signalMapper, SIGNAL(mapped(QObject*)), slot_holder, slot);
 }
 
 Breadcrumb::~Breadcrumb()

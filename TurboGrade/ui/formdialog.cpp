@@ -59,6 +59,17 @@ QWidget* FormDialog::add_field(QString type, QString name,
         dynamic_cast<QComboBox*>(field)->setObjectName(name);
         ui->formLayout->addRow(label, field);
 
+    } else if (type == "QFileDialog") {
+
+        field = new QPushButton(label);
+        dynamic_cast<QPushButton*>(field)->setObjectName(name);
+        QPixmap pixmap(placeholder);
+        QIcon ButtonIcon(pixmap);
+        dynamic_cast<QPushButton*>(field)->setIcon(ButtonIcon);
+        dynamic_cast<QPushButton*>(field)->setIconSize(QSize(16,16));
+        ui->formLayout->addRow(field);
+        connect(field, SIGNAL(clicked()), this, SLOT(select_folder()));
+
     } else if (type == "QTextEdit") {
 
         field = new QTextEdit();
@@ -108,6 +119,8 @@ QString FormDialog::val(QString name) {
         QComboBox* field = findChild<QComboBox*>(name);
         field->setCurrentIndex(0);
         return "";
+    } else if (_field_types[name] == "QFileDialog") {
+        return _data;
     } else {
         return QString();
     }
@@ -122,4 +135,11 @@ void FormDialog::on_ok_btn_clicked()
 {
     emit submit();
     hide();
+}
+
+void FormDialog::select_folder() {
+    _data = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                              "",
+                                              QFileDialog::ShowDirsOnly
+                                              | QFileDialog::DontResolveSymlinks);
 }

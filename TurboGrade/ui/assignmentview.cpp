@@ -75,6 +75,10 @@ void AssignmentView::show_students() {
     dynamic_cast<Dashboard*>(_parent)->show_students(_section);
 }
 
+void AssignmentView::show_submissions(QObject* assignment) {
+    dynamic_cast<Dashboard*>(_parent)->show_submissions(_section, assignment);
+}
+
 void AssignmentView::refresh_cards() {
 
     remove_cards();
@@ -85,7 +89,7 @@ void AssignmentView::refresh_cards() {
                                      assignment->_objective,
                                      assignment->_color, assignment);
         cards.push_back(new_assignment);
-        connect(new_assignment, SIGNAL(clicked(QObject *)), _parent, SLOT(show_submissions(QObject *)));
+        connect(new_assignment, SIGNAL(clicked(QObject *)), this, SLOT(show_submissions(QObject *)));
         add_card(new_assignment);
     }
 
