@@ -15,7 +15,7 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     add_dialog->add_field("QLabel", "instructions", "Please unzip the Moodle submissions and point \n"
                                                     "to the folder where you unzipped them.");
     add_dialog->add_field("QFileDialog", "select_folder", "Choose folder", ":/misc/res/folder.png");
-    connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
+    connect(add_dialog, SIGNAL(submit()), this, SLOT(import_submission()));
 
     add_btn = new QPushButton("Import submissions");
     add_btn->setCursor(Qt::PointingHandCursor);
@@ -57,4 +57,9 @@ void SubmissionView::refresh_cards() {
         }
     }
 
+}
+
+void SubmissionView::import_submission() {
+    qDebug()<<"Importing"<<endl;
+    DirTools::copy_dir_recursive(add_dialog->val("select_folder"), QCoreApplication::applicationDirPath() + "/submissions/");
 }

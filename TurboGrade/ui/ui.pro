@@ -28,6 +28,7 @@ SOURCES += main.cpp\
             "../tools/objectidentifier.cpp" \
         "../tools/syntaxhighlight.cpp"\
         "../tools/codeeditor.cpp" \
+        "../tools/dirtools.cpp" \
             "../db/dbengine.cpp" \
             "../db/coursedb.cpp" \
             "../db/sectiondb.cpp" \
@@ -70,6 +71,7 @@ HEADERS  +=\
         "../tools/codeeditor.h" \
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
+        "../tools/dirtools.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \

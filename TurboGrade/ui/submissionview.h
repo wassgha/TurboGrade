@@ -5,6 +5,7 @@
 #include "ui_listview.h"
 
 #include "dashboard.h"
+#include "../tools/dirtools.h"
 
 class SubmissionView;
 
@@ -18,6 +19,7 @@ public slots:
     void refresh_cards() override;
     void show_assignments();
     void show_submissions(QObject* assignment);
+    void import_submission();
 
 private:
     Controller *_controller;

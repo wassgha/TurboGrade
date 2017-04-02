@@ -9,7 +9,8 @@ SOURCES     +=  main.cpp \
                 objectidentifier.cpp \
                 filewriter.cpp \
     pdfwindow.cpp \
-    htmltopdf.cpp
+    htmltopdf.cpp \
+    dirtools.cpp
 
 HEADERS     += \
                 syntaxhighlight.h \
@@ -18,7 +19,8 @@ HEADERS     += \
                 macro.h \
                 filewriter.h \
     pdfwindow.h \
-    htmltopdf.h
+    htmltopdf.h \
+    dirtools.h
 
 FORMS += \
     pdfwindow.ui
