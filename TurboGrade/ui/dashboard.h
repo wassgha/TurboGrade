@@ -57,6 +57,7 @@ public slots:
     void show_assignments(QObject* section);
     void show_students(QObject* section);
     void show_submissions(QObject* section, QObject* assignment);
+    void start_grading(QObject* submission);
 
 private:
     Ui::Dashboard *ui;

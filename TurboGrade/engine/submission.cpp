@@ -105,6 +105,19 @@ int Submission::get_grade(Criterion *criterion){
     }
 }
 
+/**
+ * @brief Submission::get_grade retrieves the total grade
+ * @return the grade for this submission
+ */
+int Submission::get_grade(){
+    int grade = 0;
+    for (Criterion* criterion :  *_assignment->_rubric->_criteria)  {
+        if (get_grade(criterion) != -1)
+            grade += get_grade(criterion);
+    }
+    return grade;
+}
+
 
 Submission::~Submission()
 {

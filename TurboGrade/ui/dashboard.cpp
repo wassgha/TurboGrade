@@ -136,3 +136,9 @@ void Dashboard::show_submissions(QObject* section, QObject* assignment) {
     ui->mainWidget->setCurrentWidget(submissions);
 
 }
+
+void Dashboard::start_grading(QObject* submission) {
+
+    grade_submission->show();
+
+}

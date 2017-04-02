@@ -16,7 +16,6 @@ public:
 
 public slots:
     void refresh_cards() override;
-    void save_new() override;
     void show_assignments();
     void show_submissions(QObject* assignment);
 

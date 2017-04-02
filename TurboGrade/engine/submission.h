@@ -65,6 +65,9 @@ public:
     //retrieves the grade for the criterion on the current submission
     int get_grade(Criterion* criterion);
 
+    //retrieves the  total grade for the current submission
+    int get_grade();
+
     // Submission id
     int _id;
     // Submission belongs to student

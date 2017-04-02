@@ -121,3 +121,19 @@ void Criterion::show_children()
         criterion->show_children();
     }
 }
+
+/**
+ * @brief Criterion::total_grade gets the total grade for this criterion
+ * @return the total grade (sum of grades of individual criteria
+ */
+int Criterion::total_grade() {
+    if (has_children()) {
+        int grade = 0;
+        for(Criterion* criterion:*_sub_criteria) {
+            grade += criterion->total_grade();
+        }
+        return grade;
+    } else {
+        return _out_of;
+    }
+}

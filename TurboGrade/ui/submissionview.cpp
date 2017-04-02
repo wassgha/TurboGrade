@@ -44,17 +44,17 @@ void SubmissionView::refresh_cards() {
 
     add_card(add_btn);
     for(Student* student : *_section->_students) {
-        Card* new_student = new Card(student->_name,
-                                    "Avg. Grade : 96%",
-                                    student->_color, student);
-        cards.push_back(new_student);
-//      connect(new_student, SIGNAL(clicked(QObject*)), _parent, SLOT(show_sections(QObject*)));
-        add_card(new_student);
+        if (student->get_submission(_assignment) != nullptr) {
+            Submission* submission = student->get_submission(_assignment);
+            Card* new_submission = new Card(student->_name,
+                                        QString::number(submission->get_grade()) +
+                                        " out of " +
+                                        QString::number(_assignment->_rubric->total_grade()),
+                                        student->_color, submission);
+            cards.push_back(new_submission);
+            connect(new_submission, SIGNAL(clicked(QObject*)), _parent, SLOT(start_grading(QObject*)));
+            add_card(new_submission);
+        }
     }
 
-}
-
-void SubmissionView::save_new() {
-    _section->add_student(-1, add_dialog->val("name"), add_dialog->val("username"));
-    refresh_cards();
 }

@@ -37,6 +37,8 @@ public:
     Criterion* get_criterion(const QString name);
     // Get a criterion by table id
     Criterion* get_criterion(const int id);
+    // Get the total grade for this rubric
+    int total_grade();
 
     // Assignment
     Assignment* _assignment;

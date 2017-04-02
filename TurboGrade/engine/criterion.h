@@ -40,6 +40,8 @@ public:
     Criterion* find_criterion(const QString name);
     // Find a criterion within the current hierarchy by table id
     Criterion* find_criterion(const int id);
+    // Get the total maximum score for this criterion
+    int total_grade();
     // Show criteria tree
     void show_children();
 

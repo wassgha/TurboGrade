@@ -68,3 +68,15 @@ Criterion* Rubric::get_criterion(const int id) {
     }
     return nullptr;
 }
+
+/**
+ * @brief Rubric::total_grade gets the total grade for this rubric
+ * @return the total grade (sum of grades of individual criteria
+ */
+int Rubric::total_grade() {
+    int grade = 0;
+    for(Criterion* criterion:*_criteria) {
+        grade += criterion->total_grade();
+    }
+    return grade;
+}
