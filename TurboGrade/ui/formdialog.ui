@@ -85,6 +85,8 @@ QLineEdit::focus, QTextEdit::focus {
 	border: 1px solid lightgray;
 	border-radius: 3px;
 	padding: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
