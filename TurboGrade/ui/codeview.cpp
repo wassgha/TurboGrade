@@ -10,12 +10,13 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     _controller = controller;
     _parent = dynamic_cast<GradeSubmission*>(parent);
 
-    setupCodeEditor("");
-
     _model = new QFileSystemModel;
     _model->setRootPath(_parent->_submission->getPath());
+
+    QModelIndex root_index = _model->index(_parent->_submission->getPath());
+
     ui->treeView->setModel(_model);
-    ui->treeView->setRootIndex(_model->index(_parent->_submission->getPath()));
+    ui->treeView->setRootIndex(root_index);
 
     ui->treeView->setHeaderHidden(true);
     ui->treeView->hideColumn(1);
@@ -23,9 +24,19 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->treeView->hideColumn(3);
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
 
+    std::cout<<filepath.toStdString()<<std::endl;
+
+    setupCodeEditor("Main.java");
+
+    // Loads the first file
     this->connect(ui->treeView, SIGNAL(clicked( QModelIndex )), this, SLOT(loadFile(QModelIndex)));
 
+    // When users selects text, prompt to add a comment
     this->connect(ui->editor,  SIGNAL(selectionChanged()), this, SLOT(getSelection()));
+
+    // Expand all items in the tree
+    this->connect(_model, SIGNAL(directoryLoaded(QString)), this, SLOT(expandToDepth(QString)));
+
 }
 
 
@@ -65,4 +76,8 @@ void CodeView::setupCodeEditor(const QString &file_name)
     QFile file(file_name);
     if (file.open(QFile::ReadOnly | QFile::Text))
         ui->editor->setPlainText(file.readAll());
+}
+
+void CodeView::expandToDepth(QString file) {
+    ui->treeView->expandToDepth(0);
 }

@@ -45,6 +45,7 @@ public:
 public slots:
     void getSelection();
     void loadFile(QModelIndex item);
+    void expandToDepth(QString file);
 
 private:
     void setupCodeEditor(const QString &file_name);
