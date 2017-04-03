@@ -19,7 +19,7 @@
   <property name="maximumSize">
    <size>
     <width>16777215</width>
-    <height>40</height>
+    <height>41</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -29,6 +29,8 @@
    <string notr="true">#Breadcrumb {
 	max-height: 40px;
 	background: white;
+	border: 0px;
+	border-bottom: 1px solid #f1f2f6;
 }
 
 QLabel {
