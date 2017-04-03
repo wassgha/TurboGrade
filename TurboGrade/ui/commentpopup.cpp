@@ -10,7 +10,7 @@ CommentPopup::CommentPopup(QWidget *parent, Controller *controller) :
 
     ui->adjust_grade->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui->comment->setAttribute(Qt::WA_MacShowFocusRect, false);
-    ui->rubric->setAttribute(Qt::WA_MacShowFocusRect, false);
+    ui->criterion->setAttribute(Qt::WA_MacShowFocusRect, false);
 
     _controller = controller;
 
@@ -23,8 +23,26 @@ CommentPopup::~CommentPopup()
 
 void CommentPopup::on_add_btn_clicked()
 {
-    this->hide();
-    ui->adjust_grade->setValue(0);
-    ui->comment->clear();
-    ui->rubric->setCurrentIndex(0);
+    qDebug()<<"emitted signal submit";
+    emit submit();
+    hide();
+}
+
+QString CommentPopup::val(QString name) {
+
+    if (name == "adjust_grade") {
+        QString val = ui->adjust_grade->text();
+        ui->adjust_grade->setValue(0);
+        return val;
+    } else if (name == "comment") {
+        QString val = ui->comment->toPlainText();
+        ui->comment->clear();
+        return val;
+    } else if (name == "criterion") {
+        ui->criterion->setCurrentIndex(0);
+        return QString();
+    } else {
+        return QString();
+    }
+
 }

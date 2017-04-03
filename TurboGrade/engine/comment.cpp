@@ -32,8 +32,11 @@ Comment::Comment(int id, Submission* submission,
     _end_pos = end_pos;
 
     if (id == -1) {
-        _id = _controller->_commentDB->add(submission->_id, filename,
-                                           criterion->_id, text, grade,
+        _id = _controller->_commentDB->add(submission->_id,
+                                           filename,
+                                           (criterion == nullptr ? 0 : criterion->_id),
+                                           text,
+                                           grade,
                                            start_pos, end_pos);
         std::cout<<"Adjusting grade for comment"<<std::endl;
         _submission->update_grade(_criterion,

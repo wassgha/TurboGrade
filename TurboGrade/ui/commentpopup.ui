@@ -54,14 +54,14 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="rubric_label">
+      <widget class="QLabel" name="criterion_label">
        <property name="text">
         <string>Rubric:</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="rubric">
+      <widget class="QComboBox" name="criterion">
        <item>
         <property name="text">
          <string>Completeness</string>

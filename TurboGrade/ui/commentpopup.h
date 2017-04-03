@@ -18,11 +18,16 @@ class CommentPopup : public QWidget
 public:
     explicit CommentPopup(QWidget *parent = 0, Controller* controller = nullptr);
     ~CommentPopup();
+    QString val(QString name);
+
     Ui::CommentPopup *ui;
     Controller *_controller;
 
 private slots:
     void on_add_btn_clicked();
+
+signals:
+    void submit();
 };
 
 #endif // COMMENTPOPUP_H

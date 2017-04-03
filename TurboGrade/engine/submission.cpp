@@ -69,6 +69,8 @@ void Submission::add_grade(Criterion *criterion, int grade, bool load){
  * @param grade the value to set the grade to
  */
 void Submission::update_grade(Criterion *criterion, int grade, bool load){
+    if (criterion == nullptr)
+        return;
     _grades->erase(criterion);
     _grades->emplace(std::make_pair(criterion, grade));
     if (!load)
@@ -90,6 +92,9 @@ std::map<Criterion*, int> *Submission::get_grades(){
  */
 int Submission::get_grade(Criterion *criterion){
     try {
+        if (criterion == nullptr)
+            return -1;
+
         if (!criterion->has_children()) {
             return _grades->at(criterion);
         }
