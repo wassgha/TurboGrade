@@ -15,6 +15,7 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
         QString from = from_dir + copy_file;
         QString to = to_dir + copy_file;
 
+        qDebug()<<"Copying file "<< copy_file;
         if (QFile::exists(to))
         {
             if (replace_on_conflit)
@@ -39,7 +40,7 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
     foreach (QString copy_dir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
     {
         QString from = from_dir + copy_dir;
-        QString to = to_dir + copy_dir;
+        QString to = to_dir + copy_dir.left(copy_dir.indexOf("_"));
 
         if (dir.mkpath(to) == false)
         {

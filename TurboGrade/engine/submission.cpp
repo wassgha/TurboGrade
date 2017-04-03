@@ -118,6 +118,24 @@ int Submission::get_grade(){
     return grade;
 }
 
+/**
+ * @brief Submission::getPath
+ * @return the path where the submission files are stored
+ */
+QString Submission::getPath() {
+
+    return QCoreApplication::applicationDirPath()
+    + "/data/"
+    + QString::number(_student->_section->_course->_id)
+    + "/"
+    + QString::number(_student->_section->_id)
+    + "/"
+    + QString::number(_assignment->_id)
+    + "/"
+    + _student->_name
+    + "/";
+
+}
 
 Submission::~Submission()
 {

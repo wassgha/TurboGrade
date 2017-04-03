@@ -9,6 +9,9 @@
 #include "dashboard.h"
 #include "ui_dashboard.h"
 
+#include "gradesubmission.h"
+#include "ui_gradesubmission.h"
+
 #include "commentpopup.h"
 #include "ui_commentpopup.h"
 
@@ -22,6 +25,7 @@
 #include <QProcess>
 #include <iostream>
 
+class GradeSubmission;
 
 namespace Ui {
 class CodeView;
@@ -36,6 +40,7 @@ public:
     ~CodeView();
     Ui::CodeView *ui;
     Controller *_controller;
+    GradeSubmission *_parent;
 
 public slots:
     void getSelection();

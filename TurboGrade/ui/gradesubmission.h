@@ -24,11 +24,12 @@ class GradeSubmission : public QWidget
     Q_OBJECT
 
 public:
-    explicit GradeSubmission(QWidget *parent = 0, Controller* controller = nullptr);
+    explicit GradeSubmission(QWidget *parent = 0, Submission *submission = nullptr, Controller* controller = nullptr);
     ~GradeSubmission();
     CodeView *code_view;
     GradeView *grade_view;
     Controller *_controller;
+    Submission *_submission;
 
 private slots:
     void on_run_clicked();

@@ -59,7 +59,34 @@ void SubmissionView::refresh_cards() {
 
 }
 
+/**
+ * @brief SubmissionView::import_submission gets submissions
+ * from a downloaded Moodle folder and saves them locally
+ */
 void SubmissionView::import_submission() {
-    qDebug()<<"Importing"<<endl;
-    DirTools::copy_dir_recursive(add_dialog->val("select_folder"), QCoreApplication::applicationDirPath() + "/submissions/");
+
+    QString local_path = QCoreApplication::applicationDirPath()
+            + "/data/"
+            + QString::number(_section->_course->_id)
+            + "/"
+            + QString::number(_section->_id)
+            + "/"
+            + QString::number(_assignment->_id);
+
+    DirTools::copy_dir_recursive( add_dialog->val("select_folder"), local_path);
+
+
+    QDir dir;
+
+    dir.setPath(local_path);
+
+    foreach (QString submission_folder, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        std::cout<<"Adding submission by "<< submission_folder.toStdString() << std::endl;
+        qDebug()<<"Adding submission by "<< submission_folder << endl;
+        Student* added_student = _section->add_student(-1, submission_folder, "-");
+        added_student->add_submission(-1, _assignment);
+    }
+
+    refresh_cards();
+
 }

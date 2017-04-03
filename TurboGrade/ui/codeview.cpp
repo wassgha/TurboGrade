@@ -8,13 +8,14 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->setupUi(this);
 
     _controller = controller;
+    _parent = dynamic_cast<GradeSubmission*>(parent);
 
-    setupCodeEditor(QDir::currentPath()+ "/../../../../../yikyak/Yak.java");
+    setupCodeEditor("");
 
     _model = new QFileSystemModel;
-    _model->setRootPath(QDir::currentPath()+ "/../../../../../yikyak");
+    _model->setRootPath(_parent->_submission->getPath());
     ui->treeView->setModel(_model);
-    ui->treeView->setRootIndex(_model->index(QDir::currentPath()+ "/../../../../../yikyak"));
+    ui->treeView->setRootIndex(_model->index(_parent->_submission->getPath()));
 
     ui->treeView->setHeaderHidden(true);
     ui->treeView->hideColumn(1);

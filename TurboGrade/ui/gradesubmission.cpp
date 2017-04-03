@@ -1,13 +1,14 @@
 #include "gradesubmission.h"
 #include "ui_gradesubmission.h"
 
-GradeSubmission::GradeSubmission(QWidget *parent, Controller *controller) :
+GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Controller *controller) :
     QWidget(parent),
     ui(new Ui::GradeSubmission)
 {
     ui->setupUi(this);
 
     _controller = controller;
+    _submission = submission;
 
     setAttribute(Qt::WA_StyledBackground, true);
 

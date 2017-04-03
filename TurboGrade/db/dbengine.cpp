@@ -41,7 +41,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                section_id INTEGER, \
                name VARCHAR(50),\
                username VARCHAR(50),\
-               FOREIGN KEY(section_id) REFERENCES section(id))");
+               FOREIGN KEY(section_id) REFERENCES section(id),\
+               CONSTRAINT uniq UNIQUE (section_id, name))");
 
     // Assignment Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment (id INTEGER PRIMARY KEY, \

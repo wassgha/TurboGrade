@@ -50,8 +50,6 @@ Dashboard::Dashboard(QWidget *parent) :
     QApplication::setFont(roboto);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
 
-    grade_submission = new GradeSubmission(0, _controller);
-
     courses = new CourseView(this, _controller);
 
     ui->mainWidget->addWidget(courses);
@@ -63,7 +61,8 @@ Dashboard::Dashboard(QWidget *parent) :
 Dashboard::~Dashboard()
 {
     delete _controller;
-    delete grade_submission;
+    if (grade_submission != nullptr)
+        delete grade_submission;
     delete ui;
     delete courses;
     if (sections != nullptr)
@@ -139,6 +138,9 @@ void Dashboard::show_submissions(QObject* section, QObject* assignment) {
 
 void Dashboard::start_grading(QObject* submission) {
 
+    if (grade_submission != nullptr)
+        delete grade_submission;
+    grade_submission = new GradeSubmission(0, (Submission*)submission, _controller);
     grade_submission->show();
 
 }

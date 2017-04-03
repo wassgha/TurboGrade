@@ -68,6 +68,9 @@ public:
     //retrieves the  total grade for the current submission
     int get_grade();
 
+    //Returns the local path where submission files are stored
+    QString getPath();
+
     // Submission id
     int _id;
     // Submission belongs to student
