@@ -67,6 +67,7 @@ QWidget* FormDialog::add_field(QString type, QString name,
         QIcon ButtonIcon(pixmap);
         dynamic_cast<QPushButton*>(field)->setIcon(ButtonIcon);
         dynamic_cast<QPushButton*>(field)->setIconSize(QSize(16,16));
+        dynamic_cast<QPushButton*>(field)->setCursor(Qt::PointingHandCursor);
         ui->formLayout->addRow(field);
         connect(field, SIGNAL(clicked()), this, SLOT(select_folder()));
 
