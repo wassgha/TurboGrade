@@ -53,7 +53,6 @@ public slots:
 private:
     void refresh_criteria();
     void setupCodeEditor(const QString &file_name);
-    void closeEvent(QCloseEvent*);
     bool eventFilter(QObject *obj, QEvent *event);
 
     CommentPopup *_popup = new CommentPopup(this);

@@ -16,6 +16,20 @@
   <property name="styleSheet">
    <string notr="true">QWidget#CommentPopup {
 	background: rgb(255, 242, 160);
+}
+QLabel {
+	color: rgb(127, 120, 71);
+}
+#add_btn {
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	background: white;
+	border-radius: 3px;
+	margin-left : 5px;
+	color: rgb(127, 120, 71);
+	border: 1px solid rgb(215, 166, 89);
+	background: white;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -91,6 +105,10 @@
    </item>
    <item>
     <widget class="QPushButton" name="add_btn">
+     <property name="styleSheet">
+      <string notr="true">
+</string>
+     </property>
      <property name="text">
       <string>Add Comment</string>
      </property>

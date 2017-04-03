@@ -7,7 +7,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
 {
     ui->setupUi(this);
 
-    this->installEventFilter(this);
+    installEventFilter(this);
 
     _controller = controller;
     _parent = dynamic_cast<GradeSubmission*>(parent);
@@ -106,10 +106,6 @@ CodeView::~CodeView()
     delete ui;
 }
 
-void CodeView::closeEvent(QCloseEvent* ) {
-    _popup->hide();
-}
-
 void CodeView::loadFile(QModelIndex item)
 {
     if (!_model->isDir(item)) {
@@ -134,6 +130,8 @@ bool CodeView::eventFilter(QObject *obj, QEvent *event) {
     if (event->type() == QEvent::Move) {
         QMoveEvent *moveEvent = static_cast<QMoveEvent*>(event);
         _popup->move(this->cursor().pos());
+    } else if (event->type() == QEvent::Close) {
+        _popup->hide();
     }
     return QWidget::eventFilter(obj, event);
 }
