@@ -52,13 +52,13 @@ Student* Section::add_student(int id, const QString name, const QString username
 }
 
 /**
- * @brief Section::get_student finds a student by their username
- * @param username the student identifier
+ * @brief Section::get_student finds a student by their name
+ * @param name the student identifier
  * @return the student found
  */
-Student* Section::get_student(const QString username) {
+Student* Section::get_student(const QString name) {
     for(Student* student:*_students)
-        if (student->_username == username)
+        if (student->_name == name)
             return student;
     return nullptr;
 }

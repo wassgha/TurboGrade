@@ -39,7 +39,7 @@ public:
     // Add an assignment to the section
     Assignment* add_assignment(Assignment* assignment, bool load = false);
     // Find a student in the section
-    Student* get_student(const QString username);
+    Student* get_student(const QString name);
     // Find an assignment in the section
     Assignment* get_assignment(const QString name);
 
