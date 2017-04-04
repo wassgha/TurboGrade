@@ -26,9 +26,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->treeView->hideColumn(3);
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
 
-    auto layout = new QVBoxLayout();
-    layout->setAlignment(Qt::AlignTop);
-    ui->comments->setLayout(layout);
+    ui->comment_layout->setAlignment(Qt::AlignTop);
 
 
     setupCodeEditor("Main.java");
@@ -133,6 +131,7 @@ void CodeView::refresh_comments() {
     QString file_name = _model->data(ui->treeView->currentIndex()).toString();
     // Remove old comments
     for (CommentCard *comment_card : _comment_cards) {
+        ui->comment_layout->removeWidget(comment_card);
        delete comment_card;
     }
     _comment_cards.clear();
@@ -140,7 +139,7 @@ void CodeView::refresh_comments() {
     for (Comment* comment : _parent->_submission->get_comment(file_name)) {
         CommentCard *comment_card = new CommentCard(this, comment);
         _comment_cards.push_back(comment_card);
-        ui->comments->layout()->addWidget(comment_card);
+        ui->comment_layout->addWidget(comment_card);
         comment_card->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     }
 }

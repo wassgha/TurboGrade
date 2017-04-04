@@ -44,6 +44,12 @@ QScrollArea#comments {
 	border: none;
 	background: transparent;
 }
+
+#comments_title {
+	color:white;
+	text-transform: uppercase;
+	font-weight: bold;
+}
 QScrollArea#comments &gt; #scrollAreaWidgetContents {
 	border: none;
 	background: transparent;
@@ -108,15 +114,21 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
      <widget class="QScrollArea" name="comments">
       <property name="minimumSize">
        <size>
-        <width>120</width>
+        <width>320</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>250</width>
+        <width>320</width>
         <height>16777215</height>
        </size>
+      </property>
+      <property name="verticalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOn</enum>
+      </property>
+      <property name="sizeAdjustPolicy">
+       <enum>QAbstractScrollArea::AdjustToContents</enum>
       </property>
       <property name="widgetResizable">
        <bool>true</bool>
@@ -127,12 +139,33 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
       <widget class="QWidget" name="scrollAreaWidgetContents">
        <property name="geometry">
         <rect>
-         <x>0</x>
+         <x>8</x>
          <y>0</y>
-         <width>250</width>
+         <width>304</width>
          <height>454</height>
         </rect>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="comment_layout">
+        <item>
+         <widget class="QLabel" name="comments_title">
+          <property name="text">
+           <string>Comments on this file</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </widget>
