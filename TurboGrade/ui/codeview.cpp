@@ -27,6 +27,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
 
     auto layout = new QVBoxLayout();
+    layout->setAlignment(Qt::AlignTop);
     ui->comments->setLayout(layout);
 
 
@@ -107,9 +108,9 @@ CodeView::~CodeView()
 {
 
     for (CommentCard *comment_card : _comment_cards) {
-        _comment_cards.erase(std::remove(_comment_cards.begin(), _comment_cards.end(), comment_card), _comment_cards.end());
         delete comment_card;
     }
+    _comment_cards.clear();
     delete _popup;
     delete _model;
     delete ui;
@@ -132,10 +133,9 @@ void CodeView::refresh_comments() {
     QString file_name = _model->data(ui->treeView->currentIndex()).toString();
     // Remove old comments
     for (CommentCard *comment_card : _comment_cards) {
-        if (comment_card != nullptr && comment_card != 0)
-           delete comment_card;
-        _comment_cards.erase(std::remove(_comment_cards.begin(), _comment_cards.end(), comment_card), _comment_cards.end());
+       delete comment_card;
     }
+    _comment_cards.clear();
     // Add the comments to the sidebar
     for (Comment* comment : _parent->_submission->get_comment(file_name)) {
         CommentCard *comment_card = new CommentCard(this, comment);
