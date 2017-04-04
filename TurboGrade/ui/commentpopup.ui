@@ -10,48 +10,54 @@
     <height>177</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget#CommentPopup {
-	background: rgb(255, 242, 160);
+	/*background: rgb(255, 242, 160);*/
+	background: #ffea8d;
+	border-radius: 3px;
 }
-QLabel {
-	color: rgb(127, 120, 71);
+#comment {
+	background: transparent;
+/*	border-radius: 3px;
+	border: 1px solid rgb(127, 120, 71);*/
 }
 #add_btn {
-	padding: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	background: white;
-	border-radius: 3px;
-	margin-left : 5px;
-	color: rgb(127, 120, 71);
-	border: 1px solid rgb(215, 166, 89);
-	background: white;
+	background: transparent;
+	text-transform: uppercase;
+	color: rgb(107, 100, 51);
+	font-weight: bold;
+	padding: 0px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="leftMargin">
-    <number>12</number>
-   </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLabel" name="adjust_grade_label">
        <property name="text">
-        <string>Adjust grade : </string>
+        <string>Point adjustment:</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QSpinBox" name="adjust_grade">
+       <property name="font">
+        <font>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">QSpinBox#spinBox {
-	outline:0;
-	background: white;
-}</string>
+        <string notr="true"/>
        </property>
        <property name="wrapping">
         <bool>false</bool>
@@ -101,18 +107,42 @@ QLabel {
     </layout>
    </item>
    <item>
-    <widget class="QTextEdit" name="comment"/>
-   </item>
-   <item>
-    <widget class="QPushButton" name="add_btn">
-     <property name="styleSheet">
-      <string notr="true">
-</string>
-     </property>
-     <property name="text">
-      <string>Add Comment</string>
+    <widget class="QTextEdit" name="comment">
+     <property name="placeholderText">
+      <string>Type your comment here...</string>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="add_btn">
+       <property name="styleSheet">
+        <string notr="true">
+</string>
+       </property>
+       <property name="text">
+        <string>Add Comment</string>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>

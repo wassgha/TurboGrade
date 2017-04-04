@@ -57,9 +57,10 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     QFont font;
 
-    setStyleSheet("border-radius : 3px; background: white;");
+    setStyleSheet("border-radius : 3px; background: #2b303c; color: #abb2be;");
 
-    font.setFamily("Courier");
+    int font_id = QFontDatabase::addApplicationFont(":/fonts/res/FiraMono-Regular.ttf");
+    font.setFamily(QFontDatabase::applicationFontFamilies(font_id).at(0));
     font.setStyleHint(QFont::TypeWriter);
     font.setFixedPitch(true);
     font.setPointSize(12);
@@ -149,7 +150,7 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 //    painter.fillPath(path, QColor(220, 220, 220));
 //    painter.drawPath(path);
 
-    painter.fillRect(event->rect(), QColor(220, 220, 220));
+    painter.fillRect(event->rect(), QColor(43, 47, 59));
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
@@ -159,8 +160,8 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(Qt::darkGray);
-            painter.setFont(QFont("Courier", 10));
+            painter.setPen(QColor("#757a85"));
+            painter.setFont(QFont("Courier", 12));
             painter.drawText(-5, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignRight, number);
         }

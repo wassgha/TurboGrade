@@ -62,7 +62,8 @@ color:white;
 
 
 #scrollArea   {
-	background-color:rgb(83, 86, 99);
+	/* background-color:rgb(83, 86, 99); */
+	background: #2b303c;
 	border-radius:3px;
 }
 QAbstractScrollArea #scrollAreaWidgetContents  {
@@ -70,7 +71,7 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
 }
 QGroupBox {
     background-color: white;
-	border-radius:6px;
+	border-radius:3px;
 	padding-top: 3ex;
 	border: 1px solid rgb(236, 239, 239);
 }
@@ -125,7 +126,7 @@ QGroupBox::title {
         <x>0</x>
         <y>0</y>
         <width>659</width>
-        <height>666</height>
+        <height>672</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -141,6 +142,18 @@ QGroupBox::title {
        </size>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="leftMargin">
+        <number>15</number>
+       </property>
+       <property name="topMargin">
+        <number>15</number>
+       </property>
+       <property name="rightMargin">
+        <number>15</number>
+       </property>
+       <property name="bottomMargin">
+        <number>15</number>
+       </property>
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="sizePolicy">

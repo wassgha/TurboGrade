@@ -27,5 +27,6 @@
         <file>res/Roboto-Bold.ttf</file>
         <file>res/Roboto-Light.ttf</file>
         <file>res/Roboto-Regular.ttf</file>
+        <file>res/FiraMono-Regular.ttf</file>
     </qresource>
 </RCC>

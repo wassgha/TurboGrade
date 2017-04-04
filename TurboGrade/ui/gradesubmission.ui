@@ -16,14 +16,15 @@
   <property name="styleSheet">
    <string notr="true">QWidget#GradeSubmission {
        /* background: rgb(55, 64, 80); */
-	background: #434653;
+	/* background: #434653;*/
+	background: #232730;
 }
 
 QCheckBox#hideName {
         color: white;
 }
 
-#run, #toggle {
+QPushButton#run, QPushButton#toggle {
 	padding: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -32,28 +33,46 @@ QCheckBox#hideName {
 	margin-left : 5px;
 }
 
-#run {
+QPushButton#run {
 	color: white;
 	background: #63c46b;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>12</number>
+    <number>0</number>
    </property>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <property name="spacing">
+      <number>12</number>
+     </property>
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+     <property name="leftMargin">
+      <number>12</number>
+     </property>
+     <property name="topMargin">
+      <number>12</number>
+     </property>
+     <property name="rightMargin">
+      <number>12</number>
+     </property>
+     <property name="bottomMargin">
+      <number>12</number>
      </property>
      <item>
       <widget class="QLabel" name="logo">

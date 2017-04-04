@@ -14,17 +14,34 @@
    <string>CodeView</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#treeView {
+   <string notr="true">QTreeView#treeView {
         /* background: rgb(66, 76, 96); */
-		background: #535663;
+		/* background: #535663; */
+		background: transparent;
         border: none;
         color: white;
         padding-top: 10px;
-        border-radius: 3px;
+        /* border-radius: 3px; */
+    	   show-decoration-selected: 1;
+}
+
+QTreeView::item {
+	color: #aab0bc;
+}
+
+QTreeView::branch:selected,
+QTreeView::item:selected,
+QTreeView::item:selected:active,
+QTreeView::item:selected:!active {
+	background: #2b2f3b;
+	color: white;
 }
 
 QSplitter::handle:horizontal {
         image: url(:/misc/res/splitter.png);
+}
+QToolBox#toolBox::tab {
+	background: white;
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -95,6 +112,9 @@ QSplitter::handle:horizontal {
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
+        <property name="contextMenuPolicy">
+         <enum>Qt::NoContextMenu</enum>
+        </property>
        </widget>
        <widget class="QToolBox" name="toolBox">
         <property name="currentIndex">
@@ -105,7 +125,7 @@ QSplitter::handle:horizontal {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>187</width>
+           <width>188</width>
            <height>408</height>
           </rect>
          </property>
@@ -118,7 +138,7 @@ QSplitter::handle:horizontal {
           <rect>
            <x>0</x>
            <y>0</y>
-           <width>187</width>
+           <width>188</width>
            <height>408</height>
           </rect>
          </property>
