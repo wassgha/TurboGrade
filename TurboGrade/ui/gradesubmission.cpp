@@ -21,6 +21,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->mainWidget->addWidget(code_view);
     ui->mainWidget->addWidget(grade_view);
     ui->mainWidget->setCurrentWidget(code_view);
+
+    refresh_students();
 }
 
 
@@ -61,5 +63,26 @@ void GradeSubmission::on_toggle_clicked()
         ui->toggle->setIcon(QIcon(pixmap).pixmap(64));
         ui->toggle->setText("View Grade");
         ui->mainWidget->setCurrentWidget(code_view);
+    }
+}
+
+
+void GradeSubmission::refresh_students() {
+    ui->studentName->clear();
+    ui->studentName->addItem("Anonymous Grading", -1);
+    for(Student* student : *_submission->_student->_section->_students) {
+        ui->studentName->addItem(student->_name, student->_id);
+    }
+    ui->studentName->setCurrentIndex(ui->studentName->findData(_submission->_student->_id));
+}
+
+void GradeSubmission::on_hideName_toggled(bool checked)
+{
+    if (checked) {
+        ui->studentName->setCurrentIndex(0);
+        ui->studentName->setEnabled(false);
+    } else {
+        ui->studentName->setCurrentIndex(ui->studentName->findData(_submission->_student->_id));
+        ui->studentName->setEnabled(true);
     }
 }

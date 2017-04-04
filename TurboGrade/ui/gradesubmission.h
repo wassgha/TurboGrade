@@ -32,11 +32,15 @@ public:
     Submission *_submission;
 
 private slots:
+    void refresh_students();
+
     void on_run_clicked();
 
     void on_toggle_clicked();
 
     void finished_running();
+
+    void on_hideName_toggled(bool checked);
 
 private:
     Ui::GradeSubmission *ui;

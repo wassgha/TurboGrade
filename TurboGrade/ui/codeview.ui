@@ -114,13 +114,13 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
      <widget class="QScrollArea" name="comments">
       <property name="minimumSize">
        <size>
-        <width>320</width>
+        <width>300</width>
         <height>0</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>320</width>
+        <width>300</width>
         <height>16777215</height>
        </size>
       </property>
@@ -141,7 +141,7 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
         <rect>
          <x>8</x>
          <y>0</y>
-         <width>304</width>
+         <width>284</width>
          <height>454</height>
         </rect>
        </property>
