@@ -63,7 +63,7 @@ std::vector<Comment*> Submission::get_comment(QString filename) {
         if (comment->_filename == filename)
             result.push_back(comment);
 
-    std::sort(result.begin(), result.end(), [] (Comment *a, Comment *b) { return a->_start_pos > b->_start_pos; } );
+    std::sort(result.begin(), result.end(), [] (Comment *a, Comment *b) { return a->_start_pos < b->_start_pos; } );
 
 
     return result;

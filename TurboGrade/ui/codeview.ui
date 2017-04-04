@@ -62,6 +62,18 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
 </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item row="0" column="0">
     <widget class="QSplitter" name="splitter">
      <property name="orientation">
@@ -142,7 +154,7 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
          <x>8</x>
          <y>0</y>
          <width>284</width>
-         <height>454</height>
+         <height>478</height>
         </rect>
        </property>
        <property name="minimumSize">

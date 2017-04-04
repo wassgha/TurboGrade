@@ -52,36 +52,50 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="adjust_grade">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>(-2)</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="rubric">
-       <property name="text">
-        <string>On rubric &quot;Completeness&quot;</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QWidget" name="info_container" native="true">
+     <layout class="QHBoxLayout" name="info">
+      <item>
+       <widget class="QLabel" name="adjust_grade">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>(-2)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="rubric">
+        <property name="text">
+         <string>On rubric &quot;Completeness&quot;</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </item>
    <item>
     <widget class="QTextEdit" name="comment">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>45</height>
+       <height>16777215</height>
       </size>
+     </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
      <property name="placeholderText">
       <string>Type your comment here...</string>
@@ -89,7 +103,7 @@
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="controls">
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">

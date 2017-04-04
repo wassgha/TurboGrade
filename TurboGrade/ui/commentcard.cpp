@@ -16,11 +16,20 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
     ui->adjust_grade->setText("( " + sign
                                    + QString::number(abs(_comment->_grade))
                                    + " )");
+    if (_comment->_grade > 0) {
+        ui->adjust_grade->setStyle("#adjust_grade { color : rgb(27, 172, 37); }");
+    } else {
+        ui->adjust_grade->setStyle("#adjust_grade { color : rgb(195, 0, 66); }");
+    }
+
     ui->comment->setText(_comment->_text);
-    if (_comment->_criterion != nullptr)
+    if (_comment->_criterion != nullptr) {
         ui->rubric->setText("On rubric: \"" + _comment->_criterion->_name + "\"");
-    else
-        ui->rubric->setText("");
+    } else {
+        ui->rubric->setText("No rubric specified");
+        if (_comment->_grade == 0)
+            ui->info_container->hide();
+    }
 }
 
 CommentCard::~CommentCard()
