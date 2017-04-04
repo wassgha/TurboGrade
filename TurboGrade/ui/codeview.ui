@@ -40,116 +40,90 @@ QTreeView::item:selected:!active {
 QSplitter::handle:horizontal {
         image: url(:/misc/res/splitter.png);
 }
-QToolBox#toolBox::tab {
-	background: white;
-}</string>
+QScrollArea#comments {
+	border: none;
+	background: transparent;
+}
+QScrollArea#comments &gt; #scrollAreaWidgetContents {
+	border: none;
+	background: transparent;
+}
+
+QAbstractScrollArea #scrollAreaWidgetContents  {
+ background-color:transparent;
+}
+
+</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_2">
-   <property name="leftMargin">
-    <number>0</number>
-   </property>
-   <property name="topMargin">
-    <number>0</number>
-   </property>
-   <property name="rightMargin">
-    <number>0</number>
-   </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
+  <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
-      <widget class="QSplitter" name="splitter">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+    <widget class="QSplitter" name="splitter">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QTreeView" name="treeView">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>120</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>250</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
+      <property name="headerHidden">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="CodeEditor" name="editor" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="contextMenuPolicy">
+       <enum>Qt::NoContextMenu</enum>
+      </property>
+      <zorder>groupBox</zorder>
+     </widget>
+     <widget class="QScrollArea" name="comments">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignHCenter|Qt::AlignTop</set>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>364</width>
+         <height>454</height>
+        </rect>
        </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="handleWidth">
-        <number>8</number>
-       </property>
-       <widget class="QTreeView" name="treeView">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>120</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>250</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="baseSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="headerHidden">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="CodeEditor" name="editor" native="true">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="contextMenuPolicy">
-         <enum>Qt::NoContextMenu</enum>
-        </property>
-       </widget>
-       <widget class="QToolBox" name="toolBox">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="page_5">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>188</width>
-           <height>408</height>
-          </rect>
-         </property>
-         <attribute name="label">
-          <string>Page 1</string>
-         </attribute>
-        </widget>
-        <widget class="QWidget" name="page_6">
-         <property name="geometry">
-          <rect>
-           <x>0</x>
-           <y>0</y>
-           <width>188</width>
-           <height>408</height>
-          </rect>
-         </property>
-         <attribute name="label">
-          <string>Page 2</string>
-         </attribute>
-        </widget>
-       </widget>
       </widget>
-     </item>
-    </layout>
+     </widget>
+    </widget>
    </item>
   </layout>
  </widget>

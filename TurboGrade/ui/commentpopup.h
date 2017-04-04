@@ -4,7 +4,6 @@
 #include <QWidget>
 
 #include "../engine/controller.h"
-#include "../engine/controller.h"
 
 
 namespace Ui {

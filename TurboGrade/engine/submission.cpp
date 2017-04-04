@@ -50,6 +50,23 @@ void Submission::add_comment(int id, QString filename,
 
 }
 
+/**
+ * @brief Submission::get_comment returns a list of comments
+ * on a specific file in the submission
+ * @return the list of comments
+ */
+std::vector<Comment*> Submission::get_comment(QString filename) {
+
+    std::vector<Comment*> result;
+
+    for(Comment* comment : *_comments)
+        if (comment->_filename == filename)
+            result.push_back(comment);
+
+    return result;
+
+}
+
 
 /**
  * @brief Submission::add_grade adds a grade to a specific criterion,

@@ -39,19 +39,9 @@ public:
                      Criterion *criterion,
                      QString text, int grade,
                      int start_pos, int end_pos);
+    // Get comments on a file
+    std::vector<Comment*> get_comment(QString filename);
 
-
-
-    /**********************************
-     *    Grade Related Operations    *
-     **********************************/
-    void set_curr_submission(Submission *submission);
-
-    void refresh_grades_map(Submission *submission);
-
-    void refresh_criteria_vec(Submission *submission);
-
-    //ASSUMING ONLY 1 SUBMISSION BEING WORKED ON AT ONCE
 
     //returns map of all criterion and their corresp. grades
     std::map<Criterion*, int> *get_grades();

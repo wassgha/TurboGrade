@@ -26,6 +26,10 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->treeView->hideColumn(3);
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
 
+    auto layout = new QVBoxLayout();
+    ui->comments->setLayout(layout);
+
+
     setupCodeEditor("Main.java");
     refresh_criteria();
 
@@ -84,6 +88,7 @@ void CodeView::add_comment() {
                                           ui->editor->textCursor().selectionEnd());
         _popup->val("criterion");
     }
+    refresh_comments();
 }
 
 void CodeView::refresh_criteria() {
@@ -101,9 +106,14 @@ void CodeView::refresh_criteria() {
 CodeView::~CodeView()
 {
 
+    for (CommentCard *comment_card : _comment_cards) {
+        _comment_cards.erase(std::remove(_comment_cards.begin(), _comment_cards.end(), comment_card), _comment_cards.end());
+        delete comment_card;
+    }
     delete _popup;
     delete _model;
     delete ui;
+
 }
 
 void CodeView::loadFile(QModelIndex item)
@@ -112,6 +122,26 @@ void CodeView::loadFile(QModelIndex item)
         QFile file(_model->filePath(item));
         if (file.open(QFile::ReadOnly | QFile::Text))
             ui->editor->setPlainText(file.readAll());
+    }
+
+    refresh_comments();
+}
+
+void CodeView::refresh_comments() {
+    // Get the file name from the tree view
+    QString file_name = _model->data(ui->treeView->currentIndex()).toString();
+    // Remove old comments
+    for (CommentCard *comment_card : _comment_cards) {
+        if (comment_card != nullptr && comment_card != 0)
+           delete comment_card;
+        _comment_cards.erase(std::remove(_comment_cards.begin(), _comment_cards.end(), comment_card), _comment_cards.end());
+    }
+    // Add the comments to the sidebar
+    for (Comment* comment : _parent->_submission->get_comment(file_name)) {
+        CommentCard *comment_card = new CommentCard(this, comment);
+        _comment_cards.push_back(comment_card);
+        ui->comments->layout()->addWidget(comment_card);
+        comment_card->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     }
 }
 

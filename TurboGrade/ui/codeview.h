@@ -15,6 +15,9 @@
 #include "commentpopup.h"
 #include "ui_commentpopup.h"
 
+#include "commentcard.h"
+#include "ui_commentcard.h"
+
 #include "gradeview.h"
 #include "ui_gradeview.h"
 
@@ -43,6 +46,7 @@ public:
     Ui::CodeView *ui;
     Controller *_controller;
     GradeSubmission *_parent;
+    std::vector<CommentCard*> _comment_cards;
 
 public slots:
     void getSelection();
@@ -54,6 +58,7 @@ private:
     void refresh_criteria();
     void setupCodeEditor(const QString &file_name);
     bool eventFilter(QObject *obj, QEvent *event);
+    void refresh_comments();
 
     CommentPopup *_popup = new CommentPopup(this);
     QFileSystemModel *_model;
