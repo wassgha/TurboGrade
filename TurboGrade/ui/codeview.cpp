@@ -140,7 +140,6 @@ void CodeView::refresh_comments() {
         CommentCard *comment_card = new CommentCard(this, comment);
         _comment_cards.push_back(comment_card);
         ui->comment_layout->addWidget(comment_card);
-        comment_card->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
     }
 }
 

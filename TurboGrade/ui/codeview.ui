@@ -170,6 +170,9 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
         </size>
        </property>
        <layout class="QVBoxLayout" name="comment_layout">
+        <property name="leftMargin">
+         <number>12</number>
+        </property>
         <item>
          <widget class="QLabel" name="comments_title">
           <property name="text">
