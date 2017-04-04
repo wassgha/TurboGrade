@@ -17,9 +17,9 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
                                    + QString::number(abs(_comment->_grade))
                                    + " )");
     if (_comment->_grade > 0) {
-        ui->adjust_grade->setStyle("#adjust_grade { color : rgb(27, 172, 37); }");
+        ui->adjust_grade->setStyleSheet("#adjust_grade { color : rgb(27, 172, 37); }");
     } else {
-        ui->adjust_grade->setStyle("#adjust_grade { color : rgb(195, 0, 66); }");
+        ui->adjust_grade->setStyleSheet("#adjust_grade { color : rgb(195, 0, 66); }");
     }
 
     ui->comment->setText(_comment->_text);
