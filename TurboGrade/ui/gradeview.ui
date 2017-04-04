@@ -63,7 +63,8 @@ color:white;
 
 #scrollArea   {
 	/* background-color:rgb(83, 86, 99); */
-	background: #2b303c;
+	/* background: #2b303c; */
+	background-color:transparent;
 	border-radius:3px;
 }
 QAbstractScrollArea #scrollAreaWidgetContents  {

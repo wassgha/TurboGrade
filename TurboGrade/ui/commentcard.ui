@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>386</width>
-    <height>96</height>
+    <height>98</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -138,7 +138,7 @@
         <string notr="true"/>
        </property>
        <property name="text">
-        <string>EDIT Comment</string>
+        <string>EDIT</string>
        </property>
        <property name="flat">
         <bool>true</bool>

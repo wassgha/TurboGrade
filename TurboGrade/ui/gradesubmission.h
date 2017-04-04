@@ -2,6 +2,7 @@
 #define GRADESUBMISSION_H
 
 #include <QWidget>
+#include <QTimer>
 
 #include "../engine/controller.h"
 #include "../engine/controller.h"
