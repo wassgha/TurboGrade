@@ -83,6 +83,24 @@ QGroupBox::title {
 	margin-left: 10px;
 	background:transparent;
 	font-weight: bold;
+}
+
+
+
+
+
+QWidget#general_comments_box {
+	background: #ffea8d;
+	border-radius: 3px;
+}
+#general_comments {
+	background: transparent;
+}
+#general_comments_label {
+	text-transform: uppercase;
+	color: rgb(107, 100, 51);
+	font-weight: bold;
+	padding: 0px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -127,7 +145,7 @@ QGroupBox::title {
         <x>0</x>
         <y>0</y>
         <width>659</width>
-        <height>672</height>
+        <height>809</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -155,6 +173,29 @@ QGroupBox::title {
        <property name="bottomMargin">
         <number>15</number>
        </property>
+       <item>
+        <widget class="QWidget" name="general_comments_box" native="true">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLabel" name="general_comments_label">
+            <property name="text">
+             <string>GENERAL COMMENTS ON THIS SUBMISSION</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QTextEdit" name="general_comments">
+            <property name="sizeAdjustPolicy">
+             <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+            </property>
+            <property name="placeholderText">
+             <string>Enter any comments related to the submission as a whole here...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="sizePolicy">
