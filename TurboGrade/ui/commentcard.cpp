@@ -18,6 +18,8 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
                                    + " )");
     if (_comment->_grade > 0) {
         ui->adjust_grade->setStyleSheet("#adjust_grade { color : rgb(27, 172, 37); }");
+    } else if (_comment->_grade == 0) {
+        ui->adjust_grade->hide();
     } else {
         ui->adjust_grade->setStyleSheet("#adjust_grade { color : rgb(195, 0, 66); }");
     }

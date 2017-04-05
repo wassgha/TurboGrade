@@ -24,9 +24,9 @@ Dashboard::Dashboard(QWidget *parent) :
     cs105->add_section(-1, "03");
     _controller->add_assignment(-1, "Binary Search Tree", "Implement a binary search tree with polymorphism");
     Assignment *bst_assignment = _controller->get_assignments()->at(0);
-    cs150_02->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS150_02");
+    cs150_02->add_assignment(bst_assignment);
     Section* cs105_01 = cs105->_sections->at(0);
-    cs105_01->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS105_01");
+    cs105_01->add_assignment(bst_assignment);
 
 
     bst_assignment->_rubric->add_criterion(-1, "Correctness", NULL, 10);
