@@ -11,7 +11,8 @@ SOURCES     +=  main.cpp \
     pdfwindow.cpp \
     htmltopdf.cpp \
     dirtools.cpp \
-    macadress.cpp
+    macadress.cpp \
+    csvgenerator.cpp
 
 HEADERS     += \
                 syntaxhighlight.h \
@@ -22,7 +23,8 @@ HEADERS     += \
     pdfwindow.h \
     htmltopdf.h \
     dirtools.h \
-    macadress.h
+    macadress.h \
+    csvgenerator.h
 
 FORMS += \
     pdfwindow.ui
