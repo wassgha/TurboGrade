@@ -13,11 +13,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     _parent = dynamic_cast<GradeSubmission*>(parent);
 
     _popup = new CommentPopup(this);
-
-    _completer = new QCompleter(_controller->_all_comments, this);
-    _completer->setCompletionMode(QCompleter::InlineCompletion);
-    _completer->setCaseSensitivity(Qt::CaseInsensitive);
-    _popup->ui->comment->setCompleter(_completer);
+    refresh_autocomplete();
 
     _model = new QFileSystemModel;
     _model->setRootPath(_parent->_submission->getPath());
@@ -116,6 +112,7 @@ CodeView::~CodeView()
         delete comment_card;
     }
     _comment_cards.clear();
+    delete _completer;
     delete _popup;
     delete _model;
     delete ui;
@@ -154,6 +151,8 @@ void CodeView::refresh_comments() {
         connect(comment_card, SIGNAL(mouseOver(Comment*)), this, SLOT(highlight_comment(Comment *)));
         connect(comment_card, SIGNAL(mouseOut(Comment*)), this, SLOT(unhighlight_comment(Comment *)));
     }
+
+    refresh_autocomplete();
 }
 
 void CodeView::setupCodeEditor(const QString &file_name)
@@ -198,4 +197,11 @@ void CodeView::highlight_comment(Comment * comment) {
 void CodeView::unhighlight_comment(Comment * comment) {
     QList<QTextEdit::ExtraSelection> extraSelections;
     ui->editor->setExtraSelections(extraSelections);
+}
+
+void CodeView::refresh_autocomplete() {
+    _completer = new QCompleter(_controller->_all_comments, this);
+    _completer->setCompletionMode(QCompleter::InlineCompletion);
+    _completer->setCaseSensitivity(Qt::CaseInsensitive);
+    _popup->ui->comment->setCompleter(_completer);
 }

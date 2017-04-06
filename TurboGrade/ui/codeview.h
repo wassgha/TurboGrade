@@ -62,6 +62,7 @@ private:
     void setupCodeEditor(const QString &file_name);
     bool eventFilter(QObject *obj, QEvent *event);
     void refresh_comments();
+    void refresh_autocomplete();
 
     CommentPopup        *_popup;
     QFileSystemModel    *_model;
