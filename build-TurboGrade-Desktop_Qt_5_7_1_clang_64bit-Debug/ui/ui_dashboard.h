@@ -22,6 +22,7 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "clickablelabel.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -30,9 +31,10 @@ class Ui_Dashboard
 public:
     QVBoxLayout *verticalLayout;
     QHBoxLayout *header;
-    QLabel *logo;
+    ClickableLabel *logo;
     QSpacerItem *spacer;
     QLabel *last_synced;
+    QLabel *network_indicator;
     QGroupBox *tutorial;
     QVBoxLayout *verticalLayout_2;
     QLabel *tutorial_head;
@@ -53,6 +55,19 @@ public:
         Dashboard->setStyleSheet(QLatin1String("QWidget#Dashboard {\n"
 "	background: #434653;\n"
 "}\n"
+"\n"
+"#network_indicator {\n"
+"	background: rgb(36, 255, 6);\n"
+"	width: 6px;\n"
+"	height: 6px;\n"
+"	min-width: 6px;\n"
+"	min-height: 6px;\n"
+"	max-width: 6px;\n"
+"	max-height: 6px;\n"
+"	border-radius: 3px;\n"
+"	margin: 5px;\n"
+"}\n"
+"\n"
 "#add {\n"
 "	padding: 10px;\n"
 "	padding-left: 15px;\n"
@@ -86,7 +101,8 @@ public:
 "	border: 1px solid rgb(255, 255, 255);\n"
 "	text-transform: uppercase;\n"
 "	max-width: 170px;\n"
-"	padding: 8px;\n"
+"	p"
+                        "adding: 8px;\n"
 "	text-align:center;\n"
 "	height: 20px;\n"
 "	margin: 0px;\n"
@@ -107,7 +123,7 @@ public:
         header->setObjectName(QStringLiteral("header"));
         header->setSizeConstraint(QLayout::SetDefaultConstraint);
         header->setContentsMargins(12, 12, 12, 12);
-        logo = new QLabel(Dashboard);
+        logo = new ClickableLabel(Dashboard);
         logo->setObjectName(QStringLiteral("logo"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -115,6 +131,7 @@ public:
         sizePolicy.setHeightForWidth(logo->sizePolicy().hasHeightForWidth());
         logo->setSizePolicy(sizePolicy);
         logo->setMaximumSize(QSize(100, 24));
+        logo->setCursor(QCursor(Qt::PointingHandCursor));
         logo->setTextFormat(Qt::PlainText);
         logo->setPixmap(QPixmap(QString::fromUtf8(":/logo/res/logodark.png")));
         logo->setScaledContents(true);
@@ -130,6 +147,11 @@ public:
         last_synced->setObjectName(QStringLiteral("last_synced"));
 
         header->addWidget(last_synced);
+
+        network_indicator = new QLabel(Dashboard);
+        network_indicator->setObjectName(QStringLiteral("network_indicator"));
+
+        header->addWidget(network_indicator);
 
 
         verticalLayout->addLayout(header);
@@ -208,6 +230,7 @@ public:
         Dashboard->setWindowTitle(QApplication::translate("Dashboard", "Form", Q_NULLPTR));
         logo->setText(QString());
         last_synced->setText(QApplication::translate("Dashboard", "Last synced : 5 seconds ago", Q_NULLPTR));
+        network_indicator->setText(QString());
         tutorial->setTitle(QString());
         tutorial_head->setText(QApplication::translate("Dashboard", "New to TurboGrade?", Q_NULLPTR));
         tutorial_text->setText(QApplication::translate("Dashboard", "Take a look at our tutorials on Youtube.", Q_NULLPTR));

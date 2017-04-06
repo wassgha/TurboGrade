@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -g -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -g -std=gnu++11 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../../TurboGrade/ui -I. -I../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib
+INCPATH       = -I../../TurboGrade/ui -I. -I../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib
 QMAKE         = /Users/SamuelLawrence/Qt/5.7/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = ui1.0.0
 DISTDIR = /Users/SamuelLawrence/project/build-TurboGrade-Desktop_Qt_5_7_1_clang_64bit-Debug/ui/.tmp/ui1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -Wl,-rpath,/Users/SamuelLawrence/Qt/5.7/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework QtSql -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib -framework QtPrintSupport -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework QtSql -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -60,6 +60,7 @@ SOURCES       = ../../TurboGrade/ui/main.cpp \
 		../../TurboGrade/db/submissiondb.cpp \
 		../../TurboGrade/db/rubricdb.cpp \
 		../../TurboGrade/db/commentdb.cpp \
+		../../TurboGrade/db/gradedb.cpp \
 		../../TurboGrade/engine/controller.cpp \
 		../../TurboGrade/engine/course.cpp \
 		../../TurboGrade/engine/section.cpp \
@@ -74,8 +75,18 @@ SOURCES       = ../../TurboGrade/ui/main.cpp \
 		../../TurboGrade/ui/codeview.cpp \
 		../../TurboGrade/ui/gradeview.cpp \
 		../../TurboGrade/ui/dashboard.cpp \
-		../../TurboGrade/ui/courses.cpp \
-		../../TurboGrade/ui/newcourse.cpp qrc_resources.cpp \
+		../../TurboGrade/ui/card.cpp \
+		../../TurboGrade/ui/cardsview.cpp \
+		../../TurboGrade/ui/clickablelabel.cpp \
+		../../TurboGrade/ui/breadcrumb.cpp \
+		../../TurboGrade/ui/courseview.cpp \
+		../../TurboGrade/ui/sectionview.cpp \
+		../../TurboGrade/ui/assignmentview.cpp \
+		../../TurboGrade/ui/listview.cpp \
+		../../TurboGrade/ui/studentview.cpp \
+		../../TurboGrade/ui/switcher.cpp \
+		../../TurboGrade/ui/formdialog.cpp \
+		../../TurboGrade/ui/rubricview.cpp qrc_resources.cpp \
 		moc_syntaxhighlight.cpp \
 		moc_codeeditor.cpp \
 		moc_commentpopup.cpp \
@@ -83,8 +94,18 @@ SOURCES       = ../../TurboGrade/ui/main.cpp \
 		moc_codeview.cpp \
 		moc_gradeview.cpp \
 		moc_dashboard.cpp \
-		moc_courses.cpp \
-		moc_newcourse.cpp
+		moc_card.cpp \
+		moc_cardsview.cpp \
+		moc_courseview.cpp \
+		moc_sectionview.cpp \
+		moc_assignmentview.cpp \
+		moc_clickablelabel.cpp \
+		moc_breadcrumb.cpp \
+		moc_listview.cpp \
+		moc_studentview.cpp \
+		moc_switcher.cpp \
+		moc_formdialog.cpp \
+		moc_rubricview.cpp
 OBJECTS       = main.o \
 		objectidentifier.o \
 		syntaxhighlight.o \
@@ -97,6 +118,7 @@ OBJECTS       = main.o \
 		submissiondb.o \
 		rubricdb.o \
 		commentdb.o \
+		gradedb.o \
 		controller.o \
 		course.o \
 		section.o \
@@ -111,8 +133,18 @@ OBJECTS       = main.o \
 		codeview.o \
 		gradeview.o \
 		dashboard.o \
-		courses.o \
-		newcourse.o \
+		card.o \
+		cardsview.o \
+		clickablelabel.o \
+		breadcrumb.o \
+		courseview.o \
+		sectionview.o \
+		assignmentview.o \
+		listview.o \
+		studentview.o \
+		switcher.o \
+		formdialog.o \
+		rubricview.o \
 		qrc_resources.o \
 		moc_syntaxhighlight.o \
 		moc_codeeditor.o \
@@ -121,8 +153,18 @@ OBJECTS       = main.o \
 		moc_codeview.o \
 		moc_gradeview.o \
 		moc_dashboard.o \
-		moc_courses.o \
-		moc_newcourse.o
+		moc_card.o \
+		moc_cardsview.o \
+		moc_courseview.o \
+		moc_sectionview.o \
+		moc_assignmentview.o \
+		moc_clickablelabel.o \
+		moc_breadcrumb.o \
+		moc_listview.o \
+		moc_studentview.o \
+		moc_switcher.o \
+		moc_formdialog.o \
+		moc_rubricview.o
 DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.7/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.7/clang_64/mkspecs/features/device_config.prf \
@@ -293,6 +335,7 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/db/submissiondb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/engine/controller.h \
 		../../TurboGrade/engine/course.h \
 		../../TurboGrade/engine/section.h \
@@ -307,8 +350,18 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../TurboGrade/ui/dashboard.h \
-		../../TurboGrade/ui/courses.h \
-		../../TurboGrade/ui/newcourse.h ../../TurboGrade/ui/main.cpp \
+		../../TurboGrade/ui/card.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../TurboGrade/ui/listview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/switcher.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/ui/rubricview.h ../../TurboGrade/ui/main.cpp \
 		../../TurboGrade/tools/objectidentifier.cpp \
 		../../TurboGrade/tools/syntaxhighlight.cpp \
 		../../TurboGrade/tools/codeeditor.cpp \
@@ -320,6 +373,7 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/db/submissiondb.cpp \
 		../../TurboGrade/db/rubricdb.cpp \
 		../../TurboGrade/db/commentdb.cpp \
+		../../TurboGrade/db/gradedb.cpp \
 		../../TurboGrade/engine/controller.cpp \
 		../../TurboGrade/engine/course.cpp \
 		../../TurboGrade/engine/section.cpp \
@@ -334,8 +388,18 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/ui/codeview.cpp \
 		../../TurboGrade/ui/gradeview.cpp \
 		../../TurboGrade/ui/dashboard.cpp \
-		../../TurboGrade/ui/courses.cpp \
-		../../TurboGrade/ui/newcourse.cpp
+		../../TurboGrade/ui/card.cpp \
+		../../TurboGrade/ui/cardsview.cpp \
+		../../TurboGrade/ui/clickablelabel.cpp \
+		../../TurboGrade/ui/breadcrumb.cpp \
+		../../TurboGrade/ui/courseview.cpp \
+		../../TurboGrade/ui/sectionview.cpp \
+		../../TurboGrade/ui/assignmentview.cpp \
+		../../TurboGrade/ui/listview.cpp \
+		../../TurboGrade/ui/studentview.cpp \
+		../../TurboGrade/ui/switcher.cpp \
+		../../TurboGrade/ui/formdialog.cpp \
+		../../TurboGrade/ui/rubricview.cpp
 QMAKE_TARGET  = ui
 DESTDIR       = 
 TARGET        = ui.app/Contents/MacOS/ui
@@ -344,7 +408,7 @@ TARGET        = ui.app/Contents/MacOS/ui
 first: all
 ####### Build rules
 
-$(TARGET): ui_commentpopup.h ui_gradesubmission.h ui_codeview.h ui_gradeview.h ui_dashboard.h ui_courses.h ui_newcourse.h $(OBJECTS)  
+$(TARGET): ui_commentpopup.h ui_gradesubmission.h ui_codeview.h ui_gradeview.h ui_dashboard.h ui_card.h ui_cardsview.h ui_breadcrumb.h ui_listview.h ui_formdialog.h ui_rubricview.h $(OBJECTS)  
 	@test -d ui.app/Contents/MacOS/ || mkdir -p ui.app/Contents/MacOS/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -508,6 +572,7 @@ Makefile: ../../TurboGrade/ui/ui.pro ../../../Qt/5.7/clang_64/mkspecs/macx-clang
 		../../../Qt/5.7/clang_64/mkspecs/features/lex.prf \
 		../../TurboGrade/ui/ui.pro \
 		../../TurboGrade/ui/resources.qrc \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/QtSql.prl \
@@ -673,6 +738,7 @@ Makefile: ../../TurboGrade/ui/ui.pro ../../../Qt/5.7/clang_64/mkspecs/macx-clang
 ../../../Qt/5.7/clang_64/mkspecs/features/lex.prf:
 ../../TurboGrade/ui/ui.pro:
 ../../TurboGrade/ui/resources.qrc:
+../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl:
 ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt/5.7/clang_64/lib/QtSql.framework/QtSql.prl:
@@ -707,9 +773,9 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../TurboGrade/ui/resources.qrc $(DISTDIR)/
-	$(COPY_FILE) --parents ../../TurboGrade/tools/syntaxhighlight.h ../../TurboGrade/tools/codeeditor.h ../../TurboGrade/tools/macro.h ../../TurboGrade/tools/objectidentifier.h ../../TurboGrade/db/dbengine.h ../../TurboGrade/db/coursedb.h ../../TurboGrade/db/sectiondb.h ../../TurboGrade/db/studentdb.h ../../TurboGrade/db/assignmentdb.h ../../TurboGrade/db/submissiondb.h ../../TurboGrade/db/rubricdb.h ../../TurboGrade/db/commentdb.h ../../TurboGrade/engine/controller.h ../../TurboGrade/engine/course.h ../../TurboGrade/engine/section.h ../../TurboGrade/engine/student.h ../../TurboGrade/engine/assignment.h ../../TurboGrade/engine/submission.h ../../TurboGrade/engine/rubric.h ../../TurboGrade/engine/criterion.h ../../TurboGrade/engine/comment.h ../../TurboGrade/ui/commentpopup.h ../../TurboGrade/ui/gradesubmission.h ../../TurboGrade/ui/codeview.h ../../TurboGrade/ui/gradeview.h ../../TurboGrade/ui/dashboard.h ../../TurboGrade/ui/courses.h ../../TurboGrade/ui/newcourse.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../TurboGrade/ui/main.cpp ../../TurboGrade/tools/objectidentifier.cpp ../../TurboGrade/tools/syntaxhighlight.cpp ../../TurboGrade/tools/codeeditor.cpp ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/comment.cpp ../../TurboGrade/ui/commentpopup.cpp ../../TurboGrade/ui/gradesubmission.cpp ../../TurboGrade/ui/codeview.cpp ../../TurboGrade/ui/gradeview.cpp ../../TurboGrade/ui/dashboard.cpp ../../TurboGrade/ui/courses.cpp ../../TurboGrade/ui/newcourse.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../TurboGrade/ui/commentpopup.ui ../../TurboGrade/ui/gradesubmission.ui ../../TurboGrade/ui/codeview.ui ../../TurboGrade/ui/gradeview.ui ../../TurboGrade/ui/dashboard.ui ../../TurboGrade/ui/courses.ui ../../TurboGrade/ui/newcourse.ui $(DISTDIR)/
+	$(COPY_FILE) --parents ../../TurboGrade/tools/syntaxhighlight.h ../../TurboGrade/tools/codeeditor.h ../../TurboGrade/tools/macro.h ../../TurboGrade/tools/objectidentifier.h ../../TurboGrade/db/dbengine.h ../../TurboGrade/db/coursedb.h ../../TurboGrade/db/sectiondb.h ../../TurboGrade/db/studentdb.h ../../TurboGrade/db/assignmentdb.h ../../TurboGrade/db/submissiondb.h ../../TurboGrade/db/rubricdb.h ../../TurboGrade/db/commentdb.h ../../TurboGrade/db/gradedb.h ../../TurboGrade/engine/controller.h ../../TurboGrade/engine/course.h ../../TurboGrade/engine/section.h ../../TurboGrade/engine/student.h ../../TurboGrade/engine/assignment.h ../../TurboGrade/engine/submission.h ../../TurboGrade/engine/rubric.h ../../TurboGrade/engine/criterion.h ../../TurboGrade/engine/comment.h ../../TurboGrade/ui/commentpopup.h ../../TurboGrade/ui/gradesubmission.h ../../TurboGrade/ui/codeview.h ../../TurboGrade/ui/gradeview.h ../../TurboGrade/ui/dashboard.h ../../TurboGrade/ui/card.h ../../TurboGrade/ui/cardsview.h ../../TurboGrade/ui/courseview.h ../../TurboGrade/ui/sectionview.h ../../TurboGrade/ui/assignmentview.h ../../TurboGrade/ui/clickablelabel.h ../../TurboGrade/ui/breadcrumb.h ../../TurboGrade/ui/listview.h ../../TurboGrade/ui/studentview.h ../../TurboGrade/ui/switcher.h ../../TurboGrade/ui/formdialog.h ../../TurboGrade/ui/rubricview.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../TurboGrade/ui/main.cpp ../../TurboGrade/tools/objectidentifier.cpp ../../TurboGrade/tools/syntaxhighlight.cpp ../../TurboGrade/tools/codeeditor.cpp ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/gradedb.cpp ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/comment.cpp ../../TurboGrade/ui/commentpopup.cpp ../../TurboGrade/ui/gradesubmission.cpp ../../TurboGrade/ui/codeview.cpp ../../TurboGrade/ui/gradeview.cpp ../../TurboGrade/ui/dashboard.cpp ../../TurboGrade/ui/card.cpp ../../TurboGrade/ui/cardsview.cpp ../../TurboGrade/ui/clickablelabel.cpp ../../TurboGrade/ui/breadcrumb.cpp ../../TurboGrade/ui/courseview.cpp ../../TurboGrade/ui/sectionview.cpp ../../TurboGrade/ui/assignmentview.cpp ../../TurboGrade/ui/listview.cpp ../../TurboGrade/ui/studentview.cpp ../../TurboGrade/ui/switcher.cpp ../../TurboGrade/ui/formdialog.cpp ../../TurboGrade/ui/rubricview.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../TurboGrade/ui/commentpopup.ui ../../TurboGrade/ui/gradesubmission.ui ../../TurboGrade/ui/codeview.ui ../../TurboGrade/ui/gradeview.ui ../../TurboGrade/ui/dashboard.ui ../../TurboGrade/ui/card.ui ../../TurboGrade/ui/cardsview.ui ../../TurboGrade/ui/breadcrumb.ui ../../TurboGrade/ui/listview.ui ../../TurboGrade/ui/formdialog.ui ../../TurboGrade/ui/rubricview.ui $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -743,26 +809,34 @@ qrc_resources.cpp: ../../TurboGrade/ui/resources.qrc \
 		../../TurboGrade/ui/res/Roboto-Light.ttf \
 		../../TurboGrade/ui/res/Roboto-Black.ttf \
 		../../TurboGrade/ui/res/Roboto-Bold.ttf \
+		../../TurboGrade/ui/res/home-white.png \
 		../../TurboGrade/ui/res/grade@2X.png \
+		../../TurboGrade/ui/res/save.png \
 		../../TurboGrade/ui/res/grade.png \
+		../../TurboGrade/ui/res/home.png \
+		../../TurboGrade/ui/res/circle.png \
 		../../TurboGrade/ui/res/splitter.png \
+		../../TurboGrade/ui/res/add.png \
 		../../TurboGrade/ui/res/play-button-white.png \
 		../../TurboGrade/ui/res/code@2X.png \
 		../../TurboGrade/ui/res/play-button.png \
 		../../TurboGrade/ui/res/course.png \
+		../../TurboGrade/ui/res/delete.png \
+		../../TurboGrade/ui/res/home-gray.png \
+		../../TurboGrade/ui/res/confirm.png \
 		../../TurboGrade/ui/res/code.png
 	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/rcc -name resources ../../TurboGrade/ui/resources.qrc -o qrc_resources.cpp
 
-compiler_moc_header_make_all: moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_commentpopup.cpp moc_gradesubmission.cpp moc_codeview.cpp moc_gradeview.cpp moc_dashboard.cpp moc_courses.cpp moc_newcourse.cpp
+compiler_moc_header_make_all: moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_commentpopup.cpp moc_gradesubmission.cpp moc_codeview.cpp moc_gradeview.cpp moc_dashboard.cpp moc_card.cpp moc_cardsview.cpp moc_courseview.cpp moc_sectionview.cpp moc_assignmentview.cpp moc_clickablelabel.cpp moc_breadcrumb.cpp moc_listview.cpp moc_studentview.cpp moc_switcher.cpp moc_formdialog.cpp moc_rubricview.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_commentpopup.cpp moc_gradesubmission.cpp moc_codeview.cpp moc_gradeview.cpp moc_dashboard.cpp moc_courses.cpp moc_newcourse.cpp
+	-$(DEL_FILE) moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_commentpopup.cpp moc_gradesubmission.cpp moc_codeview.cpp moc_gradeview.cpp moc_dashboard.cpp moc_card.cpp moc_cardsview.cpp moc_courseview.cpp moc_sectionview.cpp moc_assignmentview.cpp moc_clickablelabel.cpp moc_breadcrumb.cpp moc_listview.cpp moc_studentview.cpp moc_switcher.cpp moc_formdialog.cpp moc_rubricview.cpp
 moc_syntaxhighlight.cpp: ../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/syntaxhighlight.h -o moc_syntaxhighlight.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/syntaxhighlight.h -o moc_syntaxhighlight.cpp
 
 moc_codeeditor.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
@@ -775,11 +849,13 @@ moc_codeeditor.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPl
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/codeeditor.h -o moc_codeeditor.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/codeeditor.h -o moc_codeeditor.cpp
 
 moc_commentpopup.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -821,13 +897,16 @@ moc_commentpopup.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/Q
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/commentpopup.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/commentpopup.h -o moc_commentpopup.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/commentpopup.h -o moc_commentpopup.cpp
 
 moc_gradesubmission.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -869,12 +948,11 @@ moc_gradesubmission.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Header
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
@@ -883,26 +961,57 @@ moc_gradesubmission.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Header
 		../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		ui_codeview.h \
 		../../TurboGrade/ui/gradeview.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		ui_gradeview.h \
 		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
@@ -913,9 +1022,11 @@ moc_gradesubmission.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Header
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/gradesubmission.h -o moc_gradesubmission.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/gradesubmission.h -o moc_gradesubmission.cpp
 
 moc_codeview.cpp: ../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -957,11 +1068,10 @@ moc_codeview.cpp: ../../TurboGrade/engine/controller.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
@@ -972,26 +1082,20 @@ moc_codeview.cpp: ../../TurboGrade/engine/controller.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
@@ -999,13 +1103,52 @@ moc_codeview.cpp: ../../TurboGrade/engine/controller.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
 		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
 		../../TurboGrade/ui/codeview.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/codeview.h -o moc_codeview.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/codeview.h -o moc_codeview.cpp
 
 moc_gradeview.cpp: ../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -1047,41 +1190,34 @@ moc_gradeview.cpp: ../../TurboGrade/engine/controller.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
@@ -1089,24 +1225,58 @@ moc_gradeview.cpp: ../../TurboGrade/engine/controller.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
 		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/gradeview.h -o moc_gradeview.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/gradeview.h -o moc_gradeview.cpp
 
 moc_dashboard.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -1148,26 +1318,67 @@ moc_dashboard.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWid
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
-		../../TurboGrade/ui/dashboard.h \
-		ui_courses.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		../../TurboGrade/ui/dashboard.h \
+		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
 		ui_dashboard.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
@@ -1175,17 +1386,19 @@ moc_dashboard.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWid
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
-		ui_gradesubmission.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
 		../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/dashboard.h -o moc_dashboard.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/dashboard.h -o moc_dashboard.cpp
 
-moc_courses.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+moc_card.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../TurboGrade/ui/card.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/card.h -o moc_card.cpp
+
+moc_cardsview.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
@@ -1193,7 +1406,27 @@ moc_courses.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidge
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -1235,33 +1468,296 @@ moc_courses.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidge
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/cardsview.h -o moc_cardsview.cpp
+
+moc_courseview.cpp: ../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/courseview.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/courseview.h -o moc_courseview.cpp
+
+moc_sectionview.cpp: ../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/sectionview.h -o moc_sectionview.cpp
+
+moc_assignmentview.cpp: ../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
 		../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		ui_dashboard.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
@@ -1269,13 +1765,78 @@ moc_courses.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidge
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
 		ui_gradesubmission.h \
-		../../TurboGrade/ui/courses.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
+		../../TurboGrade/ui/assignmentview.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/courses.h -o moc_courses.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/assignmentview.h -o moc_assignmentview.cpp
 
-moc_newcourse.cpp: ../../TurboGrade/engine/controller.h \
+moc_clickablelabel.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/clickablelabel.h -o moc_clickablelabel.cpp
+
+moc_breadcrumb.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/breadcrumb.h -o moc_breadcrumb.cpp
+
+moc_listview.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -1317,17 +1878,274 @@ moc_newcourse.cpp: ../../TurboGrade/engine/controller.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		../../TurboGrade/ui/newcourse.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		../../TurboGrade/ui/listview.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/newcourse.h -o moc_newcourse.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/listview.h -o moc_listview.cpp
+
+moc_studentview.cpp: ../../TurboGrade/ui/listview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_listview.h \
+		../../TurboGrade/ui/dashboard.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
+		../../TurboGrade/ui/gradesubmission.h \
+		../../TurboGrade/ui/codeview.h \
+		../../TurboGrade/tools/codeeditor.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
+		../../TurboGrade/tools/syntaxhighlight.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/commentpopup.h \
+		ui_commentpopup.h \
+		../../TurboGrade/ui/gradeview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		ui_codeview.h \
+		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/studentview.h -o moc_studentview.cpp
+
+moc_switcher.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/switcher.h -o moc_switcher.cpp
+
+moc_formdialog.cpp: ../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/formdialog.h -o moc_formdialog.cpp
+
+moc_rubricview.cpp: ../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		../../TurboGrade/ui/rubricview.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/ui -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtSql.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/ui/rubricview.h -o moc_rubricview.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
-compiler_uic_make_all: ui_commentpopup.h ui_gradesubmission.h ui_codeview.h ui_gradeview.h ui_dashboard.h ui_courses.h ui_newcourse.h
+compiler_uic_make_all: ui_commentpopup.h ui_gradesubmission.h ui_codeview.h ui_gradeview.h ui_dashboard.h ui_card.h ui_cardsview.h ui_breadcrumb.h ui_listview.h ui_formdialog.h ui_rubricview.h
 compiler_uic_clean:
-	-$(DEL_FILE) ui_commentpopup.h ui_gradesubmission.h ui_codeview.h ui_gradeview.h ui_dashboard.h ui_courses.h ui_newcourse.h
+	-$(DEL_FILE) ui_commentpopup.h ui_gradesubmission.h ui_codeview.h ui_gradeview.h ui_dashboard.h ui_card.h ui_cardsview.h ui_breadcrumb.h ui_listview.h ui_formdialog.h ui_rubricview.h
 ui_commentpopup.h: ../../TurboGrade/ui/commentpopup.ui \
 		../../../Qt/5.7/clang_64/bin/uic
 	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/commentpopup.ui -o ui_commentpopup.h
@@ -1355,16 +2173,37 @@ ui_gradeview.h: ../../TurboGrade/ui/gradeview.ui \
 	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/gradeview.ui -o ui_gradeview.h
 
 ui_dashboard.h: ../../TurboGrade/ui/dashboard.ui \
-		../../../Qt/5.7/clang_64/bin/uic
+		../../../Qt/5.7/clang_64/bin/uic \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h
 	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/dashboard.ui -o ui_dashboard.h
 
-ui_courses.h: ../../TurboGrade/ui/courses.ui \
+ui_card.h: ../../TurboGrade/ui/card.ui \
 		../../../Qt/5.7/clang_64/bin/uic
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/courses.ui -o ui_courses.h
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/card.ui -o ui_card.h
 
-ui_newcourse.h: ../../TurboGrade/ui/newcourse.ui \
+ui_cardsview.h: ../../TurboGrade/ui/cardsview.ui \
 		../../../Qt/5.7/clang_64/bin/uic
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/newcourse.ui -o ui_newcourse.h
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/cardsview.ui -o ui_cardsview.h
+
+ui_breadcrumb.h: ../../TurboGrade/ui/breadcrumb.ui \
+		../../../Qt/5.7/clang_64/bin/uic
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/breadcrumb.ui -o ui_breadcrumb.h
+
+ui_listview.h: ../../TurboGrade/ui/listview.ui \
+		../../../Qt/5.7/clang_64/bin/uic
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/listview.ui -o ui_listview.h
+
+ui_formdialog.h: ../../TurboGrade/ui/formdialog.ui \
+		../../../Qt/5.7/clang_64/bin/uic
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/formdialog.ui -o ui_formdialog.h
+
+ui_rubricview.h: ../../TurboGrade/ui/rubricview.ui \
+		../../../Qt/5.7/clang_64/bin/uic
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/uic ../../TurboGrade/ui/rubricview.ui -o ui_rubricview.h
 
 compiler_rez_source_make_all:
 compiler_rez_source_clean:
@@ -1383,14 +2222,11 @@ main.o: ../../TurboGrade/ui/main.cpp ../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -1432,29 +2268,27 @@ main.o: ../../TurboGrade/ui/main.cpp ../../TurboGrade/ui/dashboard.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
@@ -1462,8 +2296,46 @@ main.o: ../../TurboGrade/ui/main.cpp ../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
 		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
+		../../TurboGrade/ui/rubricview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../TurboGrade/ui/main.cpp
@@ -1619,6 +2491,8 @@ codeeditor.o: ../../TurboGrade/tools/codeeditor.cpp ../../../Qt/5.7/clang_64/lib
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o codeeditor.o ../../TurboGrade/tools/codeeditor.cpp
 
 dbengine.o: ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1644,6 +2518,8 @@ dbengine.o: ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/dbengine.h \
 
 coursedb.o: ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1666,8 +2542,8 @@ coursedb.o: ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/coursedb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1683,11 +2559,14 @@ coursedb.o: ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coursedb.o ../../TurboGrade/db/coursedb.cpp
 
 sectiondb.o: ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1710,8 +2589,8 @@ sectiondb.o: ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/sectiondb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1727,11 +2606,14 @@ sectiondb.o: ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sectiondb.o ../../TurboGrade/db/sectiondb.cpp
 
 studentdb.o: ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1754,8 +2636,8 @@ studentdb.o: ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/studentdb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1771,11 +2653,14 @@ studentdb.o: ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o studentdb.o ../../TurboGrade/db/studentdb.cpp
 
 assignmentdb.o: ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/assignmentdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1798,8 +2683,8 @@ assignmentdb.o: ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/assignm
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1815,11 +2700,14 @@ assignmentdb.o: ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/assignm
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assignmentdb.o ../../TurboGrade/db/assignmentdb.cpp
 
 submissiondb.o: ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/submissiondb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1842,8 +2730,8 @@ submissiondb.o: ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/submiss
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1859,11 +2747,14 @@ submissiondb.o: ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/submiss
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o submissiondb.o ../../TurboGrade/db/submissiondb.cpp
 
 rubricdb.o: ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1886,8 +2777,8 @@ rubricdb.o: ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/rubricdb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1903,11 +2794,14 @@ rubricdb.o: ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rubricdb.o ../../TurboGrade/db/rubricdb.cpp
 
 commentdb.o: ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/commentdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -1930,8 +2824,8 @@ commentdb.o: ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/commentdb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1947,10 +2841,60 @@ commentdb.o: ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/commentdb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
-		../../TurboGrade/db/studentdb.h
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o commentdb.o ../../TurboGrade/db/commentdb.cpp
 
+gradedb.o: ../../TurboGrade/db/gradedb.cpp ../../TurboGrade/db/gradedb.h \
+		../../TurboGrade/engine/submission.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gradedb.o ../../TurboGrade/db/gradedb.cpp
+
 controller.o: ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -1991,12 +2935,15 @@ controller.o: ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/con
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../../TurboGrade/engine/controller.cpp
 
 course.o: ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -2035,12 +2982,15 @@ course.o: ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/course.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o course.o ../../TurboGrade/engine/course.cpp
 
 section.o: ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/section.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -2079,12 +3029,15 @@ section.o: ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/section.h
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o section.o ../../TurboGrade/engine/section.cpp
 
 student.o: ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/student.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -2123,7 +3076,8 @@ student.o: ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/student.h
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o student.o ../../TurboGrade/engine/student.cpp
 
 assignment.o: ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/assignment.h \
@@ -2132,6 +3086,8 @@ assignment.o: ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/ass
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../TurboGrade/engine/section.h \
 		../../TurboGrade/engine/student.h \
@@ -2167,12 +3123,15 @@ assignment.o: ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/ass
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assignment.o ../../TurboGrade/engine/assignment.cpp
 
 submission.o: ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/submission.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -2211,12 +3170,15 @@ submission.o: ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/sub
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o submission.o ../../TurboGrade/engine/submission.cpp
 
 rubric.o: ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/rubric.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -2255,12 +3217,15 @@ rubric.o: ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/rubric.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rubric.o ../../TurboGrade/engine/rubric.cpp
 
 criterion.o: ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/criterion.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -2299,12 +3264,15 @@ criterion.o: ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/crite
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o criterion.o ../../TurboGrade/engine/criterion.cpp
 
 comment.o: ../../TurboGrade/engine/comment.cpp ../../TurboGrade/engine/comment.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -2343,13 +3311,16 @@ comment.o: ../../TurboGrade/engine/comment.cpp ../../TurboGrade/engine/comment.h
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o comment.o ../../TurboGrade/engine/comment.cpp
 
 commentpopup.o: ../../TurboGrade/ui/commentpopup.cpp ../../TurboGrade/ui/commentpopup.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -2391,6 +3362,7 @@ commentpopup.o: ../../TurboGrade/ui/commentpopup.cpp ../../TurboGrade/ui/comment
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		ui_commentpopup.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o commentpopup.o ../../TurboGrade/ui/commentpopup.cpp
 
@@ -2398,6 +3370,8 @@ gradesubmission.o: ../../TurboGrade/ui/gradesubmission.cpp ../../TurboGrade/ui/g
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -2439,12 +3413,11 @@ gradesubmission.o: ../../TurboGrade/ui/gradesubmission.cpp ../../TurboGrade/ui/g
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
@@ -2453,37 +3426,70 @@ gradesubmission.o: ../../TurboGrade/ui/gradesubmission.cpp ../../TurboGrade/ui/g
 		../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
+		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
-		ui_gradesubmission.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
+		ui_dashboard.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
-		ui_codeview.h \
-		ui_gradeview.h
+		ui_codeview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gradesubmission.o ../../TurboGrade/ui/gradesubmission.cpp
 
 codeview.o: ../../TurboGrade/ui/codeview.cpp ../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -2525,11 +3531,10 @@ codeview.o: ../../TurboGrade/ui/codeview.cpp ../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
@@ -2540,26 +3545,57 @@ codeview.o: ../../TurboGrade/ui/codeview.cpp ../../TurboGrade/ui/codeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		ui_codeview.h \
 		../../TurboGrade/ui/gradeview.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		ui_gradeview.h \
 		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
@@ -2572,6 +3608,8 @@ codeview.o: ../../TurboGrade/ui/codeview.cpp ../../TurboGrade/ui/codeview.h \
 
 gradeview.o: ../../TurboGrade/ui/gradeview.cpp ../../TurboGrade/ui/gradeview.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -2613,38 +3651,31 @@ gradeview.o: ../../TurboGrade/ui/gradeview.cpp ../../TurboGrade/ui/gradeview.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
@@ -2654,8 +3685,45 @@ gradeview.o: ../../TurboGrade/ui/gradeview.cpp ../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
-		ui_gradesubmission.h
+		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gradeview.o ../../TurboGrade/ui/gradeview.cpp
 
 dashboard.o: ../../TurboGrade/ui/dashboard.cpp ../../TurboGrade/ui/dashboard.h \
@@ -2663,14 +3731,11 @@ dashboard.o: ../../TurboGrade/ui/dashboard.cpp ../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		../../TurboGrade/ui/courses.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -2712,29 +3777,27 @@ dashboard.o: ../../TurboGrade/ui/dashboard.cpp ../../TurboGrade/ui/dashboard.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
-		ui_dashboard.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h \
-		ui_courses.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../TurboGrade/ui/commentpopup.h \
 		ui_commentpopup.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
@@ -2742,11 +3805,56 @@ dashboard.o: ../../TurboGrade/ui/dashboard.cpp ../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
-		ui_gradesubmission.h
+		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dashboard.o ../../TurboGrade/ui/dashboard.cpp
 
-courses.o: ../../TurboGrade/ui/courses.cpp ../../TurboGrade/ui/courses.h \
+card.o: ../../TurboGrade/ui/card.cpp ../../TurboGrade/ui/card.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		ui_card.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o card.o ../../TurboGrade/ui/card.cpp
+
+cardsview.o: ../../TurboGrade/ui/cardsview.cpp ../../TurboGrade/ui/cardsview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
@@ -2755,7 +3863,27 @@ courses.o: ../../TurboGrade/ui/courses.cpp ../../TurboGrade/ui/courses.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -2797,17 +3925,312 @@ courses.o: ../../TurboGrade/ui/courses.cpp ../../TurboGrade/ui/courses.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cardsview.o ../../TurboGrade/ui/cardsview.cpp
+
+clickablelabel.o: ../../TurboGrade/ui/clickablelabel.cpp ../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clickablelabel.o ../../TurboGrade/ui/clickablelabel.cpp
+
+breadcrumb.o: ../../TurboGrade/ui/breadcrumb.cpp ../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o breadcrumb.o ../../TurboGrade/ui/breadcrumb.cpp
+
+courseview.o: ../../TurboGrade/ui/courseview.cpp ../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o courseview.o ../../TurboGrade/ui/courseview.cpp
+
+sectionview.o: ../../TurboGrade/ui/sectionview.cpp ../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sectionview.o ../../TurboGrade/ui/sectionview.cpp
+
+assignmentview.o: ../../TurboGrade/ui/assignmentview.cpp ../../TurboGrade/ui/assignmentview.h \
+		../../TurboGrade/ui/cardsview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_cardsview.h \
 		../../TurboGrade/ui/dashboard.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
-		ui_courses.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
 		../../TurboGrade/ui/gradesubmission.h \
 		../../TurboGrade/ui/codeview.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
@@ -2819,6 +4242,7 @@ courses.o: ../../TurboGrade/ui/courses.cpp ../../TurboGrade/ui/courses.h \
 		../../TurboGrade/ui/gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
@@ -2826,16 +4250,44 @@ courses.o: ../../TurboGrade/ui/courses.cpp ../../TurboGrade/ui/courses.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
 		ui_codeview.h \
-		ui_gradeview.h \
 		ui_gradesubmission.h \
-		../../TurboGrade/ui/newcourse.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o courses.o ../../TurboGrade/ui/courses.cpp
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		ui_listview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assignmentview.o ../../TurboGrade/ui/assignmentview.cpp
 
-newcourse.o: ../../TurboGrade/ui/newcourse.cpp ../../TurboGrade/ui/newcourse.h \
+listview.o: ../../TurboGrade/ui/listview.cpp ../../TurboGrade/ui/listview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -2877,10 +4329,264 @@ newcourse.o: ../../TurboGrade/ui/newcourse.cpp ../../TurboGrade/ui/newcourse.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
-		ui_newcourse.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o newcourse.o ../../TurboGrade/ui/newcourse.cpp
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_listview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o listview.o ../../TurboGrade/ui/listview.cpp
+
+studentview.o: ../../TurboGrade/ui/studentview.cpp ../../TurboGrade/ui/studentview.h \
+		../../TurboGrade/ui/listview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QGroupBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../TurboGrade/ui/breadcrumb.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QSignalMapper \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qsignalmapper.h \
+		../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent \
+		ui_breadcrumb.h \
+		../../TurboGrade/ui/clickablelabel.h \
+		../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h \
+		../../TurboGrade/ui/card.h \
+		ui_card.h \
+		ui_listview.h \
+		../../TurboGrade/ui/dashboard.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QDesktopServices \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qdesktopservices.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFontDatabase \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfontdatabase.h \
+		../../TurboGrade/ui/gradesubmission.h \
+		../../TurboGrade/ui/codeview.h \
+		../../TurboGrade/tools/codeeditor.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
+		../../TurboGrade/tools/syntaxhighlight.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
+		ui_dashboard.h \
+		../../TurboGrade/ui/commentpopup.h \
+		ui_commentpopup.h \
+		../../TurboGrade/ui/gradeview.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_gradeview.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QModelIndex \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qabstractitemmodel.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QFileSystemModel \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qfilesystemmodel.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QProcess \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qprocess.h \
+		ui_codeview.h \
+		ui_gradesubmission.h \
+		../../TurboGrade/ui/courseview.h \
+		../../TurboGrade/ui/cardsview.h \
+		ui_cardsview.h \
+		../../TurboGrade/ui/sectionview.h \
+		../../TurboGrade/ui/assignmentview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o studentview.o ../../TurboGrade/ui/studentview.cpp
+
+switcher.o: ../../TurboGrade/ui/switcher.cpp ../../TurboGrade/ui/switcher.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QBrush \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qbrush.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPaintEvent
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o switcher.o ../../TurboGrade/ui/switcher.cpp
+
+formdialog.o: ../../TurboGrade/ui/formdialog.cpp ../../TurboGrade/ui/formdialog.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_formdialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o formdialog.o ../../TurboGrade/ui/formdialog.cpp
+
+rubricview.o: ../../TurboGrade/ui/rubricview.cpp ../../TurboGrade/ui/rubricview.h \
+		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QTextEdit \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qtextedit.h \
+		ui_rubricview.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rubricview.o ../../TurboGrade/ui/rubricview.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
@@ -2906,11 +4612,41 @@ moc_gradeview.o: moc_gradeview.cpp
 moc_dashboard.o: moc_dashboard.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_dashboard.o moc_dashboard.cpp
 
-moc_courses.o: moc_courses.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_courses.o moc_courses.cpp
+moc_card.o: moc_card.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_card.o moc_card.cpp
 
-moc_newcourse.o: moc_newcourse.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_newcourse.o moc_newcourse.cpp
+moc_cardsview.o: moc_cardsview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_cardsview.o moc_cardsview.cpp
+
+moc_courseview.o: moc_courseview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_courseview.o moc_courseview.cpp
+
+moc_sectionview.o: moc_sectionview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_sectionview.o moc_sectionview.cpp
+
+moc_assignmentview.o: moc_assignmentview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_assignmentview.o moc_assignmentview.cpp
+
+moc_clickablelabel.o: moc_clickablelabel.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clickablelabel.o moc_clickablelabel.cpp
+
+moc_breadcrumb.o: moc_breadcrumb.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_breadcrumb.o moc_breadcrumb.cpp
+
+moc_listview.o: moc_listview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_listview.o moc_listview.cpp
+
+moc_studentview.o: moc_studentview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_studentview.o moc_studentview.cpp
+
+moc_switcher.o: moc_switcher.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_switcher.o moc_switcher.cpp
+
+moc_formdialog.o: moc_formdialog.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_formdialog.o moc_formdialog.cpp
+
+moc_rubricview.o: moc_rubricview.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rubricview.o moc_rubricview.cpp
 
 ####### Install
 

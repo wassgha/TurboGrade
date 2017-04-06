@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -g -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -g -std=gnu++11 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../../TurboGrade/tools -I. -I../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib
+INCPATH       = -I../../TurboGrade/tools -I. -I../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I. -I../../../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib
 QMAKE         = /Users/SamuelLawrence/Qt/5.7/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = tools1.0.0
 DISTDIR = /Users/SamuelLawrence/project/build-TurboGrade-Desktop_Qt_5_7_1_clang_64bit-Debug/tools/.tmp/tools1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -Wl,-rpath,/Users/SamuelLawrence/Qt/5.7/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib -framework QtPrintSupport -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -53,19 +53,24 @@ SOURCES       = ../../TurboGrade/tools/main.cpp \
 		../../TurboGrade/tools/codeeditor.cpp \
 		../../TurboGrade/tools/objectidentifier.cpp \
 		../../TurboGrade/tools/filewriter.cpp \
-		../../TurboGrade/tools/pdfwindow.cpp moc_syntaxhighlight.cpp \
+		../../TurboGrade/tools/pdfwindow.cpp \
+		../../TurboGrade/tools/htmltopdf.cpp moc_syntaxhighlight.cpp \
 		moc_codeeditor.cpp \
-		moc_pdfwindow.cpp
+		moc_pdfwindow.cpp \
+		moc_htmltopdf.cpp
 OBJECTS       = main.o \
 		syntaxhighlight.o \
 		codeeditor.o \
 		objectidentifier.o \
 		filewriter.o \
 		pdfwindow.o \
+		htmltopdf.o \
 		moc_syntaxhighlight.o \
 		moc_codeeditor.o \
-		moc_pdfwindow.o
-DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
+		moc_pdfwindow.o \
+		moc_htmltopdf.o
+DIST          = ../../TurboGrade/tools/example.css \
+		../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.7/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.7/clang_64/mkspecs/features/device_config.prf \
 		../../../Qt/5.7/clang_64/mkspecs/common/unix.conf \
@@ -228,12 +233,14 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/filewriter.h \
-		../../TurboGrade/tools/pdfwindow.h ../../TurboGrade/tools/main.cpp \
+		../../TurboGrade/tools/pdfwindow.h \
+		../../TurboGrade/tools/htmltopdf.h ../../TurboGrade/tools/main.cpp \
 		../../TurboGrade/tools/syntaxhighlight.cpp \
 		../../TurboGrade/tools/codeeditor.cpp \
 		../../TurboGrade/tools/objectidentifier.cpp \
 		../../TurboGrade/tools/filewriter.cpp \
-		../../TurboGrade/tools/pdfwindow.cpp
+		../../TurboGrade/tools/pdfwindow.cpp \
+		../../TurboGrade/tools/htmltopdf.cpp
 QMAKE_TARGET  = tools
 DESTDIR       = 
 TARGET        = tools
@@ -404,6 +411,7 @@ Makefile: ../../TurboGrade/tools/tools.pro ../../../Qt/5.7/clang_64/mkspecs/macx
 		../../../Qt/5.7/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.7/clang_64/mkspecs/features/lex.prf \
 		../../TurboGrade/tools/tools.pro \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/QtCore.prl
@@ -567,6 +575,7 @@ Makefile: ../../TurboGrade/tools/tools.pro ../../../Qt/5.7/clang_64/mkspecs/macx
 ../../../Qt/5.7/clang_64/mkspecs/features/yacc.prf:
 ../../../Qt/5.7/clang_64/mkspecs/features/lex.prf:
 ../../TurboGrade/tools/tools.pro:
+../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl:
 ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt/5.7/clang_64/lib/QtCore.framework/QtCore.prl:
@@ -584,8 +593,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../TurboGrade/tools/syntaxhighlight.h ../../TurboGrade/tools/codeeditor.h ../../TurboGrade/tools/objectidentifier.h ../../TurboGrade/tools/macro.h ../../TurboGrade/tools/filewriter.h ../../TurboGrade/tools/pdfwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../TurboGrade/tools/main.cpp ../../TurboGrade/tools/syntaxhighlight.cpp ../../TurboGrade/tools/codeeditor.cpp ../../TurboGrade/tools/objectidentifier.cpp ../../TurboGrade/tools/filewriter.cpp ../../TurboGrade/tools/pdfwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../TurboGrade/tools/syntaxhighlight.h ../../TurboGrade/tools/codeeditor.h ../../TurboGrade/tools/objectidentifier.h ../../TurboGrade/tools/macro.h ../../TurboGrade/tools/filewriter.h ../../TurboGrade/tools/pdfwindow.h ../../TurboGrade/tools/htmltopdf.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../TurboGrade/tools/main.cpp ../../TurboGrade/tools/syntaxhighlight.cpp ../../TurboGrade/tools/codeeditor.cpp ../../TurboGrade/tools/objectidentifier.cpp ../../TurboGrade/tools/filewriter.cpp ../../TurboGrade/tools/pdfwindow.cpp ../../TurboGrade/tools/htmltopdf.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../TurboGrade/tools/pdfwindow.ui $(DISTDIR)/
 
 
@@ -611,16 +620,16 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_pdfwindow.cpp
+compiler_moc_header_make_all: moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_pdfwindow.cpp moc_htmltopdf.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_pdfwindow.cpp
+	-$(DEL_FILE) moc_syntaxhighlight.cpp moc_codeeditor.cpp moc_pdfwindow.cpp moc_htmltopdf.cpp
 moc_syntaxhighlight.cpp: ../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QSyntaxHighlighter \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qsyntaxhighlighter.h \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextCharFormat \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
 		../../TurboGrade/tools/syntaxhighlight.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/tools -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/syntaxhighlight.h -o moc_syntaxhighlight.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/tools -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/syntaxhighlight.h -o moc_syntaxhighlight.cpp
 
 moc_codeeditor.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPlainTextEdit \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qplaintextedit.h \
@@ -633,7 +642,7 @@ moc_codeeditor.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QPl
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextformat.h \
 		../../TurboGrade/tools/codeeditor.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/tools -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/codeeditor.h -o moc_codeeditor.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/tools -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/codeeditor.h -o moc_codeeditor.cpp
 
 moc_pdfwindow.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
@@ -651,7 +660,23 @@ moc_pdfwindow.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMai
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qdir.h \
 		../../TurboGrade/tools/pdfwindow.h \
 		../../../Qt/5.7/clang_64/bin/moc
-	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/tools -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/pdfwindow.h -o moc_pdfwindow.cpp
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/tools -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/pdfwindow.h -o moc_pdfwindow.cpp
+
+moc_htmltopdf.cpp: ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextDocument \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextdocument.h \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrinter \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprinter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFont \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrintPreviewDialog \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprintpreviewdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h \
+		../../TurboGrade/tools/htmltopdf.h \
+		../../../Qt/5.7/clang_64/bin/moc
+	/Users/SamuelLawrence/Qt/5.7/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/SamuelLawrence/Qt/5.7/clang_64/mkspecs/macx-clang -I/Users/SamuelLawrence/project/TurboGrade/tools -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtGui.framework/Headers -I/Users/SamuelLawrence/Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/8.0.0/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib ../../TurboGrade/tools/htmltopdf.h -o moc_htmltopdf.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -674,23 +699,21 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-main.o: ../../TurboGrade/tools/main.cpp ../../TurboGrade/tools/pdfwindow.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPainter \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpainter.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QLayout \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qlayout.h \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPdfWriter \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpdfwriter.h \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QPagedPaintDevice \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qpagedpaintdevice.h \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QImageReader \
-		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qimagereader.h \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QDir \
-		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qdir.h \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
+main.o: ../../TurboGrade/tools/main.cpp ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../TurboGrade/tools/htmltopdf.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextDocument \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextdocument.h \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrinter \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprinter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFont \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrintPreviewDialog \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprintpreviewdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../TurboGrade/tools/main.cpp
 
 syntaxhighlight.o: ../../TurboGrade/tools/syntaxhighlight.cpp ../../TurboGrade/tools/syntaxhighlight.h \
@@ -866,6 +889,21 @@ pdfwindow.o: ../../TurboGrade/tools/pdfwindow.cpp ../../TurboGrade/tools/pdfwind
 		ui_pdfwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o pdfwindow.o ../../TurboGrade/tools/pdfwindow.cpp
 
+htmltopdf.o: ../../TurboGrade/tools/htmltopdf.cpp ../../TurboGrade/tools/htmltopdf.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QTextDocument \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qtextdocument.h \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrinter \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprinter.h \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/QFont \
+		../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers/qfont.h \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/QPrintPreviewDialog \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers/qprintpreviewdialog.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QHBoxLayout \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qboxlayout.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o htmltopdf.o ../../TurboGrade/tools/htmltopdf.cpp
+
 moc_syntaxhighlight.o: moc_syntaxhighlight.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_syntaxhighlight.o moc_syntaxhighlight.cpp
 
@@ -874,6 +912,9 @@ moc_codeeditor.o: moc_codeeditor.cpp
 
 moc_pdfwindow.o: moc_pdfwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_pdfwindow.o moc_pdfwindow.cpp
+
+moc_htmltopdf.o: moc_htmltopdf.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_htmltopdf.o moc_htmltopdf.cpp
 
 ####### Install
 

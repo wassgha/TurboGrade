@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 CXX           = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
-DEFINES       = -DQT_QML_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_QML_DEBUG -DQT_PRINTSUPPORT_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_SQL_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -g -Wall -W -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -stdlib=libc++ -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -g -std=gnu++11 -Wall -W -fPIC $(DEFINES)
-INCPATH       = -I../../TurboGrade/engine -I. -I../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib
+INCPATH       = -I../../TurboGrade/engine -I. -I../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtGui.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers -I../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/AGL.framework/Headers -I../../../Qt/5.7/clang_64/mkspecs/macx-clang -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib
 QMAKE         = /Users/SamuelLawrence/Qt/5.7/clang_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -36,7 +36,7 @@ DISTNAME      = engine1.0.0
 DISTDIR = /Users/SamuelLawrence/project/build-TurboGrade-Desktop_Qt_5_7_1_clang_64bit-Debug/engine/.tmp/engine1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -Wl,-rpath,/Users/SamuelLawrence/Qt/5.7/clang_64/lib
-LIBS          = $(SUBLIBS) -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework QtSql -framework OpenGL -framework AGL 
+LIBS          = $(SUBLIBS) -F/Users/SamuelLawrence/Qt/5.7/clang_64/lib -framework QtPrintSupport -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework QtSql -framework OpenGL -framework AGL 
 AR            = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq
 RANLIB        = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib -s
 SED           = sed
@@ -57,6 +57,7 @@ SOURCES       = ../../TurboGrade/tools/objectidentifier.cpp \
 		../../TurboGrade/db/submissiondb.cpp \
 		../../TurboGrade/db/rubricdb.cpp \
 		../../TurboGrade/db/commentdb.cpp \
+		../../TurboGrade/db/gradedb.cpp \
 		../../TurboGrade/engine/main.cpp \
 		../../TurboGrade/engine/course.cpp \
 		../../TurboGrade/engine/section.cpp \
@@ -76,6 +77,7 @@ OBJECTS       = objectidentifier.o \
 		submissiondb.o \
 		rubricdb.o \
 		commentdb.o \
+		gradedb.o \
 		main.o \
 		course.o \
 		section.o \
@@ -254,6 +256,7 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/db/submissiondb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h \
 		../../TurboGrade/engine/course.h \
 		../../TurboGrade/engine/section.h \
 		../../TurboGrade/engine/student.h \
@@ -271,6 +274,7 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/db/submissiondb.cpp \
 		../../TurboGrade/db/rubricdb.cpp \
 		../../TurboGrade/db/commentdb.cpp \
+		../../TurboGrade/db/gradedb.cpp \
 		../../TurboGrade/engine/main.cpp \
 		../../TurboGrade/engine/course.cpp \
 		../../TurboGrade/engine/section.cpp \
@@ -451,6 +455,7 @@ Makefile: ../../TurboGrade/engine/engine.pro ../../../Qt/5.7/clang_64/mkspecs/ma
 		../../../Qt/5.7/clang_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.7/clang_64/mkspecs/features/lex.prf \
 		../../TurboGrade/engine/engine.pro \
+		../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl \
 		../../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/QtSql.prl \
@@ -615,6 +620,7 @@ Makefile: ../../TurboGrade/engine/engine.pro ../../../Qt/5.7/clang_64/mkspecs/ma
 ../../../Qt/5.7/clang_64/mkspecs/features/yacc.prf:
 ../../../Qt/5.7/clang_64/mkspecs/features/lex.prf:
 ../../TurboGrade/engine/engine.pro:
+../../../Qt/5.7/clang_64/lib/QtPrintSupport.framework/QtPrintSupport.prl:
 ../../../Qt/5.7/clang_64/lib/QtWidgets.framework/QtWidgets.prl:
 ../../../Qt/5.7/clang_64/lib/QtGui.framework/QtGui.prl:
 ../../../Qt/5.7/clang_64/lib/QtSql.framework/QtSql.prl:
@@ -633,8 +639,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents ../../TurboGrade/tools/macro.h ../../TurboGrade/tools/objectidentifier.h ../../TurboGrade/db/dbengine.h ../../TurboGrade/db/coursedb.h ../../TurboGrade/db/sectiondb.h ../../TurboGrade/db/studentdb.h ../../TurboGrade/db/assignmentdb.h ../../TurboGrade/db/submissiondb.h ../../TurboGrade/db/rubricdb.h ../../TurboGrade/db/commentdb.h ../../TurboGrade/engine/course.h ../../TurboGrade/engine/section.h ../../TurboGrade/engine/student.h ../../TurboGrade/engine/submission.h ../../TurboGrade/engine/assignment.h ../../TurboGrade/engine/rubric.h ../../TurboGrade/engine/criterion.h ../../TurboGrade/engine/controller.h ../../TurboGrade/engine/comment.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../TurboGrade/tools/objectidentifier.cpp ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/engine/main.cpp ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/comment.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../TurboGrade/tools/macro.h ../../TurboGrade/tools/objectidentifier.h ../../TurboGrade/db/dbengine.h ../../TurboGrade/db/coursedb.h ../../TurboGrade/db/sectiondb.h ../../TurboGrade/db/studentdb.h ../../TurboGrade/db/assignmentdb.h ../../TurboGrade/db/submissiondb.h ../../TurboGrade/db/rubricdb.h ../../TurboGrade/db/commentdb.h ../../TurboGrade/db/gradedb.h ../../TurboGrade/engine/course.h ../../TurboGrade/engine/section.h ../../TurboGrade/engine/student.h ../../TurboGrade/engine/submission.h ../../TurboGrade/engine/assignment.h ../../TurboGrade/engine/rubric.h ../../TurboGrade/engine/criterion.h ../../TurboGrade/engine/controller.h ../../TurboGrade/engine/comment.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../TurboGrade/tools/objectidentifier.cpp ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/gradedb.cpp ../../TurboGrade/engine/main.cpp ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/comment.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -682,6 +688,8 @@ objectidentifier.o: ../../TurboGrade/tools/objectidentifier.cpp ../../TurboGrade
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objectidentifier.o ../../TurboGrade/tools/objectidentifier.cpp
 
 dbengine.o: ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -707,6 +715,8 @@ dbengine.o: ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/dbengine.h \
 
 coursedb.o: ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -729,8 +739,8 @@ coursedb.o: ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/coursedb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -746,11 +756,14 @@ coursedb.o: ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coursedb.o ../../TurboGrade/db/coursedb.cpp
 
 sectiondb.o: ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -773,8 +786,8 @@ sectiondb.o: ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/sectiondb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -790,11 +803,14 @@ sectiondb.o: ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sectiondb.o ../../TurboGrade/db/sectiondb.cpp
 
 studentdb.o: ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -817,8 +833,8 @@ studentdb.o: ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/studentdb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -834,11 +850,14 @@ studentdb.o: ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/studentdb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o studentdb.o ../../TurboGrade/db/studentdb.cpp
 
 assignmentdb.o: ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/assignmentdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -861,8 +880,8 @@ assignmentdb.o: ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/assignm
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -878,11 +897,14 @@ assignmentdb.o: ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/assignm
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assignmentdb.o ../../TurboGrade/db/assignmentdb.cpp
 
 submissiondb.o: ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/submissiondb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -905,8 +927,8 @@ submissiondb.o: ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/submiss
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -922,11 +944,14 @@ submissiondb.o: ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/submiss
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o submissiondb.o ../../TurboGrade/db/submissiondb.cpp
 
 rubricdb.o: ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -949,8 +974,8 @@ rubricdb.o: ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/rubricdb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -966,11 +991,14 @@ rubricdb.o: ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rubricdb.o ../../TurboGrade/db/rubricdb.cpp
 
 commentdb.o: ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/commentdb.h \
 		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
 		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
@@ -993,8 +1021,8 @@ commentdb.o: ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/commentdb.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
 		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
 		../../TurboGrade/engine/controller.h \
-		../../TurboGrade/tools/macro.h \
-		../../TurboGrade/tools/objectidentifier.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1010,12 +1038,62 @@ commentdb.o: ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/commentdb.h \
 		../../TurboGrade/db/rubricdb.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
-		../../TurboGrade/db/studentdb.h
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o commentdb.o ../../TurboGrade/db/commentdb.cpp
+
+gradedb.o: ../../TurboGrade/db/gradedb.cpp ../../TurboGrade/db/gradedb.h \
+		../../TurboGrade/engine/submission.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt/5.7/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlDatabase \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldatabase.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlError \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlerror.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QSqlQuery \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquery.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/QtSql \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsql.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriver.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqldriverplugin.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlfield.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlindex.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrecord.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlresult.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlquerymodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaldelegate.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqlrelationaltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qsqltablemodel.h \
+		../../../Qt/5.7/clang_64/lib/QtSql.framework/Headers/qtsqlversion.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gradedb.o ../../TurboGrade/db/gradedb.cpp
 
 main.o: ../../TurboGrade/engine/main.cpp ../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
@@ -1054,12 +1132,15 @@ main.o: ../../TurboGrade/engine/main.cpp ../../TurboGrade/tools/objectidentifier
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../../TurboGrade/engine/main.cpp
 
 course.o: ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/course.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -1098,12 +1179,15 @@ course.o: ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/course.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o course.o ../../TurboGrade/engine/course.cpp
 
 section.o: ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/section.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -1142,12 +1226,15 @@ section.o: ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/section.h
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o section.o ../../TurboGrade/engine/section.cpp
 
 student.o: ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/student.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -1186,12 +1273,15 @@ student.o: ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/student.h
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o student.o ../../TurboGrade/engine/student.cpp
 
 submission.o: ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/submission.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -1230,7 +1320,8 @@ submission.o: ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/sub
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o submission.o ../../TurboGrade/engine/submission.cpp
 
 assignment.o: ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/assignment.h \
@@ -1239,6 +1330,8 @@ assignment.o: ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/ass
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/engine/course.h \
 		../../TurboGrade/engine/section.h \
 		../../TurboGrade/engine/student.h \
@@ -1274,12 +1367,15 @@ assignment.o: ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/ass
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assignment.o ../../TurboGrade/engine/assignment.cpp
 
 rubric.o: ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/rubric.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -1318,12 +1414,15 @@ rubric.o: ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/rubric.h \
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rubric.o ../../TurboGrade/engine/rubric.cpp
 
 criterion.o: ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/criterion.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -1362,10 +1461,13 @@ criterion.o: ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/crite
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o criterion.o ../../TurboGrade/engine/criterion.cpp
 
 controller.o: ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/controller.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/course.h \
@@ -1406,12 +1508,15 @@ controller.o: ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/con
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../../TurboGrade/engine/controller.cpp
 
 comment.o: ../../TurboGrade/engine/comment.cpp ../../TurboGrade/engine/comment.h \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt/5.7/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		../../TurboGrade/tools/macro.h \
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/engine/controller.h \
@@ -1450,7 +1555,8 @@ comment.o: ../../TurboGrade/engine/comment.cpp ../../TurboGrade/engine/comment.h
 		../../TurboGrade/db/coursedb.h \
 		../../TurboGrade/db/sectiondb.h \
 		../../TurboGrade/db/studentdb.h \
-		../../TurboGrade/db/commentdb.h
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o comment.o ../../TurboGrade/engine/comment.cpp
 
 ####### Install

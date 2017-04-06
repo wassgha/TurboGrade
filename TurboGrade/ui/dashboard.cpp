@@ -11,7 +11,7 @@ Dashboard::Dashboard(QWidget *parent) :
     setAttribute(Qt::WA_StyledBackground, true);
 
     // Use new Controller(true) to drop tables
-    _controller = new Controller();
+    _controller = new Controller(true);
 
 //    Course* cs105 = _controller->add_course(-1, "CS 105");
 //    _controller->add_course(-1, "CS 150");
