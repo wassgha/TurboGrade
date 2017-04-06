@@ -53,6 +53,8 @@ public slots:
     void loadFile(QModelIndex item);
     void expandToDepth(QString file);
     void add_comment();
+    void highlight_comment(Comment * comment);
+    void unhighlight_comment(Comment * comment);
 
 private:
     void refresh_criteria();

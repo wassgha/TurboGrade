@@ -53,6 +53,7 @@
 
 #include <QPlainTextEdit>
 #include <QObject>
+#include <QScrollBar>
 #include "syntaxhighlight.h"
 
 QT_BEGIN_NAMESPACE

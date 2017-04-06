@@ -8,6 +8,8 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
     ui->setupUi(this);
 
     setAttribute(Qt::WA_StyledBackground, true);
+    setAttribute(Qt::WA_Hover);
+    setMouseTracking(true);
 
     _comment = comment;
 
@@ -37,4 +39,14 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
 CommentCard::~CommentCard()
 {
     delete ui;
+}
+
+void CommentCard::enterEvent(QEvent * event)
+{
+    emit mouseOver(_comment);
+}
+
+void CommentCard::leaveEvent(QEvent * event)
+{
+    emit mouseOut(_comment);
 }
