@@ -8,7 +8,8 @@ QT       += core gui sql printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-TARGET = ui
+TARGET = TurboGrade
+VERSION = 1.0.0
 TEMPLATE = app
 CONFIG      += console c++11
 
