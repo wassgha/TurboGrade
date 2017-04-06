@@ -2,6 +2,7 @@
     <qresource prefix="/logo">
         <file>res/logo.png</file>
         <file>res/logodark.png</file>
+        <file>res/icon.png</file>
     </qresource>
     <qresource prefix="/misc">
         <file>res/splitter.png</file>
