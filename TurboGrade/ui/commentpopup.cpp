@@ -35,7 +35,7 @@ QString CommentPopup::val(QString name) {
         ui->adjust_grade->setValue(0);
         return val;
     } else if (name == "comment") {
-        QString val = ui->comment->toPlainText();
+        QString val = ui->comment->text();
         ui->comment->clear();
         return val;
     } else if (name == "criterion") {

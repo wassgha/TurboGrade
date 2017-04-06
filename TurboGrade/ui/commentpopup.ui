@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>370</width>
+    <width>388</width>
     <height>177</height>
    </rect>
   </property>
@@ -107,9 +107,27 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextEdit" name="comment">
+    <widget class="QLineEdit" name="comment">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="frame">
+      <bool>false</bool>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
      <property name="placeholderText">
       <string>Type your comment here...</string>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -131,8 +149,7 @@
      <item>
       <widget class="QPushButton" name="add_btn">
        <property name="styleSheet">
-        <string notr="true">
-</string>
+        <string notr="true"/>
        </property>
        <property name="text">
         <string>Add Comment</string>

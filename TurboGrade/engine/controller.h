@@ -107,6 +107,8 @@ public:
     CommentDB *_commentDB;
     // Grade database table
     GradeDB *_gradeDB;
+    // Auto-complete list
+    QStringList _all_comments;
 
     /*
      * UI variables

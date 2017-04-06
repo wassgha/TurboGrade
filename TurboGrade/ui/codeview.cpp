@@ -12,6 +12,13 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     _controller = controller;
     _parent = dynamic_cast<GradeSubmission*>(parent);
 
+    _popup = new CommentPopup(this);
+
+    _completer = new QCompleter(_controller->_all_comments, this);
+    _completer->setCompletionMode(QCompleter::InlineCompletion);
+    _completer->setCaseSensitivity(Qt::CaseInsensitive);
+    _popup->ui->comment->setCompleter(_completer);
+
     _model = new QFileSystemModel;
     _model->setRootPath(_parent->_submission->getPath());
 

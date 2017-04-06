@@ -28,12 +28,13 @@
 #include <QModelIndex>
 #include <QFileSystemModel>
 #include <QProcess>
+#include <QCompleter>
 #include <iostream>
 
 class GradeSubmission;
 
 namespace Ui {
-class CodeView;
+    class CodeView;
 }
 
 class CodeView : public QWidget
@@ -43,10 +44,10 @@ class CodeView : public QWidget
 public:
     explicit CodeView(QWidget *parent, Controller* controller = nullptr);
     ~CodeView();
-    Ui::CodeView *ui;
-    Controller *_controller;
-    GradeSubmission *_parent;
-    std::vector<CommentCard*> _comment_cards;
+    Ui::CodeView                *ui;
+    Controller                  *_controller;
+    GradeSubmission             *_parent;
+    std::vector<CommentCard*>   _comment_cards;
 
 public slots:
     void getSelection();
@@ -62,8 +63,9 @@ private:
     bool eventFilter(QObject *obj, QEvent *event);
     void refresh_comments();
 
-    CommentPopup *_popup = new CommentPopup(this);
-    QFileSystemModel *_model;
+    CommentPopup        *_popup;
+    QFileSystemModel    *_model;
+    QCompleter          *_completer;
 
 };
 

@@ -48,6 +48,8 @@ void Submission::add_comment(int id, QString filename,
 
     _comments->push_back(new_comment);
 
+    _controller->_all_comments<<text;
+
 }
 
 /**

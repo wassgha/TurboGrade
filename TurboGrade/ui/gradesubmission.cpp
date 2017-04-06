@@ -15,8 +15,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     setWindowFlags(Qt::Window);
     setWindowState(Qt::WindowFullScreen);
 
-    code_view = new CodeView(this);
-    grade_view = new GradeView(this);
+    code_view = new CodeView(this, _controller);
+    grade_view = new GradeView(this, _controller);
 
     ui->mainWidget->addWidget(code_view);
     ui->mainWidget->addWidget(grade_view);
