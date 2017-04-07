@@ -138,11 +138,16 @@ int Criterion::total_grade() {
     }
 }
 
-std::string Criterion::to_string() {
+/**
+ * @brief Criterion::in_order_names returns the string of all sub_criterion
+ * names and this name
+ * @return the string of all sub_criteria in_order_names and this name
+ */
+std::string Criterion::in_order_names() {
     std::string s = "";
     for(Criterion *crit : children()){
-        s.append(crit->_name.toStdString());
-        s.append(",");
+        s.append(crit->in_order_names());
+        s.append(", ");
     }
     s.append(_name.toStdString());
     return s;
