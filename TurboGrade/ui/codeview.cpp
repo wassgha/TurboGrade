@@ -63,13 +63,13 @@ void CodeView::add_comment() {
         // Find table id of the selecter criterion
         int criterion_id;
         if (criterion_select->currentIndex() == 0)
-            criterion_id = NULL;
+            criterion_id = -1;
         else
             criterion_id = criterion_select->itemData(criterion_select->currentIndex()).toInt();
 
         // Find the criterion by its id
         Criterion *criterion;
-        if (criterion_id == NULL)
+        if (criterion_id == -1)
             criterion = nullptr;
         else
             criterion = _parent->_submission->_assignment->_rubric->get_criterion(criterion_id);
@@ -137,9 +137,15 @@ void CodeView::refresh_comments() {
     _comment_cards.clear();
     // Add the comments to the sidebar
     for (Comment* comment : _parent->_submission->get_comment(file_name)) {
+
+        // Add the comment card
         CommentCard *comment_card = new CommentCard(this, comment);
         _comment_cards.push_back(comment_card);
         ui->comment_layout->addWidget(comment_card);
+
+        // Add events for highlighting the comment in the code when the mouse is over the comment card
+        connect(comment_card, SIGNAL(mouseOver(Comment*)), this, SLOT(highlight_comment(Comment *)));
+        connect(comment_card, SIGNAL(mouseOut(Comment*)), this, SLOT(unhighlight_comment(Comment *)));
     }
 }
 
@@ -162,4 +168,27 @@ bool CodeView::eventFilter(QObject *obj, QEvent *event) {
         _popup->hide();
     }
     return QWidget::eventFilter(obj, event);
+}
+
+void CodeView::highlight_comment(Comment * comment) {
+    QList<QTextEdit::ExtraSelection> extraSelections;
+    QTextEdit::ExtraSelection selection;
+
+    selection.format.setBackground(QColor("#ffea8d"));
+    selection.format.setForeground(QColor("#000000"));
+    selection.cursor = QTextCursor(ui->editor->document());
+    selection.cursor.setPosition( comment->_start_pos );
+    selection.cursor.setPosition( comment->_end_pos, QTextCursor::KeepAnchor );
+    extraSelections.append(selection);
+
+    QTextCursor cursor (ui->editor->document());
+    cursor.setPosition(comment->_start_pos);
+    ui->editor->setTextCursor(cursor);
+
+    ui->editor->setExtraSelections(extraSelections);
+}
+
+void CodeView::unhighlight_comment(Comment * comment) {
+    QList<QTextEdit::ExtraSelection> extraSelections;
+    ui->editor->setExtraSelections(extraSelections);
 }
