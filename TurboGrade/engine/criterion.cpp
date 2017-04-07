@@ -137,3 +137,13 @@ int Criterion::total_grade() {
         return _out_of;
     }
 }
+
+std::string Criterion::to_string() {
+    std::string s = "";
+    for(Criterion *crit : children()){
+        s.append(crit->_name.toStdString());
+        s.append(",");
+    }
+    s.append(_name.toStdString());
+    return s;
+}

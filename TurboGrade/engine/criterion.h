@@ -44,6 +44,8 @@ public:
     int total_grade();
     // Show criteria tree
     void show_children();
+    // to_string
+    std::string to_string();
 
     // This Criterion's id
     int _id;
