@@ -144,8 +144,8 @@ QWidget#general_comments_box {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>659</width>
-        <height>811</height>
+        <width>644</width>
+        <height>809</height>
        </rect>
       </property>
       <property name="sizePolicy">

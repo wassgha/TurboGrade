@@ -22,6 +22,7 @@
         <file>res/circle.png</file>
         <file>res/add.png</file>
         <file>res/folder.png</file>
+        <file>res/guide.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

@@ -22,6 +22,10 @@ public:
 
 private:
     Ui::RubricView *ui;
+    Assignment* _assignment;
+
+private slots:
+    void add_criterion();
 };
 
 #endif // RUBRICVIEW_H

@@ -45,7 +45,7 @@ int CommentDB::add(int submission_id, QString filename,
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'comment' table" << endl << "SQL ERROR: " << query.lastError();
-        return false;
+        return -1;
     }
 
     int last_insert_id = query.lastInsertId().toInt();

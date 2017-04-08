@@ -9,6 +9,7 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
 
     _controller = controller;
 
+
 }
 
 GradeView::~GradeView()

@@ -66,7 +66,8 @@ SOURCES += main.cpp\
     formdialog.cpp \
     rubricview.cpp \
     submissionview.cpp \
-    commentcard.cpp
+    commentcard.cpp \
+    criterionitem.cpp
 
 HEADERS  +=\
         "../tools/syntaxhighlight.h"\
@@ -110,7 +111,8 @@ HEADERS  +=\
     formdialog.h \
     rubricview.h \
     submissionview.h \
-    commentcard.h
+    commentcard.h \
+    criterionitem.h
 
 FORMS    += \
     commentpopup.ui \
@@ -124,7 +126,8 @@ FORMS    += \
     listview.ui \
     formdialog.ui \
     rubricview.ui \
-    commentcard.ui
+    commentcard.ui \
+    criterionitem.ui
 
 RESOURCES += \
     resources.qrc

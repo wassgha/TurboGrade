@@ -14,7 +14,7 @@ AssignmentDB::~AssignmentDB() {
  * @param objective the objective of the assignment (ex. Introducing students to Processing)
  * @return true if the query succeded
  */
-bool AssignmentDB::add(const QString name, const QString objective) {
+int AssignmentDB::add(const QString name, const QString objective) {
 
     SHOW_WHERE;
 
@@ -28,11 +28,12 @@ bool AssignmentDB::add(const QString name, const QString objective) {
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'assignment' table" << endl << "SQL ERROR: " << query.lastError();
         query.finish();
-        return false;
+        return -1;
     }
-
+    int last_insert_id = query.lastInsertId().toInt();
     query.finish();
-    return true;
+
+    return last_insert_id;
 }
 
 

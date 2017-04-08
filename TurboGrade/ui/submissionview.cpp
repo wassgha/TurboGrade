@@ -83,8 +83,11 @@ void SubmissionView::import_submission() {
     foreach (QString submission_folder, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
         std::cout<<"Adding submission by "<< submission_folder.toStdString() << std::endl;
         qDebug()<<"Adding submission by "<< submission_folder << endl;
-        _section->add_student(-1, submission_folder, "-");
         Student* added_student = _section->get_student(submission_folder);
+        if (added_student == nullptr) {
+            _section->add_student(-1, submission_folder, "-");
+            added_student = _section->get_student(submission_folder);
+        }
         added_student->add_submission(-1, _assignment);
     }
 
