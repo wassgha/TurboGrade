@@ -47,9 +47,13 @@ void SubmissionView::refresh_cards() {
         if (student->get_submission(_assignment) != nullptr) {
             Submission* submission = student->get_submission(_assignment);
             Card* new_submission = new Card(student->_name,
+                                        "Grade : " +
+                                        QString::number(100*submission->get_grade()/_assignment->_rubric->total_grade()) +
+                                        "% (" +
                                         QString::number(submission->get_grade()) +
                                         " out of " +
-                                        QString::number(_assignment->_rubric->total_grade()),
+                                        QString::number(_assignment->_rubric->total_grade()) +
+                                        ")",
                                         student->_color, submission);
             cards.push_back(new_submission);
             connect(new_submission, SIGNAL(clicked(QObject*)), _parent, SLOT(start_grading(QObject*)));

@@ -8,7 +8,7 @@ CriterionItem::CriterionItem(QWidget *parent, QString name, int out_of) :
     ui->setupUi(this);
 
     ui->name->setText(name);
-    ui->grade->setText("(out of " + QString::number(out_of) + ")");
+    ui->grade->setText(" (out of " + QString::number(out_of) + ")");
 }
 
 CriterionItem::~CriterionItem()
