@@ -53,13 +53,49 @@ SOURCES       = ../../TurboGrade/test/main.cpp \
 		../../TurboGrade/test/testingtemplate.cpp \
 		../../TurboGrade/test/filewritertest.cpp \
 		../../TurboGrade/tools/objectidentifier.cpp \
-		../../TurboGrade/tools/filewriter.cpp 
+		../../TurboGrade/tools/filewriter.cpp \
+		../../TurboGrade/db/dbengine.cpp \
+		../../TurboGrade/db/coursedb.cpp \
+		../../TurboGrade/db/sectiondb.cpp \
+		../../TurboGrade/db/studentdb.cpp \
+		../../TurboGrade/db/assignmentdb.cpp \
+		../../TurboGrade/db/submissiondb.cpp \
+		../../TurboGrade/db/rubricdb.cpp \
+		../../TurboGrade/db/commentdb.cpp \
+		../../TurboGrade/db/gradedb.cpp \
+		../../TurboGrade/engine/course.cpp \
+		../../TurboGrade/engine/section.cpp \
+		../../TurboGrade/engine/student.cpp \
+		../../TurboGrade/engine/submission.cpp \
+		../../TurboGrade/engine/assignment.cpp \
+		../../TurboGrade/engine/rubric.cpp \
+		../../TurboGrade/engine/criterion.cpp \
+		../../TurboGrade/engine/controller.cpp \
+		../../TurboGrade/engine/comment.cpp 
 OBJECTS       = main.o \
 		gtest-all.o \
 		testingtemplate.o \
 		filewritertest.o \
 		objectidentifier.o \
-		filewriter.o
+		filewriter.o \
+		dbengine.o \
+		coursedb.o \
+		sectiondb.o \
+		studentdb.o \
+		assignmentdb.o \
+		submissiondb.o \
+		rubricdb.o \
+		commentdb.o \
+		gradedb.o \
+		course.o \
+		section.o \
+		student.o \
+		submission.o \
+		assignment.o \
+		rubric.o \
+		criterion.o \
+		controller.o \
+		comment.o
 DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.7/clang_64/mkspecs/qdevice.pri \
 		../../../Qt/5.7/clang_64/mkspecs/features/device_config.prf \
@@ -215,12 +251,49 @@ DIST          = ../../../Qt/5.7/clang_64/mkspecs/features/spec_pre.prf \
 		../../TurboGrade/test/test.pro testingtemplate.h \
 		filewritertest.h \
 		../tools/objectidentifier.h \
-		../tools/filewriter.h ../../TurboGrade/test/main.cpp \
+		../tools/filewriter.h \
+		../tools/macro.h \
+		../db/dbengine.h \
+		../db/coursedb.h \
+		../db/sectiondb.h \
+		../db/studentdb.h \
+		../db/assignmentdb.h \
+		../db/submissiondb.h \
+		../db/rubricdb.h \
+		../db/commentdb.h \
+		../db/gradedb.h \
+		../engine/course.h \
+		../engine/section.h \
+		../engine/student.h \
+		../engine/submission.h \
+		../engine/assignment.h \
+		../engine/rubric.h \
+		../engine/criterion.h \
+		../engine/controller.h \
+		../engine/comment.h ../../TurboGrade/test/main.cpp \
 		../../TurboGrade/tools/gtest/googletest/src/gtest-all.cc \
 		../../TurboGrade/test/testingtemplate.cpp \
 		../../TurboGrade/test/filewritertest.cpp \
 		../../TurboGrade/tools/objectidentifier.cpp \
-		../../TurboGrade/tools/filewriter.cpp
+		../../TurboGrade/tools/filewriter.cpp \
+		../../TurboGrade/db/dbengine.cpp \
+		../../TurboGrade/db/coursedb.cpp \
+		../../TurboGrade/db/sectiondb.cpp \
+		../../TurboGrade/db/studentdb.cpp \
+		../../TurboGrade/db/assignmentdb.cpp \
+		../../TurboGrade/db/submissiondb.cpp \
+		../../TurboGrade/db/rubricdb.cpp \
+		../../TurboGrade/db/commentdb.cpp \
+		../../TurboGrade/db/gradedb.cpp \
+		../../TurboGrade/engine/course.cpp \
+		../../TurboGrade/engine/section.cpp \
+		../../TurboGrade/engine/student.cpp \
+		../../TurboGrade/engine/submission.cpp \
+		../../TurboGrade/engine/assignment.cpp \
+		../../TurboGrade/engine/rubric.cpp \
+		../../TurboGrade/engine/criterion.cpp \
+		../../TurboGrade/engine/controller.cpp \
+		../../TurboGrade/engine/comment.cpp
 QMAKE_TARGET  = test
 DESTDIR       = 
 TARGET        = test
@@ -702,6 +775,385 @@ filewriter.o: ../../TurboGrade/tools/filewriter.cpp ../../TurboGrade/tools/filew
 		../../TurboGrade/tools/objectidentifier.h \
 		../../TurboGrade/tools/macro.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o filewriter.o ../../TurboGrade/tools/filewriter.cpp
+
+dbengine.o: ../../TurboGrade/db/dbengine.cpp ../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o dbengine.o ../../TurboGrade/db/dbengine.cpp
+
+coursedb.o: ../../TurboGrade/db/coursedb.cpp ../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o coursedb.o ../../TurboGrade/db/coursedb.cpp
+
+sectiondb.o: ../../TurboGrade/db/sectiondb.cpp ../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sectiondb.o ../../TurboGrade/db/sectiondb.cpp
+
+studentdb.o: ../../TurboGrade/db/studentdb.cpp ../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o studentdb.o ../../TurboGrade/db/studentdb.cpp
+
+assignmentdb.o: ../../TurboGrade/db/assignmentdb.cpp ../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assignmentdb.o ../../TurboGrade/db/assignmentdb.cpp
+
+submissiondb.o: ../../TurboGrade/db/submissiondb.cpp ../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o submissiondb.o ../../TurboGrade/db/submissiondb.cpp
+
+rubricdb.o: ../../TurboGrade/db/rubricdb.cpp ../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rubricdb.o ../../TurboGrade/db/rubricdb.cpp
+
+commentdb.o: ../../TurboGrade/db/commentdb.cpp ../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o commentdb.o ../../TurboGrade/db/commentdb.cpp
+
+gradedb.o: ../../TurboGrade/db/gradedb.cpp ../../TurboGrade/db/gradedb.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o gradedb.o ../../TurboGrade/db/gradedb.cpp
+
+course.o: ../../TurboGrade/engine/course.cpp ../../TurboGrade/engine/course.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o course.o ../../TurboGrade/engine/course.cpp
+
+section.o: ../../TurboGrade/engine/section.cpp ../../TurboGrade/engine/section.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o section.o ../../TurboGrade/engine/section.cpp
+
+student.o: ../../TurboGrade/engine/student.cpp ../../TurboGrade/engine/student.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o student.o ../../TurboGrade/engine/student.cpp
+
+submission.o: ../../TurboGrade/engine/submission.cpp ../../TurboGrade/engine/submission.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o submission.o ../../TurboGrade/engine/submission.cpp
+
+assignment.o: ../../TurboGrade/engine/assignment.cpp ../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o assignment.o ../../TurboGrade/engine/assignment.cpp
+
+rubric.o: ../../TurboGrade/engine/rubric.cpp ../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rubric.o ../../TurboGrade/engine/rubric.cpp
+
+criterion.o: ../../TurboGrade/engine/criterion.cpp ../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o criterion.o ../../TurboGrade/engine/criterion.cpp
+
+controller.o: ../../TurboGrade/engine/controller.cpp ../../TurboGrade/engine/controller.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/engine/comment.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../../TurboGrade/engine/controller.cpp
+
+comment.o: ../../TurboGrade/engine/comment.cpp ../../TurboGrade/engine/comment.h \
+		../../TurboGrade/tools/macro.h \
+		../../TurboGrade/tools/objectidentifier.h \
+		../../TurboGrade/engine/controller.h \
+		../../TurboGrade/engine/course.h \
+		../../TurboGrade/engine/section.h \
+		../../TurboGrade/engine/assignment.h \
+		../../TurboGrade/engine/rubric.h \
+		../../TurboGrade/engine/criterion.h \
+		../../TurboGrade/engine/student.h \
+		../../TurboGrade/engine/submission.h \
+		../../TurboGrade/db/assignmentdb.h \
+		../../TurboGrade/db/dbengine.h \
+		../../TurboGrade/db/submissiondb.h \
+		../../TurboGrade/db/rubricdb.h \
+		../../TurboGrade/db/coursedb.h \
+		../../TurboGrade/db/sectiondb.h \
+		../../TurboGrade/db/studentdb.h \
+		../../TurboGrade/db/commentdb.h \
+		../../TurboGrade/db/gradedb.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o comment.o ../../TurboGrade/engine/comment.cpp
 
 ####### Install
 

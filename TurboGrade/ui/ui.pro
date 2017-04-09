@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql printsupport
+QT          += sql widgets printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,9 +28,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
             "../tools/objectidentifier.cpp" \
-        "../tools/syntaxhighlight.cpp"\
-        "../tools/codeeditor.cpp" \
-        "../tools/dirtools.cpp" \
+            "../tools/syntaxhighlight.cpp"\
+            "../tools/codeeditor.cpp" \
+            "../tools/dirtools.cpp" \
             "../db/dbengine.cpp" \
             "../db/coursedb.cpp" \
             "../db/sectiondb.cpp" \
@@ -69,11 +70,11 @@ SOURCES += main.cpp\
     commentcard.cpp
 
 HEADERS  +=\
-        "../tools/syntaxhighlight.h"\
-        "../tools/codeeditor.h" \
+            "../tools/syntaxhighlight.h"\
+            "../tools/codeeditor.h" \
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
-        "../tools/dirtools.h" \
+            "../tools/dirtools.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \

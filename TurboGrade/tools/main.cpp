@@ -12,6 +12,6 @@ int main(int argc, char *argv[])
     a.exec();
     cout << "Hello World!" << endl;
 
-    MacAdress m;
+//    MacAdress m;
     return 0;
 }
