@@ -51,12 +51,36 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
 
 
 void CodeView::getSelection() {
+
+    // If we're not selecting then hide the "add comment" window
     if (ui->editor->textCursor().selectionEnd() == ui->editor->textCursor().selectionStart()) {
         _popup->hide();
         return;
     }
-    _popup->move(this->cursor().pos());
+
+    // Move the "add comment" window to cursor position
+    move_popup();
+
+    // Display it
     _popup->show();
+}
+
+void CodeView::move_popup() {
+    // Get the size of the screen
+    QRect screen_size = QApplication::desktop()->screenGeometry();
+
+    // Calculate where to move the "add comment" winow
+    int popup_x = this->cursor().pos().x() + 5;
+    int popup_y = this->cursor().pos().y() + 5;
+
+    // If the window is out of bounds then draw it inside
+    if (this->cursor().pos().x() + _popup->width() + 5 > screen_size.width())
+        popup_x = this->cursor().pos().x() - _popup->width() - 5;
+    if (this->cursor().pos().y() + _popup->height() + 5 > screen_size.height())
+        popup_y = this->cursor().pos().y() - _popup->height() - 5;
+
+    // Move the "add comment" window to where the cursor is
+    _popup->move(popup_x, popup_y);
 }
 
 void CodeView::add_comment() {
@@ -169,8 +193,8 @@ void CodeView::expandToDepth(QString file) {
 bool CodeView::eventFilter(QObject *obj, QEvent *event) {
     if (event->type() == QEvent::Move) {
         QMoveEvent *moveEvent = static_cast<QMoveEvent*>(event);
-        _popup->move(this->cursor().pos());
-    } else if (event->type() == QEvent::Close) {
+        move_popup();
+    } else if (event->type() == QEvent::Hide) {
         _popup->hide();
     }
     return QWidget::eventFilter(obj, event);

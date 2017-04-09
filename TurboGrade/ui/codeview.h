@@ -22,6 +22,7 @@
 #include "ui_gradeview.h"
 
 #include <QMainWindow>
+#include <QDesktopWidget>
 #include <QWidget>
 #include <QEvent>
 #include <QMoveEvent>
@@ -30,6 +31,7 @@
 #include <QProcess>
 #include <QCompleter>
 #include <iostream>
+#include <QCloseEvent>
 
 class GradeSubmission;
 
@@ -60,9 +62,10 @@ public slots:
 private:
     void refresh_criteria();
     void setupCodeEditor(const QString &file_name);
-    bool eventFilter(QObject *obj, QEvent *event);
+    bool eventFilter(QObject *obj, QEvent *event) override;
     void refresh_comments();
     void refresh_autocomplete();
+    void move_popup();
 
     CommentPopup        *_popup;
     QFileSystemModel    *_model;
