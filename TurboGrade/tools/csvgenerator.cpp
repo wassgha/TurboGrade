@@ -34,27 +34,36 @@ void CSVGenerator::printProfessor(Section *section, Assignment *assignment, QStr
         std::cout<<"\nAnalyzing student: "<<line<<std::endl;
         line.append(", ");
         Submission *sub = stud->get_submission(assignment);
-        if(sub == nullptr){
-            line.append("NO SUBMISSION");
-        } else {
-            for(Criterion *crit: *assignment->_rubric->_criteria){
-                std::cout << crit->_name.toStdString();
-                for(Criterion *subcriterion: *crit->_sub_criteria){
-                    std::cout << subcriterion->_name.toStdString();
+        for(Criterion *crit: *assignment->_rubric->_criteria){
+            std::cout << crit->_name.toStdString();
+            for(Criterion *subcriterion: *crit->_sub_criteria){
+                std::cout << subcriterion->_name.toStdString();
+                if(sub == nullptr){
+                    line.append("N/A");
+                } else {
                     int grade = sub->get_grade(subcriterion);
                     line.append(std::to_string(grade));
-                    line.append(", ");
                 }
-                int grade = sub->get_grade(crit);
-                line.append(std::to_string(grade));
                 line.append(", ");
             }
-            line.append(std::to_string(sub->get_grade()));
+            if(sub == nullptr){
+                line.append("N/A");
+            } else {
+                int grade = sub->get_grade(crit);
+                line.append(std::to_string(grade));
+            }
             line.append(", ");
         }
-        std::cout << line;
+        if(sub == nullptr){
+            line.append("N/A");
+        } else {
+            line.append(std::to_string(sub->get_grade()));
+        }
+        std::cout << line << std::endl;
         body.append(line);
         body.append("\n");
     }
+    h << body;
+    h.close();
 }
 

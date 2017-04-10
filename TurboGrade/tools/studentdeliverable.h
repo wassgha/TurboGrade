@@ -1,6 +1,6 @@
 #ifndef STUDENTDELIVERABLE_H
 #define STUDENTDELIVERABLE_H
-
+#include "objectidentifier.h"
 
 class StudentDeliverable : public ObjectIdentifier
 {
