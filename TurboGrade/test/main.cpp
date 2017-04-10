@@ -1,23 +1,23 @@
 #include "gtest/gtest.h"
 #include <iostream>
-//#include "../db/dbengine.h"
-//#include "../db/coursedb.h"
-//#include "../db/sectiondb.h"
-//#include "../db/studentdb.h"
-//#include "../db/assignmentdb.h"
-//#include "../db/submissiondb.h"
-//#include "../db/rubricdb.h"
-//#include "../db/commentdb.h"
-//#include "../db/gradedb.h"
-//#include "../engine/course.h"
-//#include "../engine/section.h"
-//#include "../engine/student.h"
-//#include "../engine/submission.h"
-//#include "../engine/assignment.h"
-//#include "../engine/rubric.h"
-//#include "../engine/criterion.h"
-//#include "../engine/controller.h"
-//#include "../engine/comment.h"
+#include "../db/dbengine.h"
+#include "../db/coursedb.h"
+#include "../db/sectiondb.h"
+#include "../db/studentdb.h"
+#include "../db/assignmentdb.h"
+#include "../db/submissiondb.h"
+#include "../db/rubricdb.h"
+#include "../db/commentdb.h"
+#include "../db/gradedb.h"
+#include "../engine/course.h"
+#include "../engine/section.h"
+#include "../engine/student.h"
+#include "../engine/submission.h"
+#include "../engine/assignment.h"
+#include "../engine/rubric.h"
+#include "../engine/criterion.h"
+#include "../engine/controller.h"
+#include "../engine/comment.h"
 
 using namespace std;
 
@@ -52,15 +52,16 @@ int main(int argc, char *argv[])
 
 
 TEST(general,CONTROLLERBUILD) {
-    //Controller testControl;
+    Controller testControl;
+    testControl.add_course(0,"testCourse");
+    vector<Course*>* courseList = testControl.get_courses();
+    int x = courseList->size();
+    ASSERT_EQ(x,1);
+    testControl.add_course(1,"test2");
+    courseList = testControl.get_courses();
+    int x2 = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x2,2);
 
-
-
-  ASSERT_EQ(1,1);
-//  ASSERT_EQ(w1.get_headx(), 4) << w1.get_headx() << w1.get_heady();
-//  ASSERT_EQ(w1.get_heady(), 4) << "Check head starts 4,4";
-//  w1.move_up();
-//  ASSERT_EQ(w1.get_headx(), 4);
-//  ASSERT_EQ(w1.get_heady(), 5) << "Check head moves to 4,5";
 
 }
