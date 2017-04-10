@@ -31,6 +31,7 @@ SOURCES     +=  main.cpp \
             "../engine/rubric.cpp" \
             "../engine/criterion.cpp" \
             "../engine/comment.cpp" \
+    ../studentdeliverable.cpp
 
 
 HEADERS     += \
@@ -53,6 +54,7 @@ HEADERS     += \
             "../engine/rubric.h" \
             "../engine/criterion.h" \
             "../engine/comment.h" \
+    ../studentdeliverable.h
 
 FORMS += \
     pdfwindow.ui
