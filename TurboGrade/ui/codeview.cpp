@@ -237,7 +237,8 @@ QString CodeView::current_file() {
 }
 
 QString CodeView::current_folder() {
-    QString local_path = _model->filePath(ui->treeView->currentIndex().parent());
+    if (_model->isDir(ui->treeView->currentIndex()))
+        return _model->filePath(ui->treeView->currentIndex());
 
-     return local_path;
+    return _model->filePath(ui->treeView->currentIndex().parent());
 }
