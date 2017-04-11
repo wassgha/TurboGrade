@@ -56,7 +56,7 @@ public:
 public slots:
     void getSelection();
     void loadFile(QModelIndex item);
-    void expandToDepth(QString file);
+    void finished_loading(QString file);
     void add_comment();
     void highlight_comment(Comment * comment);
     void unhighlight_comment(Comment * comment);
@@ -72,6 +72,7 @@ private:
     CommentPopup        *_popup;
     QFileSystemModel    *_model;
     QCompleter          *_completer;
+    QModelIndex root_index;
 
 };
 

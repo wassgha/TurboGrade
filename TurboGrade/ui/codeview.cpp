@@ -18,17 +18,17 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     _model = new QFileSystemModel;
     _model->setRootPath(_parent->_submission->getPath());
 
-    QModelIndex root_index = _model->index(_parent->_submission->getPath());
+    root_index = _model->index(_parent->_submission->getPath());
 
     ui->treeView->setModel(_model);
     ui->treeView->setRootIndex(root_index);
+    ui->treeView->setCurrentIndex(root_index);
 
     ui->treeView->setHeaderHidden(true);
     ui->treeView->hideColumn(1);
     ui->treeView->hideColumn(2);
     ui->treeView->hideColumn(3);
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
-    ui->treeView->setCurrentIndex(_model->index(0,0));
 
     ui->comment_layout->setAlignment(Qt::AlignTop);
 
@@ -46,7 +46,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     this->connect(_popup,  SIGNAL(submit()), this, SLOT(add_comment()));
 
     // Expand all items in the tree
-    this->connect(_model, SIGNAL(directoryLoaded(QString)), this, SLOT(expandToDepth(QString)));
+    this->connect(_model, SIGNAL(directoryLoaded(QString)), this, SLOT(finished_loading(QString)));
 
 }
 
@@ -187,7 +187,10 @@ void CodeView::setupCodeEditor(const QString &file_name)
         ui->editor->setPlainText(file.readAll());
 }
 
-void CodeView::expandToDepth(QString file) {
+
+void CodeView::finished_loading(QString file) {
+    qDebug()<<"Currently selected : " << _model->fileName( ui->treeView->currentIndex());
+    ui->treeView->setCurrentIndex(root_index.child(0, 0));
     ui->treeView->expandToDepth(0);
 }
 
