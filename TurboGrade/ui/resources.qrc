@@ -25,6 +25,7 @@
         <file>res/guide.png</file>
         <file>res/csv.png</file>
         <file>res/pdf.png</file>
+        <file>res/splitter2.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>
