@@ -22,12 +22,14 @@ public slots:
     void show_submissions(QObject* assignment);
     void import_submission();
     void export_csv();
+    void export_all_pdf();
 
 private:
     Controller *_controller;
     Section* _section;
     Assignment* _assignment;
-    QPushButton *export_btn = nullptr;
+    QPushButton *export_csv_btn = nullptr;
+    QPushButton *export_pdf_btn = nullptr;
 
 };
 

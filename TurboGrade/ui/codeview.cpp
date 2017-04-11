@@ -28,6 +28,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->treeView->hideColumn(2);
     ui->treeView->hideColumn(3);
     ui->treeView->setAttribute(Qt::WA_MacShowFocusRect, 0);
+    ui->treeView->setCurrentIndex(_model->index(0,0));
 
     ui->comment_layout->setAlignment(Qt::AlignTop);
 

@@ -22,16 +22,31 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     add_btn->setObjectName("add_btn");
     connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
-    export_btn = new QPushButton("Export to CSV");
-    export_btn->setFlat(true);
-    export_btn->setCursor(Qt::PointingHandCursor);
-    export_btn->setObjectName("export_btn");
-    connect(export_btn, SIGNAL(clicked(bool)), this, SLOT(export_csv()));
+    export_csv_btn = new QPushButton("Export Grades (CSV)");
+    export_csv_btn->setFlat(true);
+    export_csv_btn->setCursor(Qt::PointingHandCursor);
+    export_csv_btn->setObjectName("export_csv_btn");
+    QPixmap csv_icon(":/misc/res/csv.png");
+    export_csv_btn->setIcon(QIcon(csv_icon).pixmap(64));
+    export_csv_btn->setIconSize(QSize(16,16));
+    connect(export_csv_btn, SIGNAL(clicked(bool)), this, SLOT(export_csv()));
+
+
+    export_pdf_btn = new QPushButton("Export Reports (PDF)");
+    export_pdf_btn->setFlat(true);
+    export_pdf_btn->setCursor(Qt::PointingHandCursor);
+    export_pdf_btn->setObjectName("export_pdf_btn");
+    QPixmap pdf_icon(":/misc/res/pdf.png");
+    export_pdf_btn->setIcon(QIcon(pdf_icon).pixmap(64));
+    export_pdf_btn->setIconSize(QSize(16,16));
+    connect(export_pdf_btn, SIGNAL(clicked(bool)), this, SLOT(export_all_pdf()));
+
 
     _breadcrumb->add_item(_section->_course->_name, SLOT(show_sections(QObject*)), _section->_course);
     _breadcrumb->add_item(_section->_name, SLOT(show_assignments(QObject*)), _section);
     _breadcrumb->add_item(_assignment->_name, SLOT(show_submissions(QObject*)), _assignment, this);
-    _breadcrumb->add_to_back(export_btn);
+    _breadcrumb->add_to_back(export_csv_btn);
+    _breadcrumb->add_to_back(export_pdf_btn);
     ui->verticalLayout->insertWidget(0, _breadcrumb);
 
     refresh_cards();
@@ -111,5 +126,11 @@ void SubmissionView::export_csv() {
     QString folder = QFileDialog::getSaveFileName(this, tr("Save CSV as"));
     CSVGenerator g;
     g.printProfessor(_section, _assignment, folder);
+}
+
+
+void SubmissionView::export_all_pdf() {
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Save reports in..."), QString(),
+                                                       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 }
 

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -58,7 +58,7 @@ QLabel {
 	margin: 5px;
 }
 
-#export_btn {
+#export_csv_btn, #export_pdf_btn {
 	background:transparent;
 	text-transform: capitalize;
 }</string>
@@ -83,6 +83,9 @@ QLabel {
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Expanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
