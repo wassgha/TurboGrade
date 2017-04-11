@@ -62,11 +62,14 @@ void CSVGenerator::printProfessor(Section *section, Assignment *assignment, QStr
         }
         if(sub == nullptr){
         } else {
-            std::string commentString = "";
+            std::string commentString = "\"";
             for(Comment *comment : *sub->_comments){
                 commentString.append(comment->_text.toStdString());
-                commentString.append(" ");
+                if(comment != sub->_comments->back()){
+                    commentString.append("\n");
+                }
             }
+            commentString.append("\"");
             line.append(commentString);
         }
         std::cout << line << std::endl;
