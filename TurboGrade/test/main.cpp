@@ -133,19 +133,20 @@ TEST(general,2CONTROLLERBReplaceLose) {
     testCourse->add_section(-1,"testSection");
     testCourse->add_section(-1,"testSection2");
     delete testControl;
-    Controller* newControl = new Controller(false,"test.sql");
+    Controller* newControl = new Controller(true,"test.sql");
+    newControl->add_course(-1,"testCourse");
     vector<Course*>* newCourseList = newControl->get_courses();
     Course* newTestCourse = newCourseList->at(0);
     vector<Section*>* sectionList = newTestCourse->get_sections();
     int x = sectionList->size();
     cout<<to_string(x)<<endl;
-    ASSERT_EQ(x,2);
+    ASSERT_EQ(x,0);
 }
 
 //assignment addition/not
 
 TEST(general,3CONTROLLERBUILD) {
-    Controller testControl;
+    Controller testControl(true,"test.sql");
     testControl.add_course(0,"testCourse");
     vector<Course*>* courseList = testControl.get_courses();
     int x = courseList->size();
@@ -158,7 +159,7 @@ TEST(general,3CONTROLLERBUILD) {
 }
 
 TEST(general,3CONTROLLERBReplaceKeep) {
-    Controller* testControl = new Controller(false,"test.sql");
+    Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
     testControl->add_course(-1,"Course2");
     delete testControl;
