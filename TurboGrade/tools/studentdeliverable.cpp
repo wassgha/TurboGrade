@@ -9,7 +9,136 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     if(submission == nullptr){
         return "";
     }
-    QString htmlString ="<!DOCTYPE html>";
+    QString htmlString ="";
+    add_header(submission, htmlString);
+    add_names(submission, htmlString);
+    add_total_grade(submission, htmlString);
+    add_comments(submission, htmlString);
+
+    htmlString.append(
+      "    <div id = \"container\">"
+
+      "        <h2>Assignment Objective</h2>"
+
+      "        <p>"
+      "          This project will help you get familiar with"
+      "          <ul>"
+      "            <li>Images</li>"
+      "            <li>Nested Loops</li>"
+      "          </ul>"
+      "        </p>"
+
+      "        <h2>Grade Summary</h2>");
+      for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
+          htmlString.append(
+      "        <div class = \"criterion\">"
+      "            <div class = \"name\">");
+          htmlString.append(criterion->_name);
+          htmlString.append("<span class = \"grade\">");
+          htmlString.append(QString(submission->get_grade(criterion)));
+                  htmlString.append("</span><span class = \"out-of\">/");
+          htmlString.append(QString(criterion->_out_of));
+          htmlString.append("</span>"
+      "            </div>"
+      "            <ul>");
+          for(Criterion *subcriterion : criterion->children()){
+          htmlString.append("<li>");
+          htmlString.append(subcriterion->_name);
+          htmlString.append(" : <span class = \"grade\">");
+          htmlString.append(submission->get_grade(subcriterion));
+          htmlString.append("</span><span class = \"out-of\">out of ");
+          htmlString.append(subcriterion->_out_of);
+          htmlString.append("</span></li>");
+          }
+          htmlString.append(
+                      "            </ul>"
+      "        </div>");
+      }
+      htmlString.append(
+      "        <div class = \"criterion\">"
+      "            <div class = \"name\">"
+      "              Documentation <span class = \"grade\">4</span><span class = \"out-of\">/5</span>"
+      "            </div>"
+      "            <table class = \"rubric\">"
+      "                <tr>"
+      "                  <td>No comments<br> No Javadoc</td>"
+      "                  <td class = \"selected\">Few comments<br> Not Javadoc Compliant</td>"
+      "                  <td>Mostly commented</td>"
+      "                  <td>Clearly documented<br> Javadoc compliant</td>"
+      "                </tr>"
+      "            </table>"
+      "        </div>"
+      "        <div id = \"total\">"
+      "          Total grade : <span class = \"grade\">");
+      htmlString.append(submission->get_grade());
+      htmlString.append("</span><span class = \"out-of\">/");
+      htmlString.append(submission->get_out_of());
+      htmlString.append("</span>"
+      "        </div>"
+
+      "        <h2>Detailed remarks</h2>"
+
+      "        <div class = \"criterion comments\">"
+      "            <div class = \"name\">"
+      "              Correctness <span class = \"grade\">17</span><span class = \"out-of\">/20</span>"
+      "            </div>"
+      "            <div class = \"code-container\">"
+      "                <div class = \"lines\">"
+      "                  1<br>"
+      "                  2<br>"
+      "                  3<br>"
+      "                  4<br>"
+      "                  5<br>"
+      "                </div>"
+      "                <div class = \"code\">"
+      "                  setNumOfCommentsPerHour();<br>"
+      "                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
+      "                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
+      "                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
+      "                  randomSeed=(long)p.random(1000);<br>"
+      "                </div>"
+      "                <div class = \"comment\">"
+      "                  <p><span class=\"grade bad\">-1</span>Please only use allowed libraries</p>"
+      "                </div>"
+      "            </div>"
+      "            <div class = \"code-container\">"
+      "                <div class = \"lines\">"
+      "                  1<br>"
+      "                  2<br>"
+      "                  3<br>"
+      "                  4<br>"
+      "                  5<br>"
+      "                </div>"
+      "                <div class = \"code\">"
+      "                  setNumOfCommentsPerHour();<br>"
+      "                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
+      "                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
+      "                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
+      "                  randomSeed=(long)p.random(1000);<br>"
+      "                </div>"
+      "                <div class = \"comment\">"
+      "                  <p><span class=\"grade bad\">-1</span>Please only use allowed libraries</p>"
+      "                </div>"
+      "            </div>"
+      "        </div>"
+
+      "        <h2>Standing stastics</h2>"
+      "        <img class = \"chart\" src=\"https://www.smashingmagazine.com/wp-content/uploads/2014/12/css-animation-craziness.gif\" />"
+
+      "    </div>"
+      "    <div id = \"logo\" >"
+      "      Powered by <img src = \"turbogradelogodark.png\" />"
+      "    </div>"
+      "    <div class=\"clear\"></div>"
+      "  </div>"
+      "</body>"
+    "</html>");
+    std::cout << htmlString.toStdString() << "\n";
+    return htmlString;
+}
+
+void StudentDeliverable::add_header(Submission *submission, QString &htmlString){
+    htmlString.append("<!DOCTYPE html>");
     htmlString.append("\n<html>");
     htmlString.append("\n   <head>");
     htmlString.append("\n<meta charset=\"utf-8\">");
@@ -221,158 +350,49 @@ QString StudentDeliverable::placeParameters(Submission *submission){
         "  });"
 
         "</style>"
-      "</head>"
-      "<body>"
-      "  <div id = \"document\">"
-      "    <div id = \"info\">");
-    htmlString.append(submission->_student->_name);
-    htmlString.append("<br>"
-      "      <div id = \"assignment-name\">"
-      "        Assignment :");
-    htmlString.append("\"Lab 5 : Binary Search Tree\"");
-    htmlString.append(
-      "      </div>"
-      "    </div>"
-      "    <div id = \"grade\">"
-      "      <div id = \"label\">"
-      "        TOTAL GRADE"
-      "      </div>"
-                );
-    htmlString.append(QString(submission->get_grade()));
-    htmlString.append(
-    "    </div>"
-      "    <div class=\"clear\"></div>"
-    );
-    for(Comment *comment:*submission->_comments){
-        htmlString.append(
-                    "    <div class = \"comment\">");
-        htmlString.append(
-                    "      <div class = \"title\">");
-        htmlString.append(comment->_criterion->_name);
-        htmlString.append("</div>"
-                          "       <p>");
-        htmlString.append(comment->_text);
-        htmlString.append("      </p>"
-                          "    </div>");
-    }
-    htmlString.append(
-      "    <div id = \"container\">"
+      "</head>");
+}
 
-      "        <h2>Assignment Objective</h2>"
+void StudentDeliverable::add_names(Submission *submission, QString &htmlString){
+   htmlString.append(
+    "<body>"
+    "  <div id = \"document\">"
+    "    <div id = \"info\">");
+  htmlString.append(submission->_student->_name);
+  htmlString.append("<br>"
+    "      <div id = \"assignment-name\">"
+    "        Assignment :\"");
+  htmlString.append(submission->_assignment->_name);
+     //         "\"Lab 5 : Binary Search Tree\"");
+  htmlString.append(
+    "\"      </div>"
+    "    </div>");
+}
 
-      "        <p>"
-      "          This project will help you get familiar with"
-      "          <ul>"
-      "            <li>Images</li>"
-      "            <li>Nested Loops</li>"
-      "          </ul>"
-      "        </p>"
+void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlString){
+  htmlString.append(
+    "    <div id = \"grade\">"
+    "      <div id = \"label\">"
+    "        TOTAL GRADE"
+    "      </div>"
+              );
+  htmlString.append(QString(submission->get_grade()));
+  htmlString.append(
+  "    </div>");
+}
 
-      "        <h2>Grade Summary</h2>");
-      for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
-          htmlString.append(
-      "        <div class = \"criterion\">"
-      "            <div class = \"name\">");
-          htmlString.append(criterion->_name);
-          htmlString.append("<span class = \"grade\">");
-          htmlString.append(QString(submission->get_grade(criterion)));
-                  htmlString.append("</span><span class = \"out-of\">/");
-          htmlString.append(QString(criterion->_out_of));
-          htmlString.append("</span>"
-      "            </div>"
-      "            <ul>");
-          for(Criterion *subcriterion : criterion->children()){
-          htmlString.append("<li>");
-          htmlString.append(subcriterion->_name);
-          htmlString.append(" : <span class = \"grade\">");
-          htmlString.append(submission->get_grade(subcriterion));
-          htmlString.append("</span><span class = \"out-of\">out of ");
-          htmlString.append(subcriterion->_out_of);
-          htmlString.append("</span></li>");
-          }
-          htmlString.append(
-                      "            </ul>"
-      "        </div>");
-      }
+void StudentDeliverable::add_comments(Submission* submission, QString &htmlString){
+  htmlString.append(  "    <div class=\"clear\"></div>");
+  for(Comment *comment:*submission->_comments){
       htmlString.append(
-      "        <div class = \"criterion\">"
-      "            <div class = \"name\">"
-      "              Documentation <span class = \"grade\">4</span><span class = \"out-of\">/5</span>"
-      "            </div>"
-      "            <table class = \"rubric\">"
-      "                <tr>"
-      "                  <td>No comments<br> No Javadoc</td>"
-      "                  <td class = \"selected\">Few comments<br> Not Javadoc Compliant</td>"
-      "                  <td>Mostly commented</td>"
-      "                  <td>Clearly documented<br> Javadoc compliant</td>"
-      "                </tr>"
-      "            </table>"
-      "        </div>"
-      "        <div id = \"total\">"
-      "          Total grade : <span class = \"grade\">");
-      htmlString.append(submission->get_grade());
-      htmlString.append("</span><span class = \"out-of\">/");
-      htmlString.append(submission->get_out_of());
-      htmlString.append("</span>"
-      "        </div>"
-
-      "        <h2>Detailed remarks</h2>"
-
-      "        <div class = \"criterion comments\">"
-      "            <div class = \"name\">"
-      "              Correctness <span class = \"grade\">17</span><span class = \"out-of\">/20</span>"
-      "            </div>"
-      "            <div class = \"code-container\">"
-      "                <div class = \"lines\">"
-      "                  1<br>"
-      "                  2<br>"
-      "                  3<br>"
-      "                  4<br>"
-      "                  5<br>"
-      "                </div>"
-      "                <div class = \"code\">"
-      "                  setNumOfCommentsPerHour();<br>"
-      "                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
-      "                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
-      "                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
-      "                  randomSeed=(long)p.random(1000);<br>"
-      "                </div>"
-      "                <div class = \"comment\">"
-      "                  <p><span class=\"grade bad\">-1</span>Please only use allowed libraries</p>"
-      "                </div>"
-      "            </div>"
-      "            <div class = \"code-container\">"
-      "                <div class = \"lines\">"
-      "                  1<br>"
-      "                  2<br>"
-      "                  3<br>"
-      "                  4<br>"
-      "                  5<br>"
-      "                </div>"
-      "                <div class = \"code\">"
-      "                  setNumOfCommentsPerHour();<br>"
-      "                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
-      "                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
-      "                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
-      "                  randomSeed=(long)p.random(1000);<br>"
-      "                </div>"
-      "                <div class = \"comment\">"
-      "                  <p><span class=\"grade bad\">-1</span>Please only use allowed libraries</p>"
-      "                </div>"
-      "            </div>"
-      "        </div>"
-
-      "        <h2>Standing stastics</h2>"
-      "        <img class = \"chart\" src=\"https://www.smashingmagazine.com/wp-content/uploads/2014/12/css-animation-craziness.gif\" />"
-
-      "    </div>"
-      "    <div id = \"logo\" >"
-      "      Powered by <img src = \"turbogradelogodark.png\" />"
-      "    </div>"
-      "    <div class=\"clear\"></div>"
-      "  </div>"
-      "</body>"
-    "</html>");
-    std::cout << htmlString.toStdString() << "\n";
-    return htmlString;
+                  "    <div class = \"comment\">");
+      htmlString.append(
+                  "      <div class = \"title\">");
+      htmlString.append(comment->_criterion->_name);
+      htmlString.append("</div>"
+                        "       <p>");
+      htmlString.append(comment->_text);
+      htmlString.append("      </p>"
+                        "    </div>");
+  }
 }
