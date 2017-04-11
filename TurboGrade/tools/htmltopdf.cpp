@@ -11,6 +11,7 @@ HTMLToPDF::HTMLToPDF(QWidget *parent) : QWidget(parent)
                       "<head>"
                       "<link rel=\"stylesheet\" type=\"text/css\" href=\"../../TurboGrade/tools/example.css\">"
                       "</head>"
+                      "<body>"
                       "<h1>Student's Name</h1><br>"
                       "<p> Course Name - Professor's name</p>"
                       "<span>Final Grade:</span>"
@@ -23,8 +24,10 @@ HTMLToPDF::HTMLToPDF(QWidget *parent) : QWidget(parent)
                       "     </ul>"
                       " </li>"
                       " <li>Rubric Category 2</li>"
-                      "</ul>");
+                      "</ul>"
+                      "</body>");
     document->setDefaultFont(font);
+//    parent->set
 
     QPrinter printer(QPrinter::HighResolution);
     printer.setPageSize(QPrinter::A4);

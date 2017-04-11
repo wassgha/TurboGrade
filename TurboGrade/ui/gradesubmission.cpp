@@ -39,7 +39,7 @@ void GradeSubmission::on_run_clicked()
     ui->run->setDisabled(true);
 
     QProcess *compile = new QProcess(this);
-    compile->start("/usr/local/bin/processing-java",QStringList() << "--sketch=/Users/wassgha/Documents/cs205/project/yikyak"<<"--run");
+    compile->start("/usr/local/bin/processing-java",QStringList() << "--sketch=" +  code_view->current_folder() <<"--run");
 
     connect(compile, SIGNAL(finished(int)), this, SLOT(finished_running()));
 }

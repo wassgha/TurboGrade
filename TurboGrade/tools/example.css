@@ -1,1 +1,206 @@
-H1, H2, P, LI { color: green }
+body {
+  background: #232730;
+  font-family:
+  color: white;
+  font-family : sans-serif;
+  max-width: 960px;
+  margin: auto;
+}
+
+h2 {
+  margin-left: 0px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.clear {
+  float: none;
+  clear: both;
+}
+
+.criterion {
+  border-top: 1px solid #EBEBEB;
+  overflow-x: scroll;
+}
+
+.criterion:first-of-type {
+  margin-top: 20px;
+}
+
+.criterion.comments {
+  border: none;
+}
+
+.criterion > .name {
+    font-size: 18px;
+    padding: 20px;
+    display: block;
+}
+
+.criterion > .name > .grade {
+  font-weight: bold;
+  font-size: 23px;
+  padding: 5px;
+}
+
+.criterion > .name > .out-of {
+  color: gray;
+}
+
+.criterion ul {
+  list-style: circle;
+}
+
+.criterion li {
+  padding: 10px;
+}
+
+.criterion li > .grade {
+  font-weight: bold;
+  font-size: 17px;
+  padding: 5px;
+}
+
+.criterion li > .out-of {
+  color: gray;
+}
+
+.rubric {
+  width: 100%;
+  min-height: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-spacing: 10px 0px;
+}
+
+.rubric td {
+  color: darkgray;
+  background-color: white;
+  border: 1px solid rgb(236, 239, 239);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.rubric td.selected {
+  color: black;
+  background-color: white;
+  border: 3px solid rgb(230, 212, 0);
+  border-radius: 5px;
+  padding: 10px;
+}
+
+#total {
+  border-top: 1px solid lightgray;
+  padding: 20px;
+  text-align: right;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+#total > .out-of {
+  color : gray;
+  font-weight: normal;
+}
+
+#document {
+  color: white;
+  padding : 20px;
+}
+
+#logo {
+  float: right;
+}
+
+#logo > img {
+  height: 32px;
+  vertical-align: middle;
+}
+
+#info {
+  float: left;
+  padding-top: 20px;
+}
+
+#grade {
+  float: right;
+  color: green;
+  border-radius: 5px;
+  background: white;
+  padding: 20px;
+  font-size: 28px;
+  text-align: center;
+}
+
+#grade > #label {
+  font-size: 13px;
+  text-transform: uppercase;
+  color: gray;
+  margin-bottom: 5px;
+}
+
+#assignment-name {
+  font-size: 24px;
+}
+
+#container {
+  color: black;
+  border-radius: 5px;
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.code-container {
+  background: #232730;
+  color: #EBEBEB;
+  padding: 20px;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: 20px;
+  overflow-x: scroll;
+}
+
+.code {
+  padding-left: 20px;
+}
+
+.code-container > .lines {
+  color: gray;
+  font-weight: 200;
+  position: absolute;
+}
+
+.comment {
+  margin-top: 20px;
+  background: #ffea8d;
+  border-radius: 5px;
+  padding: 20px;
+  color: black;
+}
+.comment > .title {
+  text-transform: uppercase;
+  color: rgb(107, 100, 51);
+  font-weight: bold;
+  padding: 10px;
+
+}
+
+.comment > p > .grade {
+  padding : 10px;
+}
+
+.comment > p > .grade.bad {
+  color: red;
+}
+
+.comment > p > .grade.good {
+  color: green;
+}
+
+.chart {
+  border-radius: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+}

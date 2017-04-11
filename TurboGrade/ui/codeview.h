@@ -46,6 +46,8 @@ class CodeView : public QWidget
 public:
     explicit CodeView(QWidget *parent, Controller* controller = nullptr);
     ~CodeView();
+    QString current_folder();
+    QString current_file();
     Ui::CodeView                *ui;
     Controller                  *_controller;
     GradeSubmission             *_parent;

@@ -229,3 +229,15 @@ void CodeView::refresh_autocomplete() {
     _completer->setCaseSensitivity(Qt::CaseInsensitive);
     _popup->ui->comment->setCompleter(_completer);
 }
+
+QString CodeView::current_file() {
+    QString local_path = _model->filePath(ui->treeView->currentIndex());
+
+     return local_path;
+}
+
+QString CodeView::current_folder() {
+    QString local_path = _model->filePath(ui->treeView->currentIndex().parent());
+
+     return local_path;
+}
