@@ -58,6 +58,16 @@ void CSVGenerator::printProfessor(Section *section, Assignment *assignment, QStr
             line.append("N/A");
         } else {
             line.append(std::to_string(sub->get_grade()));
+            line.append(", ");
+        }
+        if(sub == nullptr){
+        } else {
+            std::string commentString = "";
+            for(Comment *comment : *sub->_comments){
+                commentString.append(comment->_text.toStdString());
+                commentString.append(" ");
+            }
+            line.append(commentString);
         }
         std::cout << line << std::endl;
         body.append(line);

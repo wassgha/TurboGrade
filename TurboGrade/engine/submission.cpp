@@ -70,7 +70,6 @@ std::vector<Comment*> Submission::get_comment(QString filename) {
 
 }
 
-
 /**
  * @brief Submission::add_grade adds a grade to a specific criterion,
  * @param criterion the criterion
