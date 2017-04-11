@@ -62,6 +62,102 @@ TEST(general,CONTROLLERBUILD) {
     int x2 = courseList->size();
     cout<<to_string(x)<<endl;
     ASSERT_EQ(x2,2);
+}
 
+TEST(general,CONTROLLERBReplaceKeep) {
+    Controller* testControl = new Controller(false,"test.sql");
+    testControl->add_course(-1,"testCourse");
+    testControl->add_course(-1,"Course2");
+    delete testControl;
+    Controller* newControl = new Controller(false,"test.sql");
+    vector<Course*>* courseList = newControl->get_courses();
+    int x = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x,2);
+}
 
+TEST(general,CONTROLLERBReplaceLose) {
+    Controller* testControl = new Controller(false,"test.sql");
+    testControl->add_course(-1,"testCourse");
+    testControl->add_course(-1,"Course2");
+    delete testControl;
+    Controller* newControl = new Controller(true,"test.sql");
+    vector<Course*>* courseList = newControl->get_courses();
+    int x = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x,0);
+}
+
+TEST(general,2CONTROLLERBUILD) {
+    Controller testControl;
+    testControl.add_course(0,"testCourse");
+    vector<Course*>* courseList = testControl.get_courses();
+    int x = courseList->size();
+    ASSERT_EQ(x,1);
+    testControl.add_course(1,"test2");
+    courseList = testControl.get_courses();
+    int x2 = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x2,2);
+}
+
+TEST(general,2CONTROLLERBReplaceKeep) {
+    Controller* testControl = new Controller(false,"test.sql");
+    testControl->add_course(-1,"testCourse");
+    testControl->add_course(-1,"Course2");
+    delete testControl;
+    Controller* newControl = new Controller(false,"test.sql");
+    vector<Course*>* courseList = newControl->get_courses();
+    int x = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x,2);
+}
+
+TEST(general,2CONTROLLERBReplaceLose) {
+    Controller* testControl = new Controller(false,"test.sql");
+    testControl->add_course(-1,"testCourse");
+    testControl->add_course(-1,"Course2");
+    delete testControl;
+    Controller* newControl = new Controller(true,"test.sql");
+    vector<Course*>* courseList = newControl->get_courses();
+    int x = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x,0);
+}
+
+TEST(general,3CONTROLLERBUILD) {
+    Controller testControl;
+    testControl.add_course(0,"testCourse");
+    vector<Course*>* courseList = testControl.get_courses();
+    int x = courseList->size();
+    ASSERT_EQ(x,1);
+    testControl.add_course(1,"test2");
+    courseList = testControl.get_courses();
+    int x2 = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x2,2);
+}
+
+TEST(general,3CONTROLLERBReplaceKeep) {
+    Controller* testControl = new Controller(false,"test.sql");
+    testControl->add_course(-1,"testCourse");
+    testControl->add_course(-1,"Course2");
+    delete testControl;
+    Controller* newControl = new Controller(false,"test.sql");
+    vector<Course*>* courseList = newControl->get_courses();
+    int x = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x,2);
+}
+
+TEST(general,3CONTROLLERBReplaceLose) {
+    Controller* testControl = new Controller(false,"test.sql");
+    testControl->add_course(-1,"testCourse");
+    testControl->add_course(-1,"Course2");
+    delete testControl;
+    Controller* newControl = new Controller(true,"test.sql");
+    vector<Course*>* courseList = newControl->get_courses();
+    int x = courseList->size();
+    cout<<to_string(x)<<endl;
+    ASSERT_EQ(x,0);
 }
