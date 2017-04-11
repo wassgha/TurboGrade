@@ -12,6 +12,8 @@ public:
     void add_names(Submission *submission, QString& htmlString);
     void add_total_grade(Submission *submission, QString& htmlString);
     void add_comments(Submission *submission, QString& htmlString);
+    void add_assignment_obj(Submission *submission, QString& htmlString);
+    void add_grades(Submission *submission, QString& htmlString);
 };
 
 #endif // STUDENTDELIVERABLE_H

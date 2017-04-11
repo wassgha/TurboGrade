@@ -14,46 +14,9 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_names(submission, htmlString);
     add_total_grade(submission, htmlString);
     add_comments(submission, htmlString);
+    add_assignment_obj(submission, htmlString);
+    add_grades(submission, htmlString);
 
-    htmlString.append(
-      "    <div id = \"container\">"
-
-      "        <h2>Assignment Objective</h2>"
-
-      "        <p>"
-      "          This project will help you get familiar with"
-      "          <ul>"
-      "            <li>Images</li>"
-      "            <li>Nested Loops</li>"
-      "          </ul>"
-      "        </p>"
-
-      "        <h2>Grade Summary</h2>");
-      for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
-          htmlString.append(
-      "        <div class = \"criterion\">"
-      "            <div class = \"name\">");
-          htmlString.append(criterion->_name);
-          htmlString.append("<span class = \"grade\">");
-          htmlString.append(QString(submission->get_grade(criterion)));
-                  htmlString.append("</span><span class = \"out-of\">/");
-          htmlString.append(QString(criterion->_out_of));
-          htmlString.append("</span>"
-      "            </div>"
-      "            <ul>");
-          for(Criterion *subcriterion : criterion->children()){
-          htmlString.append("<li>");
-          htmlString.append(subcriterion->_name);
-          htmlString.append(" : <span class = \"grade\">");
-          htmlString.append(submission->get_grade(subcriterion));
-          htmlString.append("</span><span class = \"out-of\">out of ");
-          htmlString.append(subcriterion->_out_of);
-          htmlString.append("</span></li>");
-          }
-          htmlString.append(
-                      "            </ul>"
-      "        </div>");
-      }
       htmlString.append(
       "        <div class = \"criterion\">"
       "            <div class = \"name\">"
@@ -396,4 +359,45 @@ void StudentDeliverable::add_comments(Submission* submission, QString &htmlStrin
       htmlString.append("      </p>"
                         "    </div>");
   }
+}
+
+void StudentDeliverable::add_assignment_obj(Submission *submission, QString &htmlString){
+    htmlString.append(
+      "    <div id = \"container\">"
+
+      "        <h2>Assignment Objective</h2>"
+
+      "        <p>");
+    htmlString.append(submission->_assignment->_objective);
+    htmlString.append(
+      "        </p>");
+}
+
+void StudentDeliverable::add_grades(Submission *submission, QString &htmlString){
+    htmlString.append("        <h2>Grade Summary</h2>");
+    for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
+        htmlString.append(
+    "        <div class = \"criterion\">"
+    "            <div class = \"name\">");
+        htmlString.append(criterion->_name);
+        htmlString.append("<span class = \"grade\">");
+        htmlString.append(QString(std::to_string(submission->get_grade(criterion)).c_str()));
+                htmlString.append("</span><span class = \"out-of\">/");
+        htmlString.append(QString(std::to_string(criterion->_out_of).c_str()));
+        htmlString.append("</span>"
+    "            </div>"
+    "            <ul>");
+        for(Criterion *subcriterion : criterion->children()){
+        htmlString.append("<li>");
+        htmlString.append(subcriterion->_name);
+        htmlString.append(" : <span class = \"grade\">");
+        htmlString.append(std::to_string(submission->get_grade(subcriterion)).c_str());
+        htmlString.append("</span><span class = \"out-of\"> out of ");
+        htmlString.append(std::to_string(subcriterion->_out_of).c_str());
+        htmlString.append("</span></li>");
+        }
+        htmlString.append(
+                    "            </ul>"
+    "        </div>");
+    }
 }
