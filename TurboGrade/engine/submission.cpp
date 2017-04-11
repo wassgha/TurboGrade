@@ -72,7 +72,6 @@ std::vector<Comment*> Submission::get_comment(QString filename) {
 
 }
 
-
 /**
  * @brief Submission::add_grade adds a grade to a specific criterion,
  * @param criterion the criterion
@@ -126,7 +125,7 @@ int Submission::get_grade(Criterion *criterion){
         }
         return grade;
     }
-    catch (std::out_of_range& e) {
+    catch (const std::out_of_range& e) {
         qDebug() << "Tried to access grade for criterion not in map.";
         return -1;
     }
