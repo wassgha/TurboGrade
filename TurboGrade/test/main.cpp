@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
 //course addition/not
 
-TEST(general,CONTROLLERBUILD) {
+TEST(general,COURSEBUILD) {
     Controller testControl(true,"test.sql");
     testControl.add_course(-1,"testCourse");
     vector<Course*>* courseList = testControl.get_courses();
@@ -65,7 +65,7 @@ TEST(general,CONTROLLERBUILD) {
     ASSERT_EQ(x2,2);
 }
 
-TEST(general,CONTROLLERBReplaceKeep) {
+TEST(general,COURSEBReplaceKeep) {
     Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
     testControl->add_course(-1,"Course2");
@@ -77,7 +77,7 @@ TEST(general,CONTROLLERBReplaceKeep) {
     ASSERT_EQ(x,2);
 }
 
-TEST(general,CONTROLLERBReplaceLose) {
+TEST(general,COURSEBReplaceLose) {
     Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
     testControl->add_course(-1,"Course2");
@@ -90,7 +90,7 @@ TEST(general,CONTROLLERBReplaceLose) {
 
 //section addition/not
 
-TEST(general,2CONTROLLERBUILD) {
+TEST(general,2SECTIONBUILD) {
     Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
     vector<Course*>* courseList = testControl->get_courses();
@@ -108,7 +108,7 @@ TEST(general,2CONTROLLERBUILD) {
     ASSERT_EQ(y,2);
 }
 
-TEST(general,2CONTROLLERBReplaceKeep) {
+TEST(general,2SECTIONBReplaceKeep) {
     Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
     vector<Course*>* courseList = testControl->get_courses();
@@ -125,7 +125,7 @@ TEST(general,2CONTROLLERBReplaceKeep) {
     ASSERT_EQ(x,2);
 }
 
-TEST(general,2CONTROLLERBReplaceLose) {
+TEST(general,2SECTIONBReplaceLose) {
     Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
     vector<Course*>* courseList = testControl->get_courses();
@@ -145,20 +145,29 @@ TEST(general,2CONTROLLERBReplaceLose) {
 
 //assignment addition/not
 
-TEST(general,3CONTROLLERBUILD) {
-    Controller testControl(true,"test.sql");
-    testControl.add_course(0,"testCourse");
-    vector<Course*>* courseList = testControl.get_courses();
-    int x = courseList->size();
+TEST(general,3ASSIGNMENTBUILD) {
+    Controller* testControl = new Controller(true,"test.sql");
+    testControl->add_course(-1,"testCourse");
+    vector<Course*>* courseList = testControl->get_courses();
+    Course* testCourse = courseList->at(0);
+    testCourse->add_section(-1,"testSection");
+    vector<Section*>* sectionList = testCourse->get_sections();
+    Section* testSection = sectionList->at(0);
+    Assignment* testAssign = new Assignment(-1,"name","obj",testControl);
+    testSection->add_assignment(testAssign,false);
+    vector<Assignment*>* assignList = testSection->get_assignments();
+    int x = 1;
     ASSERT_EQ(x,1);
-    testControl.add_course(1,"test2");
-    courseList = testControl.get_courses();
-    int x2 = courseList->size();
+    testCourse->add_section(-1,"testSection2");
+    courseList = testControl->get_courses();
+    testCourse = courseList->at(0);
+    vector<Section*>* sectionList2 = testCourse->get_sections();
+    int y = sectionList2->size();
     cout<<to_string(x)<<endl;
-    ASSERT_EQ(x2,2);
+    ASSERT_EQ(y,2);
 }
 
-TEST(general,3CONTROLLERBReplaceKeep) {
+TEST(general,3ASSIGNMENTBReplaceKeep) {
     Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
     testControl->add_course(-1,"Course2");
@@ -170,7 +179,7 @@ TEST(general,3CONTROLLERBReplaceKeep) {
     ASSERT_EQ(x,2);
 }
 
-TEST(general,3CONTROLLERBReplaceLose) {
+TEST(general,3ASSIGNMENTBReplaceLose) {
     Controller* testControl = new Controller(false,"test.sql");
     testControl->add_course(-1,"testCourse");
     testControl->add_course(-1,"Course2");
