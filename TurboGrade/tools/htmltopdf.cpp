@@ -1,6 +1,6 @@
 #include "htmltopdf.h"
 
-HTMLToPDF::HTMLToPDF(QWidget *parent) : QWidget(parent)
+HTMLToPDF::HTMLToPDF(QWidget *parent, int x) : QWidget(parent)
 {
 
     QFont font;
@@ -36,6 +36,26 @@ HTMLToPDF::HTMLToPDF(QWidget *parent) : QWidget(parent)
     connect(&preview, SIGNAL(paintRequested(QPrinter *)), SLOT(printPreview(QPrinter *)));
     preview.exec();
 }
+
+HTMLToPDF::HTMLToPDF(QWidget *parent, QString html) : QWidget(parent){
+    QFont font;
+    font.setFamily(font.defaultFamily());
+
+    document = new QTextDocument();
+    document->setHtml(html);
+    document->setDefaultFont(font);
+
+    QPrinter printer(QPrinter::HighResolution);
+    printer.setPageSize(QPrinter::A4);
+    printer.setOutputFormat(QPrinter::PdfFormat);
+    printer.setOutputFileName("output3.pdf");
+    QPrintPreviewDialog preview(&printer, this);
+    preview.setWindowFlags ( Qt::Window );
+    document->print(&printer);
+    connect(&preview, SIGNAL(paintRequested(QPrinter *)), SLOT(printPreview(QPrinter *)));
+    preview.exec();
+}
+
 
 void HTMLToPDF::printPreview(QPrinter *printer) {
     document->print(printer);

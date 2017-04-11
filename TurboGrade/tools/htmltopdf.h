@@ -12,7 +12,8 @@ class HTMLToPDF : public QWidget
 {
     Q_OBJECT
 public:
-    explicit HTMLToPDF(QWidget *parent = 0);
+    explicit HTMLToPDF(QWidget *parent = 0, int x = 0);
+    explicit HTMLToPDF(QWidget *parent = 0, QString html = "");
     QTextDocument *document;
 
 signals:

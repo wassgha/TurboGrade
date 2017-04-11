@@ -4,17 +4,15 @@
 #include "macadress.h"
 #include "../engine/controller.h"
 #include "csvgenerator.h"
+#include "studentdeliverable.h"
 using namespace std;
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    HTMLToPDF w;
-    w.show();
-    a.exec();
-    cout << "Hello World!" << endl;
+    //cout << "Hello World!" << endl;
 
-    MacAdress m;
+    //MacAdress m;
     Controller *_controller;
 
     // Use new Controller(true) to drop tables
@@ -24,5 +22,13 @@ int main(int argc, char *argv[])
     Assignment* assignment = section->get_assignment("Binary Search Tree");
     CSVGenerator g;
     g.printProfessor(section,assignment,"test.txt");
+
+    StudentDeliverable s;
+    QString html =  s.placeParameters(section->get_student("Wassim Gharbi")->get_submission(assignment));
+    HTMLToPDF w(nullptr,html);
+    //HTMLToPDF w(nullptr, 0);
+    w.show();
+    a.exec();
+
     return 0;
 }
