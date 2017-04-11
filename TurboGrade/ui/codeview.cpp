@@ -189,7 +189,6 @@ void CodeView::setupCodeEditor(const QString &file_name)
 
 
 void CodeView::finished_loading(QString file) {
-    qDebug()<<"Currently selected : " << _model->fileName( ui->treeView->currentIndex());
     ui->treeView->setCurrentIndex(_model->index(0, 0, root_index));
     ui->treeView->expandToDepth(0);
 }

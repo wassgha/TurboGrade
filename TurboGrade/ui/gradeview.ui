@@ -83,6 +83,7 @@ QGroupBox::title {
 	margin-left: 10px;
 	background:transparent;
 	font-weight: bold;
+	text-transform: uppercase;
 }
 
 
@@ -144,8 +145,8 @@ QWidget#general_comments_box {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>644</width>
-        <height>809</height>
+        <width>659</width>
+        <height>811</height>
        </rect>
       </property>
       <property name="sizePolicy">

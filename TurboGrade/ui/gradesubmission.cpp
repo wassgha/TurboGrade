@@ -23,6 +23,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->mainWidget->setCurrentWidget(code_view);
 
     refresh_students();
+
+    ui->hideName->setChecked(true);
 }
 
 

@@ -28,7 +28,7 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     export_csv_btn->setObjectName("export_csv_btn");
     QPixmap csv_icon(":/misc/res/csv.png");
     export_csv_btn->setIcon(QIcon(csv_icon).pixmap(64));
-    export_csv_btn->setIconSize(QSize(16,16));
+    export_csv_btn->setIconSize(QSize(20,20));
     connect(export_csv_btn, SIGNAL(clicked(bool)), this, SLOT(export_csv()));
 
 
@@ -38,7 +38,7 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     export_pdf_btn->setObjectName("export_pdf_btn");
     QPixmap pdf_icon(":/misc/res/pdf.png");
     export_pdf_btn->setIcon(QIcon(pdf_icon).pixmap(64));
-    export_pdf_btn->setIconSize(QSize(16,16));
+    export_pdf_btn->setIconSize(QSize(20,20));
     connect(export_pdf_btn, SIGNAL(clicked(bool)), this, SLOT(export_all_pdf()));
 
 

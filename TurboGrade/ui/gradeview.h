@@ -4,11 +4,17 @@
 #include "../engine/controller.h"
 #include "../engine/controller.h"
 
+
+#include "gradesubmission.h"
+#include "ui_gradesubmission.h"
+
 #include "dashboard.h"
 #include "ui_dashboard.h"
 
 #include <QMainWindow>
 #include <QWidget>
+
+class GradeSubmission;
 
 namespace Ui {
 class GradeView;
@@ -22,8 +28,8 @@ public:
     explicit GradeView(QWidget *parent, Controller* controller = nullptr);
     ~GradeView();
     Ui::GradeView *ui;
-    Controller *_controller;
-
+    Controller                  *_controller;
+    GradeSubmission             *_parent;
 };
 
 #endif // GRADEVIEW_H
