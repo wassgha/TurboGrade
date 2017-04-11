@@ -6,6 +6,7 @@
 
 #include "dashboard.h"
 #include "../tools/dirtools.h"
+#include "../tools/csvgenerator.h"
 
 class SubmissionView;
 
@@ -20,11 +21,13 @@ public slots:
     void show_assignments();
     void show_submissions(QObject* assignment);
     void import_submission();
+    void export_csv();
 
 private:
     Controller *_controller;
     Section* _section;
     Assignment* _assignment;
+    QPushButton *export_btn = nullptr;
 
 };
 

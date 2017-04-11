@@ -22,9 +22,16 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     add_btn->setObjectName("add_btn");
     connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
 
+    export_btn = new QPushButton("Export to CSV");
+    export_btn->setFlat(true);
+    export_btn->setCursor(Qt::PointingHandCursor);
+    export_btn->setObjectName("export_btn");
+    connect(export_btn, SIGNAL(clicked(bool)), this, SLOT(export_csv()));
+
     _breadcrumb->add_item(_section->_course->_name, SLOT(show_sections(QObject*)), _section->_course);
     _breadcrumb->add_item(_section->_name, SLOT(show_assignments(QObject*)), _section);
     _breadcrumb->add_item(_assignment->_name, SLOT(show_submissions(QObject*)), _assignment, this);
+    _breadcrumb->add_to_back(export_btn);
     ui->verticalLayout->insertWidget(0, _breadcrumb);
 
     refresh_cards();
@@ -98,3 +105,11 @@ void SubmissionView::import_submission() {
     refresh_cards();
 
 }
+
+
+void SubmissionView::export_csv() {
+    QString folder = QFileDialog::getSaveFileName(this, tr("Save CSV as"));
+    CSVGenerator g;
+    g.printProfessor(_section, _assignment, folder);
+}
+

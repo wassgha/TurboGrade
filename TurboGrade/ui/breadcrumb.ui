@@ -56,6 +56,11 @@ QLabel {
 }
 #switcher_left, #switcher_right {
 	margin: 5px;
+}
+
+#export_btn {
+	background:transparent;
+	text-transform: capitalize;
 }</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_3">

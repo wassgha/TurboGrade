@@ -36,6 +36,10 @@ void Breadcrumb::add_home() {
     connect (home_icon, SIGNAL(clicked()), _parent, SLOT(show_courses())) ;
 }
 
+void Breadcrumb::add_to_back(QWidget* w) {
+    layout()->addWidget(w);
+}
+
 void Breadcrumb::add_switcher(QString left, QString right, bool default_state) {
 
     // Create the switcher

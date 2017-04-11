@@ -12,6 +12,8 @@ CardsView::CardsView(QWidget *parent) :
 
     setAttribute(Qt::WA_StyledBackground, true);
 
+//    ui->gridLayout_2->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
+
 }
 
 CardsView::~CardsView()

@@ -23,6 +23,7 @@ public:
     void add_item(const QString text, const char* slot, QObject* arg, QObject* slot_holder = nullptr);
     void add_home();
     void add_switcher(QString left, QString right, bool default_state);
+    void add_to_back(QWidget* w);
 
 private:
     Ui::Breadcrumb *ui;

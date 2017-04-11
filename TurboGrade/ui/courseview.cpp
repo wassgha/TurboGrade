@@ -17,6 +17,7 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
 
     ui->verticalLayout->insertWidget(0, _breadcrumb);
     refresh_cards();
+
 }
 
 void CourseView::refresh_cards() {
