@@ -42,13 +42,11 @@ color: white;
 max-height: 3px;
 }
 QProgressBar:horizontal {
-color:white;
 padding: 0px;
 margin: 0px;
 }
 QProgressBar::chunk:horizontal {
-background: rgb(47, 131, 252);
-color: white;
+background: rgb(96, 151, 45);
 padding: 0px;
 margin: 0px;
 }
@@ -143,6 +141,12 @@ margin: 0px;
      </item>
      <item>
       <widget class="QComboBox" name="studentName">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="editable">
+        <bool>false</bool>
+       </property>
        <item>
         <property name="text">
          <string>Student Name</string>
@@ -154,6 +158,9 @@ margin: 0px;
       <widget class="QCheckBox" name="hideName">
        <property name="text">
         <string>Hide student name</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
        </property>
       </widget>
      </item>
