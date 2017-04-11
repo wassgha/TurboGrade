@@ -61,6 +61,9 @@ public:
     //Returns the local path where submission files are stored
     QString getPath();
 
+    //gets the total maximum score
+    int get_out_of();
+
     // Submission id
     int _id;
     // Submission belongs to student

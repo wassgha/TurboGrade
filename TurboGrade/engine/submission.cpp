@@ -129,6 +129,17 @@ int Submission::get_grade(Criterion *criterion){
     }
 }
 
+int Submission::get_out_of(){
+    int sum = 0;
+    for(Criterion *criterion: *_assignment->_rubric->_criteria){
+        for(Criterion *sub_criterion: *criterion->_sub_criteria){
+            sum+= sub_criterion->_out_of;
+        }
+        sum+= criterion->_out_of;
+    }
+    return sum;
+}
+
 /**
  * @brief Submission::get_grade retrieves the total grade
  * @return the grade for this submission
