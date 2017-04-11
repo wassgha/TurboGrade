@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>841</width>
-    <height>592</height>
+    <height>369</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,7 +36,24 @@ QPushButton#run, QPushButton#toggle {
 QPushButton#run {
 	color: white;
 	background: #63c46b;
-}</string>
+}
+QProgressBar {
+color: white;
+max-height: 3px;
+}
+QProgressBar:horizontal {
+color:white;
+padding: 0px;
+margin: 0px;
+}
+QProgressBar::chunk:horizontal {
+background: rgb(47, 131, 252);
+color: white;
+padding: 0px;
+margin: 0px;
+}
+
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -54,6 +71,25 @@ QPushButton#run {
    <property name="bottomMargin">
     <number>0</number>
    </property>
+   <item>
+    <widget class="QProgressBar" name="progressBar">
+     <property name="value">
+      <number>24</number>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="textVisible">
+      <bool>false</bool>
+     </property>
+     <property name="textDirection">
+      <enum>QProgressBar::TopToBottom</enum>
+     </property>
+     <property name="format">
+      <string>%p% of submissions graded</string>
+     </property>
+    </widget>
+   </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
      <property name="spacing">
