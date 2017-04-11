@@ -376,7 +376,8 @@ void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlSt
     "        TOTAL GRADE"
     "      </div>"
               );
-  htmlString.append(QString(submission->get_grade()));
+  //htmlString.append(QString(submission->get_grade()));
+  htmlString.append(QString(std::to_string(submission->get_grade()).c_str()));
   htmlString.append(
   "    </div>");
 }
