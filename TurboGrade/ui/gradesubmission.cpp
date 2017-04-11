@@ -28,6 +28,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 
 GradeSubmission::~GradeSubmission()
 {
+    if(compile !=nullptr)
+        delete compile;
     delete code_view;
     delete grade_view;
     delete ui;
@@ -37,11 +39,13 @@ void GradeSubmission::on_run_clicked()
 {
     ui->run->setText("Running");
     ui->run->setDisabled(true);
+    code_view->ui->terminal->append("Running project...");
 
-    QProcess *compile = new QProcess(this);
+    if(compile != nullptr)
+        delete compile;
+
+    compile = new QProcess(this);
     compile->start("/usr/local/bin/processing-java",QStringList() << "--sketch=" +  code_view->current_folder() <<"--run");
-
-    code_view->ui->terminal->setText(compile->readAllStandardOutput());
 
     connect(compile, SIGNAL(finished(int)), this, SLOT(finished_running()));
 }
@@ -50,6 +54,7 @@ void GradeSubmission::finished_running() {
 
     ui->run->setText("Run");
     ui->run->setEnabled(true);
+    code_view->ui->terminal->append(compile->readAllStandardOutput());
 
 }
 

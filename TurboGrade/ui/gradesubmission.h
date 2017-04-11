@@ -45,6 +45,7 @@ private slots:
 
 private:
     Ui::GradeSubmission *ui;
+    QProcess *compile = nullptr;
 };
 
 #endif // GRADESUBMISSION_H
