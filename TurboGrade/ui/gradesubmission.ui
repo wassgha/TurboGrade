@@ -37,15 +37,15 @@ QPushButton#run {
 	color: white;
 	background: #63c46b;
 }
-QProgressBar {
+QProgressBar#progressBar {
 color: white;
 max-height: 3px;
 }
-QProgressBar:horizontal {
+QProgressBar#progressBar:horizontal {
 padding: 0px;
 margin: 0px;
 }
-QProgressBar::chunk:horizontal {
+QProgressBar#progressBar::chunk:horizontal {
 background: rgb(96, 151, 45);
 padding: 0px;
 margin: 0px;
