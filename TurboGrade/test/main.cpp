@@ -167,23 +167,37 @@ TEST(general,3ASSIGNMENTBUILD) {
 TEST(general,3ASSIGNMENTBReplaceKeep) {
     Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
-    testControl->add_course(-1,"Course2");
-    delete testControl;
-    Controller* newControl = new Controller(false,"test.sql");
-    vector<Course*>* courseList = newControl->get_courses();
-    int x = courseList->size();
-    cout<<to_string(x)<<endl;
-    ASSERT_EQ(x,2);
+    vector<Course*>* courseList = testControl->get_courses();
+    Course* testCourse = courseList->at(0);
+    testCourse->add_section(-1,"testSection");
+    vector<Section*>* sectionList = testCourse->get_sections();
+    Section* testSection = sectionList->at(0);
+    Assignment* testAssign = new Assignment(-1,"name","obj",testControl);
+    testSection->add_assignment(testAssign,false);
+    vector<Assignment*>* assignList = testSection->get_assignments();
+    int x = assignList->size();
+    ASSERT_EQ(x,1);
+    testSection->add_assignment(testAssign,false);
+    assignList = testSection->get_assignments();
+    int y = assignList->size();
+    ASSERT_EQ(y,2);
 }
 
 TEST(general,3ASSIGNMENTBReplaceLose) {
-    Controller* testControl = new Controller(false,"test.sql");
+    Controller* testControl = new Controller(true,"test.sql");
     testControl->add_course(-1,"testCourse");
-    testControl->add_course(-1,"Course2");
-    delete testControl;
-    Controller* newControl = new Controller(true,"test.sql");
-    vector<Course*>* courseList = newControl->get_courses();
-    int x = courseList->size();
-    cout<<to_string(x)<<endl;
-    ASSERT_EQ(x,0);
+    vector<Course*>* courseList = testControl->get_courses();
+    Course* testCourse = courseList->at(0);
+    testCourse->add_section(-1,"testSection");
+    vector<Section*>* sectionList = testCourse->get_sections();
+    Section* testSection = sectionList->at(0);
+    Assignment* testAssign = new Assignment(-1,"name","obj",testControl);
+    testSection->add_assignment(testAssign,false);
+    vector<Assignment*>* assignList = testSection->get_assignments();
+    int x = assignList->size();
+    ASSERT_EQ(x,1);
+    testSection->add_assignment(testAssign,false);
+    assignList = testSection->get_assignments();
+    int y = assignList->size();
+    ASSERT_EQ(y,2);
 }
