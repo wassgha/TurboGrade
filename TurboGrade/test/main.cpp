@@ -156,14 +156,11 @@ TEST(general,3ASSIGNMENTBUILD) {
     Assignment* testAssign = new Assignment(-1,"name","obj",testControl);
     testSection->add_assignment(testAssign,false);
     vector<Assignment*>* assignList = testSection->get_assignments();
-    int x = 1;
+    int x = assignList->size();
     ASSERT_EQ(x,1);
-    testCourse->add_section(-1,"testSection2");
-    courseList = testControl->get_courses();
-    testCourse = courseList->at(0);
-    vector<Section*>* sectionList2 = testCourse->get_sections();
-    int y = sectionList2->size();
-    cout<<to_string(x)<<endl;
+    testSection->add_assignment(testAssign,false);
+    assignList = testSection->get_assignments();
+    int y = assignList->size();
     ASSERT_EQ(y,2);
 }
 
