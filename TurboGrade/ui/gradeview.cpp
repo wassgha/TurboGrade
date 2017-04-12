@@ -1,7 +1,5 @@
 #include "gradeview.h"
 #include "ui_gradeview.h"
-#include "criteriongradecard.h"
-#include "ui_criteriongradecard.h"
 
 GradeView::GradeView(QWidget *parent, Controller *controller) :
     QWidget(parent),
@@ -15,16 +13,27 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
     _parent = dynamic_cast<GradeSubmission*>(parent);
 
     for (Criterion* criterion : *_parent->_submission->_assignment->_rubric->_criteria) {
-        ui->verticalLayout_3->insertWidget(2,
-                                           new CriterionGradeCard(
-                                               this,
-                                               criterion,
-                                               _parent->_submission->get_grade(criterion)));
+
+        CriterionGradeCard *card = new CriterionGradeCard(
+                    this,
+                    criterion,
+                    _parent->_submission->get_grade(criterion));
+        _cards[criterion] = card;
+        ui->verticalLayout_3->insertWidget(2, card);
     }
 
 }
 
+void GradeView::update_grades() {
+    for (std::pair<Criterion*, CriterionGradeCard*>card : _cards) {
+        card.second->update_grade(_parent->_submission->get_grade(card.first));
+    }
+}
+
 GradeView::~GradeView()
 {
+    for (std::pair<Criterion*, CriterionGradeCard*>card : _cards) {
+        delete card.second;
+    }
     delete ui;
 }

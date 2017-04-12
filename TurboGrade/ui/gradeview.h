@@ -4,6 +4,8 @@
 #include "../engine/controller.h"
 #include "../engine/controller.h"
 
+#include "criteriongradecard.h"
+#include "ui_criteriongradecard.h"
 
 #include "gradesubmission.h"
 #include "ui_gradesubmission.h"
@@ -27,9 +29,14 @@ class GradeView : public QWidget
 public:
     explicit GradeView(QWidget *parent, Controller* controller = nullptr);
     ~GradeView();
+    void update_grades();
+
     Ui::GradeView *ui;
     Controller                  *_controller;
     GradeSubmission             *_parent;
+    // Criterion cards
+    std::map<Criterion*, CriterionGradeCard*> _cards;
+
 };
 
 #endif // GRADEVIEW_H

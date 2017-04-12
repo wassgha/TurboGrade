@@ -63,6 +63,7 @@ void GradeSubmission::finished_running() {
 void GradeSubmission::on_toggle_clicked()
 {
     if(ui->mainWidget->currentWidget() == code_view) {
+        grade_view->update_grades();
         QPixmap pixmap(":/misc/res/code.png");
         ui->toggle->setIcon(QIcon(pixmap).pixmap(64));
         ui->toggle->setText("View Code");

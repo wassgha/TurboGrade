@@ -123,7 +123,6 @@ void CodeView::refresh_criteria() {
     _popup->ui->criterion->addItem("No criterion selected", -1);
     for(Criterion* criterion : *_parent->_submission->_assignment->_rubric->_criteria) {
         _popup->ui->criterion->addItem(criterion->_name, criterion->_id);
-        qDebug()<<"Adding criterion"<< criterion->_name<<endl;
         for(Criterion* child : *criterion->_sub_criteria) {
             _popup->ui->criterion->addItem("    | " + child->_name, child->_id);
         }
