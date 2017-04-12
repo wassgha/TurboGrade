@@ -17,7 +17,7 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
         CriterionGradeCard *card = new CriterionGradeCard(
                     this,
                     criterion,
-                    _parent->_submission->get_grade(criterion));
+                    _parent->_submission);
         _cards[criterion] = card;
         ui->verticalLayout_3->insertWidget(2, card);
     }
@@ -26,7 +26,7 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
 
 void GradeView::update_grades() {
     for (std::pair<Criterion*, CriterionGradeCard*>card : _cards) {
-        card.second->update_grade(_parent->_submission->get_grade(card.first));
+        card.second->update_grade();
     }
 }
 
