@@ -17,7 +17,7 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_assignment_obj(submission, htmlString);
     add_grades(submission, htmlString);
 
-      htmlString.append(
+      /*htmlString.append(
       "        <div class = \"criterion\">"
       "            <div class = \"name\">"
       "              Documentation <span class = \"grade\">4</span><span class = \"out-of\">/5</span>"
@@ -30,7 +30,8 @@ QString StudentDeliverable::placeParameters(Submission *submission){
       "                  <td>Clearly documented<br> Javadoc compliant</td>"
       "                </tr>"
       "            </table>"
-      "        </div>"
+      "        </div>"*/
+      htmlString.append(
       "        <div id = \"total\">"
       "          Total grade : <span class = \"grade\">");
       htmlString.append(submission->get_grade());
@@ -111,7 +112,7 @@ void StudentDeliverable::add_header(Submission *submission, QString &htmlString)
         "<style type=\"text/css\">"
         "  body {"
         "    background: #232730;"
-        "   font-family:"
+       // "   font-family:"
         "    color: white;"
         "    font-family : sans-serif;"
         "  }"
@@ -310,7 +311,7 @@ void StudentDeliverable::add_header(Submission *submission, QString &htmlString)
         "    border-radius: 5px;"
         "    width: 100%;"
         "    margin-bottom: 10px;"
-        "  });"
+        "  }"
 
         "</style>"
       "</head>");
@@ -346,8 +347,8 @@ void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlSt
 }
 
 void StudentDeliverable::add_comments(Submission* submission, QString &htmlString){
-  htmlString.append(  "    <div class=\"clear\"></div>");
   for(Comment *comment:*submission->_comments){
+      htmlString.append(  "    <div class=\"clear\"></div>");
       htmlString.append(
                   "    <div class = \"comment\">");
       htmlString.append(
