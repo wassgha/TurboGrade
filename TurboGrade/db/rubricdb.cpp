@@ -28,7 +28,9 @@ int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("INSERT INTO rubric (id, name, assignment, parent, grade_out_of) "
                   "VALUES (NULL, ?, ?, ?, ?)");
@@ -39,11 +41,13 @@ int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'rubric' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
         return false;
     }
 
     int last_insert_id = query.lastInsertId().toInt();
     query.finish();
+    db.commit();
 
     return last_insert_id;
 }
@@ -58,6 +62,8 @@ int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id
 int RubricDB::select(int assignment_id, const QString name) {
 
     QSqlQuery query(db);
+
+    db.transaction();
 
     query.prepare("SELECT * FROM rubric WHERE assignment = ? AND name = ?");
     query.addBindValue(assignment_id);
@@ -75,6 +81,7 @@ int RubricDB::select(int assignment_id, const QString name) {
         return query.value(id_field).toInt();
     }
 
+    db.commit();
     // No rows found matching the query
     return -1;
 }
@@ -88,7 +95,9 @@ void RubricDB::load_parent_criteria(Rubric *rubric) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT "
                   "rubric.name AS criterion_name, "
@@ -116,6 +125,7 @@ void RubricDB::load_parent_criteria(Rubric *rubric) {
     }
 
     query.finish();
+    db.commit();
 }
 
 
@@ -128,7 +138,9 @@ void RubricDB::load_sub_criteria(Criterion *criterion) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT "
                   "rubric.name AS criterion_name, "
@@ -154,4 +166,5 @@ void RubricDB::load_sub_criteria(Criterion *criterion) {
     }
 
     query.finish();
+    db.commit();
 }

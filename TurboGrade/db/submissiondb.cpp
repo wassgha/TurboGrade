@@ -26,7 +26,9 @@ int SubmissionDB::add(int student_id, int assignment_id) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("INSERT INTO submission (id, student, assignment) "
                   "VALUES (NULL, ?, ?)");
@@ -40,6 +42,7 @@ int SubmissionDB::add(int student_id, int assignment_id) {
 
     int last_insert_id = query.lastInsertId().toInt();
     query.finish();
+    db.commit();
 
     return last_insert_id;
 }
@@ -55,7 +58,9 @@ int SubmissionDB::select(int student_id, int assignment_id) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * FROM submission WHERE student = ? AND assignment = ?");
     query.addBindValue(student_id);
@@ -73,6 +78,7 @@ int SubmissionDB::select(int student_id, int assignment_id) {
         return query.value(id_field).toInt();
     }
 
+    db.commit();
     // No rows found matching the query
     return -1;
 }
@@ -86,7 +92,9 @@ void SubmissionDB::load_all(Student *student) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT "
                   "submission.id AS submission_id,"
@@ -112,5 +120,6 @@ void SubmissionDB::load_all(Student *student) {
     }
 
     query.finish();
+    db.commit();
 
 }

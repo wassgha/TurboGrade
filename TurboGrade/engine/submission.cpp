@@ -28,7 +28,17 @@ Submission::Submission(int id, Assignment *assignment,
     _comments = new std::vector<Comment*>();
     // Submission grades
     _grades = new std::map<Criterion*, int>();
+    // Load grade and comments
+    load_contents();
 
+}
+
+
+/**
+ * @brief Submission::load_contents loads the comments
+ * and the grades of the submission
+ */
+void Submission::load_contents() {
     std::cout<<"Loading grades..";
     _controller->_gradeDB->load_all(this, _assignment->_rubric->_criteria);
     std::cout<<"Loading comments..";

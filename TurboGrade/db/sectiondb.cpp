@@ -18,7 +18,9 @@ int SectionDB::add(int course_id, const QString name) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("INSERT INTO section (id, course_id, name) "
                   "VALUES (NULL, ?, ?)");
@@ -33,6 +35,7 @@ int SectionDB::add(int course_id, const QString name) {
     int last_insert_id = query.lastInsertId().toInt();
     query.finish();
 
+    db.commit();
     return last_insert_id;
 }
 
@@ -46,7 +49,9 @@ int SectionDB::add(int course_id, const QString name) {
  */
 int SectionDB::select(const QString course_name, const QString name) {
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * FROM section WHERE course_id = (SELECT id FROM course WHERE name=?) AND name = ?");
     query.addBindValue(course_name);
@@ -64,6 +69,7 @@ int SectionDB::select(const QString course_name, const QString name) {
         return query.value(id_field).toInt();
     }
 
+    db.commit();
     // No rows found matching the query
     return -1;
 }
@@ -77,7 +83,9 @@ void SectionDB::load_all(Course *course) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT section.id AS section_id, section.name AS section_name"
                   " FROM section, course WHERE section.course_id = course.id AND"
@@ -102,4 +110,5 @@ void SectionDB::load_all(Course *course) {
     }
 
     query.finish();
+    db.commit();
 }

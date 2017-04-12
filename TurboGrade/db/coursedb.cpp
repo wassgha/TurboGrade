@@ -17,6 +17,8 @@ int CourseDB::add(const QString name) {
 
     QSqlQuery query(db);
 
+    db.transaction();
+
     query.prepare("INSERT INTO course (id, name) "
                   "VALUES (NULL, ?)");
     query.addBindValue(name);
@@ -28,6 +30,7 @@ int CourseDB::add(const QString name) {
 
     int last_insert_id = query.lastInsertId().toInt();
     query.finish();
+    db.commit();
 
     return last_insert_id;
 }
@@ -45,6 +48,8 @@ int CourseDB::select(const QString name) {
 
     QSqlQuery query(db);
 
+    db.transaction();
+
     query.prepare("SELECT * FROM course WHERE name = ?");
     query.addBindValue(name);
 
@@ -59,6 +64,7 @@ int CourseDB::select(const QString name) {
     if (query.next()) {
         return query.value(id_field).toInt();
     }
+    db.commit();
 
     // No rows found matching the query
     return -1;
@@ -72,7 +78,9 @@ void CourseDB::load_all() {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * FROM course");
 
@@ -89,5 +97,6 @@ void CourseDB::load_all() {
     }
 
     query.finish();
+    db.commit();
 }
 

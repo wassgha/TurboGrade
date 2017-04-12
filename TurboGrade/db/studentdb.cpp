@@ -26,7 +26,9 @@ int StudentDB::add(int section_id, const QString name, const QString username) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("INSERT INTO student (id, section_id, name, username) "
                   "VALUES (NULL, ?, ?, ?)");
@@ -41,6 +43,7 @@ int StudentDB::add(int section_id, const QString name, const QString username) {
 
     int last_insert_id = query.lastInsertId().toInt();
     query.finish();
+    db.commit();
 
     return last_insert_id;
 }
@@ -57,7 +60,9 @@ int StudentDB::add(int section_id, const QString name, const QString username) {
  */
 int StudentDB::select(const QString course_name, const QString section_name, const QString name, const QString username) {
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * FROM student WHERE name = ? AND username = ? AND "
                   "section_id = (SELECT id FROM section WHERE name = ? AND "
@@ -80,6 +85,7 @@ int StudentDB::select(const QString course_name, const QString section_name, con
     }
 
     // No rows found matching the query
+    db.commit();
     return -1;
 }
 
@@ -91,7 +97,9 @@ void StudentDB::load_all(Section* section) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT student.name, student.username, student.id "
                   "FROM student "
@@ -116,4 +124,5 @@ void StudentDB::load_all(Section* section) {
     }
 
     query.finish();
+    db.commit();
 }

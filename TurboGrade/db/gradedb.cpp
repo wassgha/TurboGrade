@@ -17,9 +17,12 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
 
     SHOW_WHERE;
 
+    db.transaction();
+
     QSqlQuery query(db);
 
-    query.prepare("INSERT INTO grade (id, rubric, submission, score) "
+
+    query.prepare("INSERT OR IGNORE INTO grade (id, rubric, submission, score) "
                   "VALUES (NULL, :rubric_id, :submission_id, :grade)");
 
     query.bindValue(":rubric_id", rubric_id);
@@ -37,6 +40,7 @@ int GradeDB::add(int rubric_id, int submission_id, int grade){
     int last_id = query.lastInsertId().toInt();
 
     query.finish();
+    db.commit();
 
     return last_id;
 }
@@ -53,13 +57,18 @@ int GradeDB::update(int rubric_id, int submission_id, int grade){
 
     SHOW_WHERE;
 
+    qDebug()<<"Called update(rubric id = " << QString::number(rubric_id) << ", submission_id = " << QString::number(submission_id) << ", grade = " << grade << ")";
+
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("UPDATE grade SET score = :grade WHERE rubric = :rubric_id AND submission = :submission_id");
 
     query.bindValue(":rubric_id", rubric_id);
     query.bindValue(":submission_id", submission_id);
     query.bindValue(":grade", grade);
+    qDebug() << "UPDATE grade SET score = "<< QString::number(grade) <<" WHERE rubric = "<<QString::number(rubric_id)<<" AND submission = "<<QString::number(submission_id)<<endl;
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'grade' table"
@@ -72,6 +81,9 @@ int GradeDB::update(int rubric_id, int submission_id, int grade){
     int last_id = query.lastInsertId().toInt();
 
     query.finish();
+    db.commit();
+
+    add(rubric_id, submission_id, grade);
 
     return last_id;
 }
@@ -89,6 +101,8 @@ int GradeDB::select(int rubric_id, int submission_id){
 
     QSqlQuery query(db);
 
+    db.transaction();
+
     query.prepare("SELECT * FROM grade WHERE rubric = ? AND submission = ?");
     query.addBindValue(rubric_id);
     query.addBindValue(submission_id);
@@ -104,6 +118,7 @@ int GradeDB::select(int rubric_id, int submission_id){
     if (query.next()) {
         return query.value(id_field).toInt();
     }
+    db.commit();
 
     // No rows found matching the query
     return -1;
@@ -136,6 +151,9 @@ void GradeDB::load_criterion(Submission *submission, Criterion* criterion) {
     int submission_id = submission->_id;
 
     QSqlQuery query(db);
+
+    db.transaction();
+
     int rubric_id = criterion->_id;
     query.prepare("SELECT * FROM grade WHERE submission = ? AND rubric = ?");
     query.addBindValue(submission_id);
@@ -156,14 +174,10 @@ void GradeDB::load_criterion(Submission *submission, Criterion* criterion) {
 
     query.finish();
 
+    db.commit();
 
-    if (grade != -1) {
-        submission->update_grade(criterion,grade, true);
-    }
 
-    //If a grade still doesn't exist the initialize it with a score of 0
-    if (submission->get_grade(criterion) == -1) {
-        submission->add_grade(criterion, 0, true);
-    }
+    submission->update_grade(criterion,grade, true);
+
 
 }

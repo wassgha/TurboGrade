@@ -29,7 +29,9 @@ int CommentDB::add(int submission_id, QString filename,
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("INSERT INTO comment (id, submission, filename, "
                   "rubric, comment_text, "
@@ -45,12 +47,14 @@ int CommentDB::add(int submission_id, QString filename,
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'comment' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
         return -1;
     }
 
     int last_insert_id = query.lastInsertId().toInt();
     query.finish();
 
+    db.commit();
     return last_insert_id;
 }
 
@@ -63,7 +67,9 @@ void CommentDB::load_all(Submission *submission) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * "
                   "FROM comment "
@@ -74,6 +80,7 @@ void CommentDB::load_all(Submission *submission) {
     // Execute the query
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'comment' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
         return ;
     }
 
@@ -95,4 +102,5 @@ void CommentDB::load_all(Submission *submission) {
                                 query.value(end_pos_field).toInt());
     }
     query.finish();
+    db.commit();
 }

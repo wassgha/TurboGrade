@@ -46,6 +46,9 @@ public:
     //returns map of all criterion and their corresp. grades
     std::map<Criterion*, int> *get_grades();
 
+    // loads grades and comments
+    void load_contents();
+
     //adds a grade to the map
     void add_grade(Criterion* criterion, int grade, bool load = false);
 

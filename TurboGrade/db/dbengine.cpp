@@ -111,13 +111,16 @@ DBEngine::~DBEngine()
  */
 void DBEngine::sql_query(const QString &query_text) {
     // Create query
+    db.transaction();
     QSqlQuery query(db);
+
 
     // Execute and show error if it exists
     if (!query.exec(query_text))
         qDebug() << query_text << endl << "SQL Error: " << query.lastError();
 
     query.finish();
+    db.commit();
 
 }
 

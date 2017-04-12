@@ -18,7 +18,9 @@ int AssignmentDB::add(const QString name, const QString objective) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("INSERT INTO assignment (id, name, objective) "
                   "VALUES (NULL, ?, ?)");
@@ -32,6 +34,7 @@ int AssignmentDB::add(const QString name, const QString objective) {
     }
     int last_insert_id = query.lastInsertId().toInt();
     query.finish();
+    db.commit();
 
     return last_insert_id;
 }
@@ -46,7 +49,9 @@ int AssignmentDB::add(const QString name, const QString objective) {
 bool AssignmentDB::link(int assignment_id,
                         int section_id) {
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("INSERT INTO assignment_section (id, assignment, section) "
                   "VALUES (NULL, ?, ?)");
@@ -56,10 +61,12 @@ bool AssignmentDB::link(int assignment_id,
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'assignment_section' table" << endl << "SQL ERROR: " << query.lastError();
         query.finish();
+        db.commit();
         return false;
     }
 
     query.finish();
+    db.commit();
     return true;
 }
 
@@ -72,7 +79,9 @@ bool AssignmentDB::link(int assignment_id,
  */
 int AssignmentDB::select(const QString name) {
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * FROM assignment WHERE name = ?");
     query.addBindValue(name);
@@ -81,6 +90,7 @@ int AssignmentDB::select(const QString name) {
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'assignment'" << endl << "SQL ERROR: " << query.lastError();
         query.finish();
+        db.commit();
         return -1;
     }
 
@@ -92,6 +102,7 @@ int AssignmentDB::select(const QString name) {
 
     // No rows found matching the query
     query.finish();
+    db.commit();
     return -1;
 }
 
@@ -104,7 +115,9 @@ void AssignmentDB::load_all() {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * FROM assignment");
 
@@ -112,6 +125,7 @@ void AssignmentDB::load_all() {
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'assignment' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
         query.finish();
+        db.commit();
         return ;
     }
 
@@ -128,6 +142,7 @@ void AssignmentDB::load_all() {
     }
 
     query.finish();
+    db.commit();
     return;
 }
 
@@ -141,7 +156,9 @@ void AssignmentDB::load_all(Section *section) {
 
     SHOW_WHERE;
 
+    db.transaction();
     QSqlQuery query(db);
+
 
     query.prepare("SELECT * FROM assignment_section WHERE section = ?");
 
@@ -151,6 +168,7 @@ void AssignmentDB::load_all(Section *section) {
     if (!query.exec()) {
         qDebug() << "Failed to select from table 'assignment_section' (load_all)" << query.executedQuery() << endl << "SQL ERROR: " << query.lastError();
         query.finish();
+        db.commit();
         return ;
     }
 
@@ -164,5 +182,6 @@ void AssignmentDB::load_all(Section *section) {
     }
 
     query.finish();
+    db.commit();
     return;
 }
