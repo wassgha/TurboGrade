@@ -10,14 +10,26 @@ QString StudentDeliverable::placeParameters(Submission *submission){
         return "";
     }
     QString htmlString ="";
+    htmlString.append("\n<!DOCTYPE html>");
+    htmlString.append("\n<html>");
+    htmlString.append("\n   <head>");
+    htmlString.append("\n   <meta charset=\"utf-8\">");
     add_header(submission, htmlString);
+    add_style(submission, htmlString);
+    htmlString.append("\n</head>");
+    htmlString.append("\n<body>");
     add_names(submission, htmlString);
-    add_total_grade(submission, htmlString);
-    add_comments(submission, htmlString);
+    add_total_grade_sticker(submission, htmlString);
+    add_general_comments(submission, htmlString);
     add_assignment_obj(submission, htmlString);
-    add_grades(submission, htmlString);
+    add_grade_summary(submission, htmlString);
+    htmlString.append("\n    <div id = \"container\">");
+    ////    add_comments(submission, htmlString);
+        add_detailed_remarks(submission, htmlString);
+        //add_grades(submission, htmlString);
+        //add_grade_two(submission, htmlString);
 
-      /*htmlString.append(
+    /*htmlString.append(
       "        <div class = \"criterion\">"
       "            <div class = \"name\">"
       "              Documentation <span class = \"grade\">4</span><span class = \"out-of\">/5</span>"
@@ -31,40 +43,8 @@ QString StudentDeliverable::placeParameters(Submission *submission){
       "                </tr>"
       "            </table>"
       "        </div>"*/
-      htmlString.append(
-      "        <div id = \"total\">"
-      "          Total grade : <span class = \"grade\">");
-      htmlString.append(submission->get_grade());
-      htmlString.append("</span><span class = \"out-of\">/");
-      htmlString.append(submission->get_out_of());
-      htmlString.append("</span>"
-      "        </div>"
+    /*htmlString.append(
 
-      "        <h2>Detailed remarks</h2>"
-
-      "        <div class = \"criterion comments\">"
-      "            <div class = \"name\">"
-      "              Correctness <span class = \"grade\">17</span><span class = \"out-of\">/20</span>"
-      "            </div>"
-      "            <div class = \"code-container\">"
-      "                <div class = \"lines\">"
-      "                  1<br>"
-      "                  2<br>"
-      "                  3<br>"
-      "                  4<br>"
-      "                  5<br>"
-      "                </div>"
-      "                <div class = \"code\">"
-      "                  setNumOfCommentsPerHour();<br>"
-      "                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
-      "                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
-      "                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
-      "                  randomSeed=(long)p.random(1000);<br>"
-      "                </div>"
-      "                <div class = \"comment\">"
-      "                  <p><span class=\"grade bad\">-1</span>Please only use allowed libraries</p>"
-      "                </div>"
-      "            </div>"
       "            <div class = \"code-container\">"
       "                <div class = \"lines\">"
       "                  1<br>"
@@ -88,317 +68,397 @@ QString StudentDeliverable::placeParameters(Submission *submission){
 
       "        <h2>Standing stastics</h2>"
       "        <img class = \"chart\" src=\"https://www.smashingmagazine.com/wp-content/uploads/2014/12/css-animation-craziness.gif\" />"
-
-      "    </div>"
-      "    <div id = \"logo\" >"
-      "      Powered by <img src = \"turbogradelogodark.png\" />"
-      "    </div>"
-      "    <div class=\"clear\"></div>"
-      "  </div>"
-      "</body>"
-    "</html>");
+*/
+    htmlString.append(
+                "\n    </div>"
+                "\n    <div id = \"logo\" >"
+                "\n      Powered by <img src = \"turbogradelogodark.png\" />"
+                "\n    </div>"
+                "\n    <div class=\"clear\"></div>"
+                "\n  </div>");
+    htmlString.append("\n</body>");
+    htmlString.append("\n</html>");
     std::cout << htmlString.toStdString() << "\n";
     return htmlString;
 }
 
 void StudentDeliverable::add_header(Submission *submission, QString &htmlString){
-    htmlString.append("<!DOCTYPE html>");
-    htmlString.append("\n<html>");
-    htmlString.append("\n   <head>");
-    htmlString.append("\n<meta charset=\"utf-8\">");
-    htmlString.append("\n    <title>Student report : ");
+    htmlString.append("\n   <title>Student report : ");
     htmlString.append(submission->_student->_name);
-    htmlString.append("</title>"
-        "<style type=\"text/css\">"
-        "  body {"
-        "    background: #232730;"
-       // "   font-family:"
-        "    color: white;"
-        "    font-family : sans-serif;"
-        "  }"
+    htmlString.append("</title>");
+}
 
-        "  h2 {"
-        "    margin-left: 0px;"
-        "    margin-top: 30px;"
-        "    margin-bottom: 30px;"
-        "  }"
+void StudentDeliverable::add_style(Submission *submission, QString &htmlString){
+    htmlString.append(
+                "\n   <style type=\"text/css\">"
+                "\n       body {"
+                "\n          background-color: #232730;"
+                // "   font-family:"
+                "\n          color: white;"
+                "\n          font-family : sans-serif;"
+                "\n       }"
 
-        "  .clear {"
-        "    float: none;"
-        "    clear: both;"
-        "  }"
+                "\n       h2 {"
+                "\n          margin-left: 0px;"
+                "\n          margin-top: 30px;"
+                "\n          margin-bottom: 30px;"
+                "\n       }"
 
-        "  .criterion {"
-        "    border-top: 1px solid #EBEBEB;"
-        "  }"
+                "\n       .clear {"
+                "\n          float: none;"
+                "\n          clear: both;"
+                "\n       }"
 
-        "  .criterion:first-of-type {"
-        "    margin-top: 20px;"
-        "  }"
+                "\n       .criterion {"
+                "\n          border-top: 1px solid #EBEBEB;"
+                "\n       }"
 
-        "  .criterion.comments {"
-        "    border: none;"
-        "  }"
+                "\n       .criterion:first-of-type {"
+                "\n          margin-top: 20px;"
+                "\n       }"
 
-        "  .criterion > .name {"
-        "      font-size: 18px;"
-        "      padding: 20px;"
-        "      display: block;"
-        "  }"
+                "\n       .criterion.comments {"
+                "\n          border: none;"
+                "\n       }"
 
-        "  .criterion > .name > .grade {"
-        "    font-weight: bold;"
-        "    font-size: 23px;"
-        "    padding: 5px;"
-        "  }"
+                "\n       .criterion > .name {"
+                "\n          font-size: 18px;"
+                "\n          padding: 20px;"
+                "\n          display: block;"
+                "\n       }"
 
-        "  .criterion > .name > .out-of {"
-        "    color: gray;"
-        "  }"
+                "\n       .criterion > .name > .grade {"
+                "\n          font-weight: bold"
+                "\n          font-size: 23px;"
+                "\n          padding: 5px;"
+                "\n       }"
 
-        "  .criterion ul {"
-        "    list-style: circle;"
-        "  }"
+                "\n       .criterion > .name > .out-of {"
+                "\n          color: gray;"
+                "\n       }"
 
-        "  .criterion li {"
-        "    padding: 10px;"
-        "  }"
+                "\n       .criterion ul {"
+                "\n          list-style: circle;"
+                "\n       }"
 
-        "  .criterion li > .grade {"
-        "    font-weight: bold;"
-        "    font-size: 17px;"
-        "    padding: 5px;"
-        "  }"
+                "\n       .criterion li {"
+                "\n          padding: 10px;"
+                "\n       }"
 
-        "  .criterion li > .out-of {"
-        "    color: gray;"
-        "  }"
+                "\n       .criterion li > .grade {"
+                "\n          font-weight: bold;"
+                "\n          font-size: 17px;"
+                "\n          padding: 5px;"
+                "\n       }"
 
-        "  .rubric {"
-        "    width: 100%;"
-        "    min-height: 100px;"
-        "    margin-top: 10px;"
-        "    margin-bottom: 10px;"
-        "    border-spacing: 10px 0px;"
-        "  }"
+                "\n       .criterion li > .out-of {"
+                "\n          color: gray;"
+                "\n       }"
 
-        "  .rubric td {"
-        "    color: darkgray;"
-        "    background-color: white;"
-        "    border: 1px solid rgb(236, 239, 239);"
-        "    border-radius: 5px;"
-        "    padding: 10px;"
-        "  }"
+                "\n       .rubric {"
+                "\n          width: 100%;"
+                "\n          min-height: 100px;"
+                "\n          margin-top: 10px;"
+                "\n          margin-bottom: 10px;"
+                "\n          border-spacing: 10px 0px;"
+                "\n       }"
 
-        "  .rubric td.selected {"
-        "    color: black;"
-        "    background-color: white;"
-        "    border: 3px solid rgb(230, 212, 0);"
-        "    border-radius: 5px;"
-        "    padding: 10px;"
-        "  }"
+                "\n       .rubric td {"
+                "\n          color: darkgray;"
+                "\n          background-color-color: white;"
+                "\n          border: 1px solid rgb(236, 239, 239);"
+                "\n          border-radius: 5px;"
+                "\n          padding: 10px;"
+                "\n       }"
 
-        "  #total {"
-        "    border-top: 1px solid lightgray;"
-        "    padding: 20px;"
-        "    text-align: right;"
-        "    text-transform: uppercase;"
-        "    font-weight: bold;"
-        "    margin-top: 20px;"
-        "  }"
+                "\n       .rubric td.selected {"
+                "\n          color: black;"
+                "\n          background-color-color: white;"
+                "\n          border: 3px solid rgb(230, 212, 0);"
+                "\n          border-radius: 5px;"
+                "\n          padding: 10px;"
+                "\n       }"
 
-        "  #total > .out-of {"
-        "    color : gray;"
-        "    font-weight: normal;"
-        "  }"
+                "\n       #total {"
+                "\n          border-top: 1px solid lightgray;"
+                "\n          padding: 20px;"
+                "\n          text-align: right;"
+                "\n          text-transform: uppercase;"
+                "\n          font-weight: bold;"
+                "\n          margin-top: 20px;"
+                "\n       }"
 
-        "  #document {"
-        "    color: white;"
-        "    padding : 20px;"
-        "  }"
+                "\n       #total > .out-of {"
+                "\n          color : gray;"
+                "\n          font-weight: normal;"
+                "\n       }"
 
-        "  #logo {"
-        "    float: right;"
-        "  }"
+                "\n       #document {"
+                "\n          color: white;"
+                "\n          padding : 20px;"
+                "\n       }"
 
-        "  #logo > img {"
-        "    height: 32px;"
-        "    vertical-align: middle;"
-        "  }"
+                "\n       #logo {"
+                "\n          float: right;"
+                "\n       }"
 
-        "  #info {"
-        "    float: left;"
-        "    padding-top: 20px;"
-        "  }"
+                "\n       #logo > img {"
+                "\n          height: 32px;"
+                "\n          vertical-align: middle;"
+                "\n       }"
 
-        "  #grade {"
-        "    float: right;"
-        "    color: green;"
-        "    border-radius: 5px;"
-        "    background: white;"
-        "    padding: 20px;"
-        "    font-size: 28px;"
-        "    text-align: center;"
-        "  }"
+                "\n       #info {"
+                "\n          float: left;"
+                "\n          padding-top: 20px;"
+                "\n       }"
 
-        "  #grade > #label {"
-        "    font-size: 13px;"
-        "    text-transform: uppercase;"
-        "    color: gray;"
-        "    margin-bottom: 5px;"
-        "  }"
+                "\n       #grade {"
+                "\n          float: right;"
+                "\n          color: green;"
+                "\n          border-radius: 5px;"
+                "\n          background-color: white;"
+                "\n          padding: 20px;"
+                "\n          font-size: 28px;"
+                "\n          text-align: center;"
+                "\n       }"
 
-        "  #assignment-name {"
-        "    font-size: 24px;"
-        "  }"
+                "\n       #grade > #label {"
+                "\n          font-size: 13px;"
+                "\n          text-transform: uppercase;"
+                "\n          color: gray;"
+                "\n          margin-bottom: 5px;"
+                "\n       }"
 
-        "  #container {"
-        "    color: black;"
-        "    border-radius: 5px;"
-        "    background: white;"
-        "    padding: 20px;"
-        "    margin-top: 20px;"
-        "    margin-bottom: 20px;"
-        "  }"
+                "\n       #assignment-name {"
+                "\n          font-size: 24px;"
+                "\n       }"
 
-        "  .code-container {"
-        "    background: #232730;"
-        "    color: #EBEBEB;"
-        "    padding: 20px;"
-        "    border-radius: 5px;"
-        "    position: relative;"
-        "    margin-bottom: 20px;"
-        "  }"
+                "\n       #container {"
+                "\n          color: black;"
+                "\n          border-radius: 5px;"
+                "\n          background-color: white;"
+                "\n          padding: 20px;"
+                "\n          margin-top: 20px;"
+                "\n          margin-bottom: 20px;"
+                "\n       }"
 
-        "  .code {"
-        "    padding-left: 20px;"
-        "  }"
+                "\n       .code-container {"
+                "\n          background-color: #232730;"
+                "\n          color: #EBEBEB;"
+                "\n          padding: 20px;"
+                "\n          border-radius: 5px;"
+                "\n          position: relative;"
+                "\n          margin-bottom: 20px;"
+                "\n       }"
 
-        "  .code-container > .lines {"
-        "    color: gray;"
-        "    font-weight: 200;"
-        "    position: absolute;"
-        "  }"
+                "\n       .code {"
+                "\n          padding-left: 20px;"
+                "\n       }"
 
-        "  .comment {"
-        "    margin-top: 20px;"
-        "    background: #ffea8d;"
-        "    border-radius: 5px;"
-        "    padding: 20px;"
-        "    color: black;"
-        "  }"
-        "  .comment > .title {"
-        "    text-transform: uppercase;"
-        "    color: rgb(107, 100, 51);"
-        "    font-weight: bold;"
-        "    padding: 10px;"
+                "\n       .code-container > .lines {"
+                "\n          color: gray;"
+                "\n          font-weight: 200;"
+                "\n          position: absolute;"
+                "\n       }"
 
-        "  }"
+                "\n       .comment {"
+                "\n          margin-top: 20px;"
+                "\n          background-color: #ffea8d;"
+                //"    border-radius: 5px;"
+                "\n          padding: 20px;"
+                "\n          color: black;"
+                "\n       }"
+                "\n       .comment > .title {"
+                "\n          text-transform: uppercase;"
+                "\n          color: rgb(107, 100, 51);"
+                "\n          font-weight: bold;"
+                "\n          padding: 10px;"
 
-        "  .comment > p > .grade {"
-        "    padding : 10px;"
-        "  }"
+                "\n       }"
 
-        "  .comment > p > .grade.bad {"
-        "    color: red;"
-        "  }"
+                "\n       .comment > p > .grade {"
+                "\n          padding : 10px;"
+                "\n       }"
 
-        "  .comment > p > .grade.good {"
-        "    color: green;"
-        "  }"
+                "\n       .comment > p > .grade.bad {"
+                "\n          color: red;"
+                "\n       }"
 
-        "  .chart {"
-        "    border-radius: 5px;"
-        "    width: 100%;"
-        "    margin-bottom: 10px;"
-        "  }"
+                "\n       .comment > p > .grade.good {"
+                "\n          color: green;"
+                "\n       }"
 
-        "</style>"
-      "</head>");
+                "\n       .chart {"
+                "\n          border-radius: 5px;"
+                "\n          width: 100%;"
+                "\n          margin-bottom: 10px;"
+                "\n       }"
+
+                "\n   </style>");
 }
 
 void StudentDeliverable::add_names(Submission *submission, QString &htmlString){
-   htmlString.append(
-    "<body>"
-    "  <div id = \"document\">"
-    "    <div id = \"info\">");
-  htmlString.append(submission->_student->_name);
-  htmlString.append("<br>"
-    "      <div id = \"assignment-name\">"
-    "        Assignment :\"");
-  htmlString.append(submission->_assignment->_name);
-     //         "\"Lab 5 : Binary Search Tree\"");
-  htmlString.append(
-    "\"      </div>"
-    "    </div>");
+    htmlString.append(
+                "\n  <div id = \"document\">"
+                "\n    <div id = \"info\">");
+    htmlString.append(submission->_student->_name);
+    htmlString.append("<br>"
+                      "\n      <div id = \"assignment-name\">"
+                      "        Assignment :\"");
+    htmlString.append(submission->_assignment->_name);
+    htmlString.append(
+                "\"      </div>"
+                "\n    </div>");
 }
 
-void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlString){
-  htmlString.append(
-    "    <div id = \"grade\">"
-    "      <div id = \"label\">"
-    "        TOTAL GRADE"
-    "      </div>"
-              );
-  //htmlString.append(QString(submission->get_grade()));
-  htmlString.append(QString(std::to_string(submission->get_grade()).c_str()));
-  htmlString.append(
-  "    </div>");
+void StudentDeliverable::add_total_grade_sticker(Submission *submission, QString &htmlString){
+    htmlString.append(
+                "\n    <div id = \"grade\">"
+                "\n      <div id = \"label\">"
+                "\n        TOTAL GRADE"
+                "\n      </div>\n      "
+                );
+    htmlString.append(QString(std::to_string(submission->get_grade()).c_str()));
+    htmlString.append(
+                "\n    </div>");
+}
+
+void StudentDeliverable::add_grade_two(Submission *submission, QString &htmlString){
+    htmlString.append(
+                "\n        <div id = \"total\">"
+                "\n          Total grade : <span class = \"grade\">");
+    htmlString.append(submission->get_grade());
+    htmlString.append("\n</span><span class = \"out-of\">/");
+    htmlString.append(submission->get_out_of());
+    htmlString.append("\n</span>"
+                      "\n        </div>");
+
 }
 
 void StudentDeliverable::add_comments(Submission* submission, QString &htmlString){
-  for(Comment *comment:*submission->_comments){
-      htmlString.append(  "    <div class=\"clear\"></div>");
-      htmlString.append(
-                  "    <div class = \"comment\">");
-      htmlString.append(
-                  "      <div class = \"title\">");
-      htmlString.append(comment->_criterion->_name);
-      htmlString.append("</div>"
-                        "       <p>");
-      htmlString.append(comment->_text);
-      htmlString.append("      </p>"
-                        "    </div>");
-  }
+    htmlString.append(  "\n    <div class=\"clear\"></div>");
+    for(Comment *comment:*submission->_comments){
+        htmlString.append(
+                    "\n    <div class = \"comment\">");
+        htmlString.append(
+                    "\n      <div class = \"title\">");
+        htmlString.append(comment->_criterion->_name);
+        htmlString.append("\n</div>"
+                          "\n       <p>");
+        htmlString.append(comment->_text);
+        htmlString.append("\n      </p>"
+                          "\n    </div>");
+    }
 }
 
 void StudentDeliverable::add_assignment_obj(Submission *submission, QString &htmlString){
     htmlString.append(
-      "    <div id = \"container\">"
-
-      "        <h2>Assignment Objective</h2>"
-
-      "        <p>");
+                "\n        <h2>Assignment Objective</h2>"
+                "\n        <p>");
     htmlString.append(submission->_assignment->_objective);
     htmlString.append(
-      "        </p>");
+                "\n        </p>");
 }
 
 void StudentDeliverable::add_grades(Submission *submission, QString &htmlString){
-    htmlString.append("        <h2>Grade Summary</h2>");
     for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
         htmlString.append(
-    "        <div class = \"criterion\">"
-    "            <div class = \"name\">");
+                    "\n        <div class = \"criterion\">"
+                    "\n            <div class = \"name\">"
+                    "\n                ");
         htmlString.append(criterion->_name);
         htmlString.append("<span class = \"grade\">");
         htmlString.append(QString(std::to_string(submission->get_grade(criterion)).c_str()));
-                htmlString.append("</span><span class = \"out-of\">/");
+        htmlString.append("</span><span class = \"out-of\">/");
         htmlString.append(QString(std::to_string(criterion->_out_of).c_str()));
         htmlString.append("</span>"
-    "            </div>"
-    "            <ul>");
-        for(Criterion *subcriterion : criterion->children()){
-        htmlString.append("<li>");
-        htmlString.append(subcriterion->_name);
-        htmlString.append(" : <span class = \"grade\">");
-        htmlString.append(std::to_string(submission->get_grade(subcriterion)).c_str());
-        htmlString.append("</span><span class = \"out-of\"> out of ");
-        htmlString.append(std::to_string(subcriterion->_out_of).c_str());
-        htmlString.append("</span></li>");
+                          "\n            </div>");
+        if(criterion->has_children()){
+            htmlString.append(
+                        "\n            <ul>");
+            for(Criterion *subcriterion : criterion->children()){
+                htmlString.append("\n                <li>"
+                                  "\n                    ");
+                htmlString.append(subcriterion->_name);
+                htmlString.append(" : <span class = \"grade\">");
+                htmlString.append(std::to_string(submission->get_grade(subcriterion)).c_str());
+                htmlString.append("</span><span class = \"out-of\"> out of ");
+                htmlString.append(std::to_string(subcriterion->_out_of).c_str());
+                htmlString.append("</span>"
+                                  "\n                </li>");
+            }
+            htmlString.append(
+                        "\n            </ul>");
         }
         htmlString.append(
-                    "            </ul>"
-    "        </div>");
+                    "\n        </div>");
     }
+}
+
+void StudentDeliverable::add_general_comments(Submission *submission, QString &htmlString){
+    htmlString.append(
+                "\n    <div class = \"comment\">"
+                "\n        <div class = \"title\"> General Comments </div>"
+                "\n        <p>"
+                "\n         You did well on this assignment, beware of commenting and documentation."
+                "\n        </p>"
+                "\n    </div>");
+
+}
+
+void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &htmlString){
+    htmlString.append("\n      <h2>Detailed remarks</h2>");
+    htmlString.append("\n      <div class = \"criterion comments\">");
+    for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
+        htmlString.append("\n          <div class = \"name\">");
+        htmlString.append(criterion->_name);
+        htmlString.append("\n              <span class = \"grade\">");
+        htmlString.append(std::to_string(submission->get_grade(criterion)).c_str());
+        htmlString.append("</span><span class = \"out-of\">/");
+        htmlString.append(std::to_string(criterion->_out_of).c_str());
+        htmlString.append("</span>"
+                          "\n          </div>");
+        for(Criterion *sub_criterion: *criterion->_sub_criteria){
+            std::vector<Comment *> comments = submission->get_comments(sub_criterion);
+            if(comments.empty()){
+                continue;
+            } else {
+                for(Comment *comment : comments){
+                    add_code_comment(submission, htmlString, comment);
+                }
+            }
+        }
+        htmlString.append("\n      </div>");
+    }
+}
+
+void StudentDeliverable::add_grade_summary(Submission *submission, QString &htmlString){
+    htmlString.append("\n        <h2>Grade Summary</h2>");
+    add_grades(submission, htmlString);
+}
+
+void StudentDeliverable::add_code_comment(Submission *submission, QString &htmlString, Comment *comment){
+    htmlString.append(
+                "\n            <div class = \"code-container\">"
+                "\n                <div class = \"lines\">"
+                "\n                  1<br>"
+                "\n                  2<br>"
+                "\n                  3<br>"
+                "\n                  4<br>"
+                "\n                  5<br>"
+                "\n                </div>"
+                "\n                <div class = \"code\">"
+                "\n                  setNumOfCommentsPerHour();<br>"
+                "\n                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
+                "\n                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
+                "\n                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
+                "\n                  randomSeed=(long)p.random(1000);<br>"
+                "\n                </div>"
+                "\n                <div class = \"comment\">"
+                "\n                  <p><span class=\"grade bad\">");
+    htmlString.append(std::to_string(comment->_grade).c_str());
+    htmlString.append("\n</span>");
+    htmlString.append(comment->_text);
+    htmlString.append("\n</p>"
+                      "\n                </div>");
 }
