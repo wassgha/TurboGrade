@@ -24,10 +24,7 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_assignment_obj(submission, htmlString);
     add_grade_summary(submission, htmlString);
     htmlString.append("\n    <div id = \"container\">");
-    ////    add_comments(submission, htmlString);
-        add_detailed_remarks(submission, htmlString);
-        //add_grades(submission, htmlString);
-        //add_grade_two(submission, htmlString);
+    add_detailed_remarks(submission, htmlString);
 
     /*htmlString.append(
       "        <div class = \"criterion\">"
