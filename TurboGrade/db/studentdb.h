@@ -28,9 +28,9 @@ public:
 
 
     // Adds a row to the table
-    int add(int section_id, const QString name, const QString username);
+    int add(int section_id, const QString name);
     // Gets row id matching student
-    int select(const QString course_name, const QString section_name, const QString name, const QString username);
+    int select(const QString course_name, const QString section_name, const QString name);
     // Load students for a specific section to controller
     void load_all(Section* section);
     // Controller

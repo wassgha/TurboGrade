@@ -40,7 +40,6 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     sql_query("CREATE TABLE IF NOT EXISTS student (id INTEGER PRIMARY KEY, \
                section_id INTEGER, \
                name VARCHAR(50),\
-               username VARCHAR(50),\
                FOREIGN KEY(section_id) REFERENCES section(id),\
                CONSTRAINT uniq UNIQUE (section_id, name))");
 

@@ -35,7 +35,7 @@ public:
     // Destructor
     ~Section();
     // Add a student to the section
-    Student* add_student(int id, const QString name, const QString username);
+    Student* add_student(int id, const QString name);
     // Add an assignment to the section
     Assignment* add_assignment(Assignment* assignment, bool load = false);
     // Find a student in the section

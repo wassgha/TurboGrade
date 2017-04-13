@@ -19,10 +19,9 @@ StudentDB::~StudentDB() {
 /**
  * @brief StudentDB::add Insert a row to the database
  * @param name the name of the student (ex. Wassim Gharbi)
- * @param username the student's username (ex. gharbiw)
  * @return true if the query succeded
  */
-int StudentDB::add(int section_id, const QString name, const QString username) {
+int StudentDB::add(int section_id, const QString name) {
 
     SHOW_WHERE;
 
@@ -30,11 +29,10 @@ int StudentDB::add(int section_id, const QString name, const QString username) {
     QSqlQuery query(db);
 
 
-    query.prepare("INSERT INTO student (id, section_id, name, username) "
-                  "VALUES (NULL, ?, ?, ?)");
+    query.prepare("INSERT INTO student (id, section_id, name) "
+                  "VALUES (NULL, ?, ?)");
     query.addBindValue(section_id);
     query.addBindValue(name);
-    query.addBindValue(username);
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'student' table" << endl << "SQL ERROR: " << query.lastError();
@@ -55,20 +53,18 @@ int StudentDB::add(int section_id, const QString name, const QString username) {
  * @param course_name the name of the course (ex. CS 150)
  * @param section_name the name of the student (ex. 02)
  * @param name the name of the student (ex. Wassim Gharbi)
- * @param username the username of the student (ex. gharbiw)
  * @return the resulting ID
  */
-int StudentDB::select(const QString course_name, const QString section_name, const QString name, const QString username) {
+int StudentDB::select(const QString course_name, const QString section_name, const QString name) {
 
     db.transaction();
     QSqlQuery query(db);
 
 
-    query.prepare("SELECT * FROM student WHERE name = ? AND username = ? AND "
+    query.prepare("SELECT * FROM student WHERE name = ? AND "
                   "section_id = (SELECT id FROM section WHERE name = ? AND "
                   "course_id = (SELECT id FROM course WHERE name=?)) ");
     query.addBindValue(name);
-    query.addBindValue(username);
     query.addBindValue(section_name);
     query.addBindValue(course_name);
 
@@ -101,7 +97,7 @@ void StudentDB::load_all(Section* section) {
     QSqlQuery query(db);
 
 
-    query.prepare("SELECT student.name, student.username, student.id "
+    query.prepare("SELECT student.name, student.id "
                   "FROM student "
                   "WHERE student.section_id = ?");
 
@@ -115,12 +111,10 @@ void StudentDB::load_all(Section* section) {
 
     int id_field = query.record().indexOf("id");
     int name_field = query.record().indexOf("name");
-    int username_field = query.record().indexOf("username");
 
     while(query.next()) {
         section->add_student(query.value(id_field).toInt(),
-                             query.value(name_field).toString(),
-                             query.value(username_field).toString());
+                             query.value(name_field).toString());
     }
 
     query.finish();

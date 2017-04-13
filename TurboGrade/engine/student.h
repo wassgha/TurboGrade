@@ -28,7 +28,7 @@ class Student : public ObjectIdentifier, public QObject
 public:
     Student() = delete; //don't allow default constructor
     // Parametrized constructor
-    Student(int id, QString name, QString username, Section* section, Controller * controller);
+    Student(int id, QString name, Section* section, Controller * controller);
     // Destructor
     ~Student();
     // Add a student submission
@@ -42,8 +42,6 @@ public:
     Section* _section;
     // Student name
     QString _name;
-    // Student username
-    QString _username;
     // Student submissions
     std::vector<Submission*> *_submissions;
     // Color (for UI)

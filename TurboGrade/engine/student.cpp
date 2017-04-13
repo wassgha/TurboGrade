@@ -1,6 +1,6 @@
 #include "student.h"
 
-Student::Student(int id, QString name, QString username, Section* section, Controller * controller)
+Student::Student(int id, QString name, Section* section, Controller * controller)
 {
 
     SHOW_WHERE;
@@ -8,12 +8,11 @@ Student::Student(int id, QString name, QString username, Section* section, Contr
     _controller = controller;
 
     if (id == -1)
-        _id = _controller->_studentDB->add(section->_id, name, username);
+        _id = _controller->_studentDB->add(section->_id, name);
     else
         _id = id;
 
     _name = name;
-    _username = username;
     _section = section;
 
     // Student submissions

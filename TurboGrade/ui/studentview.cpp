@@ -11,7 +11,6 @@ StudentView::StudentView(QWidget* parent, QObject* section, Controller* controll
     add_dialog->add_field("QLabel", "warning", "Please be aware that students are added automatically when you import \n"
                                                "submissions. Only manually add students if they do not have a submission.");
     add_dialog->add_field("QLineEdit", "name", "Student's name :", "John Appleseed");
-    add_dialog->add_field("QLineEdit", "username", "Student's username :", "applesej");
     connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
 
     add_btn = new QPushButton("Add student");
@@ -49,6 +48,6 @@ void StudentView::refresh_cards() {
 }
 
 void StudentView::save_new() {
-    _section->add_student(-1, add_dialog->val("name"), add_dialog->val("username"));
+    _section->add_student(-1, add_dialog->val("name"));
     refresh_cards();
 }

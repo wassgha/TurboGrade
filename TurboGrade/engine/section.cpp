@@ -42,9 +42,9 @@ Section::~Section()
  * @param name name of the student
  * @param username identifier of the student
  */
-Student* Section::add_student(int id, const QString name, const QString username) {
+Student* Section::add_student(int id, const QString name) {
 
-    Student *new_student = new Student(id, name, username, this, _controller);
+    Student *new_student = new Student(id, name, this, _controller);
 
     _students->push_back(new_student);
 

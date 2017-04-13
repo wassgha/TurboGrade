@@ -116,7 +116,7 @@ void Controller::show_courses() {
             for(Section *section : *course->_sections) {
                 std::cout<<"    ->"<< section->_name.toStdString()<<std::endl;
                 for(Student *student : *section->_students) {
-                    std::cout<<"        ->"<< student->_name.toStdString() <<" (" << student->_username.toStdString() << ")"<<std::endl;
+                    std::cout<<"        ->"<< student->_name.toStdString() <<std::endl;
                     for(Submission *submission : *student->_submissions) {
                         std::cout<<"            -> Submission for "<< submission->_assignment->_name.toStdString() <<std::endl;
                         for(Comment *comment : *submission->_comments) {
