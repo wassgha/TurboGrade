@@ -58,7 +58,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
-         <widget class="QLabel" name="add_child">
+         <widget class="ClickableLabel" name="add_child">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -108,7 +108,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="add_guide">
+         <widget class="ClickableLabel" name="add_guide">
           <property name="maximumSize">
            <size>
             <width>26</width>
@@ -169,6 +169,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>clickablelabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

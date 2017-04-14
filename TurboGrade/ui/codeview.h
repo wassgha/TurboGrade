@@ -48,10 +48,12 @@ public:
     ~CodeView();
     QString current_folder();
     QString current_file();
+    void move_popup();
     Ui::CodeView                *ui;
     Controller                  *_controller;
     GradeSubmission             *_parent;
     std::vector<CommentCard*>   _comment_cards;
+    CommentPopup        *_popup;
 
 public slots:
     void getSelection();
@@ -67,9 +69,7 @@ private:
     bool eventFilter(QObject *obj, QEvent *event) override;
     void refresh_comments();
     void refresh_autocomplete();
-    void move_popup();
 
-    CommentPopup        *_popup;
     QFileSystemModel    *_model;
     QCompleter          *_completer;
     QModelIndex root_index;

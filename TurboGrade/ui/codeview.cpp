@@ -192,12 +192,10 @@ void CodeView::finished_loading(QString file) {
 }
 
 bool CodeView::eventFilter(QObject *obj, QEvent *event) {
-    if (event->type() == QEvent::Move) {
-        QMoveEvent *moveEvent = static_cast<QMoveEvent*>(event);
-        move_popup();
-    } else if (event->type() == QEvent::Hide) {
+    if (event->type() == QEvent::Hide) {
         _popup->hide();
     }
+
     return QWidget::eventFilter(obj, event);
 }
 

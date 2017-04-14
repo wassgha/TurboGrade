@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>456</width>
-    <height>261</height>
+    <height>330</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -121,16 +121,17 @@ QGroupBox &gt; QGroupBox {
 </string>
   </property>
   <layout class="QVBoxLayout" name="mainLayout">
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <property name="sizeConstraint">
-    <enum>QLayout::SetMinimumSize</enum>
-   </property>
    <item>
     <widget class="QLabel" name="title">
      <property name="text">
       <string>Binary Search Tree</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QCheckBox" name="checkBox">
+     <property name="text">
+      <string>Start with full grades (to assign penalties) </string>
      </property>
     </widget>
    </item>
@@ -240,31 +241,10 @@ QGroupBox &gt; QGroupBox {
       <property name="horizontalSpacing">
        <number>-1</number>
       </property>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_27">
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_32">
         <property name="text">
-         <string>JavaDoc</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLabel" name="label_28">
-        <property name="text">
-         <string>Complet...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_30">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_26">
-        <property name="text">
-         <string>Design</string>
+         <string>Extra-credit</string>
         </property>
        </widget>
       </item>
@@ -275,6 +255,27 @@ QGroupBox &gt; QGroupBox {
         </property>
        </widget>
       </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_26">
+        <property name="text">
+         <string>Design</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="QLabel" name="label_30">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_28">
+        <property name="text">
+         <string>Complet...</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_31">
         <property name="text">
@@ -282,10 +283,10 @@ QGroupBox &gt; QGroupBox {
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
-       <widget class="QLabel" name="label_32">
+      <item row="0" column="2">
+       <widget class="QLabel" name="label_27">
         <property name="text">
-         <string>Extra-credit</string>
+         <string>JavaDoc</string>
         </property>
        </widget>
       </item>

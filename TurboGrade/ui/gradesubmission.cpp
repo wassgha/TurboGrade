@@ -7,6 +7,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 {
     ui->setupUi(this);
 
+    installEventFilter(this);
+
     _controller = controller;
     _submission = submission;
 
@@ -95,4 +97,24 @@ void GradeSubmission::on_hideName_toggled(bool checked)
         ui->studentName->setCurrentIndex(ui->studentName->findData(_submission->_student->_id));
         ui->studentName->setEnabled(true);
     }
+}
+
+bool GradeSubmission::eventFilter(QObject *watched, QEvent *event) {
+    if (event->type() == QEvent::Move) {
+        code_view->move_popup();
+    }
+    else if (event->type() == QEvent::ActivationChange)
+    {
+        if(!this->isActiveWindow())
+        {
+            code_view->_popup->hide();
+        }
+    }
+    else if (event->type() == QEvent::FocusOut)
+    {
+        qDebug()<<"Lost focus";
+        code_view->_popup->hide();
+    }
+
+    return QWidget::eventFilter(watched, event);
 }
