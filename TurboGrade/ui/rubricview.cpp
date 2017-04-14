@@ -35,7 +35,7 @@ RubricView::~RubricView()
 
 void RubricView::add_criterion()
 {
-    if (_assignment->_rubric->add_criterion(-1, ui->criterion_name->text(), nullptr, ui->criterion_grade->value()))
+    if (_assignment->_rubric->add_criterion(ui->criterion_name->text(), nullptr, ui->criterion_grade->value()))
     {
         ui->mainLayout->insertWidget(2, new CriterionItem(this, ui->criterion_name->text(), ui->criterion_grade->value()));
         ui->criterion_name->clear();

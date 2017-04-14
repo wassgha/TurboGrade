@@ -28,11 +28,11 @@ class Student : public ObjectIdentifier, public QObject
 public:
     Student() = delete; //don't allow default constructor
     // Parametrized constructor
-    Student(int id, QString name, Section* section, Controller * controller);
+    Student(QString name, Section* section, Controller * controller, int id = -1);
     // Destructor
     ~Student();
     // Add a student submission
-    Submission* add_submission(int id, Assignment* assignment);
+    Submission* add_submission(Assignment* assignment, int id = -1);
     // Find a submission
     Submission* get_submission(Assignment* assignment);
 

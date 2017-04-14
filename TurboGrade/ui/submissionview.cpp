@@ -111,10 +111,10 @@ void SubmissionView::import_submission() {
         qDebug()<<"Adding submission by "<< submission_folder << endl;
         Student* added_student = _section->get_student(submission_folder);
         if (added_student == nullptr) {
-            _section->add_student(-1, submission_folder);
+            _section->add_student(submission_folder);
             added_student = _section->get_student(submission_folder);
         }
-        added_student->add_submission(-1, _assignment);
+        added_student->add_submission(_assignment);
     }
 
     refresh_cards();

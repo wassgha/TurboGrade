@@ -1,6 +1,6 @@
 #include "section.h"
 
-Section::Section(int id, QString name, Course* course, Controller* controller)
+Section::Section(QString name, Course* course, Controller* controller, int id)
 {
 
     SHOW_WHERE;
@@ -42,9 +42,9 @@ Section::~Section()
  * @param name name of the student
  * @param username identifier of the student
  */
-Student* Section::add_student(int id, const QString name) {
+Student* Section::add_student(const QString name, int id) {
 
-    Student *new_student = new Student(id, name, this, _controller);
+    Student *new_student = new Student(name, this, _controller, id);
 
     _students->push_back(new_student);
 

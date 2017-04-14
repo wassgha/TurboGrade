@@ -19,30 +19,30 @@ int main(int argc, char *argv[])
     // Use new Controller(true) to drop tables
     _controller = new Controller();
 
-//    Course* cs105 = _controller->add_course(-1, "CS 105");
-//    _controller->add_course(-1, "CS 150");
+//    Course* cs105 = _controller->add_course("CS 105");
+//    _controller->add_course("CS 150");
 //    Course* cs150 = _controller->get_courses()->at(1);
-//    cs150->add_section(-1, "01");
-//    cs105->add_section(-1, "01");
-//    Section * cs150_02 = cs105->add_section(-1, "02");
-//    cs150_02->add_student(-1, "Wassim Gharbi", "gharbiw");
-//    cs150_02->add_student(-1, "Darren Norton", "nortondj");
-//    cs105->add_section(-1, "03");
-//    _controller->add_assignment(-1, "Binary Search Tree", "Implement a binary search tree with polymorphism");
+//    cs150->add_section("01");
+//    cs105->add_section("01");
+//    Section * cs150_02 = cs105->add_section("02");
+//    cs150_02->add_student("Wassim Gharbi", "gharbiw");
+//    cs150_02->add_student("Darren Norton", "nortondj");
+//    cs105->add_section("03");
+//    _controller->add_assignment("Binary Search Tree", "Implement a binary search tree with polymorphism");
 //    Assignment *bst_assignment = _controller->get_assignments()->at(0);
 //    cs150_02->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS150_02");
 //    Section* cs105_01 = cs105->_sections->at(0);
 //    cs105_01->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS105_01");
 
 
-//    bst_assignment->_rubric->add_criterion(-1, "Correctness", NULL, 10);
-//    bst_assignment->_rubric->add_criterion(-1, "Design", NULL, 5);
+//    bst_assignment->_rubric->add_criterion("Correctness", NULL, 10);
+//    bst_assignment->_rubric->add_criterion("Design", NULL, 5);
 //    Criterion* comments = bst_assignment->_rubric->add_criterion(-1, "Comments", NULL, 2);
-//    bst_assignment->_rubric->add_criterion(-1, "JavaDoc", comments, 2);
+//    bst_assignment->_rubric->add_criterion("JavaDoc", comments, 2);
 
 //    Student * gharbiw = cs150_02->get_student("gharbiw");
-//    Submission* gharbiw_01 = gharbiw->add_submission(-1, bst_assignment);
-//    gharbiw_01->add_comment(-1, "main.java", bst_assignment->_rubric->get_criterion("Correctness"),
+//    Submission* gharbiw_01 = gharbiw->add_submission(bst_assignment);
+//    gharbiw_01->add_comment("main.java", bst_assignment->_rubric->get_criterion("Correctness"),
 //                            "You screwed up bro", -2, 20, 150);
 //    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Correctness"), 4);
 //    gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Design"), 3);

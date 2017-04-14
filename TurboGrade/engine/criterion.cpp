@@ -1,6 +1,6 @@
 #include "criterion.h"
 
-Criterion::Criterion(int id, const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller)
+Criterion::Criterion(const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller, int id)
 {
     SHOW_WHERE;
 
@@ -38,10 +38,10 @@ Criterion::~Criterion()
  * @param child a pointer to the child criterion
  */
 
-Criterion* Criterion::add_child(int id, const QString name, Criterion* parent, int out_of)
+Criterion* Criterion::add_child(const QString name, Criterion* parent, int out_of, int id)
 {
     if (_parent == nullptr) {
-        Criterion* new_criterion = new Criterion(id, name, parent, out_of, _rubric, _controller);
+        Criterion* new_criterion = new Criterion(name, parent, out_of, _rubric, _controller, id);
         _sub_criteria->push_back(new_criterion);
         return new_criterion;
     } else {

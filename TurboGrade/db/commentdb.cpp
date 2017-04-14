@@ -93,13 +93,13 @@ void CommentDB::load_all(Submission *submission) {
     int end_pos_field = query.record().indexOf("end_pos");
 
     while(query.next()) {
-        submission->add_comment(query.value(id_field).toInt(),
-                                query.value(filename_field).toString(),
+        submission->add_comment(query.value(filename_field).toString(),
                                 submission->_assignment->_rubric->get_criterion(query.value(criterion_field).toInt()),
                                 query.value(text_field).toString(),
                                 query.value(grade_field).toInt(),
                                 query.value(start_pos_field).toInt(),
-                                query.value(end_pos_field).toInt());
+                                query.value(end_pos_field).toInt(),
+                                query.value(id_field).toInt());
     }
     query.finish();
     db.commit();

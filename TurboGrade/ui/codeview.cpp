@@ -106,8 +106,7 @@ void CodeView::add_comment() {
         QString file_name = _model->data(ui->treeView->currentIndex()).toString();
 
         // Add the comment
-        _parent->_submission->add_comment(-1,
-                                          file_name,
+        _parent->_submission->add_comment(file_name,
                                           criterion,
                                           _popup->val("comment"),
                                           _popup->val("adjust_grade").toInt(),

@@ -27,7 +27,7 @@ public:
 
     Assignment() = delete; //don't allow default constructor
     // Parametrized constructor
-    Assignment(int id, const QString name, const QString objective, Controller *controller);
+    Assignment(const QString name, const QString objective, Controller *controller, int id = -1);
     // Destructor
     ~Assignment();
 

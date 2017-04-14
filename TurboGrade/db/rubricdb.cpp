@@ -121,7 +121,7 @@ void RubricDB::load_parent_criteria(Rubric *rubric) {
     int out_of_field = query.record().indexOf("out_of");
 
     while(query.next()) {
-        rubric->add_criterion(query.value(criterion_id_field).toInt(), query.value(criterion_name_field).toString(), NULL, query.value(out_of_field).toInt());
+        rubric->add_criterion(query.value(criterion_name_field).toString(), NULL, query.value(out_of_field).toInt(), query.value(criterion_id_field).toInt());
     }
 
     query.finish();
@@ -162,7 +162,7 @@ void RubricDB::load_sub_criteria(Criterion *criterion) {
     int out_of_field = query.record().indexOf("out_of");
 
     while(query.next()) {
-        criterion->_rubric->add_criterion(query.value(criterion_id_field).toInt(), query.value(criterion_name_field).toString(), criterion, query.value(out_of_field).toInt());
+        criterion->_rubric->add_criterion(query.value(criterion_name_field).toString(), criterion, query.value(out_of_field).toInt(), query.value(criterion_id_field).toInt());
     }
 
     query.finish();

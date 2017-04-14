@@ -57,7 +57,7 @@ public:
      **********************************/
 
     // Add a course to the software
-    Course* add_course(int id, const QString name);
+    Course* add_course(const QString name, int id = -1);
     // Searches for a course by name and returns it
     Course* get_course(const QString name);
     // Retuns vector of all courses in the system
@@ -70,9 +70,8 @@ public:
      **********************************/
 
     // Add a assignment to the software
-    Assignment* add_assignment(int id,
-                               const QString name,
-                               const QString objective);
+    Assignment* add_assignment(const QString name,
+                               const QString objective, int id = -1);
     // Searches for an assignment by name and returns it
     Assignment* get_assignment(const QString name);
     // Searches for an assignment by table ID and returns it

@@ -32,7 +32,7 @@ public:
     // Destructor
     ~Rubric();
     // Add a criterion to the rubric
-    Criterion* add_criterion(int id, const QString name, Criterion* parent, int out_of);
+    Criterion* add_criterion(const QString name, Criterion* parent, int out_of, int id = -1);
     // Get a criterion by name
     Criterion* get_criterion(const QString name);
     // Get a criterion by table id

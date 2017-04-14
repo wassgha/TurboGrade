@@ -48,6 +48,6 @@ void StudentView::refresh_cards() {
 }
 
 void StudentView::save_new() {
-    _section->add_student(-1, add_dialog->val("name"));
+    _section->add_student(add_dialog->val("name"));
     refresh_cards();
 }

@@ -1,6 +1,6 @@
 #include "assignment.h"
 
-Assignment::Assignment(int id, const QString name, const QString objective, Controller *controller)
+Assignment::Assignment(const QString name, const QString objective, Controller *controller, int id)
 {
 
     SHOW_WHERE;

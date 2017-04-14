@@ -29,11 +29,11 @@ public:
 
     Course() = delete; //don't allow default constructor
     // Parametrized constructor
-    Course(int id, QString name, Controller * controller);
+    Course(QString name, Controller * controller, int id = -1);
     // Destructor
     ~Course();
     // Add a section to the course
-    Section* add_section(int id, const QString name);
+    Section* add_section(const QString name, int id = -1);
     // Find a section in the course
     Section* get_section(const QString name);
     // Gets all sections in the course

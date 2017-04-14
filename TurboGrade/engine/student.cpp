@@ -1,6 +1,6 @@
 #include "student.h"
 
-Student::Student(int id, QString name, Section* section, Controller * controller)
+Student::Student(QString name, Section* section, Controller * controller, int id)
 {
 
     SHOW_WHERE;
@@ -35,9 +35,9 @@ Student::~Student()
  * @brief Student::add_submission adds a submission made by this student
  * @param assignment a pointer to the assignment the submission belongs to
  */
-Submission* Student::add_submission(int id, Assignment* assignment) {
+Submission* Student::add_submission(Assignment* assignment, int id) {
 
-    Submission *new_submission = new Submission(id, assignment, this, _controller);
+    Submission *new_submission = new Submission(assignment, this, _controller, id);
 
     _submissions->push_back(new_submission);
 

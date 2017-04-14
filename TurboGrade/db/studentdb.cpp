@@ -113,8 +113,8 @@ void StudentDB::load_all(Section* section) {
     int name_field = query.record().indexOf("name");
 
     while(query.next()) {
-        section->add_student(query.value(id_field).toInt(),
-                             query.value(name_field).toString());
+        section->add_student(query.value(name_field).toString(),
+                             query.value(id_field).toInt());
     }
 
     query.finish();

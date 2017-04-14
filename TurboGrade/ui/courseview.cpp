@@ -37,6 +37,6 @@ void CourseView::refresh_cards() {
 }
 
 void CourseView::save_new() {
-    _controller->add_course(-1, add_dialog->val("name"));
+    _controller->add_course(add_dialog->val("name"));
     refresh_cards();
 }

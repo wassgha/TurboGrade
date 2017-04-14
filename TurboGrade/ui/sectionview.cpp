@@ -41,6 +41,6 @@ void SectionView::refresh_cards() {
 }
 
 void SectionView::save_new() {
-    _course->add_section(-1, add_dialog->val("name"));
+    _course->add_section(add_dialog->val("name"));
     refresh_cards();
 }

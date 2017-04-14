@@ -96,7 +96,7 @@ void AssignmentView::refresh_cards() {
 }
 
 void AssignmentView::add_new() {
-    Assignment *assignment = _controller->add_assignment(-1, add_dialog->val("name"), add_dialog->val("objective"));
+    Assignment *assignment = _controller->add_assignment(add_dialog->val("name"), add_dialog->val("objective"));
     _section->add_assignment(assignment, false);
     if (_rubric_view != nullptr)
         delete _rubric_view;

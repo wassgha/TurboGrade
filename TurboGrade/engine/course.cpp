@@ -1,6 +1,6 @@
 #include "course.h"
 
-Course::Course(int id, QString name, Controller* controller)
+Course::Course(QString name, Controller* controller, int id)
 {
     SHOW_WHERE;
 
@@ -29,9 +29,9 @@ Course::~Course()
  * @brief Course::add_section adds a section to this course
  * @param name name of the section
  */
-Section* Course::add_section(int id, const QString name) {
+Section* Course::add_section(const QString name, int id) {
 
-    Section *new_section = new Section(id, name, this, _controller);
+    Section *new_section = new Section(name, this, _controller, id);
 
     _sections->push_back(new_section);
 

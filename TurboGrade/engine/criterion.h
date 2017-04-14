@@ -27,11 +27,11 @@ class Criterion : public ObjectIdentifier, public QObject
 public:
     Criterion() = delete; //don't allow default constructor
     // Parametrized constructor
-    Criterion(int id, const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller);
+    Criterion(const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller, int id = -1);
     // Destructor
     ~Criterion();
     // Add sub-criterion
-    Criterion* add_child(int id, const QString name, Criterion* parent, int out_of);
+    Criterion* add_child(const QString name, Criterion* parent, int out_of, int id = -1);
     // Returns whether this criterion has children or not
     bool has_children();
     // Returns this criterion's children

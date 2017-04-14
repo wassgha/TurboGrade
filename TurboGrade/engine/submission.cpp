@@ -8,8 +8,9 @@
  * @param student the student this submission belongs to
  * @param controller the current controller
  */
-Submission::Submission(int id, Assignment *assignment,
-                       Student* student, Controller * controller)
+Submission::Submission(Assignment *assignment,
+                       Student* student, Controller * controller,
+                       int id)
 {
 
     SHOW_WHERE;
@@ -49,12 +50,13 @@ void Submission::load_contents() {
 /**
  * @brief Submission::add_comment adds a comment made on this submission
  */
-void Submission::add_comment(int id, QString filename,
+void Submission::add_comment(QString filename,
                              Criterion *criterion,
                              QString text, int grade,
-                             int start_pos, int end_pos) {
+                             int start_pos, int end_pos,
+                             int id) {
 
-    Comment *new_comment = new Comment(id, this, filename, criterion, text, grade, start_pos, end_pos, _controller);
+    Comment *new_comment = new Comment(this, filename, criterion, text, grade, start_pos, end_pos, _controller, id);
 
     _comments->push_back(new_comment);
 

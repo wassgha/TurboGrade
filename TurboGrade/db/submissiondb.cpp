@@ -115,8 +115,8 @@ void SubmissionDB::load_all(Student *student) {
     int submission_id_field = query.record().indexOf("submission_id");
 
     while(query.next()) {
-        student->add_submission(query.value(submission_id_field).toInt(),
-                                _controller->get_assignment(query.value(assignment_name_field).toString()));
+        student->add_submission(_controller->get_assignment(query.value(assignment_name_field).toString()),
+                                query.value(submission_id_field).toInt());
     }
 
     query.finish();

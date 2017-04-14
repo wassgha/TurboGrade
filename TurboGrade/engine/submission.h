@@ -31,14 +31,15 @@ class Submission : public ObjectIdentifier, public QObject
 public:
     Submission() = delete; //don't allow default constructor
     // Parametrized constructor
-    Submission(int id, Assignment* assignment, Student* student, Controller * controller);
+    Submission(Assignment* assignment, Student* student, Controller * controller, int id = -1);
     // Destructor
     ~Submission();
     // Add a comment on the submission
-    void add_comment(int id, QString filename,
+    void add_comment(QString filename,
                      Criterion *criterion,
                      QString text, int grade,
-                     int start_pos, int end_pos);
+                     int start_pos, int end_pos,
+                     int id = -1);
     // Get comments on a file
     std::vector<Comment*> get_comment(QString filename);
 

@@ -104,8 +104,7 @@ void SectionDB::load_all(Course *course) {
 
     while(query.next()) {
 
-        course->add_section(query.value(section_id_field).toInt(),
-                            query.value(section_name_field).toString());
+        course->add_section(query.value(section_name_field).toString(), query.value(section_id_field).toInt());
 
     }
 

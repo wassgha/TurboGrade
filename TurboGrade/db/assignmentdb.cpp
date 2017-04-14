@@ -135,9 +135,9 @@ void AssignmentDB::load_all() {
 
     while(query.next()) {
 
-        _controller->add_assignment(query.value(id_field).toInt(),
-                                   query.value(name_field).toString(),
-                                   query.value(objective_field).toString());
+        _controller->add_assignment(query.value(name_field).toString(),
+                                   query.value(objective_field).toString(),
+                                    query.value(id_field).toInt());
 
     }
 

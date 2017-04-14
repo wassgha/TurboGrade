@@ -27,14 +27,14 @@ Rubric::~Rubric()
  * @param parent parent of the criterion if it exists (other wise criterion is general)
  * @param out_of the maximum score for this criterion
  */
-Criterion* Rubric::add_criterion(int id, const QString name, Criterion* parent, int out_of) {
+Criterion* Rubric::add_criterion(const QString name, Criterion* parent, int out_of, int id) {
 
     Criterion *new_criterion = nullptr;
 
     if (parent != nullptr) {
-        new_criterion = parent->add_child(id, name, parent, out_of);
+        new_criterion = parent->add_child(name, parent, out_of, id);
     } else {
-        new_criterion = new Criterion(id, name, parent, out_of, this, _controller);
+        new_criterion = new Criterion(name, parent, out_of, this, _controller, id);
         _criteria->push_back(new_criterion);
     }
 

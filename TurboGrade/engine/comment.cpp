@@ -13,11 +13,11 @@
  * @param end_pos character index for the end of the comment
  * @param controller the current controller
  */
-Comment::Comment(int id, Submission* submission,
+Comment::Comment(Submission* submission,
                        QString filename, Criterion* criterion,
                        QString text, int grade,
                        int start_pos, int end_pos,
-                       Controller * controller)
+                       Controller * controller, int id)
 {
 
     SHOW_WHERE;

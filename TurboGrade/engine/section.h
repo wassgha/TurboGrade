@@ -31,11 +31,11 @@ class Section : public ObjectIdentifier, public QObject
 public:
     Section() = delete; //don't allow default constructor
     // Parametrized constructor
-    Section(int id, QString name, Course* course, Controller * controller);
+    Section(QString name, Course* course, Controller * controller, int id = -1);
     // Destructor
     ~Section();
     // Add a student to the section
-    Student* add_student(int id, const QString name);
+    Student* add_student(const QString name, int id = -1);
     // Add an assignment to the section
     Assignment* add_assignment(Assignment* assignment, bool load = false);
     // Find a student in the section
