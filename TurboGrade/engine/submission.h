@@ -65,6 +65,12 @@ public:
     //Returns the local path where submission files are stored
     QString getPath();
 
+    //gets the total maximum score
+    int get_out_of();
+
+    //gets the comments for the given criterion
+    std::vector<Comment*> get_comments(Criterion *criterion);
+
     // Submission id
     int _id;
     // Submission belongs to student

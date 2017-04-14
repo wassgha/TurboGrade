@@ -143,6 +143,17 @@ int Submission::get_grade(Criterion *criterion){
     }
 }
 
+int Submission::get_out_of(){
+    int sum = 0;
+    for(Criterion *criterion: *_assignment->_rubric->_criteria){
+        for(Criterion *sub_criterion: *criterion->_sub_criteria){
+            sum+= sub_criterion->_out_of;
+        }
+        sum+= criterion->_out_of;
+    }
+    return sum;
+}
+
 /**
  * @brief Submission::get_grade retrieves the total grade
  * @return the grade for this submission
@@ -173,6 +184,22 @@ QString Submission::getPath() {
     + _student->_name
     + "/";
 
+}
+
+/**
+ * @brief Submission::get_comments given a criterion, searches through each
+ * comment and if there is a match, adds the Comment to the result.
+ * @param criterion
+ * @return the list of comments that match a criterion
+ */
+std::vector<Comment *> Submission::get_comments(Criterion *criterion){
+    std::vector<Comment *> comment_vec;
+    for(Comment *comment:*_comments){
+        if(comment->_criterion == criterion){
+            comment_vec.push_back(comment);
+        }
+    }
+    return comment_vec;
 }
 
 Submission::~Submission()
