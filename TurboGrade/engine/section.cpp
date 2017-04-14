@@ -82,7 +82,7 @@ Assignment* Section::add_assignment(Assignment* assignment, bool load) {
 /**
  * @brief Section::get_assignment finds an assignment by its name
  * @param name the name of the assignment to search for
- * @return a pair containing the assignment and the folder the submissions are in
+ * @return the assignment
  */
 Assignment* Section::get_assignment(const QString name) {
     for(Assignment* assignment:*_assignments)
