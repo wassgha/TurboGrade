@@ -1,7 +1,7 @@
 #ifndef MACADRESS_H
 #define MACADRESS_H
 
-#include <QNetworkInterface>
+//#include <QNetworkInterface>
 #include <iostream>
 
 class MacAdress

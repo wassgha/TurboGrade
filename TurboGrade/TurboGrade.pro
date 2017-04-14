@@ -6,4 +6,5 @@ SUBDIRS += \
     db \
     test \
     ui \
-    tools
+    tools \
+    Stats

@@ -91,3 +91,9 @@ Assignment* Section::get_assignment(const QString name) {
     std::cerr<<"Assignment not found";
     exit(0);
 }
+
+std::vector<Assignment*>* Section::get_assignments() {
+
+    return _assignments;
+
+}

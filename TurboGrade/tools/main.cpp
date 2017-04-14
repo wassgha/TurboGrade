@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
     a.exec();
     cout << "Hello World!" << endl;
 
+<<<<<<< HEAD
     MacAdress m;
     Controller *_controller;
 
@@ -24,5 +25,8 @@ int main(int argc, char *argv[])
     Assignment* assignment = section->get_assignment("Binary Search Tree");
     CSVGenerator g;
     g.printProfessor(section,assignment,"test.txt");
+=======
+//    MacAdress m;
+>>>>>>> 35622264124a078d1b72e5f0a7be3ec70864bab8
     return 0;
 }

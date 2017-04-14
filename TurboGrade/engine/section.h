@@ -42,6 +42,7 @@ public:
     Student* get_student(const QString name);
     // Find an assignment in the section
     Assignment* get_assignment(const QString name);
+    std::vector<Assignment*>* get_assignments();
 
     // Section id
     int _id;

@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql printsupport
+QT          += sql widgets printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -75,13 +76,13 @@ SOURCES += main.cpp\
     criteriongradecard.cpp
 
 HEADERS  +=\
-        "../tools/syntaxhighlight.h"\
-        "../tools/codeeditor.h" \
+            "../tools/syntaxhighlight.h"\
+            "../tools/codeeditor.h" \
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
-        "../tools/dirtools.h" \
-        "../tools/csvgenerator.h" \
-        "../tools/filewriter.h" \
+            "../tools/dirtools.h" \
+            "../tools/csvgenerator.h" \
+            "../tools/filewriter.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \
