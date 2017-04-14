@@ -54,11 +54,11 @@ int main(int argc, char *argv[])
 
 TEST(general,COURSEBUILD) {
     Controller testControl(true,"test.sql");
-    testControl.add_course(-1,"testCourse");
+    testControl.add_course("testCourse");
     vector<Course*>* courseList = testControl.get_courses();
     int x = courseList->size();
     ASSERT_EQ(x,1);
-    testControl.add_course(-1,"test2");
+    testControl.add_course("test2");
     courseList = testControl.get_courses();
     int x2 = courseList->size();
     cout<<to_string(x)<<endl;
@@ -67,8 +67,8 @@ TEST(general,COURSEBUILD) {
 
 TEST(general,COURSEBReplaceKeep) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
-    testControl->add_course(-1,"Course2");
+    testControl->add_course("testCourse");
+    testControl->add_course("Course2");
     delete testControl;
     Controller* newControl = new Controller(false,"test.sql");
     vector<Course*>* courseList = newControl->get_courses();
@@ -79,8 +79,8 @@ TEST(general,COURSEBReplaceKeep) {
 
 TEST(general,COURSEBReplaceLose) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
-    testControl->add_course(-1,"Course2");
+    testControl->add_course("testCourse");
+    testControl->add_course("Course2");
     delete testControl;
     Controller* newControl = new Controller(true,"test.sql");
     vector<Course*>* courseList = newControl->get_courses();
@@ -92,14 +92,14 @@ TEST(general,COURSEBReplaceLose) {
 
 TEST(general,2SECTIONBUILD) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
+    testControl->add_course("testCourse");
     vector<Course*>* courseList = testControl->get_courses();
     Course* testCourse = courseList->at(0);
-    testCourse->add_section(-1,"testSection");
+    testCourse->add_section("testSection");
     vector<Section*>* sectionList = testCourse->get_sections();
     int x = sectionList->size();
     ASSERT_EQ(x,1);
-    testCourse->add_section(-1,"testSection2");
+    testCourse->add_section("testSection2");
     courseList = testControl->get_courses();
     testCourse = courseList->at(0);
     vector<Section*>* sectionList2 = testCourse->get_sections();
@@ -110,11 +110,11 @@ TEST(general,2SECTIONBUILD) {
 
 TEST(general,2SECTIONBReplaceKeep) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
+    testControl->add_course("testCourse");
     vector<Course*>* courseList = testControl->get_courses();
     Course* testCourse = courseList->at(0);
-    testCourse->add_section(-1,"testSection");
-    testCourse->add_section(-1,"testSection2");
+    testCourse->add_section("testSection");
+    testCourse->add_section("testSection2");
     delete testControl;
     Controller* newControl = new Controller(false,"test.sql");
     vector<Course*>* newCourseList = newControl->get_courses();
@@ -127,14 +127,14 @@ TEST(general,2SECTIONBReplaceKeep) {
 
 TEST(general,2SECTIONBReplaceLose) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
+    testControl->add_course("testCourse");
     vector<Course*>* courseList = testControl->get_courses();
     Course* testCourse = courseList->at(0);
-    testCourse->add_section(-1,"testSection");
-    testCourse->add_section(-1,"testSection2");
+    testCourse->add_section("testSection");
+    testCourse->add_section("testSection2");
     delete testControl;
     Controller* newControl = new Controller(true,"test.sql");
-    newControl->add_course(-1,"testCourse");
+    newControl->add_course("testCourse");
     vector<Course*>* newCourseList = newControl->get_courses();
     Course* newTestCourse = newCourseList->at(0);
     vector<Section*>* sectionList = newTestCourse->get_sections();
@@ -147,13 +147,13 @@ TEST(general,2SECTIONBReplaceLose) {
 
 TEST(general,3ASSIGNMENTBUILD) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
+    testControl->add_course("testCourse");
     vector<Course*>* courseList = testControl->get_courses();
     Course* testCourse = courseList->at(0);
-    testCourse->add_section(-1,"testSection");
+    testCourse->add_section("testSection");
     vector<Section*>* sectionList = testCourse->get_sections();
     Section* testSection = sectionList->at(0);
-    Assignment* testAssign = new Assignment(-1,"name","obj",testControl);
+    Assignment* testAssign = new Assignment("name","obj",testControl);
     testSection->add_assignment(testAssign,false);
     vector<Assignment*>* assignList = testSection->get_assignments();
     int x = assignList->size();
@@ -166,13 +166,13 @@ TEST(general,3ASSIGNMENTBUILD) {
 
 TEST(general,3ASSIGNMENTBReplaceKeep) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
+    testControl->add_course("testCourse");
     vector<Course*>* courseList = testControl->get_courses();
     Course* testCourse = courseList->at(0);
-    testCourse->add_section(-1,"testSection");
+    testCourse->add_section("testSection");
     vector<Section*>* sectionList = testCourse->get_sections();
     Section* testSection = sectionList->at(0);
-    Assignment* testAssign = new Assignment(-1,"name","obj",testControl);
+    Assignment* testAssign = new Assignment("name","obj",testControl);
     testSection->add_assignment(testAssign,false);
     vector<Assignment*>* assignList = testSection->get_assignments();
     int x = assignList->size();
@@ -185,13 +185,13 @@ TEST(general,3ASSIGNMENTBReplaceKeep) {
 
 TEST(general,3ASSIGNMENTBReplaceLose) {
     Controller* testControl = new Controller(true,"test.sql");
-    testControl->add_course(-1,"testCourse");
+    testControl->add_course("testCourse");
     vector<Course*>* courseList = testControl->get_courses();
     Course* testCourse = courseList->at(0);
-    testCourse->add_section(-1,"testSection");
+    testCourse->add_section("testSection");
     vector<Section*>* sectionList = testCourse->get_sections();
     Section* testSection = sectionList->at(0);
-    Assignment* testAssign = new Assignment(-1,"name","obj",testControl);
+    Assignment* testAssign = new Assignment("name","obj",testControl);
     testSection->add_assignment(testAssign,false);
     vector<Assignment*>* assignList = testSection->get_assignments();
     int x = assignList->size();
