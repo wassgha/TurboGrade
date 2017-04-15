@@ -58,6 +58,13 @@ void GradeSubmission::finished_running() {
 
     ui->run->setText("Run");
     ui->run->setEnabled(true);
+    QByteArray errors = compile->readAllStandardError();
+    if (errors != QByteArray("")) {
+        code_view->ui->terminal->append("<code style=\"color:white; background:#e74c3c; padding-top:10px; padding-right:10px;padding-left:10px;padding-bottom:10px;\">"
+                                            + errors + "</code>");
+        activateWindow();
+        raise();
+    }
     code_view->ui->terminal->append(compile->readAllStandardOutput());
 
 }
