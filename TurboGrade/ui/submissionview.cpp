@@ -15,6 +15,7 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     add_dialog->add_field("QLabel", "instructions", "Please unzip the Moodle submissions and point \n"
                                                     "to the folder where you unzipped them.");
     add_dialog->add_field("QFileDialog", "select_folder", "Choose folder", ":/misc/res/folder.png");
+    _progress_bar = dynamic_cast<QProgressBar*>(add_dialog->add_field("QProgressBar", "progress"));
     connect(add_dialog, SIGNAL(submit()), this, SLOT(import_submission()));
 
     add_btn = new QPushButton("Import submissions");
@@ -99,7 +100,9 @@ void SubmissionView::import_submission() {
             + "/"
             + QString::number(_assignment->_id);
 
-    DirTools::copy_dir_recursive( add_dialog->val("select_folder"), local_path);
+    _progress_bar->show();
+
+    DirTools::copy_dir_recursive( add_dialog->val("select_folder"), local_path,  true, _progress_bar);
 
 
     QDir dir;

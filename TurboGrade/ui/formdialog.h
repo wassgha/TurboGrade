@@ -8,6 +8,7 @@
 #include <QFileDialog>
 #include <QLineEdit>
 #include <QTextEdit>
+#include <QProgressBar>
 
 namespace Ui {
 class FormDialog;

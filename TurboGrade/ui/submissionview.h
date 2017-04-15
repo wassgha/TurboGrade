@@ -1,6 +1,8 @@
 #ifndef SUBMISSIONVIEW_H
 #define SUBMISSIONVIEW_H
 
+#include <QProgressBar>
+
 #include "listview.h"
 #include "ui_listview.h"
 
@@ -30,6 +32,7 @@ private:
     Assignment* _assignment;
     QPushButton *export_csv_btn = nullptr;
     QPushButton *export_pdf_btn = nullptr;
+    QProgressBar* _progress_bar;
 
 };
 

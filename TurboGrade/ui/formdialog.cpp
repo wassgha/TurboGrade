@@ -45,6 +45,16 @@ QWidget* FormDialog::add_field(QString type, QString name,
         dynamic_cast<QLabel*>(field)->setObjectName(name);
         ui->formLayout->addRow(field);
 
+    } else if (type == "QProgressBar") {
+
+        field = new QProgressBar();
+        dynamic_cast<QProgressBar*>(field)->setObjectName(name);
+        dynamic_cast<QProgressBar*>(field)->setMaximum(0);
+        dynamic_cast<QProgressBar*>(field)->setValue(0);
+        ui->formLayout->addRow(field);
+        field->hide();
+
+
     } else if (type == "Separator") {
 
         field = new QFrame();
