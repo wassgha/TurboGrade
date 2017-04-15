@@ -14,7 +14,7 @@ class Card : public QWidget
     Q_OBJECT
 
 public:
-    explicit Card(QString title, QString info, QString color, QObject* obj);
+    explicit Card(QString title, QString info, QString color, QObject* obj, bool initials = false);
     ~Card();
 
 protected:

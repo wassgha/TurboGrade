@@ -82,7 +82,7 @@ void SubmissionView::refresh_cards() {
                                         " out of " +
                                         QString::number(_assignment->_rubric->total_grade()) +
                                         ")",
-                                        student->_color, submission);
+                                        student->_color, submission, true);
             cards.push_back(new_submission);
             connect(new_submission, SIGNAL(clicked(QObject*)), _parent, SLOT(start_grading(QObject*)));
             add_card(new_submission);
