@@ -53,15 +53,15 @@ int main(int argc, char *argv[])
     Course *course = _controller->get_course("CS 105");
     Section *section = course->get_section("02");
     Assignment* assignment = section->get_assignment("Binary Search Tree");
-    CSVGenerator g;
-    g.printProfessor(section,assignment,"test.txt");
+//    CSVGenerator g;
+//    g.printProfessor(section,assignment,"test.txt");
 
     StudentDeliverable s;
     QString html =  s.placeParameters(section->get_student("Wassim Gharbi")->get_submission(assignment));
-    HTMLToPDF w(nullptr,html);
-    //HTMLToPDF w(nullptr, 0);
+    HTMLToPDF w(nullptr, html);
     w.show();
     a.exec();
 
     return 0;
 }
+

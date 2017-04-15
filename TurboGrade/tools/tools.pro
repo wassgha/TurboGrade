@@ -1,14 +1,13 @@
 TEMPLATE    = app
 CONFIG      += console c++11
 CONFIG      -= app_bundle
-QT          += sql widgets printsupport network
+QT          += sql widgets printsupport network webenginewidgets
 
 SOURCES     +=  main.cpp \
                 syntaxhighlight.cpp \
                 codeeditor.cpp \
                 objectidentifier.cpp \
                 filewriter.cpp \
-    pdfwindow.cpp \
     htmltopdf.cpp \
     dirtools.cpp \
     macadress.cpp \
@@ -40,7 +39,6 @@ HEADERS     += \
                 objectidentifier.h \
                 macro.h \
                 filewriter.h \
-    pdfwindow.h \
     htmltopdf.h \
     dirtools.h \
     macadress.h \
@@ -56,8 +54,9 @@ HEADERS     += \
             "../engine/comment.h" \
             studentdeliverable.h
 
-FORMS += \
-    pdfwindow.ui
+FORMS +=
 
-DISTFILES += \
-    example.css
+DISTFILES +=
+
+RESOURCES += \
+    report.qrc

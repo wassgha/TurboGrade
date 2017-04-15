@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/css">
+        <file>report/style.css</file>
+        <file>report/logo.png</file>
+    </qresource>
+</RCC>

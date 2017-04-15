@@ -21,9 +21,9 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_names(submission, htmlString);
     add_total_grade_sticker(submission, htmlString);
     add_general_comments(submission, htmlString);
+    htmlString.append("\n    <div id = \"container\">");
     add_assignment_obj(submission, htmlString);
     add_grade_summary(submission, htmlString);
-    htmlString.append("\n    <div id = \"container\">");
     add_detailed_remarks(submission, htmlString);
 
     /*htmlString.append(
@@ -69,7 +69,7 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     htmlString.append(
                 "\n    </div>"
                 "\n    <div id = \"logo\" >"
-                "\n      Powered by <img src = \"turbogradelogodark.png\" />"
+                "\n      Powered by <img src = \"qrc:///css/report/logo.png\" />"
                 "\n    </div>"
                 "\n    <div class=\"clear\"></div>"
                 "\n  </div>");
@@ -86,212 +86,7 @@ void StudentDeliverable::add_header(Submission *submission, QString &htmlString)
 }
 
 void StudentDeliverable::add_style(Submission *submission, QString &htmlString){
-    htmlString.append(
-                "\n   <style type=\"text/css\">"
-                "\n       body {"
-                "\n          background-color: #232730;"
-                // "   font-family:"
-                "\n          color: white;"
-                "\n          font-family : sans-serif;"
-                "\n       }"
-
-                "\n       h2 {"
-                "\n          margin-left: 0px;"
-                "\n          margin-top: 30px;"
-                "\n          margin-bottom: 30px;"
-                "\n       }"
-
-                "\n       .clear {"
-                "\n          float: none;"
-                "\n          clear: both;"
-                "\n       }"
-
-                "\n       .criterion {"
-                "\n          border-top: 1px solid #EBEBEB;"
-                "\n       }"
-
-                "\n       .criterion:first-of-type {"
-                "\n          margin-top: 20px;"
-                "\n       }"
-
-                "\n       .criterion.comments {"
-                "\n          border: none;"
-                "\n       }"
-
-                "\n       .criterion > .name {"
-                "\n          font-size: 18px;"
-                "\n          padding: 20px;"
-                "\n          display: block;"
-                "\n       }"
-
-                "\n       .criterion > .name > .grade {"
-                "\n          font-weight: bold"
-                "\n          font-size: 23px;"
-                "\n          padding: 5px;"
-                "\n       }"
-
-                "\n       .criterion > .name > .out-of {"
-                "\n          color: gray;"
-                "\n       }"
-
-                "\n       .criterion ul {"
-                "\n          list-style: circle;"
-                "\n       }"
-
-                "\n       .criterion li {"
-                "\n          padding: 10px;"
-                "\n       }"
-
-                "\n       .criterion li > .grade {"
-                "\n          font-weight: bold;"
-                "\n          font-size: 17px;"
-                "\n          padding: 5px;"
-                "\n       }"
-
-                "\n       .criterion li > .out-of {"
-                "\n          color: gray;"
-                "\n       }"
-
-                "\n       .rubric {"
-                "\n          width: 100%;"
-                "\n          min-height: 100px;"
-                "\n          margin-top: 10px;"
-                "\n          margin-bottom: 10px;"
-                "\n          border-spacing: 10px 0px;"
-                "\n       }"
-
-                "\n       .rubric td {"
-                "\n          color: darkgray;"
-                "\n          background-color-color: white;"
-                "\n          border: 1px solid rgb(236, 239, 239);"
-                "\n          border-radius: 5px;"
-                "\n          padding: 10px;"
-                "\n       }"
-
-                "\n       .rubric td.selected {"
-                "\n          color: black;"
-                "\n          background-color-color: white;"
-                "\n          border: 3px solid rgb(230, 212, 0);"
-                "\n          border-radius: 5px;"
-                "\n          padding: 10px;"
-                "\n       }"
-
-                "\n       #total {"
-                "\n          border-top: 1px solid lightgray;"
-                "\n          padding: 20px;"
-                "\n          text-align: right;"
-                "\n          text-transform: uppercase;"
-                "\n          font-weight: bold;"
-                "\n          margin-top: 20px;"
-                "\n       }"
-
-                "\n       #total > .out-of {"
-                "\n          color : gray;"
-                "\n          font-weight: normal;"
-                "\n       }"
-
-                "\n       #document {"
-                "\n          color: white;"
-                "\n          padding : 20px;"
-                "\n       }"
-
-                "\n       #logo {"
-                "\n          float: right;"
-                "\n       }"
-
-                "\n       #logo > img {"
-                "\n          height: 32px;"
-                "\n          vertical-align: middle;"
-                "\n       }"
-
-                "\n       #info {"
-                "\n          float: left;"
-                "\n          padding-top: 20px;"
-                "\n       }"
-
-                "\n       #grade {"
-                "\n          float: right;"
-                "\n          color: green;"
-                "\n          border-radius: 5px;"
-                "\n          background-color: white;"
-                "\n          padding: 20px;"
-                "\n          font-size: 28px;"
-                "\n          text-align: center;"
-                "\n       }"
-
-                "\n       #grade > #label {"
-                "\n          font-size: 13px;"
-                "\n          text-transform: uppercase;"
-                "\n          color: gray;"
-                "\n          margin-bottom: 5px;"
-                "\n       }"
-
-                "\n       #assignment-name {"
-                "\n          font-size: 24px;"
-                "\n       }"
-
-                "\n       #container {"
-                "\n          color: black;"
-                "\n          border-radius: 5px;"
-                "\n          background-color: white;"
-                "\n          padding: 20px;"
-                "\n          margin-top: 20px;"
-                "\n          margin-bottom: 20px;"
-                "\n       }"
-
-                "\n       .code-container {"
-                "\n          background-color: #232730;"
-                "\n          color: #EBEBEB;"
-                "\n          padding: 20px;"
-                "\n          border-radius: 5px;"
-                "\n          position: relative;"
-                "\n          margin-bottom: 20px;"
-                "\n       }"
-
-                "\n       .code {"
-                "\n          padding-left: 20px;"
-                "\n       }"
-
-                "\n       .code-container > .lines {"
-                "\n          color: gray;"
-                "\n          font-weight: 200;"
-                "\n          position: absolute;"
-                "\n       }"
-
-                "\n       .comment {"
-                "\n          margin-top: 20px;"
-                "\n          background-color: #ffea8d;"
-                //"    border-radius: 5px;"
-                "\n          padding: 20px;"
-                "\n          color: black;"
-                "\n       }"
-                "\n       .comment > .title {"
-                "\n          text-transform: uppercase;"
-                "\n          color: rgb(107, 100, 51);"
-                "\n          font-weight: bold;"
-                "\n          padding: 10px;"
-
-                "\n       }"
-
-                "\n       .comment > p > .grade {"
-                "\n          padding : 10px;"
-                "\n       }"
-
-                "\n       .comment > p > .grade.bad {"
-                "\n          color: red;"
-                "\n       }"
-
-                "\n       .comment > p > .grade.good {"
-                "\n          color: green;"
-                "\n       }"
-
-                "\n       .chart {"
-                "\n          border-radius: 5px;"
-                "\n          width: 100%;"
-                "\n          margin-bottom: 10px;"
-                "\n       }"
-
-                "\n   </style>");
+    htmlString.append("<link href=\"qrc:///css/report/style.css\" rel=\"stylesheet\" type=\"text/css\" />");
 }
 
 void StudentDeliverable::add_names(Submission *submission, QString &htmlString){
@@ -317,7 +112,9 @@ void StudentDeliverable::add_total_grade_sticker(Submission *submission, QString
                 );
     htmlString.append(QString(std::to_string(submission->get_grade()).c_str()));
     htmlString.append(
-                "\n    </div>");
+                "\n    </div>"
+                "\n     <div class=\"clear\"></div>"
+                );
 }
 
 void StudentDeliverable::add_grade_two(Submission *submission, QString &htmlString){
