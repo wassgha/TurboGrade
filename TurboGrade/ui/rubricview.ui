@@ -129,13 +129,6 @@ QGroupBox &gt; QGroupBox {
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="checkBox">
-     <property name="text">
-      <string>Start with full grades (to assign penalties) </string>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QGroupBox" name="add_box">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">

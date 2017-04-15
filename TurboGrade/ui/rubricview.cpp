@@ -20,9 +20,6 @@ RubricView::RubricView(QWidget *parent, Assignment *assignment) :
     ui->criterion_grade->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui->criterion_name->setAttribute(Qt::WA_MacShowFocusRect, false);
 
-//    ui->dummy->hide();
-//    ui->last->hide();
-
     layout()->setAlignment(Qt::AlignTop);
 
     connect(ui->add_btn, SIGNAL(clicked()), this, SLOT(add_criterion()));
@@ -37,7 +34,7 @@ void RubricView::add_criterion()
 {
     if (_assignment->_rubric->add_criterion(ui->criterion_name->text(), nullptr, ui->criterion_grade->value()))
     {
-        ui->mainLayout->insertWidget(2, new CriterionItem(this, ui->criterion_name->text(), ui->criterion_grade->value()));
+        ui->mainLayout->insertWidget(3, new CriterionItem(this, ui->criterion_name->text(), ui->criterion_grade->value()));
         ui->criterion_name->clear();
         ui->criterion_grade->setValue(0);
     }

@@ -149,10 +149,10 @@ void Controller::show_courses() {
  * @param objective objective of the assignment
  * @param load whether to add to the database or only locally
  */
-Assignment* Controller::add_assignment(const QString name,
-                                const QString objective, int id) {
+Assignment* Controller::add_assignment(const QString name, const QString objective,
+                                       bool full_grade, int id) {
 
-    Assignment *new_assignment = new Assignment(name, objective, this, id);
+    Assignment *new_assignment = new Assignment(name, objective, this, full_grade, id);
 
     _assignments->push_back(new_assignment);
 

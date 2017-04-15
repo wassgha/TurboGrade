@@ -46,7 +46,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     // Assignment Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment (id INTEGER PRIMARY KEY, \
                name VARCHAR(50) UNIQUE,\
-               objective TEXT)");
+               objective TEXT,\
+               full_grade INT)");
 
     // AssignmentSection Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment_section (id INTEGER PRIMARY KEY, \

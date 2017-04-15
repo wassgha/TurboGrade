@@ -54,6 +54,11 @@ QWidget* FormDialog::add_field(QString type, QString name,
         ui->formLayout->addRow(field);
         field->hide();
 
+    } else if (type == "QCheckBox") {
+
+        field = new QCheckBox(label);
+        dynamic_cast<QCheckBox*>(field)->setObjectName(name);
+        ui->formLayout->addRow(field);
 
     } else if (type == "Separator") {
 
@@ -132,6 +137,11 @@ QString FormDialog::val(QString name) {
         return "";
     } else if (_field_types[name] == "QFileDialog") {
         return _data;
+    } else if (_field_types[name] == "QCheckBox") {
+        QCheckBox* field = findChild<QCheckBox*>(name);
+        bool checked = field->isChecked();
+        field->setChecked(false);
+        return checked  ? "1" : "0";
     } else {
         return QString();
     }
@@ -153,4 +163,12 @@ void FormDialog::select_folder() {
                                               "",
                                               QFileDialog::ShowDirsOnly
                                               | QFileDialog::DontResolveSymlinks);
+}
+
+void FormDialog::disableSubmit() {
+    ui->ok_btn->setEnabled(false);
+}
+
+void FormDialog::enableSubmit() {
+    ui->ok_btn->setEnabled(true);
 }

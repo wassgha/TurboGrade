@@ -29,6 +29,7 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
     add_dialog->add_field("QTextEdit", "objective",
                           "Assignment Objective :",
                           "This project will help you get familiar with data structures");
+    add_dialog->add_field("QCheckBox", "full_grades_checkbox", "Start with full grades (to assign penalties)");
     connect(add_dialog, SIGNAL(submit()), this, SLOT(add_new()));
 
     add_btn = new QPushButton("Add assignment");
@@ -96,7 +97,7 @@ void AssignmentView::refresh_cards() {
 }
 
 void AssignmentView::add_new() {
-    Assignment *assignment = _controller->add_assignment(add_dialog->val("name"), add_dialog->val("objective"));
+    Assignment *assignment = _controller->add_assignment(add_dialog->val("name"), add_dialog->val("objective"), add_dialog->val("full_grades_checkbox") == "1");
     _section->add_assignment(assignment, false);
     if (_rubric_view != nullptr)
         delete _rubric_view;

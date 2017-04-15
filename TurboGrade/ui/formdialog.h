@@ -9,6 +9,7 @@
 #include <QLineEdit>
 #include <QTextEdit>
 #include <QProgressBar>
+#include <QCheckBox>
 
 namespace Ui {
 class FormDialog;
@@ -27,6 +28,8 @@ public:
                    QString label = "",
                    QString placeholder = "");
     QString val(QString name);
+    void disableSubmit();
+    void enableSubmit();
 
     Ui::FormDialog *ui;
     std::map<QString, QWidget*> _fields;

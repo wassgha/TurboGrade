@@ -71,7 +71,12 @@ void SubmissionView::refresh_cards() {
             Submission* submission = student->get_submission(_assignment);
             Card* new_submission = new Card(student->_name,
                                         "Grade : " +
-                                        QString::number(100*submission->get_grade()/_assignment->_rubric->total_grade()) +
+                                        (_assignment->_rubric->total_grade() == 0
+                                             ?
+                                             QString::number(0)
+                                             :
+                                             QString::number(100*submission->get_grade()/_assignment->_rubric->total_grade())
+                                         ) +
                                         "% (" +
                                         QString::number(submission->get_grade()) +
                                         " out of " +
@@ -102,6 +107,8 @@ void SubmissionView::import_submission() {
 
     _progress_bar->show();
 
+    add_dialog->disableSubmit();
+
     DirTools::copy_dir_recursive( add_dialog->val("select_folder"), local_path,  true, _progress_bar);
 
 
@@ -121,6 +128,8 @@ void SubmissionView::import_submission() {
     }
 
     refresh_cards();
+
+    add_dialog->enableSubmit();
 
 }
 

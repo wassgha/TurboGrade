@@ -70,8 +70,8 @@ public:
      **********************************/
 
     // Add a assignment to the software
-    Assignment* add_assignment(const QString name,
-                               const QString objective, int id = -1);
+    Assignment* add_assignment(const QString name, const QString objective,
+                               bool full_grade = false, int id = -1);
     // Searches for an assignment by name and returns it
     Assignment* get_assignment(const QString name);
     // Searches for an assignment by table ID and returns it

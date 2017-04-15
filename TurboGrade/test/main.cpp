@@ -158,7 +158,7 @@ TEST(general,3ASSIGNMENTBUILD) {
     vector<Assignment*>* assignList = testSection->get_assignments();
     int x = assignList->size();
     ASSERT_EQ(x,1);
-    testSection->add_assignment(testAssign,false);
+    testSection->add_assignment(testAssign, false);
     assignList = testSection->get_assignments();
     int y = assignList->size();
     ASSERT_EQ(y,2);

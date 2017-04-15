@@ -27,7 +27,7 @@ public:
 
     Assignment() = delete; //don't allow default constructor
     // Parametrized constructor
-    Assignment(const QString name, const QString objective, Controller *controller, int id = -1);
+    Assignment(const QString name, const QString objective, Controller *controller, bool full_grade = false, int id = -1);
     // Destructor
     ~Assignment();
 
@@ -40,6 +40,8 @@ public:
     Rubric* _rubric;
     // Color (for UI)
     QString _color;
+    // Start grading at full grades or at 0?
+    bool _full_grade = false;
     // Controller
     Controller *_controller;
 };
