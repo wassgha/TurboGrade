@@ -124,7 +124,10 @@ void SubmissionView::import_submission() {
             _section->add_student(submission_folder);
             added_student = _section->get_student(submission_folder);
         }
-        added_student->add_submission(_assignment);
+        Submission* added_submission = added_student->add_submission(_assignment);
+        if (_assignment->_full_grade) {
+            added_submission->attribute_full_grade();
+        }
     }
 
     refresh_cards();

@@ -50,8 +50,11 @@ public:
     // loads grades and comments
     void load_contents();
 
-    //adds a grade to the map
+    // adds a grade to the map
     void add_grade(Criterion* criterion, int grade, bool load = false);
+
+    // makes all grades 100%
+    void attribute_full_grade();
 
     //updates a grade in the map
     void update_grade(Criterion* criterion, int grade, bool load = false);

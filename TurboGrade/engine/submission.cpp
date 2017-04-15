@@ -110,6 +110,23 @@ void Submission::update_grade(Criterion *criterion, int grade, bool load){
         _controller->_gradeDB->update(criterion->_id, _id, grade);
 }
 
+
+/**
+ * @brief Submission::attribute_full_grade sets every criterion to the maximum
+ * grade available
+ */
+void Submission::attribute_full_grade() {
+    for (Criterion* criterion : *_assignment->_rubric->_criteria) {
+        if (criterion->has_children()) {
+            for (Criterion* child : *_assignment->_rubric->_criteria) {
+                update_grade(child, child->_out_of);
+            }
+        } else {
+            update_grade(criterion, criterion->_out_of);
+        }
+    }
+}
+
 /**
  * @brief Submission::get_grades getter for the _grades map
  * @return the _grades map containing Criterion, grade mappings
