@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
 
     StudentDeliverable s;
     QString html =  s.placeParameters(section->get_student("Wassim Gharbi")->get_submission(assignment));
-    HTMLToPDF w(nullptr, html);
+    HTMLToPDF w(html, "output3.pdf");
     w.show();
     a.exec();
 
