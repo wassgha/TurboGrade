@@ -4,6 +4,7 @@
 #include "../engine/controller.h"
 #include <QString>
 #include <QFile>
+#include <iostream>
 class StudentDeliverable : public ObjectIdentifier
 {
 public:

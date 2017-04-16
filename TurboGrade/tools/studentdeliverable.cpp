@@ -266,8 +266,16 @@ void StudentDeliverable::add_code_comment(Submission *submission, QString &htmlS
 
 void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment, QString &htmlString, int linesBefore, int linesAfter){
     QString fullPath = submission->getPath() + comment->_filename;
-    qDebug() << "FILE PATH: " << fullPath;
     QFile file(fullPath);
+    QString errMsg;
+    QFileDevice::FileError err = QFileDevice::NoError;
+//    if (!file.open(QIODevice::ReadOnly)) {
+//        errMsg = file.errorString();
+//        err = file.error();
+//    }
+    qDebug() << errMsg;
+    htmlString += "\n            <div class = \"code-container\">";
+    if (file.open(QFile::ReadOnly | QFile::Text)){
     QTextStream in(&file);
     int start = comment->_start_pos;
     int end = comment->_end_pos;
@@ -291,10 +299,9 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
     }
 
 
-    QString lineNumbers = "\n            <div class = \"code-container\">"
-                          "\n                <div class = \"lines\">";
+    QString lineNumbers = "\n                <div class = \"lines\">";
     QString codeLines = "\n                <div class = \"code\">";
-    for(int i = lineIndexStart - linesBefore; i <= lineIndexEnd + linesAfter && i < allLines.size(); i++){
+    for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < allLines.size(); i++){
         if(i >= 0){
             codeLines.append("\n");
             lineNumbers.append("\n");
@@ -302,11 +309,15 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
             lineNumbers.append("<br>");
             codeLines.append(allLines[i]);
             codeLines.append("<br>");
+            std::cout << "\n" << codeLines.toStdString();
+            std::cout << "\n" << lineNumbers.toStdString();
         }
     }
     lineNumbers.append("\n                </div>");
     codeLines.append("\n                </div>");
     htmlString.append(lineNumbers);
     htmlString.append(codeLines);
+    file.close();
+    }
     htmlString.append("\n            </div>");
 }
