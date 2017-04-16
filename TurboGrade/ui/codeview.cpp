@@ -103,7 +103,7 @@ void CodeView::add_comment() {
             criterion = _parent->_submission->_assignment->_rubric->get_criterion(criterion_id);
 
         // Get the file name from the tree view
-        QString file_name = _model->data(ui->treeView->currentIndex()).toString();
+        QString file_name = QDir(_model->rootPath()).relativeFilePath(_model->filePath(ui->treeView->currentIndex()));
 
         // Add the comment
         _parent->_submission->add_comment(file_name,
@@ -162,7 +162,7 @@ void CodeView::loadFile(QModelIndex item)
 
 void CodeView::refresh_comments() {
     // Get the file name from the tree view
-    QString file_name = _model->data(ui->treeView->currentIndex()).toString();
+    QString file_name = QDir(_model->rootPath()).relativeFilePath(_model->filePath(ui->treeView->currentIndex()));
     // Remove old comments
     for (CommentCard *comment_card : _comment_cards) {
         ui->comment_layout->removeWidget(comment_card);
