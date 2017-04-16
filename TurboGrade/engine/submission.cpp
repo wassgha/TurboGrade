@@ -118,7 +118,7 @@ void Submission::update_grade(Criterion *criterion, int grade, bool load){
 void Submission::attribute_full_grade() {
     for (Criterion* criterion : *_assignment->_rubric->_criteria) {
         if (criterion->has_children()) {
-            for (Criterion* child : *_assignment->_rubric->_criteria) {
+            for (Criterion* child : criterion->children()) {
                 update_grade(child, child->_out_of);
             }
         } else {

@@ -11,7 +11,7 @@ Dashboard::Dashboard(QWidget *parent) :
     setAttribute(Qt::WA_StyledBackground, true);
 
     // Use new Controller(true) to drop tables
-    _controller = new Controller();
+    _controller = new Controller(true);
 
     int id = QFontDatabase::addApplicationFont(":/fonts/res/Roboto-Regular.ttf");
     QString family = QFontDatabase::applicationFontFamilies(id).at(0);
