@@ -120,11 +120,18 @@ void CodeView::add_comment() {
 void CodeView::refresh_criteria() {
     _popup->ui->criterion->clear();
     _popup->ui->criterion->addItem("No criterion selected", -1);
+    int i = 1;
+    QStandardItemModel* model = qobject_cast<QStandardItemModel*>(_popup->ui->criterion->model());
     for(Criterion* criterion : *_parent->_submission->_assignment->_rubric->_criteria) {
         _popup->ui->criterion->addItem(criterion->_name, criterion->_id);
-        for(Criterion* child : *criterion->_sub_criteria) {
-            _popup->ui->criterion->addItem("    | " + child->_name, child->_id);
+        QStandardItem* item= model->item(i);
+        if (criterion->has_children()) {
+            item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
+            for(Criterion* child : *criterion->_sub_criteria) {
+                _popup->ui->criterion->addItem("    | " + child->_name, child->_id);
+            }
         }
+        i++;
     }
 }
 

@@ -23,6 +23,7 @@
 
 #include <QMainWindow>
 #include <QDesktopWidget>
+#include <QStandardItemModel>
 #include <QWidget>
 #include <QEvent>
 #include <QMoveEvent>
