@@ -35,7 +35,7 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
     add_btn = new QPushButton("Add assignment");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
-    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
+    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
     /**************************************************
      *               Breadcrumb Trail                 *

@@ -41,7 +41,7 @@ protected:
     QWidget* _parent = nullptr;
 
 public slots:
-    virtual void new_course();
+    virtual void open_add_dialog();
     virtual void refresh_cards();
     virtual void save_new();
 };

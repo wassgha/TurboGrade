@@ -38,10 +38,10 @@ Criterion::~Criterion()
  * @param child a pointer to the child criterion
  */
 
-Criterion* Criterion::add_child(const QString name, Criterion* parent, int out_of, int id)
+Criterion* Criterion::add_child(const QString name, int out_of, int id)
 {
     if (_parent == nullptr) {
-        Criterion* new_criterion = new Criterion(name, parent, out_of, _rubric, _controller, id);
+        Criterion* new_criterion = new Criterion(name, this, out_of, _rubric, _controller, id);
         _sub_criteria->push_back(new_criterion);
         return new_criterion;
     } else {

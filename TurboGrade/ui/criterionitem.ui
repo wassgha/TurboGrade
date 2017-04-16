@@ -164,6 +164,13 @@
         </item>
        </layout>
       </item>
+      <item>
+       <layout class="QVBoxLayout" name="sub_criteria">
+        <property name="topMargin">
+         <number>12</number>
+        </property>
+       </layout>
+      </item>
      </layout>
     </widget>
    </item>

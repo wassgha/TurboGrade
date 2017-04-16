@@ -73,7 +73,8 @@ SOURCES += main.cpp\
     submissionview.cpp \
     commentcard.cpp \
     criterionitem.cpp \
-    criteriongradecard.cpp
+    criteriongradecard.cpp \
+    criteriondialog.cpp
 
 HEADERS  +=\
             "../tools/syntaxhighlight.h"\
@@ -121,7 +122,8 @@ HEADERS  +=\
     submissionview.h \
     commentcard.h \
     criterionitem.h \
-    criteriongradecard.h
+    criteriongradecard.h \
+    criteriondialog.h
 
 FORMS    += \
     commentpopup.ui \
@@ -137,7 +139,8 @@ FORMS    += \
     rubricview.ui \
     commentcard.ui \
     criterionitem.ui \
-    criteriongradecard.ui
+    criteriongradecard.ui \
+    criteriondialog.ui
 
 RESOURCES += \
     resources.qrc

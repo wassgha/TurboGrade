@@ -46,7 +46,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     this->connect(_popup,  SIGNAL(submit()), this, SLOT(add_comment()));
 
     // Expand all items in the tree
-    this->connect(_model, SIGNAL(directoryLoaded(QString)), this, SLOT(finished_loading(QString)));
+    this->connect(_model, SIGNAL(directoryLoaded(QString)), this, SLOT(finished_loading()));
 
 }
 
@@ -172,7 +172,7 @@ void CodeView::refresh_comments() {
 
         // Add events for highlighting the comment in the code when the mouse is over the comment card
         connect(comment_card, SIGNAL(mouseOver(Comment*)), this, SLOT(highlight_comment(Comment *)));
-        connect(comment_card, SIGNAL(mouseOut(Comment*)), this, SLOT(unhighlight_comment(Comment *)));
+        connect(comment_card, SIGNAL(mouseOut(Comment*)), this, SLOT(unhighlight_comments()));
     }
 
     refresh_autocomplete();
@@ -186,7 +186,7 @@ void CodeView::setupCodeEditor(const QString &file_name)
 }
 
 
-void CodeView::finished_loading(QString file) {
+void CodeView::finished_loading() {
     ui->treeView->setCurrentIndex(_model->index(0, 0, root_index));
     ui->treeView->expandToDepth(0);
 }
@@ -217,7 +217,7 @@ void CodeView::highlight_comment(Comment * comment) {
     ui->editor->setExtraSelections(extraSelections);
 }
 
-void CodeView::unhighlight_comment(Comment * comment) {
+void CodeView::unhighlight_comments() {
     QList<QTextEdit::ExtraSelection> extraSelections;
     ui->editor->setExtraSelections(extraSelections);
 }

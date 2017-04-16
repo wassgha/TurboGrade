@@ -21,7 +21,7 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     add_btn = new QPushButton("Import submissions");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
-    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
+    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
     export_csv_btn = new QPushButton("Export Grades (CSV)");
     export_csv_btn->setFlat(true);

@@ -58,6 +58,6 @@ void CardsView::remove_cards() {
     cur_row = 0;
 }
 
-void CardsView::new_course() {
+void CardsView::open_add_dialog() {
     add_dialog->show();
 }

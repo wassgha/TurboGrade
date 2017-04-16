@@ -32,7 +32,7 @@ Criterion* Rubric::add_criterion(const QString name, Criterion* parent, int out_
     Criterion *new_criterion = nullptr;
 
     if (parent != nullptr) {
-        new_criterion = parent->add_child(name, parent, out_of, id);
+        new_criterion = parent->add_child(name, out_of, id);
     } else {
         new_criterion = new Criterion(name, parent, out_of, this, _controller, id);
         _criteria->push_back(new_criterion);

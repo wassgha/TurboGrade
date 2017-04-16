@@ -13,7 +13,7 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
     add_btn = new QPushButton("Add course");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
-    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
+    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
     ui->verticalLayout->insertWidget(0, _breadcrumb);
     refresh_cards();

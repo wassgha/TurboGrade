@@ -48,6 +48,11 @@ QGroupBox {
 	margin: 0px;
 }
 
+QGroupBox QGroupBox {
+	border: 0px;
+	border-bottom: 0px solid lightgray;
+}
+
 #last, #suggestions {
 	border-bottom: 0px solid gray;
 }
@@ -63,12 +68,6 @@ QGroupBox {
 	color: rgb(153, 144, 50);
 	border-radius: 3px;
 	padding: 5px;
-}
-
-QGroupBox &gt; QGroupBox {
-	padding-left: 15px;
-	border-bottom: 0px solid gray;
-	border-top: 1px solid lightgray;
 }
 
 #has_children {
@@ -121,6 +120,9 @@ QGroupBox &gt; QGroupBox {
 </string>
   </property>
   <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QLabel" name="title">
      <property name="text">
@@ -212,6 +214,13 @@ QGroupBox &gt; QGroupBox {
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="criteria">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
    </item>
    <item>
     <widget class="QGroupBox" name="suggestions">
