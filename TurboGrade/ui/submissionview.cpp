@@ -86,6 +86,12 @@ void SubmissionView::refresh_cards() {
             cards.push_back(new_submission);
             connect(new_submission, SIGNAL(clicked(QObject*)), _parent, SLOT(start_grading(QObject*)));
             add_card(new_submission);
+        } else {
+            Card* no_submission = new Card(student->_name,
+                                        "Student didn't submit",
+                                        student->_color, nullptr, true, true);
+            cards.push_back(no_submission);
+            add_card(no_submission);
         }
     }
 

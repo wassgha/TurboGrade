@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QWidget>
 #include <QMouseEvent>
+#include <QGraphicsOpacityEffect>
 
 namespace Ui {
 class Card;
@@ -14,7 +15,7 @@ class Card : public QWidget
     Q_OBJECT
 
 public:
-    explicit Card(QString title, QString info, QString color, QObject* obj, bool initials = false);
+    explicit Card(QString title, QString info, QString color, QObject* obj, bool initials = false, bool disabled = false);
     ~Card();
 
 protected:
@@ -23,6 +24,7 @@ protected:
 private:
     Ui::Card *ui;
     QObject* _obj;
+    bool _disabled = false;
 
 signals:
     void clicked(QObject* obj);
