@@ -212,13 +212,20 @@ void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &h
         htmlString.append(std::to_string(criterion->_out_of).c_str());
         htmlString.append("</span>"
                           "\n          </div>");
+        std::vector<Comment *> comments = submission->get_comments(criterion);
+        if(comments.empty()){
+        } else {
+            for(Comment *comment : comments){
+                add_code_lines(submission, comment, htmlString, 2, 2);
+            }
+        }
         for(Criterion *sub_criterion: *criterion->_sub_criteria){
             std::vector<Comment *> comments = submission->get_comments(sub_criterion);
             if(comments.empty()){
                 continue;
             } else {
                 for(Comment *comment : comments){
-                    add_code_comment(submission, htmlString, comment);
+                    add_code_lines(submission, comment, htmlString, 2, 2);
                 }
             }
         }
@@ -255,4 +262,51 @@ void StudentDeliverable::add_code_comment(Submission *submission, QString &htmlS
     htmlString.append(comment->_text);
     htmlString.append("\n</p>"
                       "\n                </div>");
+}
+
+void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment, QString &htmlString, int linesBefore, int linesAfter){
+    QString fullPath = submission->getPath() + comment->_filename;
+    qDebug() << "FILE PATH: " << fullPath;
+    QFile file(fullPath);
+    QTextStream in(&file);
+    int start = comment->_start_pos;
+    int end = comment->_end_pos;
+    int current = 0;
+    int lineCount = 1;
+    int lineIndexStart = -1;
+    int lineIndexEnd = -1;
+    std::vector<QString> allLines;
+    while (!in.atEnd()) {
+        QString line = in.readLine();
+        allLines.push_back(line);
+        int size = line.size();
+        current += size;
+        if(start < current && lineIndexStart == -1){
+            lineIndexStart = lineCount-1;
+        }
+        if (end < current && lineIndexEnd == -1){
+            lineIndexEnd = lineCount-1;
+        }
+        lineCount++;
+    }
+
+
+    QString lineNumbers = "\n            <div class = \"code-container\">"
+                          "\n                <div class = \"lines\">";
+    QString codeLines = "\n                <div class = \"code\">";
+    for(int i = lineIndexStart - linesBefore; i <= lineIndexEnd + linesAfter && i < allLines.size(); i++){
+        if(i >= 0){
+            codeLines.append("\n");
+            lineNumbers.append("\n");
+            lineNumbers.append(std::to_string(i).c_str());
+            lineNumbers.append("<br>");
+            codeLines.append(allLines[i]);
+            codeLines.append("<br>");
+        }
+    }
+    lineNumbers.append("\n                </div>");
+    codeLines.append("\n                </div>");
+    htmlString.append(lineNumbers);
+    htmlString.append(codeLines);
+    htmlString.append("\n            </div>");
 }

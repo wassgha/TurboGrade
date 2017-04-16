@@ -3,6 +3,7 @@
 #include "objectidentifier.h"
 #include "../engine/controller.h"
 #include <QString>
+#include <QFile>
 class StudentDeliverable : public ObjectIdentifier
 {
 public:
@@ -16,6 +17,7 @@ public:
     void add_general_comments(Submission *submission, QString& htmlString);
     void add_grade_summary(Submission *submission, QString& htmlString);
     void add_detailed_remarks(Submission *submission, QString& htmlString);
+    void add_code_lines(Submission *submission, Comment* comment, QString& htmlString, int linesBefore, int linesAfter);
 
     void add_comments(Submission *submission, QString& htmlString);
     void add_grades(Submission *submission, QString& htmlString);
