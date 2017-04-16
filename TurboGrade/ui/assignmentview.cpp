@@ -15,7 +15,7 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
 
     // Select an existing assignment
     _assignment_id = (QComboBox*) add_dialog->add_field("QComboBox", "assignment_id", "Existing assignment :");
-    refresh_combobox();
+    refresh_existing_assignments();
     connect(_assignment_id, SIGNAL(currentIndexChanged(int)), this, SLOT(add_existing(int)));
 
     // Separator
@@ -29,7 +29,7 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
     add_dialog->add_field("QTextEdit", "objective",
                           "Assignment Objective :",
                           "This project will help you get familiar with data structures");
-    add_dialog->add_field("QCheckBox", "full_grades_checkbox", "Start with full grades (to assign penalties)");
+    add_dialog->add_field("QCheckBox", "full_grades_checkbox", "Initialize submissions with full grades (grade by penalties)");
     connect(add_dialog, SIGNAL(submit()), this, SLOT(add_new()));
 
     add_btn = new QPushButton("Add assignment");
@@ -63,7 +63,7 @@ AssignmentView::~AssignmentView() {
         delete _assignment_id;
 }
 
-void AssignmentView::refresh_combobox() {
+void AssignmentView::refresh_existing_assignments() {
     _assignment_id->clear();
     _assignment_id->addItem("No assignment selected", -1);
     for(Assignment* assignment : *_controller->get_assignments()) {
@@ -97,14 +97,25 @@ void AssignmentView::refresh_cards() {
 }
 
 void AssignmentView::add_new() {
-    Assignment *assignment = _controller->add_assignment(add_dialog->val("name"), add_dialog->val("objective"), add_dialog->val("full_grades_checkbox") == "1");
+
+    // Capitalize assignment name
+    QString assignment_name = add_dialog->val("name");
+    assignment_name = assignment_name.left(1).toUpper()+assignment_name.mid(1);
+
+    // Add the assignment
+    Assignment *assignment = _controller->add_assignment(assignment_name, add_dialog->val("objective"), add_dialog->val("full_grades_checkbox") == "1");
+
+    // Link it to the current section
     _section->add_assignment(assignment, false);
+
+    // Show the rubric maker
     if (_rubric_view != nullptr)
         delete _rubric_view;
-
     _rubric_view = new RubricView(0, assignment);
     _rubric_view->show();
-    refresh_combobox();
+
+    // Refresh UI
+    refresh_existing_assignments();
     refresh_cards();
 }
 
@@ -115,7 +126,7 @@ void AssignmentView::add_existing(int id) {
         _section->add_assignment(assignment, false);
         add_dialog->val("assignment_id");
         add_dialog->hide();
-        refresh_combobox();
+        refresh_existing_assignments();
         refresh_cards();
     }
 }

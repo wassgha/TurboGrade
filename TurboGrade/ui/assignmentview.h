@@ -26,7 +26,7 @@ public slots:
     void add_existing(int id);
 
 private:
-    void refresh_combobox();
+    void refresh_existing_assignments();
 
     Controller *_controller;
     Section* _section;

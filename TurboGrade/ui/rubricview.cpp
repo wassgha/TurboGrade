@@ -4,7 +4,7 @@
 #include "ui_criterionitem.h"
 
 RubricView::RubricView(QWidget *parent, Assignment *assignment) :
-    QWidget(parent),
+    QWidget(parent, Qt::Sheet),
     ui(new Ui::RubricView)
 {
 
@@ -32,7 +32,13 @@ RubricView::~RubricView()
 
 void RubricView::add_criterion()
 {
-    _assignment->_rubric->add_criterion(ui->criterion_name->text(), nullptr, ui->criterion_grade->value());
+
+    // Capitalize criterion name
+    QString criterion_name = ui->criterion_name->text();
+    criterion_name = criterion_name.left(1).toUpper()+criterion_name.mid(1);
+
+    // Add the criterion
+    _assignment->_rubric->add_criterion(criterion_name, nullptr, ui->criterion_grade->value());
     refresh_criteria();
 }
 
@@ -92,7 +98,13 @@ void RubricView::refresh_criteria() {
 
 void RubricView::add_child() {
     Criterion* parent = _add_dialog->_parent_criterion;
-    parent->_rubric->add_criterion(_add_dialog->ui->name->text(),
+
+    // Capitalize criterion name
+    QString criterion_name = _add_dialog->ui->name->text();
+    criterion_name = criterion_name.left(1).toUpper()+criterion_name.mid(1);
+
+    // Add the criterion
+    parent->_rubric->add_criterion(criterion_name,
                                    parent,
                                    _add_dialog->ui->grade->value());
     refresh_criteria();
