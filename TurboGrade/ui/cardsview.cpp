@@ -63,8 +63,9 @@ void CardsView::open_add_dialog() {
 }
 
 void CardsView::resizeEvent(QResizeEvent* event) {
-    if (max_col != this->size().width() / 220) {
-        max_col = this->size().width() / 220;
+    int cards_per_col = this->size().width() / 220;
+    if (max_col != cards_per_col) {
+        max_col = cards_per_col;
         refresh_cards();
     }
 }
