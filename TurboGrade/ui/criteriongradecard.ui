@@ -24,7 +24,10 @@
 	padding: 0px;
 	margin: 0px;
 	font-weight: bold;
-}</string>
+        background: transparent;
+        border: none;
+    }
+    </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -149,15 +152,16 @@
           <widget class="QPushButton" name="show_comments">
            <property name="font">
             <font>
+             <pointsize>13</pointsize>
              <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
            <property name="text">
             <string>SHOW COMMENTS</string>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
            </property>
           </widget>
          </item>
