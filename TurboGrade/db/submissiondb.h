@@ -26,7 +26,7 @@ public:
 
 
     // Adds a row to the submission table
-    int add(int student_id, int assignment_id);
+    int add(int student_id, int assignment_id, int status);
     // Gets row id matching submission
     int select(int student_id, int assignment_id);
     // Loads submissions for a specific student

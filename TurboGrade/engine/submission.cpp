@@ -6,10 +6,11 @@
  * @param id the table id for the submission (-1 if this is a new entry)
  * @param assignment the assignment this submission belongs to
  * @param student the student this submission belongs to
+ * @param status whether the submission has been graded or not
  * @param controller the current controller
  */
 Submission::Submission(Assignment *assignment,
-                       Student* student, Controller * controller,
+                       Student* student, Controller * controller, int status,
                        int id)
 {
 
@@ -18,12 +19,13 @@ Submission::Submission(Assignment *assignment,
     _controller = controller;
 
     if (id == -1)
-        _id = _controller->_submissionDB->add(student->_id, assignment->_id);
+        _id = _controller->_submissionDB->add(student->_id, assignment->_id, status);
     else
         _id = id;
 
     _assignment = assignment;
     _student = student;
+    _status = status;
 
     // Submission comments
     _comments = new std::vector<Comment*>();
@@ -225,4 +227,14 @@ Submission::~Submission()
         delete comment;
     delete _comments;
     delete _grades;
+}
+
+
+float Submission::grade_percent() {
+    return (_assignment->_rubric->total_grade() == 0
+         ?
+         0
+         :
+         100*get_grade()/_assignment->_rubric->total_grade()
+     );
 }

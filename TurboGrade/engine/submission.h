@@ -31,7 +31,7 @@ class Submission : public ObjectIdentifier, public QObject
 public:
     Submission() = delete; //don't allow default constructor
     // Parametrized constructor
-    Submission(Assignment* assignment, Student* student, Controller * controller, int id = -1);
+    Submission(Assignment* assignment, Student* student, Controller * controller, int status = 0, int id = -1);
     // Destructor
     ~Submission();
     // Add a comment on the submission
@@ -65,6 +65,9 @@ public:
     //retrieves the  total grade for the current submission
     int get_grade();
 
+    // returns the total grade as a percentage
+    float grade_percent();
+
     //Returns the local path where submission files are stored
     QString getPath();
 
@@ -84,6 +87,8 @@ public:
     std::vector<Comment*> *_comments;    
     // The collection of criterion and their grades for the current submission
     std::map<Criterion*, int> *_grades;
+    // Status of the submission ("started", "finalized or "unopened")
+    int _status = 0;
     // Controller
     Controller *_controller;
 };

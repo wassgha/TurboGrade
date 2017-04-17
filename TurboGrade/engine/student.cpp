@@ -34,10 +34,11 @@ Student::~Student()
 /**
  * @brief Student::add_submission adds a submission made by this student
  * @param assignment a pointer to the assignment the submission belongs to
+ * @param status whether the submission was graded or not
  */
-Submission* Student::add_submission(Assignment* assignment, int id) {
+Submission* Student::add_submission(Assignment* assignment, int status, int id) {
 
-    Submission *new_submission = new Submission(assignment, this, _controller, id);
+    Submission *new_submission = new Submission(assignment, this, _controller, status, id);
 
     _submissions->push_back(new_submission);
 

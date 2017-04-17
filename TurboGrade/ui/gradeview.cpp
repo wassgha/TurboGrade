@@ -41,6 +41,13 @@ void GradeView::update_grades() {
     for (std::pair<Criterion*, CriterionGradeCard*>card : _cards) {
         card.second->update_grade();
     }
+    ui->total_grade->setText("Total Grade : " +
+                             QString::number(submission->grade_percent()) +
+                             "% (" +
+                             QString::number(submission->get_grade()) +
+                             " out of " +
+                             QString::number(_assignment->_rubric->total_grade()) +
+                             ")");
 }
 
 GradeView::~GradeView()

@@ -57,9 +57,12 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                FOREIGN KEY(section) REFERENCES section(id))");
 
     // Submission Table
+    // Note: The status field holds whether the submission was "finalized", "started"
+    //        or "unopened"
     sql_query("CREATE TABLE IF NOT EXISTS submission (id INTEGER PRIMARY KEY, \
                student INTEGER,\
                assignment INTEGER,\
+               status INT,\
                FOREIGN KEY(student) REFERENCES student(id),\
                FOREIGN KEY(assignment) REFERENCES assignment(id))");
 

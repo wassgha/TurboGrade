@@ -71,12 +71,7 @@ void SubmissionView::refresh_cards() {
             Submission* submission = student->get_submission(_assignment);
             Card* new_submission = new Card(student->_name,
                                         "Grade : " +
-                                        (_assignment->_rubric->total_grade() == 0
-                                             ?
-                                             QString::number(0)
-                                             :
-                                             QString::number(100*submission->get_grade()/_assignment->_rubric->total_grade())
-                                         ) +
+                                        QString::number(submission->grade_percent()) +
                                         "% (" +
                                         QString::number(submission->get_grade()) +
                                         " out of " +

@@ -20,9 +20,10 @@ SubmissionDB::~SubmissionDB() {
  * @brief SubmissionDB::add Insert a row to the database
  * @param student_id the student's unique identifier
  * @param assignment_id the assignment this submission belongs to
- * @return true if the query succeded
+ * @param status whether the submission has been graded or not
+ * @return the id if the query succeeded
  */
-int SubmissionDB::add(int student_id, int assignment_id) {
+int SubmissionDB::add(int student_id, int assignment_id, int status) {
 
     SHOW_WHERE;
 
@@ -30,10 +31,11 @@ int SubmissionDB::add(int student_id, int assignment_id) {
     QSqlQuery query(db);
 
 
-    query.prepare("INSERT INTO submission (id, student, assignment) "
-                  "VALUES (NULL, ?, ?)");
+    query.prepare("INSERT INTO submission (id, student, assignment, status) "
+                  "VALUES (NULL, ?, ?, ?)");
     query.addBindValue(student_id);
     query.addBindValue(assignment_id);
+    query.addBindValue(status);
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'submission' table" << endl << "SQL ERROR: " << query.lastError();
@@ -97,6 +99,7 @@ void SubmissionDB::load_all(Student *student) {
 
 
     query.prepare("SELECT "
+                  "submission.status AS submission_status,"
                   "submission.id AS submission_id,"
                   "assignment.name AS assignment_name "
                   "FROM submission, assignment "
@@ -113,9 +116,11 @@ void SubmissionDB::load_all(Student *student) {
 
     int assignment_name_field = query.record().indexOf("assignment_name");
     int submission_id_field = query.record().indexOf("submission_id");
+    int submission_status_field = query.record().indexOf("submission_status");
 
     while(query.next()) {
         student->add_submission(_controller->get_assignment(query.value(assignment_name_field).toString()),
+                                query.value(submission_status_field).toInt(),
                                 query.value(submission_id_field).toInt());
     }
 
