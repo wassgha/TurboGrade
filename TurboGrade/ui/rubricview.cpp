@@ -1,10 +1,8 @@
 #include "rubricview.h"
 #include "ui_rubricview.h"
-#include "criterionitem.h"
-#include "ui_criterionitem.h"
 
 RubricView::RubricView(QWidget *parent, Assignment *assignment) :
-    QWidget(parent, Qt::Sheet),
+    QDialog(parent, Qt::Sheet),
     ui(new Ui::RubricView)
 {
 
@@ -13,16 +11,17 @@ RubricView::RubricView(QWidget *parent, Assignment *assignment) :
     ui->setupUi(this);
 
     setAttribute(Qt::WA_StyledBackground, true);
+    QWidget::setWindowModality(Qt::WindowModal);
 
     ui->title->setText("Rubric : " + _assignment->_name);
 
-    ui->add_btn->setAttribute(Qt::WA_MacShowFocusRect, false);
+    ui->add_criterion_btn->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui->criterion_grade->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui->criterion_name->setAttribute(Qt::WA_MacShowFocusRect, false);
 
     layout()->setAlignment(Qt::AlignTop);
 
-    connect(ui->add_btn, SIGNAL(clicked()), this, SLOT(add_criterion()));
+    connect(ui->add_criterion_btn, SIGNAL(clicked()), this, SLOT(add_criterion()));
 }
 
 RubricView::~RubricView()
@@ -108,4 +107,9 @@ void RubricView::add_child() {
                                    parent,
                                    _add_dialog->ui->grade->value());
     refresh_criteria();
+}
+
+void RubricView::on_done_btn_clicked()
+{
+    hide();
 }

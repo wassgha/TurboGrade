@@ -18,7 +18,7 @@ namespace Ui {
 class RubricView;
 }
 
-class RubricView : public QWidget
+class RubricView : public QDialog
 {
     Q_OBJECT
 
@@ -39,6 +39,7 @@ private slots:
     void add_criterion();
     void add_child();
     void add_criterion(Criterion* parent);
+    void on_done_btn_clicked();
 };
 
 #endif // RUBRICVIEW_H

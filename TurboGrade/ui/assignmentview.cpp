@@ -109,9 +109,10 @@ void AssignmentView::add_new() {
     _section->add_assignment(assignment, false);
 
     // Show the rubric maker
+    add_dialog->hide();
     if (_rubric_view != nullptr)
         delete _rubric_view;
-    _rubric_view = new RubricView(0, assignment);
+    _rubric_view = new RubricView(this, assignment);
     _rubric_view->show();
 
     // Refresh UI
