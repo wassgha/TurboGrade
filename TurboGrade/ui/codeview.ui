@@ -47,7 +47,10 @@ QSplitter#splitter_2::handle:vertical {
 
 QScrollArea#comments {
 	border: none;
-	background: transparent;
+	background: url(:/misc/res/comment.png);
+	background-repeat: none;
+	background-position: center center;
+	background-size: 20px;
 }
 
 #comments_title {
