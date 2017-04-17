@@ -61,3 +61,10 @@ void CardsView::remove_cards() {
 void CardsView::open_add_dialog() {
     add_dialog->show();
 }
+
+void CardsView::resizeEvent(QResizeEvent* event) {
+    if (max_col != this->size().width() / 220) {
+        max_col = this->size().width() / 220;
+        refresh_cards();
+    }
+}

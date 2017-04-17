@@ -44,6 +44,7 @@ public slots:
     virtual void open_add_dialog();
     virtual void refresh_cards();
     virtual void save_new();
+    void resizeEvent(QResizeEvent* event);
 };
 
 #endif // CARDSVIEW_H
