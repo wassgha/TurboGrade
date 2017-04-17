@@ -128,3 +128,33 @@ void SubmissionDB::load_all(Student *student) {
     db.commit();
 
 }
+
+
+/**
+ * @brief SubmissionDB::update_status updates the grading status
+ * of a specific submission
+ * @param submission_id the submission id
+ * @param status the value for the status (in progress, finalized, etc.)
+ */
+void SubmissionDB::update_status(int submission_id, int status){
+
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE submission SET status = :status WHERE id = :submission_id");
+
+    query.bindValue(":status", status);
+    query.bindValue(":submission_id", submission_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update submission status"
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+    }
+
+    query.finish();
+    db.commit();
+}

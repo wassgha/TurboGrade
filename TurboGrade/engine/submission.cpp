@@ -94,8 +94,10 @@ std::vector<Comment*> Submission::get_comment(QString filename) {
 void Submission::add_grade(Criterion *criterion, int grade, bool load){
     _grades->erase(criterion);
     _grades->emplace(std::make_pair(criterion, grade));
-    if (!load)
+    if (!load) {
         _controller->_gradeDB->add(criterion->_id, _id, grade);
+        update_status(1);
+    }
 }
 
 /**
@@ -108,8 +110,10 @@ void Submission::update_grade(Criterion *criterion, int grade, bool load){
         return;
     _grades->erase(criterion);
     _grades->emplace(std::make_pair(criterion, grade));
-    if (!load)
+    if (!load) {
         _controller->_gradeDB->update(criterion->_id, _id, grade);
+        update_status(1);
+    }
 }
 
 
@@ -127,6 +131,11 @@ void Submission::attribute_full_grade() {
             update_grade(criterion, criterion->_out_of);
         }
     }
+}
+
+void Submission::update_status(int status) {
+    _status = status;
+    _controller->_submissionDB->update_status(_id, _status);
 }
 
 /**

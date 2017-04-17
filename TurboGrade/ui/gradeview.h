@@ -39,6 +39,8 @@ public:
 public slots:
     void update_grades();
 
+private slots:
+    void on_finalize_clicked();
 };
 
 #endif // GRADEVIEW_H

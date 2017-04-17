@@ -37,8 +37,10 @@ void CriterionGradeCard::update_grade() {
 
 void CriterionGradeCard::on_grade_valueChanged(int grade)
 {
-    _submission->update_grade(_criterion, grade);
-    emit grade_changed();
+    if (grade != _submission->get_grade(_criterion)) {
+        _submission->update_grade(_criterion, grade);
+        emit grade_changed();
+    }
 }
 
 void CriterionGradeCard::insert_child(QWidget* child) {

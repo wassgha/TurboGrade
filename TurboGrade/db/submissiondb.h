@@ -31,6 +31,8 @@ public:
     int select(int student_id, int assignment_id);
     // Loads submissions for a specific student
     void load_all(Student *student);
+    // Updates the grading status of a submission
+    void update_status(int submission_id, int status);
 
 
     // Controller

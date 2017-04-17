@@ -34,12 +34,14 @@ public:
     Submission(Assignment* assignment, Student* student, Controller * controller, int status = 0, int id = -1);
     // Destructor
     ~Submission();
+
     // Add a comment on the submission
     void add_comment(QString filename,
                      Criterion *criterion,
                      QString text, int grade,
                      int start_pos, int end_pos,
                      int id = -1);
+
     // Get comments on a file
     std::vector<Comment*> get_comment(QString filename);
 
@@ -55,6 +57,9 @@ public:
 
     // makes all grades 100%
     void attribute_full_grade();
+
+    // Changes submission's grading status
+    void update_status(int status);
 
     //updates a grade in the map
     void update_grade(Criterion* criterion, int grade, bool load = false);

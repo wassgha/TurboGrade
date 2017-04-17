@@ -57,3 +57,8 @@ GradeView::~GradeView()
     }
     delete ui;
 }
+
+void GradeView::on_finalize_clicked()
+{
+    _parent->_submission->update_status(2);
+}
