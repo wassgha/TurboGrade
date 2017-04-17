@@ -27,7 +27,6 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
                         this,
                         child,
                         _parent->_submission);
-            _cards[child] = child_card;
             card->insert_child(child_card);
             connect(child_card, SIGNAL(grade_changed()), this, SLOT(update_grades()));
         }
