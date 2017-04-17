@@ -129,6 +129,7 @@ void CodeView::refresh_criteria() {
             item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
             for(Criterion* child : *criterion->_sub_criteria) {
                 _popup->ui->criterion->addItem("--- " + child->_name, child->_id);
+                i++;
             }
         }
         i++;

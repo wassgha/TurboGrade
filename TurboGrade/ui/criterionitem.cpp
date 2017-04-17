@@ -1,21 +1,20 @@
 #include "criterionitem.h"
 #include "ui_criterionitem.h"
 
-CriterionItem::CriterionItem(QWidget *parent, Criterion *criterion, bool child) :
+CriterionItem::CriterionItem(QWidget *parent, Criterion *criterion) :
     QWidget(parent),
-    _child(child),
     _criterion(criterion),
     ui(new Ui::CriterionItem)
 {
     ui->setupUi(this);
 
-    if (child) {
+    if (criterion->_parent != nullptr) {
         ui->verticalLayout_2->setContentsMargins(26, 0, 0, 0);
         ui->add_child->hide();
         ui->add_guide->hide();
     }
 
-    if (!criterion->has_children() || child) {
+    if (!criterion->has_children() || criterion->_parent != nullptr) {
         ui->sub_criteria->setContentsMargins(0, 0, 0, 0);
     }
 
@@ -35,5 +34,5 @@ void CriterionItem::add_child() {
 }
 
 bool CriterionItem::isChild() {
-    return _child;
+    return _criterion->_parent != nullptr;
 }

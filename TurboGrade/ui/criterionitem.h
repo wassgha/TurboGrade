@@ -13,10 +13,9 @@ class CriterionItem : public QWidget
     Q_OBJECT
 
 public:
-    explicit CriterionItem(QWidget *parent = 0, Criterion *criterion = nullptr, bool child = false);
+    explicit CriterionItem(QWidget *parent = 0, Criterion *criterion = nullptr);
     ~CriterionItem();
     bool isChild();
-    bool _child = false;
     Criterion *_criterion = nullptr;
     Ui::CriterionItem *ui;
 

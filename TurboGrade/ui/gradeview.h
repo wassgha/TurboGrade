@@ -29,13 +29,15 @@ class GradeView : public QWidget
 public:
     explicit GradeView(QWidget *parent, Controller* controller = nullptr);
     ~GradeView();
-    void update_grades();
 
     Ui::GradeView *ui;
     Controller                  *_controller;
     GradeSubmission             *_parent;
     // Criterion cards
     std::map<Criterion*, CriterionGradeCard*> _cards;
+
+public slots:
+    void update_grades();
 
 };
 

@@ -56,7 +56,7 @@ void RubricView::add_criterion(Criterion* parent) {
 CriterionItem* RubricView::add_item(Criterion * criterion, CriterionItem* parent) {
     if (criterion != nullptr)
     {
-        CriterionItem *item = new CriterionItem(this, criterion, parent != nullptr);
+        CriterionItem *item = new CriterionItem(this, criterion);
         if (parent == nullptr)
             ui->criteria->addWidget(item);
         else

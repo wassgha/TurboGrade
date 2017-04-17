@@ -317,6 +317,9 @@ QGroupBox QGroupBox {
       <iconset resource="resources.qrc">
        <normaloff>:/misc/res/confirm.png</normaloff>:/misc/res/confirm.png</iconset>
      </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
   </layout>
