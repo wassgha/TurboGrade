@@ -111,5 +111,10 @@ void RubricView::add_child() {
 
 void RubricView::on_done_btn_clicked()
 {
-    hide();
+    if (_assignment->_rubric->_criteria->size() > 0) {
+        hide();
+    } else {
+        QMessageBox errorBox(QMessageBox::Critical, "No criteria detected", "Please add at least one criterion to the rubric of this assignment.", QMessageBox::Cancel);
+        errorBox.exec();
+    }
 }
