@@ -22,10 +22,10 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
 
     _semester_switch = new QComboBox();
     _semester_switch->setModel(_semesters_model);
-    _semester_switch->setCurrentIndex(2);
+    _semester_switch->setCurrentText(_controller->_current_semester);
     connect(_semester_switch, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_cards()));
 
-    _breadcrumb->add_to_back(_semester_switch);
+    _breadcrumb->add_to_switch(_semester_switch);
     ui->verticalLayout->insertWidget(0, _breadcrumb);
     refresh_cards();
 

@@ -38,6 +38,7 @@ Controller::Controller(bool drop_tables, QString dbname)
     _all_semesters<<"Fall " + QString::number(QDate::currentDate().year());
     _all_semesters<<"Spring " + QString::number(QDate::currentDate().year() - 1);
     _all_semesters<<"Fall " + QString::number(QDate::currentDate().year() - 1);
+    _current_semester = ((QDate::currentDate().month() < 5)?"Spring ":"Fall ") + QString::number(QDate::currentDate().year());
 
     // Initialize containers
     _courses = new std::vector<Course*>();

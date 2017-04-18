@@ -58,6 +58,11 @@ void Breadcrumb::add_switcher(QString left, QString right, bool default_state) {
     connect (switcher, SIGNAL(toggled()), this, SIGNAL(switcher_toggled())) ;
 }
 
+
+void Breadcrumb::add_to_switch(QWidget *widget) {
+    ui->switcher_group->addWidget(widget);
+}
+
 void Breadcrumb::add_item(const QString text, const char* slot, QObject* arg, QObject* slot_holder) {
 
     if (slot_holder == nullptr)

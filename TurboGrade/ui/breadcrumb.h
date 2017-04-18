@@ -24,6 +24,7 @@ public:
     void add_home();
     void add_switcher(QString left, QString right, bool default_state);
     void add_to_back(QWidget* w);
+    void add_to_switch(QWidget *widget);
 
 private:
     Ui::Breadcrumb *ui;

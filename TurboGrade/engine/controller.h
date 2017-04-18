@@ -110,6 +110,8 @@ public:
     QStringList _all_comments;
     // All semesters used
     QStringList _all_semesters;
+    // Current semester
+    QString _current_semester;
 
     /*
      * UI variables
