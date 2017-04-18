@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
     // Create a rubric
     bst_assignment->_rubric->add_criterion("Correctness", nullptr, 10);
     bst_assignment->_rubric->add_criterion("Design", nullptr, 5);
-    Criterion* comments = bst_assignment->_rubric->add_criterion(-1, "Comments", nullptr, 2);
+    Criterion* comments = bst_assignment->_rubric->add_criterion("Comments", nullptr, 2);
     bst_assignment->_rubric->add_criterion("JavaDoc", comments, 2);
 
     // Create a submission and grade it
