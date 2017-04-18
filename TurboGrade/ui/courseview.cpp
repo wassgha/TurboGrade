@@ -9,12 +9,20 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
     _semesters_model = new QStringListModel();
     _semesters_model->setStringList(_controller->_all_semesters);
 
+
+    /**************************************************
+     *          Construct the "Add new" Dialog        *
+     **************************************************/
     add_dialog = new FormDialog(this, "New Course");
     add_dialog->add_field("QLineEdit", "name", "Course Name :", "CS 150");
     _semester_select = dynamic_cast<QComboBox*>(add_dialog->add_field("QComboBox", "semester", "Semester :"));
     _semester_select->setModel(_semesters_model);
     connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
 
+
+    /**************************************************
+     *    Create button to invoke "Add new" Dialog    *
+     **************************************************/
     add_btn = new QPushButton("Add course");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
@@ -25,8 +33,16 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
     _semester_switch->setCurrentText(_controller->_current_semester);
     connect(_semester_switch, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_cards()));
 
+
+    /**************************************************
+     *          Create the Breadcrumb Trail           *
+     **************************************************/
+
     _breadcrumb->add_to_switch(_semester_switch);
     ui->verticalLayout->insertWidget(0, _breadcrumb);
+
+
+    // Load the courses
     refresh_cards();
 
 }

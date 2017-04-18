@@ -13,7 +13,14 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     _parent = dynamic_cast<GradeSubmission*>(parent);
 
     _popup = new CommentPopup(this);
+
+    // Load comments for autocomplete
     refresh_autocomplete();
+
+
+    /**************************************************
+     *          Construct the file tree               *
+     **************************************************/
 
     _model = new QFileSystemModel;
     _model->setRootPath(_parent->_submission->getPath());

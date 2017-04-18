@@ -1,5 +1,12 @@
 #include "assignmentview.h"
 
+/**
+ * @brief AssignmentView::AssignmentView Constructor, creates a new view that
+ * holds assignmets for a specific section
+ * @param parent        the dashboard object
+ * @param section       the current section
+ * @param controller    the controller object
+ */
 AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* controller):
     CardsView(parent)
 {
@@ -56,6 +63,9 @@ AssignmentView::AssignmentView(QWidget* parent, QObject* section, Controller* co
 
 }
 
+/**
+ * @brief AssignmentView::~AssignmentView Destructor
+ */
 AssignmentView::~AssignmentView() {
     if (_rubric_view != nullptr)
         delete _rubric_view;
@@ -63,6 +73,10 @@ AssignmentView::~AssignmentView() {
         delete _assignment_id;
 }
 
+/**
+ * @brief AssignmentView::refresh_existing_assignments reloads the list
+ * of existing assignment (to put in the "add new" dialog)
+ */
 void AssignmentView::refresh_existing_assignments() {
     _assignment_id->clear();
     _assignment_id->addItem("No assignment selected", -1);
@@ -72,14 +86,27 @@ void AssignmentView::refresh_existing_assignments() {
     }
 }
 
+/**
+ * @brief AssignmentView::show_students slot to transition to the student
+ * view
+ */
 void AssignmentView::show_students() {
     dynamic_cast<Dashboard*>(_parent)->show_students(_section);
 }
 
+/**
+ * @brief AssignmentView::show_submissions slot to transition to the
+ * submissions view
+ * @param assignment the selected assignment to show submissions for
+ */
 void AssignmentView::show_submissions(QObject* assignment) {
     dynamic_cast<Dashboard*>(_parent)->show_submissions(_section, assignment);
 }
 
+/**
+ * @brief AssignmentView::refresh_cards reloads the assignments in the view
+ * in case an assignment was added/deleted/updated etc.
+ */
 void AssignmentView::refresh_cards() {
 
     remove_cards();
@@ -96,6 +123,10 @@ void AssignmentView::refresh_cards() {
 
 }
 
+/**
+ * @brief AssignmentView::add_new callback for the "add new" dialog,
+ * adds the new assignment as described by the dialog to the database
+ */
 void AssignmentView::add_new() {
 
     // Capitalize assignment name
@@ -120,6 +151,12 @@ void AssignmentView::add_new() {
     refresh_cards();
 }
 
+/**
+ * @brief AssignmentView::add_existing callback for the "add new" dialog,
+ * links an existing assignment to this section based on the selected
+ * item in the "add new" dialog
+ * @param id the selected assignment to add to this section
+ */
 void AssignmentView::add_existing(int id) {
     if (id > 0) {
         int assignment_table_id = _assignment_id->itemData(id).toInt();
