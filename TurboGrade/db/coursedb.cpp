@@ -11,17 +11,19 @@ CourseDB::~CourseDB() {
 /**
  * @brief CourseDB::add Insert a row to the database
  * @param name the name of the course (ex. CS150)
+ * @param semester the semester the course is taught in
  * @return true if the query succeded
  */
-int CourseDB::add(const QString name) {
+int CourseDB::add(const QString name, const QString semester) {
 
     QSqlQuery query(db);
 
     db.transaction();
 
-    query.prepare("INSERT INTO course (id, name) "
-                  "VALUES (NULL, ?)");
+    query.prepare("INSERT INTO course (id, name, semester) "
+                  "VALUES (NULL, ?, ?)");
     query.addBindValue(name);
+    query.addBindValue(semester);
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'course' table" << endl << "SQL ERROR: " << query.lastError();
@@ -40,9 +42,10 @@ int CourseDB::add(const QString name) {
  * @brief CourseDB::select Returns id of the row
  * that matches given name
  * @param name the name of the course (ex. CS150)
+ * @param semester the semester the course is taught in
  * @return the resulting ID
  */
-int CourseDB::select(const QString name) {
+int CourseDB::select(const QString name, const QString semester) {
 
     SHOW_WHERE;
 
@@ -50,8 +53,9 @@ int CourseDB::select(const QString name) {
 
     db.transaction();
 
-    query.prepare("SELECT * FROM course WHERE name = ?");
+    query.prepare("SELECT * FROM course WHERE name = ? AND semester = ?");
     query.addBindValue(name);
+    query.addBindValue(semester);
 
     // Execute the query
     if (!query.exec()) {
@@ -92,8 +96,9 @@ void CourseDB::load_all() {
 
     int id_field = query.record().indexOf("id");
     int name_field = query.record().indexOf("name");
+    int semester_field = query.record().indexOf("semester");
     while(query.next()) {
-        _controller->add_course(query.value(name_field).toString(), query.value(id_field).toInt());
+        _controller->add_course(query.value(name_field).toString(), query.value(semester_field).toString(), query.value(id_field).toInt());
     }
 
     query.finish();

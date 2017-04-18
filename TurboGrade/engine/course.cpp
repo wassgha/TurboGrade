@@ -1,19 +1,23 @@
 #include "course.h"
 
-Course::Course(QString name, Controller* controller, int id)
+Course::Course(QString name, QString semester, Controller* controller, int id)
 {
     SHOW_WHERE;
 
     _controller = controller;
 
     if (id == -1)
-        _id = _controller->_courseDB->add(name);
+        _id = _controller->_courseDB->add(name, semester);
     else
         _id = id;
 
     _name = name;
+    _semester = semester;
     _sections = new std::vector<Section*>();
     _color = _controller->rand_color();
+
+    if (!_controller->_all_semesters.contains(_semester))
+        _controller->_all_semesters<<_semester;
 
     _controller->_sectionDB->load_all(this);
 }

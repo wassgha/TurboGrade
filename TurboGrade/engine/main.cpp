@@ -19,8 +19,8 @@ int main(int argc, char *argv[])
     // Use new Controller(true) to drop tables
     _controller = new Controller();
 
-//    Course* cs105 = _controller->add_course("CS 105");
-//    _controller->add_course("CS 150");
+//    Course* cs105 = _controller->add_course("CS 105", "Fall 2017");
+//    _controller->add_course("CS 150", "Fall 2017");
 //    Course* cs150 = _controller->get_courses()->at(1);
 //    cs150->add_section("01");
 //    cs105->add_section("01");

@@ -24,9 +24,9 @@ public:
 
 
     // Adds a row to the table
-    int add(const QString name);
+    int add(const QString name, const QString semester);
     // Gets row id matching name
-    int select(const QString name);
+    int select(const QString name, const QString semester);
     // Load to controller
     void load_all();
 

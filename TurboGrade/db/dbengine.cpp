@@ -27,7 +27,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     // Course Table
 
     sql_query("CREATE TABLE IF NOT EXISTS course (id INTEGER PRIMARY KEY, \
-              name VARCHAR(50) UNIQUE)");
+              name VARCHAR(50),\
+              semester VARCHAR(50))");
 
     // Section Table
 

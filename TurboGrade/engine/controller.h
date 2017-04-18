@@ -57,9 +57,9 @@ public:
      **********************************/
 
     // Add a course to the software
-    Course* add_course(const QString name, int id = -1);
+    Course* add_course(const QString name, const QString semester, int id = -1);
     // Searches for a course by name and returns it
-    Course* get_course(const QString name);
+    Course* get_course(const QString name, const QString semester);
     // Retuns vector of all courses in the system
     std::vector<Course*>* get_courses();
     // Prints all courses and sections
@@ -108,6 +108,8 @@ public:
     GradeDB *_gradeDB;
     // Auto-complete list
     QStringList _all_comments;
+    // All semesters used
+    QStringList _all_semesters;
 
     /*
      * UI variables

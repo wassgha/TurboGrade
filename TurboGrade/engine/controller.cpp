@@ -31,6 +31,14 @@ Controller::Controller(bool drop_tables, QString dbname)
     _commentDB          = new CommentDB(this, dbname);
     _gradeDB            = new GradeDB(this, dbname);
 
+    // Initialize semesters (should at least have semesters from current, previous and next years)
+    _all_semesters<<"Spring " + QString::number(QDate::currentDate().year() + 1);
+    _all_semesters<<"Fall " + QString::number(QDate::currentDate().year() + 1);
+    _all_semesters<<"Spring " + QString::number(QDate::currentDate().year());
+    _all_semesters<<"Fall " + QString::number(QDate::currentDate().year());
+    _all_semesters<<"Spring " + QString::number(QDate::currentDate().year() - 1);
+    _all_semesters<<"Fall " + QString::number(QDate::currentDate().year() - 1);
+
     // Initialize containers
     _courses = new std::vector<Course*>();
     _assignments = new std::vector<Assignment*>();
@@ -38,6 +46,7 @@ Controller::Controller(bool drop_tables, QString dbname)
     // Load from database
     _assignmentDB->load_all();
     _courseDB->load_all();
+
 
 }
 
@@ -70,10 +79,11 @@ Controller::~Controller()
  * @brief Controller::add_course adds a course to the engine
  * @param id table id of the course
  * @param name name of the course
+ * @param semester the semester the course was taught in
  */
-Course* Controller::add_course(const QString name, int id) {
+Course* Controller::add_course(const QString name, const QString semester, int id) {
 
-    Course *new_course = new Course(name, this, id);
+    Course *new_course = new Course(name, semester, this, id);
 
     _courses->push_back(new_course);
 
@@ -84,11 +94,12 @@ Course* Controller::add_course(const QString name, int id) {
 /**
  * @brief Controller::get_course finds a course by its name
  * @param name the name of the course to search for
+ * @param semester the semester the course was taught in
  * @return the course found
  */
-Course* Controller::get_course(const QString name) {
+Course* Controller::get_course(const QString name, const QString semester) {
     for(Course* course:*_courses)
-        if (course->_name == name)
+        if (course->_name == name && course->_semester == semester)
             return course;
     return nullptr;
 }
