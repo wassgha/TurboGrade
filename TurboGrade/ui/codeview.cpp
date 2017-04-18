@@ -117,15 +117,29 @@ void CodeView::add_comment() {
             if(adjusted_grade > criterion->_out_of || adjusted_grade < 0) {
                 QMessageBox errorBox(QMessageBox::Critical,
                                      "The point adjustment is out of grading range.",
-                                     "The point adjustment made by this comment is either higher than the maximum score"
-                                     " for this criterion or lower than 0, please change it.", QMessageBox::Close, this, Qt::Sheet);
+                                     "The point adjustment made by this comment is either higher than the"
+                                     " maximum score for this criterion or lower than 0, please change it.",
+                                     QMessageBox::Close, this, Qt::Sheet);
                 errorBox.exec();
                 return;
             }
         } else {
             QMessageBox errorBox(QMessageBox::Critical,
                                  "No criterion selected.",
-                                 "Please select a category for this comment.", QMessageBox::Close, this, Qt::Sheet);
+                                 "Please select a category for this comment.",
+                                 QMessageBox::Close, this, Qt::Sheet);
+            errorBox.exec();
+            return;
+        }
+
+        // Get comment text
+        QString comment_text = _popup->val("comment");
+
+        if(comment_text == "") {
+            QMessageBox errorBox(QMessageBox::Critical,
+                                 "No text entered.",
+                                 "A comment can not be empty, please enter text in the box.",
+                                 QMessageBox::Close, this, Qt::Sheet);
             errorBox.exec();
             return;
         }
@@ -136,7 +150,7 @@ void CodeView::add_comment() {
         // Add the comment
         _parent->_submission->add_comment(file_name,
                                           criterion,
-                                          _popup->val("comment"),
+                                          comment_text,
                                           grade_adjustment,
                                           ui->editor->textCursor().selectionStart(),
                                           ui->editor->textCursor().selectionEnd());
