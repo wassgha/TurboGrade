@@ -1,10 +1,5 @@
 #include "gradedb.h"
 
-GradeDB::GradeDB()
-{
-
-}
-
 /**
  * @brief GradeDB::add Adds a mapping from rubric_id, submission_id to a grade
  * value

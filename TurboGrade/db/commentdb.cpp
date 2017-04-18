@@ -1,22 +1,6 @@
 #include "commentdb.h"
 
 /**
- * @brief Default constructor
- */
-CommentDB::CommentDB()
-{
-
-}
-
-/**
- * @brief Destructor
- */
-
-CommentDB::~CommentDB() {
-
-}
-
-/**
  * @brief CommentDB::add Insert a row to the database
  * @param student_id the student's unique identifier
  * @param assignment_id the assignment this submission belongs to
@@ -103,4 +87,13 @@ void CommentDB::load_all(Submission *submission) {
     }
     query.finish();
     db.commit();
+}
+
+
+/**
+ * @brief Destructor
+ */
+
+CommentDB::~CommentDB() {
+
 }

@@ -15,8 +15,6 @@ class Controller;
 class SubmissionDB : public DBEngine
 {
 public:
-    // Constructor
-    SubmissionDB();
     // Parametrized constructor
     SubmissionDB(Controller *controller, QString dbname):
         DBEngine("SubmissionDB", dbname),

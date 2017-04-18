@@ -1,5 +1,10 @@
 #include "rubric.h"
 
+/**
+ * @brief Rubric::Rubric Constructor
+ * @param assignment    pointer to the constructor
+ * @param controller    current controller object
+ */
 Rubric::Rubric(Assignment* assignment, Controller * controller)
 {
     SHOW_WHERE;
@@ -10,9 +15,13 @@ Rubric::Rubric(Assignment* assignment, Controller * controller)
 
     _criteria = new std::vector<Criterion*>();
 
+    // load the criteria locally
     _controller->_rubricDB->load_parent_criteria(this);
 }
 
+/**
+ * @brief Rubric::~Rubric Destructor
+ */
 Rubric::~Rubric()
 {
     for(Criterion* criterion:*_criteria)

@@ -18,6 +18,7 @@ Submission::Submission(Assignment *assignment,
 
     _controller = controller;
 
+    // If id is -1 then we're creating locally and we should add to the database
     if (id == -1)
         _id = _controller->_submissionDB->add(student->_id, assignment->_id, status);
     else
@@ -133,6 +134,12 @@ void Submission::attribute_full_grade() {
     }
 }
 
+/**
+ * @brief Submission::update_status updates the grading status
+ * of the submission
+ * @param status either of 0 ("grading not started"), 1 ("grading
+ * in progress") or 2 ("grade finalized")
+ */
 void Submission::update_status(int status) {
     _status = status;
     _controller->_submissionDB->update_status(_id, _status);
@@ -171,6 +178,11 @@ int Submission::get_grade(Criterion *criterion){
     }
 }
 
+/**
+ * @brief Submission::get_out_of gives the total number of points a student
+ * can get in the assignment
+ * @return  total maximum points
+ */
 int Submission::get_out_of(){
     int sum = 0;
     for(Criterion *criterion: *_assignment->_rubric->_criteria){
@@ -230,6 +242,9 @@ std::vector<Comment *> Submission::get_comments(Criterion *criterion){
     return comment_vec;
 }
 
+/**
+ * @brief Submission::~Submission Destructor
+ */
 Submission::~Submission()
 {
     for (Comment* comment : *_comments)
@@ -238,7 +253,11 @@ Submission::~Submission()
     delete _grades;
 }
 
-
+/**
+ * @brief Submission::grade_percent gives the percentage of grades
+ * obtained on the submission (total grade in percentage)
+ * @return total grade in percentage
+ */
 float Submission::grade_percent() {
     return (_assignment->_rubric->total_grade() == 0
          ?

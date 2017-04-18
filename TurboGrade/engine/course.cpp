@@ -1,11 +1,19 @@
 #include "course.h"
 
+/**
+ * @brief Course::Course Constructor, creates a course
+ * @param name          name of the course
+ * @param semester      semester the course was taught in
+ * @param controller    current controller object
+ * @param id            -1 if new, table id if it exists
+ */
 Course::Course(QString name, QString semester, Controller* controller, int id)
 {
     SHOW_WHERE;
 
     _controller = controller;
 
+    // If id is -1 then we're creating locally and we should add to the database
     if (id == -1)
         _id = _controller->_courseDB->add(name, semester);
     else
@@ -16,9 +24,11 @@ Course::Course(QString name, QString semester, Controller* controller, int id)
     _sections = new std::vector<Section*>();
     _color = _controller->rand_color();
 
+    // Add semester to the semester model if it doesn't exist
     if (!_controller->_all_semesters.contains(_semester))
         _controller->_all_semesters<<_semester;
 
+    // Load all sections for this course
     _controller->_sectionDB->load_all(this);
 }
 

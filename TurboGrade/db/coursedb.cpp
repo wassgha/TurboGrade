@@ -1,14 +1,6 @@
 #include "coursedb.h"
 
 /**
- * @brief Destructor
- */
-
-CourseDB::~CourseDB() {
-
-}
-
-/**
  * @brief CourseDB::add Insert a row to the database
  * @param name the name of the course (ex. CS150)
  * @param semester the semester the course is taught in
@@ -105,3 +97,11 @@ void CourseDB::load_all() {
     db.commit();
 }
 
+
+/**
+ * @brief Destructor
+ */
+
+CourseDB::~CourseDB() {
+
+}

@@ -1,5 +1,12 @@
 #include "student.h"
 
+/**
+ * @brief Student::Student Constructor, creates a new student locally
+ * @param name          name of the student
+ * @param section       pointer to the section the student belongs to
+ * @param controller    current controller object
+ * @param id            -1 if this is to be added to the database or its id if it exists
+ */
 Student::Student(QString name, Section* section, Controller * controller, int id)
 {
 
@@ -7,6 +14,7 @@ Student::Student(QString name, Section* section, Controller * controller, int id
 
     _controller = controller;
 
+    // If id is -1 then we're creating locally and we should add to the database
     if (id == -1)
         _id = _controller->_studentDB->add(section->_id, name);
     else
@@ -23,6 +31,9 @@ Student::Student(QString name, Section* section, Controller * controller, int id
     _controller->_submissionDB->load_all(this);
 }
 
+/**
+ * @brief Student::~Student Destructor
+ */
 Student::~Student()
 {
     for(Submission* submission:*_submissions)

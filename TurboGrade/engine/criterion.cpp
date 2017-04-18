@@ -1,11 +1,21 @@
 #include "criterion.h"
 
+/**
+ * @brief Criterion::Criterion Constructor creates a rubric item
+ * @param name          description of the rubric item (ex. "Design")
+ * @param parent        pointer to the parent (if sub-criterion), else nullptr
+ * @param out_of        maximum grade attributed to the criterion
+ * @param rubric        pointer to the rubric this criterion belongs to
+ * @param controller    current controller
+ * @param id            -1 if new, id if it exists in the database
+ */
 Criterion::Criterion(const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller, int id)
 {
     SHOW_WHERE;
 
     _controller = controller;
 
+    // If id is -1 then we're creating locally and we should add to the database
     if (id == -1)
         _id = _controller->_rubricDB->add_criterion(name,
                                                     rubric->_assignment->_id,
@@ -24,6 +34,9 @@ Criterion::Criterion(const QString name, Criterion* parent, int out_of, Rubric* 
     _controller->_rubricDB->load_sub_criteria(this);
 }
 
+/**
+ * @brief Criterion::~Criterion Destructor
+ */
 
 Criterion::~Criterion()
 {

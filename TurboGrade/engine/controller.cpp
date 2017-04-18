@@ -52,6 +52,9 @@ Controller::Controller(bool drop_tables, QString dbname)
 }
 
 
+/**
+ * @brief Controller::~Controller Destructor
+ */
 Controller::~Controller()
 {
     delete _commentDB;

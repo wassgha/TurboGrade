@@ -1,22 +1,6 @@
 #include "rubricdb.h"
 
 /**
- * @brief Default constructor
- */
-RubricDB::RubricDB()
-{
-
-}
-
-/**
- * @brief Destructor
- */
-
-RubricDB::~RubricDB() {
-
-}
-
-/**
  * @brief RubricDB::add Insert a row to the database
  * @param name description of the criterion
  * @param assignment_id the assignment this rubric belongs to
@@ -167,4 +151,14 @@ void RubricDB::load_sub_criteria(Criterion *criterion) {
 
     query.finish();
     db.commit();
+}
+
+
+
+/**
+ * @brief Destructor
+ */
+
+RubricDB::~RubricDB() {
+
 }

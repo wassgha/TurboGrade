@@ -15,8 +15,6 @@ class Controller;
 class CommentDB : public DBEngine
 {
 public:
-    // Constructor
-    CommentDB();
     // Parametrized constructor
     CommentDB(Controller *controller, QString dbname):
         DBEngine("CommentDB", dbname),

@@ -1,22 +1,6 @@
 #include "submissiondb.h"
 
 /**
- * @brief Default constructor
- */
-SubmissionDB::SubmissionDB()
-{
-
-}
-
-/**
- * @brief Destructor
- */
-
-SubmissionDB::~SubmissionDB() {
-
-}
-
-/**
  * @brief SubmissionDB::add Insert a row to the database
  * @param student_id the student's unique identifier
  * @param assignment_id the assignment this submission belongs to
@@ -157,4 +141,13 @@ void SubmissionDB::update_status(int submission_id, int status){
 
     query.finish();
     db.commit();
+}
+
+
+/**
+ * @brief Destructor
+ */
+
+SubmissionDB::~SubmissionDB() {
+
 }

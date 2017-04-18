@@ -17,8 +17,6 @@ class Section;
 class StudentDB : public DBEngine
 {
 public:
-    // Constructor
-    StudentDB();
     // Parametrized constructor
     StudentDB(Controller *controller, QString dbname):
         DBEngine("StudentDB", dbname),
