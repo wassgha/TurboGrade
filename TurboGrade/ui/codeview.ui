@@ -50,7 +50,6 @@ QScrollArea#comments {
 	background: url(:/misc/res/comment.png);
 	background-repeat: none;
 	background-position: center center;
-	background-size: 20px;
 }
 
 #comments_title {

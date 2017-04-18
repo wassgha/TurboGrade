@@ -3,8 +3,8 @@
 
 CriterionDialog::CriterionDialog(QWidget *parent, Criterion* parent_criterion) :
     QDialog(parent, Qt::Sheet),
-    _parent_criterion(parent_criterion),
-    ui(new Ui::CriterionDialog)
+    ui(new Ui::CriterionDialog),
+  _parent_criterion(parent_criterion)
 {
     ui->setupUi(this);
     setWindowTitle("Add Criterion");

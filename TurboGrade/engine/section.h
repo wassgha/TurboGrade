@@ -42,7 +42,12 @@ public:
     Student* get_student(const QString name);
     // Find an assignment in the section
     Assignment* get_assignment(const QString name);
+    // Returns all assignments
     std::vector<Assignment*>* get_assignments();
+    // Returns number of submissions for an assignment
+    int num_submissions_total(Assignment* assignment);
+    // Returns number of finalized (graded) submissions for an assignment
+    int num_submissions_graded(Assignment* assignment);
 
     // Section id
     int _id;

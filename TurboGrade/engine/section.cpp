@@ -97,3 +97,35 @@ std::vector<Assignment*>* Section::get_assignments() {
     return _assignments;
 
 }
+
+/**
+ * @brief Section::num_submissions_total returns the number
+ * of submissions for a specified assignment
+ * @param assignment the assignment
+ * @return total number of submissions
+ */
+int Section::num_submissions_total(Assignment* assignment) {
+    int i = 0;
+    for (Student* student : *_students) {
+        if (student->get_submission(assignment) != nullptr) {
+            i++;
+        }
+    }
+    return i;
+}
+
+/**
+ * @brief Section::num_submissions_graded returns the number
+ * of finalized (graded) submissions for a specified assignment
+ * @param assignment the assignment
+ * @return total number of graded submissions
+ */
+int Section::num_submissions_graded(Assignment* assignment) {
+    int i = 0;
+    for (Student* student : *_students) {
+        if (student->get_submission(assignment) != nullptr && student->get_submission(assignment)->_status == 2) {
+            i++;
+        }
+    }
+    return i;
+}

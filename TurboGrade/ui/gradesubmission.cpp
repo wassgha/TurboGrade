@@ -27,6 +27,10 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->mainWidget->addWidget(grade_view);
     ui->mainWidget->setCurrentWidget(code_view);
 
+    // Show grading progress (graded/total submissions)
+    ui->progressBar->setMaximum(_submission->_student->_section->num_submissions_total(_submission->_assignment));
+    ui->progressBar->setValue(_submission->_student->_section->num_submissions_graded(_submission->_assignment));
+
     refresh_students();
 
     ui->hideName->setChecked(true);
