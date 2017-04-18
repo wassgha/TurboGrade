@@ -118,7 +118,7 @@ void CodeView::add_comment() {
                 QMessageBox errorBox(QMessageBox::Critical,
                                      "The point adjustment is out of grading range.",
                                      "The point adjustment made by this comment is either higher than the maximum score"
-                                     "for this criterion or lower than 0, please change it.", QMessageBox::Close, this, Qt::Sheet);
+                                     " for this criterion or lower than 0, please change it.", QMessageBox::Close, this, Qt::Sheet);
                 errorBox.exec();
                 return;
             }
@@ -142,6 +142,7 @@ void CodeView::add_comment() {
                                           ui->editor->textCursor().selectionEnd());
         _popup->val("criterion");
     }
+    _popup->hide();
     refresh_comments();
 }
 

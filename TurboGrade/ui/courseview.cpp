@@ -17,6 +17,7 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
     add_dialog->add_field("QLineEdit", "name", "Course Name :", "CS 150");
     _semester_select = dynamic_cast<QComboBox*>(add_dialog->add_field("QComboBox", "semester", "Semester :"));
     _semester_select->setModel(_semesters_model);
+    _semester_select->setCurrentText(_controller->_current_semester);
     connect(add_dialog, SIGNAL(submit()), this, SLOT(save_new()));
 
 

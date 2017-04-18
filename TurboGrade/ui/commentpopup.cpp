@@ -24,7 +24,6 @@ void CommentPopup::on_add_btn_clicked()
 {
     qDebug()<<"emitted signal submit";
     emit submit();
-    hide();
 }
 
 QString CommentPopup::val(QString name) {
