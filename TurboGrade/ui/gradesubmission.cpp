@@ -2,19 +2,17 @@
 #include "ui_gradesubmission.h"
 
 GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Controller *controller) :
-    QWidget(parent),
+    QWidget(parent, Qt::Window),
     ui(new Ui::GradeSubmission)
 {
-    ui->setupUi(this);
 
-    installEventFilter(this);
+    ui->setupUi(this);
 
     _controller = controller;
     _submission = submission;
 
     setWindowTitle("TurboGrade - Grading submission");
     setAttribute(Qt::WA_StyledBackground, true);
-    setWindowFlags(Qt::Window);
     setWindowState(Qt::WindowFullScreen);
 
     ui->run->setCursor(Qt::PointingHandCursor);
@@ -34,6 +32,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     refresh_students();
 
     ui->hideName->setChecked(true);
+
+    installEventFilter(this);
 }
 
 

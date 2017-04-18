@@ -109,6 +109,27 @@ void CodeView::add_comment() {
         else
             criterion = _parent->_submission->_assignment->_rubric->get_criterion(criterion_id);
 
+        // Get grade adjustment
+        int grade_adjustment = _popup->val("adjust_grade").toInt();
+
+        if (criterion != nullptr) {
+            int adjusted_grade = _parent->_submission->get_grade(criterion) + grade_adjustment;
+            if(adjusted_grade > criterion->_out_of || adjusted_grade < 0) {
+                QMessageBox errorBox(QMessageBox::Critical,
+                                     "The point adjustment is out of grading range.",
+                                     "The point adjustment made by this comment is either higher than the maximum score"
+                                     "for this criterion or lower than 0, please change it.", QMessageBox::Close, this, Qt::Sheet);
+                errorBox.exec();
+                return;
+            }
+        } else {
+            QMessageBox errorBox(QMessageBox::Critical,
+                                 "No criterion selected.",
+                                 "Please select a category for this comment.", QMessageBox::Close, this, Qt::Sheet);
+            errorBox.exec();
+            return;
+        }
+
         // Get the file name from the tree view
         QString file_name = QDir(_model->rootPath()).relativeFilePath(_model->filePath(ui->treeView->currentIndex()));
 
@@ -116,7 +137,7 @@ void CodeView::add_comment() {
         _parent->_submission->add_comment(file_name,
                                           criterion,
                                           _popup->val("comment"),
-                                          _popup->val("adjust_grade").toInt(),
+                                          grade_adjustment,
                                           ui->editor->textCursor().selectionStart(),
                                           ui->editor->textCursor().selectionEnd());
         _popup->val("criterion");

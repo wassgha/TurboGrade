@@ -123,6 +123,7 @@ void Submission::update_grade(Criterion *criterion, int grade, bool load){
  * grade available
  */
 void Submission::attribute_full_grade() {
+    int old_status = _status;
     for (Criterion* criterion : *_assignment->_rubric->_criteria) {
         if (criterion->has_children()) {
             for (Criterion* child : criterion->children()) {
@@ -132,6 +133,7 @@ void Submission::attribute_full_grade() {
             update_grade(criterion, criterion->_out_of);
         }
     }
+    update_status(old_status);
 }
 
 /**
