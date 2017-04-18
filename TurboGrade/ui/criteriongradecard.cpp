@@ -33,6 +33,14 @@ CriterionGradeCard::~CriterionGradeCard()
 
 void CriterionGradeCard::update_grade() {
     ui->grade->setValue(_submission->get_grade(_criterion));
+    for (int i = 0; i < ui->children->count(); ++i)
+    {
+        CriterionGradeCard *card = dynamic_cast<CriterionGradeCard*>(ui->children->itemAt(i)->widget());
+        if (card != NULL)
+        {
+            card->update_grade();
+        }
+    }
 }
 
 void CriterionGradeCard::on_grade_valueChanged(int grade)
