@@ -23,6 +23,7 @@ public:
     void add_comments(Submission *submission, QString& htmlString);
     void add_grades(Submission *submission, QString& htmlString);
     void add_grade_two(Submission *submission, QString& htmlString);
+    void add_image(Submission *submission, QString& htmlString);
 };
 
 #endif // STUDENTDELIVERABLE_H

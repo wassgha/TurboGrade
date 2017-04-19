@@ -25,58 +25,20 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_assignment_obj(submission, htmlString);
     add_grade_summary(submission, htmlString);
     add_detailed_remarks(submission, htmlString);
-
-    /*htmlString.append(
-      "        <div class = \"criterion\">"
-      "            <div class = \"name\">"
-      "              Documentation <span class = \"grade\">4</span><span class = \"out-of\">/5</span>"
-      "            </div>"
-      "            <table class = \"rubric\">"
-      "                <tr>"
-      "                  <td>No comments<br> No Javadoc</td>"
-      "                  <td class = \"selected\">Few comments<br> Not Javadoc Compliant</td>"
-      "                  <td>Mostly commented</td>"
-      "                  <td>Clearly documented<br> Javadoc compliant</td>"
-      "                </tr>"
-      "            </table>"
-      "        </div>"*/
-    /*htmlString.append(
-
-      "            <div class = \"code-container\">"
-      "                <div class = \"lines\">"
-      "                  1<br>"
-      "                  2<br>"
-      "                  3<br>"
-      "                  4<br>"
-      "                  5<br>"
-      "                </div>"
-      "                <div class = \"code\">"
-      "                  setNumOfCommentsPerHour();<br>"
-      "                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
-      "                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
-      "                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
-      "                  randomSeed=(long)p.random(1000);<br>"
-      "                </div>"
-      "                <div class = \"comment\">"
-      "                  <p><span class=\"grade bad\">-1</span>Please only use allowed libraries</p>"
-      "                </div>"
-      "            </div>"
-      "        </div>"
-
-      "        <h2>Standing stastics</h2>"
-      "        <img class = \"chart\" src=\"https://www.smashingmagazine.com/wp-content/uploads/2014/12/css-animation-craziness.gif\" />"
-*/
-    htmlString.append(
-                "\n    </div>"
-                "\n    <div id = \"logo\" >"
-                "\n      Powered by <img src = \"qrc:///css/report/logo.png\" />"
-                "\n    </div>"
-                "\n    <div class=\"clear\"></div>"
-                "\n  </div>");
+    add_image(submission, htmlString);
+    htmlString.append(                "\n  </div>");
     htmlString.append("\n</body>");
     htmlString.append("\n</html>");
     std::cout << htmlString.toStdString() << "\n";
     return htmlString;
+}
+
+void StudentDeliverable::add_image(Submission *submission, QString &htmlString){
+    htmlString.append(
+                "\n    <div id = \"logo\" >"
+                "\n      Powered by <img src = \"qrc:///css/report/logo.png\" />"
+                "\n    </div>"
+                "\n    <div class=\"clear\"></div>");
 }
 
 void StudentDeliverable::add_header(Submission *submission, QString &htmlString){
@@ -233,6 +195,7 @@ void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &h
         }
     }
     htmlString.append("\n      </div>");
+    htmlString.append("\n  </div>");
 }
 
 void StudentDeliverable::add_grade_summary(Submission *submission, QString &htmlString){
