@@ -46,6 +46,11 @@ private slots:
     void add_guide(Criterion* parent);
     void remove_criterion(Criterion* criterion);
     void on_done_btn_clicked();
+    void on_suggestion_design_clicked();
+    void on_suggestion_compiles_clicked();
+    void on_suggestion_extracredit_clicked();
+    void on_suggestion_documentation_clicked();
+    void on_suggestion_completeness_clicked();
 };
 
 #endif // RUBRICVIEW_H

@@ -19,9 +19,11 @@ RubricView::RubricView(QWidget *parent, Assignment *assignment) :
     ui->criterion_grade->setAttribute(Qt::WA_MacShowFocusRect, false);
     ui->criterion_name->setAttribute(Qt::WA_MacShowFocusRect, false);
 
+
     layout()->setAlignment(Qt::AlignTop);
 
     connect(ui->add_criterion_btn, SIGNAL(clicked()), this, SLOT(add_criterion()));
+
 }
 
 RubricView::~RubricView()
@@ -138,4 +140,34 @@ void RubricView::on_done_btn_clicked()
         QMessageBox errorBox(QMessageBox::Critical, "No criteria detected", "Please add at least one criterion to the rubric of this assignment.", QMessageBox::Cancel);
         errorBox.exec();
     }
+}
+
+void RubricView::on_suggestion_design_clicked()
+{
+    ui->criterion_grade->setValue(10);
+    ui->criterion_name->setText("Design");
+}
+
+void RubricView::on_suggestion_compiles_clicked()
+{
+    ui->criterion_grade->setValue(10);
+    ui->criterion_name->setText("Design");
+}
+
+void RubricView::on_suggestion_extracredit_clicked()
+{
+    ui->criterion_grade->setValue(4);
+    ui->criterion_name->setText("Design");
+}
+
+void RubricView::on_suggestion_documentation_clicked()
+{
+    ui->criterion_grade->setValue(2);
+    ui->criterion_name->setText("Documentation");
+}
+
+void RubricView::on_suggestion_completeness_clicked()
+{
+    ui->criterion_grade->setValue(20);
+    ui->criterion_name->setText("Correctness");
 }
