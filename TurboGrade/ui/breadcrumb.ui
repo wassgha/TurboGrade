@@ -96,7 +96,11 @@ QLabel {
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="switcher_group"/>
+    <layout class="QHBoxLayout" name="switcher_group">
+     <property name="rightMargin">
+      <number>12</number>
+     </property>
+    </layout>
    </item>
   </layout>
  </widget>

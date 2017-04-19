@@ -29,15 +29,15 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
     add_btn->setObjectName("add_btn");
     connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
-    _semester_switch = new QComboBox();
-    _semester_switch->setModel(_semesters_model);
-    _semester_switch->setCurrentText(_controller->_current_semester);
-    connect(_semester_switch, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_cards()));
-
 
     /**************************************************
      *          Create the Breadcrumb Trail           *
      **************************************************/
+
+    _semester_switch = new QComboBox();
+    _semester_switch->setModel(_semesters_model);
+    _semester_switch->setCurrentText(_controller->_current_semester);
+    connect(_semester_switch, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_cards()));
 
     _breadcrumb->add_to_switch(_semester_switch);
     ui->verticalLayout->insertWidget(0, _breadcrumb);
