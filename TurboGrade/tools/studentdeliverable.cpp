@@ -300,9 +300,9 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
     } else {
         htmlString.append("\n                  <p><span class=\"grade good\">");
     }
-        htmlString.append(QString::number(comment->_grade));
-                htmlString.append("\n                  </span>");
-                htmlString.append("\n                  " + comment->_text + "</p>"
-                                  "\n                </div>");
-                htmlString.append("\n            </div>");
+    htmlString.append(QString::number(comment->_grade));
+    htmlString.append("\n                  </span>");
+    htmlString.append("\n                  " + comment->_text + "</p>"
+                      "\n                </div>");
+    htmlString.append("\n            </div>");
 }
