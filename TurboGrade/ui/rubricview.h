@@ -50,7 +50,6 @@ private slots:
     void on_suggestion_compiles_clicked();
     void on_suggestion_extracredit_clicked();
     void on_suggestion_documentation_clicked();
-    void on_suggestion_completeness_clicked();
     void on_suggestion_correctness_clicked();
 };
 
