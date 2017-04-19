@@ -79,18 +79,6 @@ void StudentDeliverable::add_total_grade_sticker(Submission *submission, QString
                 );
 }
 
-void StudentDeliverable::add_grade_two(Submission *submission, QString &htmlString){
-    htmlString.append(
-                "\n        <div id = \"total\">"
-                "\n          Total grade : <span class = \"grade\">");
-    htmlString.append(submission->get_grade());
-    htmlString.append("\n</span><span class = \"out-of\">/");
-    htmlString.append(submission->get_out_of());
-    htmlString.append("\n</span>"
-                      "\n        </div>");
-
-}
-
 void StudentDeliverable::add_comments(Submission* submission, QString &htmlString){
     htmlString.append(  "\n    <div class=\"clear\"></div>");
     for(Comment *comment:*submission->_comments){
