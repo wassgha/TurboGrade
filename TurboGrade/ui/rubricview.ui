@@ -264,9 +264,9 @@ QGroupBox QGroupBox {
        </widget>
       </item>
       <item row="0" column="2">
-       <widget class="ClickableLabel" name="suggestion_completeness">
+       <widget class="ClickableLabel" name="suggestion_correctness">
         <property name="text">
-         <string>Completeness</string>
+         <string>Correctness</string>
         </property>
        </widget>
       </item>
