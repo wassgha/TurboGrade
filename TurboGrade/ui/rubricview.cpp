@@ -150,8 +150,8 @@ void RubricView::on_suggestion_design_clicked()
 
 void RubricView::on_suggestion_compiles_clicked()
 {
-    ui->criterion_grade->setValue(10);
-    ui->criterion_name->setText("Design");
+    ui->criterion_grade->setValue(2);
+    ui->criterion_name->setText("Compiles");
 }
 
 void RubricView::on_suggestion_extracredit_clicked()
@@ -166,7 +166,7 @@ void RubricView::on_suggestion_documentation_clicked()
     ui->criterion_name->setText("Documentation");
 }
 
-void RubricView::on_suggestion_completeness_clicked()
+void RubricView::on_suggestion_correctness_clicked()
 {
     ui->criterion_grade->setValue(20);
     ui->criterion_name->setText("Correctness");
