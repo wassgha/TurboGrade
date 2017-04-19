@@ -251,8 +251,9 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
     //        err = file.error();
     //    }
     qDebug() << errMsg;
+    htmlString += comment->_filename;
     htmlString += "\n            <div class = \"code-container\">";
-    if (file.open(QFile::ReadOnly | QFile::Text)){
+            if (file.open(QFile::ReadOnly | QFile::Text)){
         QTextStream in(&file);
         int start = comment->_start_pos;
         int end = comment->_end_pos;
