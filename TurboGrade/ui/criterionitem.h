@@ -21,9 +21,11 @@ public:
 
 public slots:
     void add_child();
+    void add_guide();
 
 signals:
     void added_child(Criterion* criterion);
+    void added_guide(Criterion* criterion);
 
 };
 

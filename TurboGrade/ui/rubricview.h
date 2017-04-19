@@ -7,6 +7,9 @@
 #include "criteriondialog.h"
 #include "ui_criteriondialog.h"
 
+#include "criterionguidedialog.h"
+#include "ui_criterionguidedialog.h"
+
 #include "criterionitem.h"
 #include "ui_criterionitem.h"
 
@@ -33,12 +36,14 @@ private:
     Ui::RubricView *ui;
     Assignment* _assignment;
     CriterionDialog *_add_dialog = nullptr;
+    CriterionGuideDialog *_add_guide_dialog = nullptr;
     std::vector<CriterionItem*> items;
 
 private slots:
     void add_criterion();
     void add_child();
     void add_criterion(Criterion* parent);
+    void add_guide(Criterion* parent);
     void on_done_btn_clicked();
 };
 

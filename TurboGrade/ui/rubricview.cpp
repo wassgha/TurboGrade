@@ -53,6 +53,19 @@ void RubricView::add_criterion(Criterion* parent) {
     connect(_add_dialog, SIGNAL(submit()), SLOT(add_child()));
 }
 
+void RubricView::add_guide(Criterion* parent) {
+    qDebug()<<"Adding guide to criterion";
+
+    if (_add_guide_dialog != nullptr)
+        delete _add_guide_dialog;
+
+    _add_guide_dialog = new CriterionGuideDialog(this, parent);
+    _add_guide_dialog->show();
+
+    connect(_add_guide_dialog, SIGNAL(submit()), SLOT(add_guide()));
+}
+
+
 CriterionItem* RubricView::add_item(Criterion * criterion, CriterionItem* parent) {
     if (criterion != nullptr)
     {
@@ -65,6 +78,7 @@ CriterionItem* RubricView::add_item(Criterion * criterion, CriterionItem* parent
         ui->criterion_grade->setValue(0);
         items.push_back(item);
         connect(item, SIGNAL(added_child(Criterion*)), this, SLOT(add_criterion(Criterion*)));
+        connect(item, SIGNAL(added_guide(Criterion*)), this, SLOT(add_guide(Criterion*)));
         return item;
     }
     return nullptr;
