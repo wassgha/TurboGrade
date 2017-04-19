@@ -22,7 +22,6 @@ public:
 
     void add_comments(Submission *submission, QString& htmlString);
     void add_grades(Submission *submission, QString& htmlString);
-    void add_code_comment(Submission *submission, QString& htmlString, Comment *comment);
     void add_grade_two(Submission *submission, QString& htmlString);
 };
 

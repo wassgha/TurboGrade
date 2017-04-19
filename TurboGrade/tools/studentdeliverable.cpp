@@ -180,6 +180,8 @@ void StudentDeliverable::add_grades(Submission *submission, QString &htmlString)
                 htmlString.append(std::to_string(subcriterion->_out_of).c_str());
                 htmlString.append("</span>"
                                   "\n                </li>");
+                htmlString.append(
+                            "\n        </div>");
             }
             htmlString.append(
                         "\n            </ul>");
@@ -229,8 +231,8 @@ void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &h
                 }
             }
         }
-        htmlString.append("\n      </div>");
     }
+    htmlString.append("\n      </div>");
 }
 
 void StudentDeliverable::add_grade_summary(Submission *submission, QString &htmlString){
@@ -238,86 +240,69 @@ void StudentDeliverable::add_grade_summary(Submission *submission, QString &html
     add_grades(submission, htmlString);
 }
 
-void StudentDeliverable::add_code_comment(Submission *submission, QString &htmlString, Comment *comment){
-    htmlString.append(
-                "\n            <div class = \"code-container\">"
-                "\n                <div class = \"lines\">"
-                "\n                  1<br>"
-                "\n                  2<br>"
-                "\n                  3<br>"
-                "\n                  4<br>"
-                "\n                  5<br>"
-                "\n                </div>"
-                "\n                <div class = \"code\">"
-                "\n                  setNumOfCommentsPerHour();<br>"
-                "\n                  maxYaksPerHr=maxOfArray(numOfYaksPerHr);<br>"
-                "\n                  maxCommentsPerHr=maxOfArray(numOfCommentsPerHr);<br>"
-                "\n                  maxLikesPerHr=maxOfArray(numOfLikesPerHr);<br>"
-                "\n                  randomSeed=(long)p.random(1000);<br>"
-                "\n                </div>"
-                "\n                <div class = \"comment\">"
-                "\n                  <p><span class=\"grade bad\">");
-    htmlString.append(std::to_string(comment->_grade).c_str());
-    htmlString.append("\n</span>");
-    htmlString.append(comment->_text);
-    htmlString.append("\n</p>"
-                      "\n                </div>");
-}
 
 void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment, QString &htmlString, int linesBefore, int linesAfter){
     QString fullPath = submission->getPath() + comment->_filename;
     QFile file(fullPath);
     QString errMsg;
     QFileDevice::FileError err = QFileDevice::NoError;
-//    if (!file.open(QIODevice::ReadOnly)) {
-//        errMsg = file.errorString();
-//        err = file.error();
-//    }
+    //    if (!file.open(QIODevice::ReadOnly)) {
+    //        errMsg = file.errorString();
+    //        err = file.error();
+    //    }
     qDebug() << errMsg;
     htmlString += "\n            <div class = \"code-container\">";
     if (file.open(QFile::ReadOnly | QFile::Text)){
-    QTextStream in(&file);
-    int start = comment->_start_pos;
-    int end = comment->_end_pos;
-    int current = 0;
-    int lineCount = 1;
-    int lineIndexStart = -1;
-    int lineIndexEnd = -1;
-    std::vector<QString> allLines;
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-        allLines.push_back(line);
-        int size = line.size();
-        current += size;
-        if(start < current && lineIndexStart == -1){
-            lineIndexStart = lineCount-1;
+        QTextStream in(&file);
+        int start = comment->_start_pos;
+        int end = comment->_end_pos;
+        int current = 0;
+        int lineCount = 1;
+        int lineIndexStart = -1;
+        int lineIndexEnd = -1;
+        std::vector<QString> allLines;
+        while (!in.atEnd()) {
+            QString line = in.readLine();
+            allLines.push_back(line);
+            int size = line.size();
+            current += size;
+            if(start < current && lineIndexStart == -1){
+                lineIndexStart = lineCount-1;
+            }
+            if (end < current && lineIndexEnd == -1){
+                lineIndexEnd = lineCount-1;
+            }
+            lineCount++;
         }
-        if (end < current && lineIndexEnd == -1){
-            lineIndexEnd = lineCount-1;
-        }
-        lineCount++;
-    }
 
 
-    QString lineNumbers = "\n                <div class = \"lines\">";
-    QString codeLines = "\n                <div class = \"code\">";
-    for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < allLines.size(); i++){
-        if(i >= 0){
-            codeLines.append("\n");
-            lineNumbers.append("\n");
-            lineNumbers.append(std::to_string(i).c_str());
-            lineNumbers.append("<br>");
-            codeLines.append(allLines[i]);
-            codeLines.append("<br>");
-            std::cout << "\n" << codeLines.toStdString();
-            std::cout << "\n" << lineNumbers.toStdString();
+        QString lineNumbers = "\n                <div class = \"lines\">";
+        QString codeLines = "\n                <div class = \"code\">";
+        for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < allLines.size(); i++){
+            if(i >= 0){
+                codeLines.append("\n                   ");
+                lineNumbers.append("\n                   ");
+                lineNumbers.append(std::to_string(i).c_str());
+                lineNumbers.append("<br>");
+                codeLines.append(allLines[i]);
+                codeLines.append("<br>");
+            }
         }
+        lineNumbers.append("\n                </div>");
+        codeLines.append("\n                </div>");
+        htmlString.append(lineNumbers);
+        htmlString.append(codeLines);
+        file.close();
     }
-    lineNumbers.append("\n                </div>");
-    codeLines.append("\n                </div>");
-    htmlString.append(lineNumbers);
-    htmlString.append(codeLines);
-    file.close();
+    htmlString.append("\n                <div class = \"comment\">");
+    if(comment->_grade < 0){
+        htmlString.append("\n                  <p><span class=\"grade bad\">");
+    } else {
+        htmlString.append("\n                  <p><span class=\"grade good\">");
     }
-    htmlString.append("\n            </div>");
+        htmlString.append(QString::number(comment->_grade));
+                htmlString.append("\n                  </span>");
+                htmlString.append("\n                  " + comment->_text + "</p>"
+                                  "\n                </div>");
+                htmlString.append("\n            </div>");
 }
