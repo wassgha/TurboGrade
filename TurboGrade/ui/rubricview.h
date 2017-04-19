@@ -44,6 +44,7 @@ private slots:
     void add_child();
     void add_criterion(Criterion* parent);
     void add_guide(Criterion* parent);
+    void remove_criterion(Criterion* criterion);
     void on_done_btn_clicked();
 };
 

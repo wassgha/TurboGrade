@@ -50,6 +50,31 @@ Criterion* Rubric::add_criterion(const QString name, Criterion* parent, int out_
     return new_criterion;
 }
 
+
+/**
+ * @brief Rubric::remove_criterion deletes a criterion from this rubric
+ * @param criterion pointer to the criterion object to delete
+ */
+void Rubric::remove_criterion(Criterion* criterion) {
+
+    // TO DO : REMOVE EVERYTHING THAT INVOLVES THE CRITERION
+    // LIKE COMMENTS AND GRADES
+    // TO DO : REMOVE CRITERION FROM DATABASE
+    if (criterion != nullptr) {
+        auto it = std::find(_criteria->begin(), _criteria->end(), criterion);
+        if(it != _criteria->end())
+            _criteria->erase(it);
+        for (Criterion* parent : *_criteria) {
+            it = std::find(parent->_sub_criteria->begin(), parent->_sub_criteria->end(), criterion);
+            if(it != parent->_sub_criteria->end())
+                parent->_sub_criteria->erase(it);
+        }
+//        _controller->_rubricDB->remove_criterion(criterion->_id);
+        delete criterion;
+    }
+}
+
+
 /**
  * @brief Rubric::get_criterion finds a criterion by its name
  * @param name the name of the criterion

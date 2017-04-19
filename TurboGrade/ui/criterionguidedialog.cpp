@@ -9,9 +9,8 @@ CriterionGuideDialog::CriterionGuideDialog(QWidget *parent, Criterion* parent_cr
     ui->setupUi(this);
     setWindowTitle("Add Guide");
     setAttribute(Qt::WA_StyledBackground, true);
-    ui->title->setText("Guide for : " + _parent_criterion->_name);
+    ui->title->setText("Grading Guide for : " + _parent_criterion->_name);
     QWidget::setWindowModality(Qt::WindowModal);
-    set_column_width();
 
 }
 
@@ -23,6 +22,7 @@ CriterionGuideDialog::~CriterionGuideDialog()
 
 void CriterionGuideDialog::set_column_width() {
     int column_width = floor(ui->guide->size().width()/ui->guide->columnCount());
+    qDebug()<<"Current column width : " << column_width;
     for (int i = 0; i < ui->guide->columnCount(); i++) {
         ui->guide->setColumnWidth(i, column_width);
     }

@@ -53,6 +53,13 @@ void RubricView::add_criterion(Criterion* parent) {
     connect(_add_dialog, SIGNAL(submit()), SLOT(add_child()));
 }
 
+
+void RubricView::remove_criterion(Criterion* criterion) {
+    qDebug()<<"Removing criterion" + criterion->_name;
+    _assignment->_rubric->remove_criterion(criterion);
+    refresh_criteria();
+}
+
 void RubricView::add_guide(Criterion* parent) {
     qDebug()<<"Adding guide to criterion";
 
@@ -64,7 +71,6 @@ void RubricView::add_guide(Criterion* parent) {
 
     connect(_add_guide_dialog, SIGNAL(submit()), SLOT(add_guide()));
 }
-
 
 CriterionItem* RubricView::add_item(Criterion * criterion, CriterionItem* parent) {
     if (criterion != nullptr)
@@ -79,6 +85,7 @@ CriterionItem* RubricView::add_item(Criterion * criterion, CriterionItem* parent
         items.push_back(item);
         connect(item, SIGNAL(added_child(Criterion*)), this, SLOT(add_criterion(Criterion*)));
         connect(item, SIGNAL(added_guide(Criterion*)), this, SLOT(add_guide(Criterion*)));
+        connect(item, SIGNAL(removed_criterion(Criterion*)), this, SLOT(remove_criterion(Criterion*)));
         return item;
     }
     return nullptr;

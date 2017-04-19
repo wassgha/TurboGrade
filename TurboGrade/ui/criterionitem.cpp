@@ -23,6 +23,7 @@ CriterionItem::CriterionItem(QWidget *parent, Criterion *criterion) :
 
     connect(ui->add_child, SIGNAL(clicked()), this, SLOT(add_child()));
     connect(ui->add_guide, SIGNAL(clicked()), this, SLOT(add_guide()));
+    connect(ui->remove, SIGNAL(clicked()), this, SLOT(remove_criterion()));
 }
 
 CriterionItem::~CriterionItem()
@@ -37,6 +38,11 @@ void CriterionItem::add_child() {
 
 void CriterionItem::add_guide() {
     emit added_guide(_criterion);
+}
+
+
+void CriterionItem::remove_criterion() {
+    emit removed_criterion(_criterion);
 }
 
 bool CriterionItem::isChild() {
