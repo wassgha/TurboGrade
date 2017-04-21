@@ -230,7 +230,7 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
 
         QString lineNumbers = "\n                <div class = \"lines\">";
         QString codeLines = "\n                <div class = \"code\">";
-        for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < allLines.size(); i++){
+        for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < (int)allLines.size(); i++){
             if(i >= 0){
                 codeLines.append("\n                   ");
                 lineNumbers.append("\n                   ");
