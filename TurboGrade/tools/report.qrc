@@ -3,4 +3,7 @@
         <file>report/style.css</file>
         <file>report/logo.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>report-template.html</file>
+    </qresource>
 </RCC>

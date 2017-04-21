@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql printsupport
+QT       += core gui sql printsupport script
 QT          += sql widgets printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
