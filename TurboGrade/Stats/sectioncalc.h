@@ -14,7 +14,9 @@
 class SectionCalc
 {
 public:
-    SectionCalc();
+    SectionCalc(Section a);
+    ~SectionCalc();
+    Section *current;
 };
 
 #endif // SECTIONCALC_H
