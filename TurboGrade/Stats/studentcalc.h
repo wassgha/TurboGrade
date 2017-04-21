@@ -15,7 +15,10 @@
 class StudentCalc
 {
 public:
-    StudentCalc();
+    StudentCalc(Student a);
+    ~StudentCalc();
+    float getMean();
+    Student *current;
 };
 
 #endif // STUDENTCALC_H

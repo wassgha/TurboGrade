@@ -55,3 +55,9 @@ Submission* Student::get_submission(Assignment* assignment) {
             return submission;
     return nullptr;
 }
+
+std::vector<Submission*>* Student::get_submissions() {
+
+    return _submissions;
+
+}

@@ -35,6 +35,7 @@ public:
     Submission* add_submission(Assignment* assignment, int id = -1);
     // Find a submission
     Submission* get_submission(Assignment* assignment);
+    std::vector<Submission*>* get_submissions();
 
     // Student id
     int _id;
