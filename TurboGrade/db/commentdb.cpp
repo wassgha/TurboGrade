@@ -91,6 +91,35 @@ void CommentDB::load_all(Submission *submission) {
 
 
 /**
+ * @brief CommentDB::load_all loads all comments on
+ * a specific submission
+ */
+QSqlTableModel* CommentDB::load_model() {
+
+    SHOW_WHERE;
+
+    db.transaction();
+
+    QSqlTableModel *model = new QSqlTableModel(0, db);
+    model->setTable("comment");
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->select();
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("id"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("submission"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("filename"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("rubric"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("comment_text"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("grade"));
+    model->setHeaderData(6, Qt::Horizontal, QObject::tr("start_pos"));
+    model->setHeaderData(7, Qt::Horizontal, QObject::tr("end_pos"));
+
+
+    db.commit();
+    return model;
+}
+
+
+/**
  * @brief Destructor
  */
 

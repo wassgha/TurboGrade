@@ -277,6 +277,7 @@ void CodeView::refresh_autocomplete() {
     _completer = new QCompleter(_controller->_all_comments, this);
     _completer->setCompletionMode(QCompleter::InlineCompletion);
     _completer->setCaseSensitivity(Qt::CaseInsensitive);
+    _completer->setCompletionColumn(4);
     _popup->ui->comment->setCompleter(_completer);
 }
 

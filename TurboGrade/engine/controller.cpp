@@ -48,7 +48,8 @@ Controller::Controller(bool drop_tables, QString dbname)
     _assignmentDB->load_all();
     _courseDB->load_all();
 
-
+    // Load all comments for autocomplete
+    refresh_autocomplete();
 }
 
 
@@ -207,6 +208,10 @@ std::vector<Assignment*>* Controller::get_assignments() {
 
     return _assignments;
 
+}
+
+void Controller::refresh_autocomplete() {
+    _all_comments = _commentDB->load_model();
 }
 
 /**************************************

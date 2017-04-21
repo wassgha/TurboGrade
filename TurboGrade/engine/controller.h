@@ -80,6 +80,8 @@ public:
     std::vector<Assignment*>* get_assignments();
     // Shows rubric for all assignments
     void show_rubrics();
+    // Refresh auto-complete
+    void refresh_autocomplete();
 
     /**********************************
      *       UI Related Operations    *
@@ -107,7 +109,7 @@ public:
     // Grade database table
     GradeDB *_gradeDB;
     // Auto-complete list
-    QStringList _all_comments;
+    QSqlQueryModel *_all_comments;
     // All semesters used
     QStringList _all_semesters;
     // Current semester
