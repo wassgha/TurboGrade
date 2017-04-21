@@ -27,6 +27,7 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_detailed_remarks(submission, htmlString);
     add_image(submission, htmlString);
     htmlString.append(                "\n  </div>");
+    htmlString.append("<script>hljs.initHighlightingOnLoad();</script>");
     htmlString.append("\n</body>");
     htmlString.append("\n</html>");
     std::cout << htmlString.toStdString() << "\n";
@@ -49,6 +50,9 @@ void StudentDeliverable::add_header(Submission *submission, QString &htmlString)
 
 void StudentDeliverable::add_style(Submission *submission, QString &htmlString){
     htmlString.append("<link href=\"qrc:///css/report/style.css\" rel=\"stylesheet\" type=\"text/css\" />");
+    htmlString.append("<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css\">"
+                      "<script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js\"></script>");
+
 }
 
 void StudentDeliverable::add_names(Submission *submission, QString &htmlString){
@@ -229,7 +233,7 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
 
 
         QString lineNumbers = "\n                <div class = \"lines\">";
-        QString codeLines = "\n                <div class = \"code\">";
+        QString codeLines = "\n                <pre><code>";
         for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < (int)allLines.size(); i++){
             if(i >= 0){
                 codeLines.append("\n                   ");
@@ -241,7 +245,7 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
             }
         }
         lineNumbers.append("\n                </div>");
-        codeLines.append("\n                </div>");
+        codeLines.append("\n                </code></pre>");
         htmlString.append(lineNumbers);
         htmlString.append(codeLines);
         file.close();
