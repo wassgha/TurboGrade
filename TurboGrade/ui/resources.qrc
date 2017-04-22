@@ -27,6 +27,7 @@
         <file>res/pdf.png</file>
         <file>res/splitter2.png</file>
         <file>res/comment.png</file>
+        <file>res/caret-down.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

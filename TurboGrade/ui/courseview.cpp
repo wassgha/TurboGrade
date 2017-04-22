@@ -35,6 +35,7 @@ CourseView::CourseView(QWidget* parent, Controller* controller):
      **************************************************/
 
     _semester_switch = new QComboBox();
+    _semester_switch->setSizeAdjustPolicy(QComboBox::AdjustToContents);
     _semester_switch->setModel(_semesters_model);
     _semester_switch->setCurrentText(_controller->_current_semester);
     connect(_semester_switch, SIGNAL(currentIndexChanged(int)), this, SLOT(refresh_cards()));

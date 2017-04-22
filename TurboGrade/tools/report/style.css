@@ -31,6 +31,10 @@ h2 {
   margin-top: 20px;
 }
 
+.criterion.comment:last-of-type {
+  border-bottom: none;
+}
+
 .criterion.comments {
   page-break-inside: auto;
 }

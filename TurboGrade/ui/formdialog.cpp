@@ -71,6 +71,7 @@ QWidget* FormDialog::add_field(QString type, QString name,
     } else if (type == "QComboBox") {
 
         field = new QComboBox();
+        dynamic_cast<QComboBox*>(field)->setSizeAdjustPolicy(QComboBox::AdjustToContents);
         dynamic_cast<QComboBox*>(field)->setObjectName(name);
         ui->formLayout->addRow(label, field);
 

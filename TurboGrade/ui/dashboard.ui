@@ -72,6 +72,31 @@
 
 #last_synced {
 	color: white;
+}
+
+QComboBox {
+	border: none;
+	min-width: 90px;
+	outline:none;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+QComboBox::disabled {
+    background: #E1E1E1;
+}
+
+
+QComboBox::down-arrow {
+    width: 10px;
+    height: 10px;
+	margin: 5px;
+    border-image: url(:/misc/res/caret-down.png) 0 0 0 0 stretch stretch;
+}
+
+QComboBox::drop-down {
+	background: transparent;
+	border: none;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">

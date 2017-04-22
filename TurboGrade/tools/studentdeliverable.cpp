@@ -250,7 +250,6 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
             QString line = in.readLine();
             int size = line.size();
             if (end > current && end < current + size) {
-//                codeLines.append(line.insert(end - current, "</span>"));
                 codeLines.append(line);
                 codeLines.append("\n");
                 started = false;
@@ -258,7 +257,6 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
             }
                 else if (start > current && start < current + size)
             {
-//                codeLines.append(line.insert(start - current, "<span class=\"selected\">"));
                 codeLines.append(line);
                 codeLines.append("\n");
                 started = true;
