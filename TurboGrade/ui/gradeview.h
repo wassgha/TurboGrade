@@ -41,6 +41,7 @@ public slots:
 
 private slots:
     void on_finalize_clicked();
+    void on_export_pdf_clicked();
 };
 
 #endif // GRADEVIEW_H

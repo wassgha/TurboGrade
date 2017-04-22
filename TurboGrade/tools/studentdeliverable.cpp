@@ -225,7 +225,7 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
 //    }
     qDebug() << errMsg<<endl;
     qDebug()<< fullPath;
-    htmlString += "\n <span class=\"file_name\">On \"" + comment->_filename + "\"</span>";
+    htmlString += "\n <span class=\"file_name\">On \"" + comment->_filename + "\" for \"" + comment->_criterion->_name + "\" </span>";
     htmlString += "\n            <div class = \"code-container\">";
     if (file.open(QFile::ReadOnly | QFile::Text)){
         QTextStream in(&file);
