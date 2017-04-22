@@ -18,12 +18,13 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_style(submission, htmlString);
     htmlString.append("\n</head>");
     htmlString.append("\n<body>");
+    htmlString.append("\n  <div id = \"document\">");
     add_names(submission, htmlString);
     add_total_grade_sticker(submission, htmlString);
     add_general_comments(submission, htmlString);
-    htmlString.append("\n    <div id = \"container\">");
     add_assignment_obj(submission, htmlString);
     add_grade_summary(submission, htmlString);
+    add_total_grade(submission, htmlString);
     add_detailed_remarks(submission, htmlString);
     add_image(submission, htmlString);
     htmlString.append(                "\n  </div>");
@@ -58,9 +59,7 @@ void StudentDeliverable::add_style(Submission *submission, QString &htmlString){
 }
 
 void StudentDeliverable::add_names(Submission *submission, QString &htmlString){
-    htmlString.append(
-                "\n  <div id = \"document\">"
-                "\n    <div id = \"info\">");
+    htmlString.append("\n    <div id = \"info\">");
     htmlString.append(submission->_student->_name);
     htmlString.append("<br>"
                       "\n      <div id = \"assignment-name\">"
@@ -71,6 +70,17 @@ void StudentDeliverable::add_names(Submission *submission, QString &htmlString){
                 "\n    </div>");
 }
 
+void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlString){
+    htmlString.append(
+                "\n <div id = \"total\">"
+                "\n Total grade : "
+                "   <span class = \"grade\">" + QString::number(submission->get_grade()) + "</span>"
+                "   <span class = \"out-of\">/" + QString::number(submission->_assignment->_rubric->total_grade()) + "</span>"
+                "\n </div>"
+                );
+}
+
+
 void StudentDeliverable::add_total_grade_sticker(Submission *submission, QString &htmlString){
     htmlString.append(
                 "\n    <div id = \"grade\">"
@@ -78,7 +88,7 @@ void StudentDeliverable::add_total_grade_sticker(Submission *submission, QString
                 "\n        TOTAL GRADE"
                 "\n      </div>\n      "
                 );
-    htmlString.append(QString(std::to_string(submission->get_grade()).c_str()));
+    htmlString.append(QString::number(submission->get_grade()));
     htmlString.append(
                 "\n    </div>"
                 "\n     <div class=\"clear\"></div>"
@@ -102,6 +112,7 @@ void StudentDeliverable::add_comments(Submission* submission, QString &htmlStrin
 }
 
 void StudentDeliverable::add_assignment_obj(Submission *submission, QString &htmlString){
+    htmlString.append("\n    <div id = \"container\">");
     htmlString.append(
                 "\n        <h2>Assignment Objective</h2>"
                 "\n        <p>");
@@ -118,9 +129,9 @@ void StudentDeliverable::add_grades(Submission *submission, QString &htmlString)
                     "\n                ");
         htmlString.append(criterion->_name);
         htmlString.append("<span class = \"grade\">");
-        htmlString.append(QString(std::to_string(submission->get_grade(criterion)).c_str()));
+        htmlString.append(QString::number(submission->get_grade(criterion)));
         htmlString.append("</span><span class = \"out-of\">/");
-        htmlString.append(QString(std::to_string(criterion->_out_of).c_str()));
+        htmlString.append(QString::number(criterion->_out_of));
         htmlString.append("</span>"
                           "\n            </div>");
         if(criterion->has_children()){
