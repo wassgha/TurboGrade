@@ -15,8 +15,7 @@ class Controller;
 class RubricDB : public DBEngine
 {
 public:
-    // Constructor
-    RubricDB();
+
     // Parametrized constructor
     RubricDB(Controller *controller, QString dbname):
         DBEngine("RubricDB", dbname),

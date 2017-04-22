@@ -24,7 +24,7 @@ public:
 
 
     // Adds a row to the table
-    int add(const QString name, const QString objective);
+    int add(const QString name, const QString objective, bool full_grade);
     // Link assignment to section
     bool link(int assignment_id, int section_id);
     // Gets row id matching name

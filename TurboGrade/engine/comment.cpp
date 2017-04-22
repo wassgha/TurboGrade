@@ -31,14 +31,19 @@ Comment::Comment(Submission* submission,
     _start_pos = start_pos;
     _end_pos = end_pos;
 
+    // If id is -1 then we're creating locally and we should add to the database
     if (id == -1) {
+
+        // Add the comment to the database
         _id = _controller->_commentDB->add(submission->_id,
                                            filename,
                                            (criterion == nullptr ? 0 : criterion->_id),
                                            text,
                                            grade,
                                            start_pos, end_pos);
-        std::cout<<"Adjusting grade for comment"<<std::endl;
+
+        // Adjust the grade according to the comment
+        qDebug()<<"Adjusting grade for comment"<<endl;
         _submission->update_grade(_criterion,
                   (
                   _submission->get_grade(_criterion) == -1 ?
@@ -50,6 +55,9 @@ Comment::Comment(Submission* submission,
 
 }
 
+/**
+ * @brief Comment::~Comment Destructor
+ */
 Comment::~Comment()
 {
 }

@@ -15,8 +15,6 @@ class Controller;
 class SubmissionDB : public DBEngine
 {
 public:
-    // Constructor
-    SubmissionDB();
     // Parametrized constructor
     SubmissionDB(Controller *controller, QString dbname):
         DBEngine("SubmissionDB", dbname),
@@ -26,11 +24,13 @@ public:
 
 
     // Adds a row to the submission table
-    int add(int student_id, int assignment_id);
+    int add(int student_id, int assignment_id, int status);
     // Gets row id matching submission
     int select(int student_id, int assignment_id);
     // Loads submissions for a specific student
     void load_all(Student *student);
+    // Updates the grading status of a submission
+    void update_status(int submission_id, int status);
 
 
     // Controller

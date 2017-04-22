@@ -17,7 +17,11 @@ public slots:
     void save_new() override;
 
 private:
-    Controller *_controller;
+    Controller* _controller;
+    QComboBox* _semester_select;
+    QComboBox* _semester_switch;
+    QStringListModel *_semesters_model = nullptr;
+
 
 };
 

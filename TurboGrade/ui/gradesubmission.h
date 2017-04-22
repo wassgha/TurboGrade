@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QEvent>
+#include <QMoveEvent>
+#include <QFocusEvent>
 
 #include "../engine/controller.h"
 #include "../engine/controller.h"
@@ -44,6 +47,8 @@ private slots:
     void on_hideName_toggled(bool checked);
 
 private:
+    bool eventFilter(QObject *watched, QEvent *event) override;
+
     Ui::GradeSubmission *ui;
     QProcess *compile = nullptr;
 };

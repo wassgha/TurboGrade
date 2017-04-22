@@ -26,7 +26,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Breadcrumb {
+   <string notr="true">QWidget#Breadcrumb {
 	max-height: 40px;
 	background: white;
 	border: 0px;
@@ -96,7 +96,11 @@ QLabel {
     </spacer>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="switcher_group"/>
+    <layout class="QHBoxLayout" name="switcher_group">
+     <property name="rightMargin">
+      <number>12</number>
+     </property>
+    </layout>
    </item>
   </layout>
  </widget>

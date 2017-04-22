@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql printsupport
+QT       += core gui sql printsupport webenginewidgets script
 QT          += sql widgets printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -35,6 +35,8 @@ SOURCES += main.cpp\
         "../tools/dirtools.cpp" \
         "../tools/csvgenerator.cpp" \
         "../tools/filewriter.cpp" \
+            "../tools/studentdeliverable.cpp" \
+            "../tools/htmltopdf.cpp" \
             "../db/dbengine.cpp" \
             "../db/coursedb.cpp" \
             "../db/sectiondb.cpp" \
@@ -73,7 +75,9 @@ SOURCES += main.cpp\
     submissionview.cpp \
     commentcard.cpp \
     criterionitem.cpp \
-    criteriongradecard.cpp
+    criteriongradecard.cpp \
+    criteriondialog.cpp \
+    criterionguidedialog.cpp
 
 HEADERS  +=\
             "../tools/syntaxhighlight.h"\
@@ -83,6 +87,8 @@ HEADERS  +=\
             "../tools/dirtools.h" \
             "../tools/csvgenerator.h" \
             "../tools/filewriter.h" \
+            "../tools/studentdeliverable.h" \
+            "../tools/htmltopdf.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \
@@ -121,7 +127,9 @@ HEADERS  +=\
     submissionview.h \
     commentcard.h \
     criterionitem.h \
-    criteriongradecard.h
+    criteriongradecard.h \
+    criteriondialog.h \
+    criterionguidedialog.h
 
 FORMS    += \
     commentpopup.ui \
@@ -137,7 +145,10 @@ FORMS    += \
     rubricview.ui \
     commentcard.ui \
     criterionitem.ui \
-    criteriongradecard.ui
+    criteriongradecard.ui \
+    criteriondialog.ui \
+    criterionguidedialog.ui
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    "../tools/report.qrc"

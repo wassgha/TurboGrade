@@ -1,25 +1,21 @@
 #ifndef HTMLTOPDF_H
 #define HTMLTOPDF_H
 
-#include <QWidget>
-#include <QTextDocument>
-#include <QPrinter>
-#include <QFont>
-#include <QPrintPreviewDialog>
-#include <QHBoxLayout>
+#include <QWebEngineView>
 
-class HTMLToPDF : public QWidget
+class HTMLToPDF : public QWebEngineView
 {
     Q_OBJECT
+
 public:
-    explicit HTMLToPDF(QWidget *parent = 0, int x = 0);
-    explicit HTMLToPDF(QWidget *parent = 0, QString html = "");
-    QTextDocument *document;
+    explicit HTMLToPDF(QString html = "",
+                       QString output = "output.pdf");
 
-signals:
+private slots:
+    void saveToPdf(bool loaded);
+private:
+    QString _output;
 
-public slots:
-    void printPreview(QPrinter *printer);
 };
 
 #endif // HTMLTOPDF_H

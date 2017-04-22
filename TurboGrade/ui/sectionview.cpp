@@ -16,7 +16,7 @@ SectionView::SectionView(QWidget* parent, QObject* course, Controller* controlle
     add_btn = new QPushButton("Add section");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
-    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
+    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
     _breadcrumb->add_item(_course->_name, SLOT(show_sections(QObject *)), _course);
     ui->verticalLayout->insertWidget(0, _breadcrumb);

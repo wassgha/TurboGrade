@@ -1,14 +1,13 @@
 TEMPLATE    = app
 CONFIG      += console c++11
 CONFIG      -= app_bundle
-QT          += sql widgets printsupport network
+QT          += sql widgets printsupport network webenginewidgets script
 
 SOURCES     +=  main.cpp \
                 syntaxhighlight.cpp \
                 codeeditor.cpp \
                 objectidentifier.cpp \
                 filewriter.cpp \
-    pdfwindow.cpp \
     htmltopdf.cpp \
     dirtools.cpp \
     macadress.cpp \
@@ -31,7 +30,8 @@ SOURCES     +=  main.cpp \
             "../engine/rubric.cpp" \
             "../engine/criterion.cpp" \
             "../engine/comment.cpp" \
-            studentdeliverable.cpp
+            studentdeliverable.cpp \
+    report.cpp
 
 
 HEADERS     += \
@@ -40,7 +40,6 @@ HEADERS     += \
                 objectidentifier.h \
                 macro.h \
                 filewriter.h \
-    pdfwindow.h \
     htmltopdf.h \
     dirtools.h \
     macadress.h \
@@ -54,10 +53,13 @@ HEADERS     += \
             "../engine/rubric.h" \
             "../engine/criterion.h" \
             "../engine/comment.h" \
-            studentdeliverable.h
+            studentdeliverable.h \
+    jtemplate.h \
+    report.h
 
-FORMS += \
-    pdfwindow.ui
+FORMS +=
 
-DISTFILES += \
-    example.css
+DISTFILES +=
+
+RESOURCES += \
+    report.qrc

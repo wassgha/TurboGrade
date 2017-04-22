@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Student report : John Appleseed</title>
+    <title>Student report : <?=student_name?></title>
     <style type="text/css">
       body {
         background: #232730;
@@ -212,9 +212,9 @@
   <body>
     <div id = "document">
       <div id = "info">
-        John Appleseed<br>
+        <?=student_name?><br>
         <div id = "assignment-name">
-          Assignment : "Lab 5 : Binary Search Tree"
+          Assignment : "<?=assignment_name?>"
         </div>
       </div>
       <div id = "grade">

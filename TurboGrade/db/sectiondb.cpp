@@ -1,14 +1,6 @@
 #include "sectiondb.h"
 
 /**
- * @brief Destructor
- */
-
-SectionDB::~SectionDB() {
-
-}
-
-/**
  * @brief SectionDB::add Insert a row to the database
  * @param name the name of the section (ex. 01)
  * @param course_id the id of the course (ex. 1)
@@ -110,4 +102,12 @@ void SectionDB::load_all(Course *course) {
 
     query.finish();
     db.commit();
+}
+
+/**
+ * @brief Destructor
+ */
+
+SectionDB::~SectionDB() {
+
 }

@@ -2,10 +2,9 @@
 #include "ui_commentpopup.h"
 
 CommentPopup::CommentPopup(QWidget *parent, Controller *controller) :
-    QWidget(parent, Qt::Tool | Qt::FramelessWindowHint),
+    QWidget(parent, Qt::Dialog | Qt::FramelessWindowHint),
     ui(new Ui::CommentPopup)
 {
-    setAttribute(Qt::WA_ShowWithoutActivating);
     ui->setupUi(this);
 
     ui->adjust_grade->setAttribute(Qt::WA_MacShowFocusRect, false);
@@ -25,7 +24,6 @@ void CommentPopup::on_add_btn_clicked()
 {
     qDebug()<<"emitted signal submit";
     emit submit();
-    hide();
 }
 
 QString CommentPopup::val(QString name) {

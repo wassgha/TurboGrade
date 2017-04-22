@@ -23,6 +23,7 @@
 
 #include <QMainWindow>
 #include <QDesktopWidget>
+#include <QStandardItemModel>
 #include <QWidget>
 #include <QEvent>
 #include <QMoveEvent>
@@ -48,18 +49,20 @@ public:
     ~CodeView();
     QString current_folder();
     QString current_file();
+    void move_popup();
     Ui::CodeView                *ui;
     Controller                  *_controller;
     GradeSubmission             *_parent;
     std::vector<CommentCard*>   _comment_cards;
+    CommentPopup        *_popup;
 
 public slots:
     void getSelection();
     void loadFile(QModelIndex item);
-    void finished_loading(QString file);
+    void finished_loading();
     void add_comment();
     void highlight_comment(Comment * comment);
-    void unhighlight_comment(Comment * comment);
+    void unhighlight_comments();
 
 private:
     void refresh_criteria();
@@ -67,9 +70,7 @@ private:
     bool eventFilter(QObject *obj, QEvent *event) override;
     void refresh_comments();
     void refresh_autocomplete();
-    void move_popup();
 
-    CommentPopup        *_popup;
     QFileSystemModel    *_model;
     QCompleter          *_completer;
     QModelIndex root_index;

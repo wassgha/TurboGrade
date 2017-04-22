@@ -45,6 +45,21 @@ QWidget* FormDialog::add_field(QString type, QString name,
         dynamic_cast<QLabel*>(field)->setObjectName(name);
         ui->formLayout->addRow(field);
 
+    } else if (type == "QProgressBar") {
+
+        field = new QProgressBar();
+        dynamic_cast<QProgressBar*>(field)->setObjectName(name);
+        dynamic_cast<QProgressBar*>(field)->setMaximum(0);
+        dynamic_cast<QProgressBar*>(field)->setValue(0);
+        ui->formLayout->addRow(field);
+        field->hide();
+
+    } else if (type == "QCheckBox") {
+
+        field = new QCheckBox(label);
+        dynamic_cast<QCheckBox*>(field)->setObjectName(name);
+        ui->formLayout->addRow(field);
+
     } else if (type == "Separator") {
 
         field = new QFrame();
@@ -122,6 +137,11 @@ QString FormDialog::val(QString name) {
         return "";
     } else if (_field_types[name] == "QFileDialog") {
         return _data;
+    } else if (_field_types[name] == "QCheckBox") {
+        QCheckBox* field = findChild<QCheckBox*>(name);
+        bool checked = field->isChecked();
+        field->setChecked(false);
+        return checked  ? "1" : "0";
     } else {
         return QString();
     }
@@ -143,4 +163,12 @@ void FormDialog::select_folder() {
                                               "",
                                               QFileDialog::ShowDirsOnly
                                               | QFileDialog::DontResolveSymlinks);
+}
+
+void FormDialog::disableSubmit() {
+    ui->ok_btn->setEnabled(false);
+}
+
+void FormDialog::enableSubmit() {
+    ui->ok_btn->setEnabled(true);
 }

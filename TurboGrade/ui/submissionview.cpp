@@ -15,12 +15,13 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     add_dialog->add_field("QLabel", "instructions", "Please unzip the Moodle submissions and point \n"
                                                     "to the folder where you unzipped them.");
     add_dialog->add_field("QFileDialog", "select_folder", "Choose folder", ":/misc/res/folder.png");
+    _progress_bar = dynamic_cast<QProgressBar*>(add_dialog->add_field("QProgressBar", "progress"));
     connect(add_dialog, SIGNAL(submit()), this, SLOT(import_submission()));
 
     add_btn = new QPushButton("Import submissions");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
-    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
+    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
     export_csv_btn = new QPushButton("Export Grades (CSV)");
     export_csv_btn->setFlat(true);
@@ -68,18 +69,49 @@ void SubmissionView::refresh_cards() {
     for(Student* student : *_section->_students) {
         if (student->get_submission(_assignment) != nullptr) {
             Submission* submission = student->get_submission(_assignment);
+
+            // Determine grading status
+            QString grading_status = "";
+            switch (submission->_status) {
+                case 0:
+                    grading_status = "Grading not started";
+                    break;
+                case 1:
+                    grading_status = "Grading in progress";
+                    break;
+                case 2:
+                    grading_status = "Final Grade : " +
+                            QString::number(submission->grade_percent()) +
+                            "% (" +
+                            QString::number(submission->get_grade()) +
+                            " out of " +
+                            QString::number(_assignment->_rubric->total_grade()) +
+                            ")";
+                    break;
+                default:
+                    break;
+            }
+
             Card* new_submission = new Card(student->_name,
-                                        "Grade : " +
-                                        QString::number(100*submission->get_grade()/_assignment->_rubric->total_grade()) +
-                                        "% (" +
-                                        QString::number(submission->get_grade()) +
-                                        " out of " +
-                                        QString::number(_assignment->_rubric->total_grade()) +
-                                        ")",
-                                        student->_color, submission);
+                                        grading_status,
+                                        student->_color, submission, true);
+
             cards.push_back(new_submission);
+
             connect(new_submission, SIGNAL(clicked(QObject*)), _parent, SLOT(start_grading(QObject*)));
+
             add_card(new_submission);
+
+        } else {
+
+            Card* no_submission = new Card(student->_name,
+                                        "Student didn't submit",
+                                        student->_color, nullptr, true, true);
+
+            cards.push_back(no_submission);
+
+            add_card(no_submission);
+
         }
     }
 
@@ -99,7 +131,11 @@ void SubmissionView::import_submission() {
             + "/"
             + QString::number(_assignment->_id);
 
-    DirTools::copy_dir_recursive( add_dialog->val("select_folder"), local_path);
+    _progress_bar->show();
+
+    add_dialog->disableSubmit();
+
+    DirTools::copy_dir_recursive( add_dialog->val("select_folder"), local_path,  true, _progress_bar);
 
 
     QDir dir;
@@ -114,10 +150,18 @@ void SubmissionView::import_submission() {
             _section->add_student(submission_folder);
             added_student = _section->get_student(submission_folder);
         }
-        added_student->add_submission(_assignment);
+        Submission* added_submission = added_student->get_submission(_assignment);
+        if (added_submission == nullptr) {
+            added_submission = added_student->add_submission(_assignment);
+            if (_assignment->_full_grade) {
+                added_submission->attribute_full_grade();
+            }
+        }
     }
 
     refresh_cards();
+
+    add_dialog->enableSubmit();
 
 }
 
@@ -132,5 +176,15 @@ void SubmissionView::export_csv() {
 void SubmissionView::export_all_pdf() {
     QString folder = QFileDialog::getExistingDirectory(this, tr("Save reports in..."), QString(),
                                                        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    std::vector<HTMLToPDF*> pdf_generators;
+    for (Student *student : *_section->_students) {
+        if (student->get_submission(_assignment) != nullptr) {
+            StudentDeliverable s;
+            QString html = s.placeParameters(student->get_submission(_assignment));
+            pdf_generators.push_back(new HTMLToPDF(html, folder + "/" + student->_name + ".pdf"));
+
+        }
+    }
+
 }
 

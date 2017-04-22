@@ -1,7 +1,7 @@
 TEMPLATE    = app
 CONFIG      += console c++11
 CONFIG      -= app_bundle
-QT          += sql widgets printsupport
+QT          += sql widgets printsupport webenginewidgets script
 
 SOURCES     += \
             "../tools/objectidentifier.cpp" \

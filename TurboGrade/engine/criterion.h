@@ -31,7 +31,7 @@ public:
     // Destructor
     ~Criterion();
     // Add sub-criterion
-    Criterion* add_child(const QString name, Criterion* parent, int out_of, int id = -1);
+    Criterion* add_child(const QString name, int out_of, int id = -1);
     // Returns whether this criterion has children or not
     bool has_children();
     // Returns this criterion's children

@@ -16,7 +16,7 @@ StudentView::StudentView(QWidget* parent, QObject* section, Controller* controll
     add_btn = new QPushButton("Add student");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
-    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
+    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
     _breadcrumb->add_item(_section->_course->_name, SLOT(show_sections(QObject*)), _section->_course);
     _breadcrumb->add_item(_section->_name, SLOT(show_assignments(QObject*)), _section);
@@ -38,8 +38,8 @@ void StudentView::refresh_cards() {
     add_card(add_btn);
     for(Student* student : *_section->_students) {
         Card* new_student = new Card(student->_name,
-                                    "Avg. Grade : 96%",
-                                    student->_color, student);
+                                    "Avg. Grade : -",
+                                    student->_color, student, true);
         cards.push_back(new_student);
 //      connect(new_student, SIGNAL(clicked(QObject*)), _parent, SLOT(show_sections(QObject*)));
         add_card(new_student);

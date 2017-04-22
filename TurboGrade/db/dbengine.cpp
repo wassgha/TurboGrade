@@ -27,7 +27,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     // Course Table
 
     sql_query("CREATE TABLE IF NOT EXISTS course (id INTEGER PRIMARY KEY, \
-              name VARCHAR(50) UNIQUE)");
+              name VARCHAR(50),\
+              semester VARCHAR(50))");
 
     // Section Table
 
@@ -46,7 +47,8 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     // Assignment Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment (id INTEGER PRIMARY KEY, \
                name VARCHAR(50) UNIQUE,\
-               objective TEXT)");
+               objective TEXT,\
+               full_grade INT)");
 
     // AssignmentSection Table
     sql_query("CREATE TABLE IF NOT EXISTS assignment_section (id INTEGER PRIMARY KEY, \
@@ -56,9 +58,12 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                FOREIGN KEY(section) REFERENCES section(id))");
 
     // Submission Table
+    // Note: The status field holds whether the submission was "finalized", "started"
+    //        or "unopened"
     sql_query("CREATE TABLE IF NOT EXISTS submission (id INTEGER PRIMARY KEY, \
                student INTEGER,\
                assignment INTEGER,\
+               status INT,\
                FOREIGN KEY(student) REFERENCES student(id),\
                FOREIGN KEY(assignment) REFERENCES assignment(id))");
 

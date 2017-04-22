@@ -12,9 +12,10 @@ AssignmentDB::~AssignmentDB() {
  * @brief AssignmentDB::add Insert a row to the database
  * @param name the name of the assignment (ex. Drawing Shapes)
  * @param objective the objective of the assignment (ex. Introducing students to Processing)
+ * @param full_grade true if we start grading with a full grade, false if we start at 0
  * @return true if the query succeded
  */
-int AssignmentDB::add(const QString name, const QString objective) {
+int AssignmentDB::add(const QString name, const QString objective, bool full_grade) {
 
     SHOW_WHERE;
 
@@ -22,10 +23,11 @@ int AssignmentDB::add(const QString name, const QString objective) {
     QSqlQuery query(db);
 
 
-    query.prepare("INSERT INTO assignment (id, name, objective) "
-                  "VALUES (NULL, ?, ?)");
+    query.prepare("INSERT INTO assignment (id, name, objective, full_grade) "
+                  "VALUES (NULL, ?, ?, ?)");
     query.addBindValue(name);
     query.addBindValue(objective);
+    query.addBindValue(full_grade);
 
     if (!query.exec()) {
         qDebug() << "Failed to insert to 'assignment' table" << endl << "SQL ERROR: " << query.lastError();
@@ -132,11 +134,13 @@ void AssignmentDB::load_all() {
     int id_field = query.record().indexOf("id");
     int name_field = query.record().indexOf("name");
     int objective_field = query.record().indexOf("objective");
+    int full_grade_field = query.record().indexOf("full_grade");
 
     while(query.next()) {
 
         _controller->add_assignment(query.value(name_field).toString(),
                                    query.value(objective_field).toString(),
+                                    query.value(full_grade_field).toBool(),
                                     query.value(id_field).toInt());
 
     }
@@ -150,6 +154,7 @@ void AssignmentDB::load_all() {
 /**
  * @brief AssignmentDB::load_all loads all database records
  * to the controller
+ * @param section the section
  */
 void AssignmentDB::load_all(Section *section) {
 

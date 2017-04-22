@@ -5,7 +5,9 @@
 #include "QString"
 #include "QFile"
 #include "QDir"
+#include <QApplication>
 #include <QDebug>
+#include <QProgressBar>
 #include <iostream>
 
 
@@ -13,7 +15,7 @@ class DirTools
 {
 public:
     DirTools();
-    static bool copy_dir_recursive(QString from_dir, QString to_dir, bool replace_on_conflit = true);
+    static bool copy_dir_recursive(QString from_dir, QString to_dir, bool replace_on_conflit = true, QProgressBar* progress_bar = nullptr);
 };
 
 #endif // DIRTOOLS_H

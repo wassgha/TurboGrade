@@ -1,6 +1,6 @@
 #include "dirtools.h"
 
-bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace_on_conflit)
+bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace_on_conflit, QProgressBar* progress_bar)
 {
     QDir dir;
     dir.setPath(from_dir);
@@ -10,12 +10,14 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
 
     qDebug()<<"Importing "<< from_dir << " to " << to_dir;
 
+    progress_bar->setMaximum(progress_bar->maximum() + dir.count());
+    QApplication::processEvents();
+
     foreach (QString copy_file, dir.entryList(QDir::Files))
     {
         QString from = from_dir + copy_file;
         QString to = to_dir + copy_file;
 
-        qDebug()<<"Copying file "<< copy_file;
         if (QFile::exists(to))
         {
             if (replace_on_conflit)
@@ -35,7 +37,11 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
         {
             return false;
         }
+
+        progress_bar->setValue(progress_bar->value() + 1);
+        QApplication::processEvents();
     }
+
 
     foreach (QString copy_dir, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot))
     {
@@ -47,10 +53,12 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
             return false;
         }
 
-        if (copy_dir_recursive(from, to, replace_on_conflit) == false)
+        if (copy_dir_recursive(from, to, replace_on_conflit, progress_bar) == false)
         {
             return false;
         }
+        progress_bar->setValue(progress_bar->value() + 1);
+        QApplication::processEvents();
     }
 
     return true;
