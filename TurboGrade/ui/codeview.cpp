@@ -124,7 +124,7 @@ void CodeView::add_comment() {
         }
 
         // Get comment text
-        QString comment_text = _popup->val("comment");
+        QString comment_text = _popup->peek("comment");
 
         if(comment_text == "") {
             QMessageBox errorBox(QMessageBox::Critical,
@@ -136,7 +136,7 @@ void CodeView::add_comment() {
         }
 
         // Get grade adjustment
-        int grade_adjustment = _popup->val("adjust_grade").toInt();
+        int grade_adjustment = _popup->peek("adjust_grade").toInt();
 
         int adjusted_grade = _parent->_submission->get_grade(criterion) + grade_adjustment;
         if(adjusted_grade > criterion->_out_of || adjusted_grade < 0) {
@@ -157,8 +157,8 @@ void CodeView::add_comment() {
         // Add the comment
         _parent->_submission->add_comment(file_name,
                                           criterion,
-                                          comment_text,
-                                          grade_adjustment,
+                                          _popup->val("comment"),
+                                          _popup->val("adjust_grade").toInt(),
                                           ui->editor->textCursor().selectionStart(),
                                           ui->editor->textCursor().selectionEnd());
         _popup->val("criterion");
