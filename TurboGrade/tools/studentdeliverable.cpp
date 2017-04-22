@@ -18,12 +18,11 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_style(submission, htmlString);
     htmlString.append("\n</head>");
     htmlString.append("\n<body>");
+    add_student_name(submission, htmlString);
+    add_assignment_info(submission, htmlString);
     htmlString.append("\n  <div id = \"document\">");
-    add_names(submission, htmlString);
-    add_total_grade_sticker(submission, htmlString);
     add_general_comments(submission, htmlString);
     htmlString.append("\n    <div class = \"container\">");
-    add_assignment_obj(submission, htmlString);
     add_grade_summary(submission, htmlString);
     htmlString.append(                "\n  </div>");
     add_total_grade(submission, htmlString);
@@ -62,17 +61,43 @@ void StudentDeliverable::add_style(Submission *submission, QString &htmlString){
 
 }
 
-void StudentDeliverable::add_names(Submission *submission, QString &htmlString){
-    htmlString.append("\n    <div id = \"info\">");
-    htmlString.append(submission->_student->_name);
-    htmlString.append("<br>"
-                      "\n      <div id = \"assignment-name\">"
-                      "        Assignment :\"");
+void StudentDeliverable::add_assignment_info(Submission *submission, QString &htmlString){
+    htmlString.append("\n <div id = \"info\">");
+    htmlString.append("\n <h3 id = \"assignment-name\">Assignment: ");
     htmlString.append(submission->_assignment->_name);
-    htmlString.append(
-                "\"      </div>"
-                "\n    </div>");
+    htmlString.append(" </h3>");
+    htmlString.append(" <b>Objective: </b>"
+                      "<p>");
+    htmlString.append(submission->_assignment->_objective);
+    htmlString.append("</p>");
+    htmlString.append(" </div>");
 }
+
+void StudentDeliverable::add_student_name(Submission *submission, QString &htmlString){
+    htmlString.append("\n<div id = \"student\">");
+    htmlString.append("\n<span class=\"avatar\" style=\"background:" + submission->_student->_color + "\">");
+    if (submission->_student->_name.split(" ").count() > 1) {
+        htmlString.append(
+            "\n " +
+            submission->_student->_name.split(" ").at(0).left(1).toUpper() +
+            submission->_student->_name.split(" ").at(1).left(1).toUpper()
+        );
+    } else {
+        htmlString.append("\n " + submission->_student->_name.left(2).toUpper());
+    }
+    htmlString.append("\n</span>");
+    htmlString.append("\n<div class=\"name\">Student<br>");
+    htmlString.append("\n<b>" + submission->_student->_name + "</b></div>");
+    htmlString.append("\n<div id = \"grade\">"
+        "\n <div id = \"label\">"
+        "\n   TOTAL GRADE"
+        "\n </div>"
+        + QString::number(submission->grade_percent()) +
+        "\n %</div>"
+        "\n <div class=\"clear\"></div>"
+        "\n </div>");
+}
+
 
 void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlString){
     htmlString.append(
@@ -82,21 +107,6 @@ void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlSt
                 "   <span class = \"out-of\">/" + QString::number(submission->_assignment->_rubric->total_grade()) + "</span>"
                 "   <span class = \"out-of\"> (" + QString::number(submission->grade_percent()) + "% )</span>"
                 "\n </div>"
-                );
-}
-
-
-void StudentDeliverable::add_total_grade_sticker(Submission *submission, QString &htmlString){
-    htmlString.append(
-                "\n    <div id = \"grade\">"
-                "\n      <div id = \"label\">"
-                "\n        TOTAL GRADE"
-                "\n      </div>\n      "
-                );
-    htmlString.append(QString::number(submission->grade_percent()));
-    htmlString.append(
-                "\n    %</div>"
-                "\n     <div class=\"clear\"></div>"
                 );
 }
 
@@ -116,20 +126,11 @@ void StudentDeliverable::add_comments(Submission* submission, QString &htmlStrin
     }
 }
 
-void StudentDeliverable::add_assignment_obj(Submission *submission, QString &htmlString){
-    htmlString.append(
-                "\n        <h2>Assignment Objective</h2>"
-                "\n        <p>");
-    htmlString.append(submission->_assignment->_objective);
-    htmlString.append(
-                "\n        </p>");
-}
-
 void StudentDeliverable::add_grades(Submission *submission, QString &htmlString){
     for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
         htmlString.append(
                     "\n        <div class = \"criterion\">"
-                    "\n            <div class = \"name\">"
+                    "\n            <div class = \"name\"> <span class = \"circle\"></span> "
                     "\n                ");
         htmlString.append(criterion->_name);
         htmlString.append("<span class = \"grade\">");
@@ -143,7 +144,7 @@ void StudentDeliverable::add_grades(Submission *submission, QString &htmlString)
                         "\n            <ul>");
             for(Criterion *subcriterion : criterion->children()){
                 htmlString.append("\n                <li>"
-                                  "\n                    ");
+                                  "\n                <span class = \"sub-line\"></span>      ");
                 htmlString.append(subcriterion->_name);
                 htmlString.append(" : <span class = \"grade\">");
                 htmlString.append(std::to_string(submission->get_grade(subcriterion)).c_str());
@@ -173,9 +174,9 @@ void StudentDeliverable::add_general_comments(Submission *submission, QString &h
 
 void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &htmlString){
     htmlString.append("\n      <h2>Detailed remarks</h2>");
-    htmlString.append("\n      <div class = \"criterion comments\">");
     for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
-        htmlString.append("\n          <div class = \"name\">");
+        htmlString.append("\n      <div class = \"criterion\">");
+        htmlString.append("\n          <div class = \"name\">  <span class = \"circle\"></span> ");
         htmlString.append(criterion->_name);
         htmlString.append("\n              <span class = \"grade\">");
         htmlString.append(QString::number(submission->get_grade(criterion)));
@@ -185,7 +186,9 @@ void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &h
                           "\n          </div>");
         std::vector<Comment *> comments = submission->get_comments(criterion);
         if(comments.empty()){
+            htmlString.append("\n <p>No remarks on this criterion.</p>");
         } else {
+            htmlString.append("\n <p><b>Remarks:</b></p>");
             for(Comment *comment : comments){
                 add_code_lines(submission, comment, htmlString, 2, 2);
             }
@@ -200,13 +203,13 @@ void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &h
                 }
             }
         }
+        htmlString.append("\n      </div>");
     }
-    htmlString.append("\n      </div>");
     htmlString.append("\n  </div>");
 }
 
 void StudentDeliverable::add_grade_summary(Submission *submission, QString &htmlString){
-    htmlString.append("\n        <h2>Grade Summary</h2>");
+    htmlString.append("\n        <h2>Grade Breakdown</h2>");
     add_grades(submission, htmlString);
 }
 
@@ -229,34 +232,36 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
         int start = comment->_start_pos;
         int end = comment->_end_pos;
         int current = 0;
-        int lineCount = 1;
         int lineIndexStart = -1;
         int lineIndexEnd = -1;
-        std::vector<QString> allLines;
+        bool started = false;
+        QString codeLines = "\n <pre class=\"brush: java\">";
+        if (submission->_student->_name == "Wassim Gharbi") {
+
+        }
         while (!in.atEnd()) {
             QString line = in.readLine();
-            allLines.push_back(line);
             int size = line.size();
+            if (end > current && end < current + size) {
+                codeLines.append(line.insert(end - current, "</span>"));
+                codeLines.append("\n");
+                started = false;
+                break;
+            }
+                else if (start > current && start < current + size)
+            {
+                codeLines.append(line.insert(start - current, "<span class=\"selected\">"));
+                codeLines.append("\n");
+                started = true;
+            }
+                else if (started)
+            {
+                codeLines.append(line);
+                codeLines.append("\n");
+            }
             current += size;
-            if(start < current && lineIndexStart == -1){
-                lineIndexStart = lineCount-1;
-            }
-            if (end < current && lineIndexEnd == -1){
-                lineIndexEnd = lineCount-1;
-            }
-            lineCount++;
         }
-
-
-        QString codeLines = "\n                <pre class=\"brush: java\">";
-        for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < (int)allLines.size(); i++){
-            if(i >= 0){
-                codeLines.append("\n                   ");
-                codeLines.append(allLines[i]);
-                codeLines.append("<br>");
-            }
-        }
-        codeLines.append("\n                </pre>");
+        codeLines.append("\n </pre>");
         htmlString.append(codeLines);
         file.close();
     }

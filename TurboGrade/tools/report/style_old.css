@@ -1,7 +1,7 @@
 body {
-  background: white;
-  color: black;
-  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Geneva,Arial,sans-serif;
+  background: #232730;
+  color: white;
+  font-family : sans-serif;
   max-width: 960px;
   margin: auto;
 }
@@ -18,18 +18,12 @@ h2 {
 }
 
 .criterion {
-    page-break-inside: avoid;
-    border-top: 1px solid #EBEBEB;
-    overflow-x: scroll;
-}
-
-.criterion:last-of-type {
-  border-bottom: 1px solid #EBEBEB;
+  border-top: 1px solid #EBEBEB;
+  overflow-x: scroll;
 }
 
 .criterion:first-of-type {
   margin-top: 20px;
-  page-break-before: avoid;
 }
 
 .criterion.comments {
@@ -44,8 +38,8 @@ h2 {
 
 .criterion > .name > .grade {
   font-weight: bold;
+  font-size: 23px;
   padding: 5px;
-  margin-left: 10px;
 }
 
 .criterion > .name > .out-of {
@@ -53,8 +47,7 @@ h2 {
 }
 
 .criterion ul {
-  list-style: none;
-  margin-left: 20px;
+  list-style: circle;
 }
 
 .criterion li {
@@ -63,15 +56,12 @@ h2 {
 
 .criterion li > .grade {
   font-weight: bold;
+  font-size: 17px;
   padding: 5px;
 }
 
 .criterion li > .out-of {
   color: gray;
-}
-
-.criterion p {
-    margin-left : 20px;
 }
 
 .rubric {
@@ -112,6 +102,7 @@ h2 {
 }
 
 #document {
+  color: white;
   padding : 20px;
 }
 
@@ -125,19 +116,18 @@ h2 {
 }
 
 #info {
-  padding: 25px;
-  margin-top: 10px;
-  background: #F1F1F1;
+  float: left;
+  padding-top: 20px;
 }
 
 #grade {
   float: right;
   color: green;
   border-radius: 3px;
+  background: white;
+  padding: 20px;
   font-size: 28px;
   text-align: center;
-  font-family: sans-serif;
-  vertical-align: middle;
 }
 
 #grade > #label {
@@ -149,10 +139,6 @@ h2 {
 
 #assignment-name {
   font-size: 24px;
-  color: black;
-  font-weight: 400;
-  margin-top: 0px;
-
 }
 
 .container {
@@ -160,11 +146,11 @@ h2 {
   border-radius: 3px;
   background: white;
   padding: 20px;
-  page-break-inside: avoid;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .code-container {
-  page-break-inside: avoid;
   background: #232730;
   color: #EBEBEB;
   padding: 20px;
@@ -190,7 +176,6 @@ h2 {
   border-radius: 3px;
   padding: 20px;
   color: black;
-  font-family: sans-serif;
 }
 .comment > .title {
   text-transform: uppercase;
@@ -252,44 +237,4 @@ h2 {
 .file_name {
     padding: 10px;
     display: block;
-}
-
-.circle {
-  display: inline-block;
-  width: 15px;
-  height: 15px;
-  border: 2px solid green;
-  border-radius: 40%;
-  vertical-align: text-top;
-  margin-right: 10px;
-}
-
-.sub-line {
-  display: inline-block;
-  width: 20px;
-  height: 0px;
-  border-top: 3px solid rgb(23, 99, 200);
-  vertical-align: middle;
-  margin-right: 10px;
-}
-
-#student {
-  padding: 20px;
-}
-#student .avatar {
-  color: white;
-  display: inline-block;
-  padding: 15px;
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  vertical-align: middle;
-  text-align: center;
-  border-radius: 50%;
-}
-
-#student .name {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 10px;
 }

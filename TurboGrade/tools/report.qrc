@@ -6,6 +6,7 @@
         <file>report/shBrushJava.js</file>
         <file>report/shCore.js</file>
         <file>report/shThemeRDark.css</file>
+        <file>report/style_old.css</file>
     </qresource>
     <qresource prefix="/">
         <file>report-template.html</file>
