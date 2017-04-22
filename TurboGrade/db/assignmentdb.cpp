@@ -154,6 +154,7 @@ void AssignmentDB::load_all() {
 /**
  * @brief AssignmentDB::load_all loads all database records
  * to the controller
+ * @param section the section
  */
 void AssignmentDB::load_all(Section *section) {
 

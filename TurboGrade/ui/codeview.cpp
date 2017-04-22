@@ -13,7 +13,14 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     _parent = dynamic_cast<GradeSubmission*>(parent);
 
     _popup = new CommentPopup(this);
+
+    // Load comments for autocomplete
     refresh_autocomplete();
+
+
+    /**************************************************
+     *          Construct the file tree               *
+     **************************************************/
 
     _model = new QFileSystemModel;
     _model->setRootPath(_parent->_submission->getPath());
@@ -46,7 +53,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     this->connect(_popup,  SIGNAL(submit()), this, SLOT(add_comment()));
 
     // Expand all items in the tree
-    this->connect(_model, SIGNAL(directoryLoaded(QString)), this, SLOT(finished_loading(QString)));
+    this->connect(_model, SIGNAL(directoryLoaded(QString)), this, SLOT(finished_loading()));
 
 }
 
@@ -102,29 +109,73 @@ void CodeView::add_comment() {
         else
             criterion = _parent->_submission->_assignment->_rubric->get_criterion(criterion_id);
 
+        // Get grade adjustment
+        int grade_adjustment = _popup->val("adjust_grade").toInt();
+
+        if (criterion != nullptr) {
+            int adjusted_grade = _parent->_submission->get_grade(criterion) + grade_adjustment;
+            if(adjusted_grade > criterion->_out_of || adjusted_grade < 0) {
+                QMessageBox errorBox(QMessageBox::Critical,
+                                     "The point adjustment is out of grading range.",
+                                     "The point adjustment made by this comment is either higher than the"
+                                     " maximum score for this criterion or lower than 0, please change it.",
+                                     QMessageBox::Close, this, Qt::Sheet);
+                errorBox.exec();
+                return;
+            }
+        } else {
+            QMessageBox errorBox(QMessageBox::Critical,
+                                 "No criterion selected.",
+                                 "Please select a category for this comment.",
+                                 QMessageBox::Close, this, Qt::Sheet);
+            errorBox.exec();
+            return;
+        }
+
+        // Get comment text
+        QString comment_text = _popup->val("comment");
+
+        if(comment_text == "") {
+            QMessageBox errorBox(QMessageBox::Critical,
+                                 "No text entered.",
+                                 "A comment can not be empty, please enter text in the box.",
+                                 QMessageBox::Close, this, Qt::Sheet);
+            errorBox.exec();
+            return;
+        }
+
         // Get the file name from the tree view
         QString file_name = QDir(_model->rootPath()).relativeFilePath(_model->filePath(ui->treeView->currentIndex()));
 
         // Add the comment
         _parent->_submission->add_comment(file_name,
                                           criterion,
-                                          _popup->val("comment"),
-                                          _popup->val("adjust_grade").toInt(),
+                                          comment_text,
+                                          grade_adjustment,
                                           ui->editor->textCursor().selectionStart(),
                                           ui->editor->textCursor().selectionEnd());
         _popup->val("criterion");
     }
+    _popup->hide();
     refresh_comments();
 }
 
 void CodeView::refresh_criteria() {
     _popup->ui->criterion->clear();
     _popup->ui->criterion->addItem("No criterion selected", -1);
+    int i = 1;
+    QStandardItemModel* model = qobject_cast<QStandardItemModel*>(_popup->ui->criterion->model());
     for(Criterion* criterion : *_parent->_submission->_assignment->_rubric->_criteria) {
         _popup->ui->criterion->addItem(criterion->_name, criterion->_id);
-        for(Criterion* child : *criterion->_sub_criteria) {
-            _popup->ui->criterion->addItem("    | " + child->_name, child->_id);
+        QStandardItem* item= model->item(i);
+        if (criterion->has_children()) {
+            item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
+            for(Criterion* child : *criterion->_sub_criteria) {
+                _popup->ui->criterion->addItem("--- " + child->_name, child->_id);
+                i++;
+            }
         }
+        i++;
     }
 }
 
@@ -172,7 +223,7 @@ void CodeView::refresh_comments() {
 
         // Add events for highlighting the comment in the code when the mouse is over the comment card
         connect(comment_card, SIGNAL(mouseOver(Comment*)), this, SLOT(highlight_comment(Comment *)));
-        connect(comment_card, SIGNAL(mouseOut(Comment*)), this, SLOT(unhighlight_comment(Comment *)));
+        connect(comment_card, SIGNAL(mouseOut(Comment*)), this, SLOT(unhighlight_comments()));
     }
 
     refresh_autocomplete();
@@ -186,7 +237,7 @@ void CodeView::setupCodeEditor(const QString &file_name)
 }
 
 
-void CodeView::finished_loading(QString file) {
+void CodeView::finished_loading() {
     ui->treeView->setCurrentIndex(_model->index(0, 0, root_index));
     ui->treeView->expandToDepth(0);
 }
@@ -217,7 +268,7 @@ void CodeView::highlight_comment(Comment * comment) {
     ui->editor->setExtraSelections(extraSelections);
 }
 
-void CodeView::unhighlight_comment(Comment * comment) {
+void CodeView::unhighlight_comments() {
     QList<QTextEdit::ExtraSelection> extraSelections;
     ui->editor->setExtraSelections(extraSelections);
 }
@@ -226,6 +277,7 @@ void CodeView::refresh_autocomplete() {
     _completer = new QCompleter(_controller->_all_comments, this);
     _completer->setCompletionMode(QCompleter::InlineCompletion);
     _completer->setCaseSensitivity(Qt::CaseInsensitive);
+    _completer->setCompletionColumn(4);
     _popup->ui->comment->setCompleter(_completer);
 }
 

@@ -1,7 +1,7 @@
 TEMPLATE    = app
 CONFIG      += console c++11
 CONFIG      -= app_bundle
-QT          += sql widgets printsupport network webenginewidgets
+QT          += sql widgets printsupport network webenginewidgets script
 
 SOURCES     +=  main.cpp \
                 syntaxhighlight.cpp \
@@ -30,7 +30,8 @@ SOURCES     +=  main.cpp \
             "../engine/rubric.cpp" \
             "../engine/criterion.cpp" \
             "../engine/comment.cpp" \
-            studentdeliverable.cpp
+            studentdeliverable.cpp \
+    report.cpp
 
 
 HEADERS     += \
@@ -52,7 +53,9 @@ HEADERS     += \
             "../engine/rubric.h" \
             "../engine/criterion.h" \
             "../engine/comment.h" \
-            studentdeliverable.h
+            studentdeliverable.h \
+    jtemplate.h \
+    report.h
 
 FORMS +=
 

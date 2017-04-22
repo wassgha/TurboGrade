@@ -58,6 +58,14 @@ void CardsView::remove_cards() {
     cur_row = 0;
 }
 
-void CardsView::new_course() {
+void CardsView::open_add_dialog() {
     add_dialog->show();
+}
+
+void CardsView::resizeEvent(QResizeEvent* event) {
+    int cards_per_col = this->size().width() / 220;
+    if (max_col != cards_per_col) {
+        max_col = cards_per_col;
+        refresh_cards();
+    }
 }

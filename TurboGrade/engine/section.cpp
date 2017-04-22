@@ -1,5 +1,12 @@
 #include "section.h"
 
+/**
+ * @brief Section::Section Constructor, create a new section locally
+ * @param name          name of the section, ex. "01"
+ * @param course        pointer to the course this section belongs to
+ * @param controller    current controller object
+ * @param id            -1 if new otherwise the table id if it exists
+ */
 Section::Section(QString name, Course* course, Controller* controller, int id)
 {
 
@@ -7,6 +14,7 @@ Section::Section(QString name, Course* course, Controller* controller, int id)
 
     _controller = controller;
 
+    // If id is -1 then we're creating locally and we should add to the database
     if (id == -1)
         _id = _controller->_sectionDB->add(course->_id, name);
     else
@@ -22,11 +30,14 @@ Section::Section(QString name, Course* course, Controller* controller, int id)
 
     _color = _controller->rand_color();
 
-
+    // Load the assignments and students to the section
     _controller->_assignmentDB->load_all(this);
     _controller->_studentDB->load_all(this);
 }
 
+/**
+ * @brief Section::~Section Destructor
+ */
 Section::~Section()
 {
     for(Student* student:*_students)
@@ -96,4 +107,36 @@ std::vector<Assignment*>* Section::get_assignments() {
 
     return _assignments;
 
+}
+
+/**
+ * @brief Section::num_submissions_total returns the number
+ * of submissions for a specified assignment
+ * @param assignment the assignment
+ * @return total number of submissions
+ */
+int Section::num_submissions_total(Assignment* assignment) {
+    int i = 0;
+    for (Student* student : *_students) {
+        if (student->get_submission(assignment) != nullptr) {
+            i++;
+        }
+    }
+    return i;
+}
+
+/**
+ * @brief Section::num_submissions_graded returns the number
+ * of finalized (graded) submissions for a specified assignment
+ * @param assignment the assignment
+ * @return total number of graded submissions
+ */
+int Section::num_submissions_graded(Assignment* assignment) {
+    int i = 0;
+    for (Student* student : *_students) {
+        if (student->get_submission(assignment) != nullptr && student->get_submission(assignment)->_status == 2) {
+            i++;
+        }
+    }
+    return i;
 }

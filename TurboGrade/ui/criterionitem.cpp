@@ -1,16 +1,29 @@
 #include "criterionitem.h"
 #include "ui_criterionitem.h"
 
-CriterionItem::CriterionItem(QWidget *parent, QString name, int out_of) :
+CriterionItem::CriterionItem(QWidget *parent, Criterion *criterion) :
     QWidget(parent),
+    _criterion(criterion),
     ui(new Ui::CriterionItem)
 {
     ui->setupUi(this);
 
-    ui->name->setText(name);
-    ui->grade->setText(" (out of " + QString::number(out_of) + ")");
+    if (criterion->_parent != nullptr) {
+        ui->verticalLayout_2->setContentsMargins(26, 0, 0, 0);
+        ui->add_child->hide();
+        ui->add_guide->hide();
+    }
+
+    if (!criterion->has_children() || criterion->_parent != nullptr) {
+        ui->sub_criteria->setContentsMargins(0, 0, 0, 0);
+    }
+
+    ui->name->setText(criterion->_name);
+    ui->grade->setText(" (out of " + QString::number(criterion->_out_of) + ")");
 
     connect(ui->add_child, SIGNAL(clicked()), this, SLOT(add_child()));
+    connect(ui->add_guide, SIGNAL(clicked()), this, SLOT(add_guide()));
+    connect(ui->remove, SIGNAL(clicked()), this, SLOT(remove_criterion()));
 }
 
 CriterionItem::~CriterionItem()
@@ -19,5 +32,19 @@ CriterionItem::~CriterionItem()
 }
 
 void CriterionItem::add_child() {
-//    emit add_child();
+    emit added_child(_criterion);
+}
+
+
+void CriterionItem::add_guide() {
+    emit added_guide(_criterion);
+}
+
+
+void CriterionItem::remove_criterion() {
+    emit removed_criterion(_criterion);
+}
+
+bool CriterionItem::isChild() {
+    return _criterion->_parent != nullptr;
 }

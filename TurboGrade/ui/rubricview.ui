@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>RubricView</class>
- <widget class="QWidget" name="RubricView">
+ <widget class="QDialog" name="RubricView">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -26,7 +26,7 @@
    <string/>
   </property>
   <property name="styleSheet">
-   <string notr="true">#RubricView {
+   <string notr="true">QDialog#RubricView {
 	background: white;
 }
 
@@ -48,6 +48,11 @@ QGroupBox {
 	margin: 0px;
 }
 
+QGroupBox QGroupBox {
+	border: 0px;
+	border-bottom: 0px solid lightgray;
+}
+
 #last, #suggestions {
 	border-bottom: 0px solid gray;
 }
@@ -65,12 +70,6 @@ QGroupBox {
 	padding: 5px;
 }
 
-QGroupBox &gt; QGroupBox {
-	padding-left: 15px;
-	border-bottom: 0px solid gray;
-	border-top: 1px solid lightgray;
-}
-
 #has_children {
 	padding-right: 0px;
 	padding-bottom: 0px;
@@ -80,7 +79,7 @@ QGroupBox &gt; QGroupBox {
 	margin-top : 0px;
 }
 
-#add_btn {
+#add_criterion_btn {
 	color: rgb(52, 148, 255);
 	font-weight: bold;
 }
@@ -118,9 +117,25 @@ QGroupBox &gt; QGroupBox {
 	padding: 10px;
 	border: 1px solid rgb(236, 239, 239);
 }
+
+#done_btn {
+	border:none;
+	text-transform: uppercase;
+	padding: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	border-radius: 18px;
+	color: white;
+	background: #61b4ff;
+	width: 100px;
+	height: 18px;
+}
 </string>
   </property>
   <layout class="QVBoxLayout" name="mainLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <item>
     <widget class="QLabel" name="title">
      <property name="text">
@@ -192,7 +207,7 @@ QGroupBox &gt; QGroupBox {
        </widget>
       </item>
       <item>
-       <widget class="ClickableLabel" name="add_btn">
+       <widget class="ClickableLabel" name="add_criterion_btn">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -212,6 +227,13 @@ QGroupBox &gt; QGroupBox {
       </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="criteria">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
    </item>
    <item>
     <widget class="QGroupBox" name="suggestions">
@@ -235,55 +257,55 @@ QGroupBox &gt; QGroupBox {
        <number>-1</number>
       </property>
       <item row="1" column="1">
-       <widget class="QLabel" name="label_32">
+       <widget class="ClickableLabel" name="suggestion_extracredit">
         <property name="text">
          <string>Extra-credit</string>
         </property>
        </widget>
       </item>
+      <item row="0" column="2">
+       <widget class="ClickableLabel" name="suggestion_correctness">
+        <property name="text">
+         <string>Correctness</string>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="label_29">
+       <widget class="ClickableLabel" name="suggestion_compiles">
         <property name="text">
          <string>Compiles</string>
         </property>
        </widget>
       </item>
+      <item row="0" column="1">
+       <widget class="ClickableLabel" name="suggestion_documentation">
+        <property name="text">
+         <string>Documentation</string>
+        </property>
+       </widget>
+      </item>
       <item row="0" column="0">
-       <widget class="QLabel" name="label_26">
+       <widget class="ClickableLabel" name="suggestion_design">
         <property name="text">
          <string>Design</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
-       <widget class="QLabel" name="label_30">
-        <property name="text">
-         <string>TextLabel</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLabel" name="label_28">
-        <property name="text">
-         <string>Complet...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label_31">
-        <property name="text">
-         <string>Comments</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QLabel" name="label_27">
-        <property name="text">
-         <string>JavaDoc</string>
-        </property>
-       </widget>
-      </item>
      </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="done_btn">
+     <property name="text">
+      <string>Done</string>
+     </property>
+     <property name="icon">
+      <iconset resource="resources.qrc">
+       <normaloff>:/misc/res/confirm.png</normaloff>:/misc/res/confirm.png</iconset>
+     </property>
+     <property name="autoDefault">
+      <bool>false</bool>
+     </property>
     </widget>
    </item>
   </layout>
@@ -293,8 +315,13 @@ QGroupBox &gt; QGroupBox {
    <class>ClickableLabel</class>
    <extends>QLabel</extends>
    <header>clickablelabel.h</header>
+   <slots>
+    <signal>clicked()</signal>
+   </slots>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -21,7 +21,7 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     add_btn = new QPushButton("Import submissions");
     add_btn->setCursor(Qt::PointingHandCursor);
     add_btn->setObjectName("add_btn");
-    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(new_course()));
+    connect(add_btn, SIGNAL(clicked(bool)), this, SLOT(open_add_dialog()));
 
     export_csv_btn = new QPushButton("Export Grades (CSV)");
     export_csv_btn->setFlat(true);
@@ -69,23 +69,49 @@ void SubmissionView::refresh_cards() {
     for(Student* student : *_section->_students) {
         if (student->get_submission(_assignment) != nullptr) {
             Submission* submission = student->get_submission(_assignment);
+
+            // Determine grading status
+            QString grading_status = "";
+            switch (submission->_status) {
+                case 0:
+                    grading_status = "Grading not started";
+                    break;
+                case 1:
+                    grading_status = "Grading in progress";
+                    break;
+                case 2:
+                    grading_status = "Final Grade : " +
+                            QString::number(submission->grade_percent()) +
+                            "% (" +
+                            QString::number(submission->get_grade()) +
+                            " out of " +
+                            QString::number(_assignment->_rubric->total_grade()) +
+                            ")";
+                    break;
+                default:
+                    break;
+            }
+
             Card* new_submission = new Card(student->_name,
-                                        "Grade : " +
-                                        (_assignment->_rubric->total_grade() == 0
-                                             ?
-                                             QString::number(0)
-                                             :
-                                             QString::number(100*submission->get_grade()/_assignment->_rubric->total_grade())
-                                         ) +
-                                        "% (" +
-                                        QString::number(submission->get_grade()) +
-                                        " out of " +
-                                        QString::number(_assignment->_rubric->total_grade()) +
-                                        ")",
+                                        grading_status,
                                         student->_color, submission, true);
+
             cards.push_back(new_submission);
+
             connect(new_submission, SIGNAL(clicked(QObject*)), _parent, SLOT(start_grading(QObject*)));
+
             add_card(new_submission);
+
+        } else {
+
+            Card* no_submission = new Card(student->_name,
+                                        "Student didn't submit",
+                                        student->_color, nullptr, true, true);
+
+            cards.push_back(no_submission);
+
+            add_card(no_submission);
+
         }
     }
 
@@ -124,9 +150,12 @@ void SubmissionView::import_submission() {
             _section->add_student(submission_folder);
             added_student = _section->get_student(submission_folder);
         }
-        Submission* added_submission = added_student->add_submission(_assignment);
-        if (_assignment->_full_grade) {
-            added_submission->attribute_full_grade();
+        Submission* added_submission = added_student->get_submission(_assignment);
+        if (added_submission == nullptr) {
+            added_submission = added_student->add_submission(_assignment);
+            if (_assignment->_full_grade) {
+                added_submission->attribute_full_grade();
+            }
         }
     }
 

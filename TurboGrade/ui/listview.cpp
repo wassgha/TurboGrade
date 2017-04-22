@@ -56,6 +56,6 @@ void ListView::remove_cards() {
     cur_row = 0;
 }
 
-void ListView::new_course() {
+void ListView::open_add_dialog() {
     add_dialog->show();
 }

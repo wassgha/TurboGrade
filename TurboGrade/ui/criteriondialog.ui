@@ -1,100 +1,100 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>FormDialog</class>
- <widget class="QWidget" name="FormDialog">
+ <class>CriterionDialog</class>
+ <widget class="QWidget" name="CriterionDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>161</height>
+    <height>191</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#FormDialog
+   <string notr="true">#CriterionDialog
 {
-	background: white;
+        background: white;
 }
 
 QLabel {
-	text-transform: capitalize;
+        text-transform: capitalize;
 }
 
 #title {
-	text-transform: capitalize;
-	font-size: 16px;
-	font-weight: bold;
+        text-transform: capitalize;
+        font-size: 16px;
+        font-weight: bold;
 }
 
 QLineEdit, QTextEdit {
-	border: none;
-	border-bottom: 2px solid rgba(0,0,0,10);
-	outline:none;
-	padding: 5px;
+        border: none;
+        border-bottom: 2px solid rgba(0,0,0,10);
+        outline:none;
+        padding: 5px;
 }
 
 QLineEdit::focus, QTextEdit::focus {
-	border: none;
-	border-bottom: 2px solid lightgray;
-	outline:none;
+        border: none;
+        border-bottom: 2px solid lightgray;
+        outline:none;
 }
 
 #cancel_btn {
-	border:none;
-	background:transparent;
-	color: black;
-	text-transform: uppercase;
-	width: 80px;
-	height: 18px;
+        border:none;
+        background:transparent;
+        color: black;
+        text-transform: uppercase;
+        width: 80px;
+        height: 18px;
 }
 
 #ok_btn {
-	border:none;
-	text-transform: uppercase;
-	padding: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	border-radius: 18px;
-	color: white;
-	background: #61b4ff;
-	width: 100px;
-	height: 18px;
+        border:none;
+        text-transform: uppercase;
+        padding: 10px;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-radius: 18px;
+        color: white;
+        background: #61b4ff;
+        width: 100px;
+        height: 18px;
 }
 
 #warning, #info {
-	border:none;
-	text-transform: capitalize;
-	padding: 10px;
-	border-radius: 3px;
-	color: white;
-	text-align: center;
+        border:none;
+        text-transform: capitalize;
+        padding: 10px;
+        border-radius: 3px;
+        color: white;
+        text-align: center;
 }
 
 #warning {
-	background: #f39c12;
+        background: #f39c12;
 }
 
 #info {
-	background: #61b4ff;
+        background: #61b4ff;
 }
 
 #select_folder {
-	background: white;
-	border: 1px solid lightgray;
-	border-radius: 3px;
-	padding: 10px;
-	padding-top: 20px;
-	padding-bottom: 20px;
+        background: white;
+        border: 1px solid lightgray;
+        border-radius: 3px;
+        padding: 10px;
+        padding-top: 20px;
+        padding-bottom: 20px;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="title">
      <property name="text">
-      <string>New Course</string>
+      <string>Parent:</string>
      </property>
     </widget>
    </item>
@@ -112,19 +112,33 @@ QLineEdit::focus, QTextEdit::focus {
     </spacer>
    </item>
    <item>
-    <layout class="QFormLayout" name="formLayout">
-     <property name="horizontalSpacing">
-      <number>-1</number>
-     </property>
-     <property name="verticalSpacing">
-      <number>20</number>
-     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="topMargin">
       <number>20</number>
      </property>
      <property name="bottomMargin">
       <number>20</number>
      </property>
+     <item>
+      <widget class="QLabel" name="name_label">
+       <property name="text">
+        <string>Criterion: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="name"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="total_pts_label">
+       <property name="text">
+        <string>Total Pts.:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="grade"/>
+     </item>
     </layout>
    </item>
    <item>

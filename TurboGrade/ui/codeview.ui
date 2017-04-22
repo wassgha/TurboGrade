@@ -47,7 +47,9 @@ QSplitter#splitter_2::handle:vertical {
 
 QScrollArea#comments {
 	border: none;
-	background: transparent;
+	background: url(:/misc/res/comment.png);
+	background-repeat: none;
+	background-position: center center;
 }
 
 #comments_title {
@@ -65,7 +67,7 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
 }
 
 #terminal {
-	background: black;
+	background: rgba(0, 0, 0, 128);
 	border-radius: 3px;
 	color: white;
 	padding: 10px;

@@ -19,9 +19,13 @@ public:
                                 Submission* submission = nullptr);
     ~CriterionGradeCard();
     void update_grade();
+    void insert_child(QWidget* child);
 
 private slots:
     void on_grade_valueChanged(int grade);
+
+signals:
+    void grade_changed();
 
 private:
     Ui::CriterionGradeCard *ui;

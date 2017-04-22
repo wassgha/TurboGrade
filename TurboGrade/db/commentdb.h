@@ -15,15 +15,13 @@ class Controller;
 class CommentDB : public DBEngine
 {
 public:
-    // Constructor
-    CommentDB();
+
     // Parametrized constructor
     CommentDB(Controller *controller, QString dbname):
         DBEngine("CommentDB", dbname),
         _controller(controller){}
     // Destructor
     ~CommentDB();
-
 
     // Adds a row to the comment table
     int add(int submission_id, QString filename,
@@ -32,6 +30,8 @@ public:
             int end_pos);
     // Loads comments for a specific submission
     void load_all(Submission *submission);
+    // Load all comments for autocompleting
+    QSqlTableModel* load_model();
 
 
     // Controller

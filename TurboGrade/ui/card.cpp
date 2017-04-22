@@ -2,12 +2,20 @@
 #include "ui_card.h"
 
 
-Card::Card(QString title, QString info, QString color, QObject* obj, bool initials) :
+Card::Card(QString title, QString info, QString color, QObject* obj, bool initials, bool disabled) :
     QWidget(0),
-    ui(new Ui::Card)
+    ui(new Ui::Card),
+    _disabled(disabled)
 {
     setCursor(Qt::PointingHandCursor);
     ui->setupUi(this);
+    if (_disabled) {
+        setCursor(Qt::ArrowCursor);
+        QGraphicsOpacityEffect * op = new QGraphicsOpacityEffect();
+        op->setOpacity(0.5);
+        setGraphicsEffect(op);
+        setAutoFillBackground(true);
+    }
     ui->title->setText(title);
     ui->info->setText(info);
     ui->logo->setStyleSheet("background: " + color + ";");
@@ -26,7 +34,7 @@ Card::~Card()
 
 void Card::mousePressEvent(QMouseEvent *event)
 {
-    if (event->button() == Qt::LeftButton) {
+    if (event->button() == Qt::LeftButton && !_disabled) {
         emit clicked(_obj);
     }
 }

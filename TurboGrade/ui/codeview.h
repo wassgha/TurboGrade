@@ -23,6 +23,7 @@
 
 #include <QMainWindow>
 #include <QDesktopWidget>
+#include <QStandardItemModel>
 #include <QWidget>
 #include <QEvent>
 #include <QMoveEvent>
@@ -58,10 +59,10 @@ public:
 public slots:
     void getSelection();
     void loadFile(QModelIndex item);
-    void finished_loading(QString file);
+    void finished_loading();
     void add_comment();
     void highlight_comment(Comment * comment);
-    void unhighlight_comment(Comment * comment);
+    void unhighlight_comments();
 
 private:
     void refresh_criteria();

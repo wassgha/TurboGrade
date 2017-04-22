@@ -2,20 +2,21 @@
 #include "ui_gradesubmission.h"
 
 GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Controller *controller) :
-    QWidget(parent),
+    QWidget(parent, Qt::Window),
     ui(new Ui::GradeSubmission)
 {
-    ui->setupUi(this);
 
-    installEventFilter(this);
+    ui->setupUi(this);
 
     _controller = controller;
     _submission = submission;
 
     setWindowTitle("TurboGrade - Grading submission");
     setAttribute(Qt::WA_StyledBackground, true);
-    setWindowFlags(Qt::Window);
     setWindowState(Qt::WindowFullScreen);
+
+    ui->run->setCursor(Qt::PointingHandCursor);
+    ui->toggle->setCursor(Qt::PointingHandCursor);
 
     code_view = new CodeView(this, _controller);
     grade_view = new GradeView(this, _controller);
@@ -24,9 +25,15 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->mainWidget->addWidget(grade_view);
     ui->mainWidget->setCurrentWidget(code_view);
 
+    // Show grading progress (graded/total submissions)
+    ui->progressBar->setMaximum(_submission->_student->_section->num_submissions_total(_submission->_assignment));
+    ui->progressBar->setValue(_submission->_student->_section->num_submissions_graded(_submission->_assignment));
+
     refresh_students();
 
     ui->hideName->setChecked(true);
+
+    installEventFilter(this);
 }
 
 
@@ -58,6 +65,13 @@ void GradeSubmission::finished_running() {
 
     ui->run->setText("Run");
     ui->run->setEnabled(true);
+    QByteArray errors = compile->readAllStandardError();
+    if (errors != QByteArray("")) {
+        code_view->ui->terminal->append("<code style=\"color:white; background:#e74c3c; padding-top:10px; padding-right:10px;padding-left:10px;padding-bottom:10px;\">"
+                                            + errors + "</code>");
+        activateWindow();
+        raise();
+    }
     code_view->ui->terminal->append(compile->readAllStandardOutput());
 
 }

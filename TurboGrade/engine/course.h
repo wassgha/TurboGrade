@@ -29,7 +29,7 @@ public:
 
     Course() = delete; //don't allow default constructor
     // Parametrized constructor
-    Course(QString name, Controller * controller, int id = -1);
+    Course(QString name, QString semester, Controller * controller, int id = -1);
     // Destructor
     ~Course();
     // Add a section to the course
@@ -43,6 +43,8 @@ public:
     int _id;
     // Class name
     QString _name;
+    // Class semester
+    QString _semester;
     // Class sections
     std::vector<Section*> *_sections;
     // Controller

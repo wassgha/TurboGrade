@@ -7,14 +7,14 @@
     <x>0</x>
     <y>0</y>
     <width>216</width>
-    <height>76</height>
+    <height>80</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#Card {
+   <string notr="true">QWidget#Card {
 	background:transparent;
 }
 #logo {

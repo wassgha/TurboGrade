@@ -10,7 +10,6 @@ class Controller;
 class GradeDB : public DBEngine
 {
 public:
-    GradeDB();
     // Constructor
     GradeDB(Controller *controller, QString dbname):
         DBEngine("GradeDB", dbname),

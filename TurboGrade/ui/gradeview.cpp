@@ -20,7 +20,20 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
                     _parent->_submission);
         _cards[criterion] = card;
         ui->verticalLayout_3->insertWidget(2, card);
+        connect(card, SIGNAL(grade_changed()), this, SLOT(update_grades()));
+        for (Criterion* child : *criterion->_sub_criteria) {
+
+            CriterionGradeCard *child_card = new CriterionGradeCard(
+                        this,
+                        child,
+                        _parent->_submission);
+            card->insert_child(child_card);
+            connect(child_card, SIGNAL(grade_changed()), this, SLOT(update_grades()));
+        }
     }
+
+    ui->dummy1->hide();
+    ui->dummy2->hide();
 
 }
 
@@ -28,6 +41,13 @@ void GradeView::update_grades() {
     for (std::pair<Criterion*, CriterionGradeCard*>card : _cards) {
         card.second->update_grade();
     }
+    ui->total_grade->setText("Total Grade : " +
+                             QString::number(_parent->_submission->grade_percent()) +
+                             "% (" +
+                             QString::number(_parent->_submission->get_grade()) +
+                             " out of " +
+                             QString::number(_parent->_submission->_assignment->_rubric->total_grade()) +
+                             ")");
 }
 
 GradeView::~GradeView()
@@ -36,4 +56,9 @@ GradeView::~GradeView()
         delete card.second;
     }
     delete ui;
+}
+
+void GradeView::on_finalize_clicked()
+{
+    _parent->_submission->update_status(2);
 }

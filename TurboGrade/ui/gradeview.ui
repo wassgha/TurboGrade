@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>659</width>
-    <height>767</height>
+    <height>832</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -85,8 +85,6 @@ QGroupBox::title {
 	font-weight: bold;
 	text-transform: uppercase;
 }
-
-
 
 
 
@@ -262,7 +260,7 @@ QWidget#general_comments_box {
         </layout>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox_2">
+        <widget class="QGroupBox" name="dummy1">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
            <horstretch>0</horstretch>
@@ -534,7 +532,7 @@ QWidget#general_comments_box {
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="groupBox">
+        <widget class="QGroupBox" name="dummy2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
            <horstretch>0</horstretch>

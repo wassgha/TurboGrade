@@ -86,7 +86,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="remove">
+         <widget class="ClickableLabel" name="remove">
           <property name="maximumSize">
            <size>
             <width>26</width>
@@ -162,6 +162,13 @@
           </property>
          </spacer>
         </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="sub_criteria">
+        <property name="topMargin">
+         <number>12</number>
+        </property>
        </layout>
       </item>
      </layout>

@@ -1,5 +1,12 @@
 #include "student.h"
 
+/**
+ * @brief Student::Student Constructor, creates a new student locally
+ * @param name          name of the student
+ * @param section       pointer to the section the student belongs to
+ * @param controller    current controller object
+ * @param id            -1 if this is to be added to the database or its id if it exists
+ */
 Student::Student(QString name, Section* section, Controller * controller, int id)
 {
 
@@ -7,6 +14,7 @@ Student::Student(QString name, Section* section, Controller * controller, int id
 
     _controller = controller;
 
+    // If id is -1 then we're creating locally and we should add to the database
     if (id == -1)
         _id = _controller->_studentDB->add(section->_id, name);
     else
@@ -23,6 +31,9 @@ Student::Student(QString name, Section* section, Controller * controller, int id
     _controller->_submissionDB->load_all(this);
 }
 
+/**
+ * @brief Student::~Student Destructor
+ */
 Student::~Student()
 {
     for(Submission* submission:*_submissions)
@@ -34,10 +45,11 @@ Student::~Student()
 /**
  * @brief Student::add_submission adds a submission made by this student
  * @param assignment a pointer to the assignment the submission belongs to
+ * @param status whether the submission was graded or not
  */
-Submission* Student::add_submission(Assignment* assignment, int id) {
+Submission* Student::add_submission(Assignment* assignment, int status, int id) {
 
-    Submission *new_submission = new Submission(assignment, this, _controller, id);
+    Submission *new_submission = new Submission(assignment, this, _controller, status, id);
 
     _submissions->push_back(new_submission);
 

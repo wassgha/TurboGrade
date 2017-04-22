@@ -1,22 +1,6 @@
 #include "studentdb.h"
 
 /**
- * @brief Default constructor
- */
-StudentDB::StudentDB()
-{
-
-}
-
-/**
- * @brief Destructor
- */
-
-StudentDB::~StudentDB() {
-
-}
-
-/**
  * @brief StudentDB::add Insert a row to the database
  * @param name the name of the student (ex. Wassim Gharbi)
  * @return true if the query succeded
@@ -119,4 +103,14 @@ void StudentDB::load_all(Section* section) {
 
     query.finish();
     db.commit();
+}
+
+
+
+/**
+ * @brief Destructor
+ */
+
+StudentDB::~StudentDB() {
+
 }
