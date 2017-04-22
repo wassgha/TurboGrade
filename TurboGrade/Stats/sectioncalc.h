@@ -14,9 +14,13 @@
 class SectionCalc
 {
 public:
-    SectionCalc(Section a);
+    SectionCalc(Section *a);
     ~SectionCalc();
     Section *current;
+    float getTotMean();
+    float getTotal();
+    float getNumber();
+    float getAssignMean(Assignment *assign);
 };
 
 #endif // SECTIONCALC_H

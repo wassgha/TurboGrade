@@ -1,9 +1,9 @@
 #include "studentcalc.h"
 
-StudentCalc::StudentCalc(Student a)
+StudentCalc::StudentCalc(Student *a)
 {
 
-    current = &a;
+    current = a;
 }
 
 StudentCalc::~StudentCalc()
@@ -26,3 +26,15 @@ float StudentCalc::getMean()
     }
     return mean;
 }
+
+float StudentCalc::getTotal()
+{
+    float total = 0;
+    std::vector<Submission*> *currentSubs = current->get_submissions();
+    for(int i = 0; i<int(currentSubs->size()); i++)
+    {
+        total = total + currentSubs->at(i)->get_grade();
+    }
+    return total;
+}
+

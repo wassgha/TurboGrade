@@ -1,5 +1,5 @@
 #ifndef CLASSCALC_H
-#define CLASSCALC_H
+#define COURSECALC_H
 
 #include "../db/gradedb.h"
 #include "../db/rubricdb.h"
@@ -11,12 +11,16 @@
 #include "../db/coursedb.h"
 #include "../db/dbengine.h"
 
-class ClassCalc
+class CourseCalc
 {
 public:
-    ClassCalc();
-    ~ClassCalc();
-    int getTotal(GradeDB x);
+    CourseCalc(Course *a);
+    ~CourseCalc();
+    Course *current;
+    float getTotMean();
+    float getTotal();
+    float get();
+    float getAssignMean(Assignment *assign);
 };
 
-#endif // CLASSCALC_H
+#endif // COURSECALC_H

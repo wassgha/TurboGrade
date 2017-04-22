@@ -97,3 +97,9 @@ std::vector<Assignment*>* Section::get_assignments() {
     return _assignments;
 
 }
+
+std::vector<Student*>* Section::get_students() {
+
+    return _students;
+
+}

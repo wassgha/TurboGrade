@@ -6,16 +6,14 @@ QT += sql widgets printsupport
 LIBS += -pthread
 
 SOURCES += main.cpp \
-    assignmentcalc.cpp \
     studentcalc.cpp \
     sectioncalc.cpp \
-    classcalc.cpp
+    coursecalc.cpp
 
 HEADERS += \
-    assignmentcalc.h \
     studentcalc.h \
     sectioncalc.h \
-    classcalc.h
+    coursecalc.h
 
 SOURCES     += \
             "../tools/objectidentifier.cpp" \
