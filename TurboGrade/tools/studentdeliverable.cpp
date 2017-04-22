@@ -22,12 +22,16 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_names(submission, htmlString);
     add_total_grade_sticker(submission, htmlString);
     add_general_comments(submission, htmlString);
+    htmlString.append("\n    <div class = \"container\">");
     add_assignment_obj(submission, htmlString);
     add_grade_summary(submission, htmlString);
+    htmlString.append(                "\n  </div>");
     add_total_grade(submission, htmlString);
+    htmlString.append("\n    <div class = \"container\">");
     add_detailed_remarks(submission, htmlString);
     add_image(submission, htmlString);
-    htmlString.append(                "\n  </div>");
+    htmlString.append("\n       </div>");
+    htmlString.append("\n  </div>");
     htmlString.append("<script>SyntaxHighlighter.all();</script>");
     htmlString.append("\n</body>");
     htmlString.append("\n</html>");
@@ -113,7 +117,6 @@ void StudentDeliverable::add_comments(Submission* submission, QString &htmlStrin
 }
 
 void StudentDeliverable::add_assignment_obj(Submission *submission, QString &htmlString){
-    htmlString.append("\n    <div class = \"container\">");
     htmlString.append(
                 "\n        <h2>Assignment Objective</h2>"
                 "\n        <p>");
@@ -148,8 +151,6 @@ void StudentDeliverable::add_grades(Submission *submission, QString &htmlString)
                 htmlString.append(std::to_string(subcriterion->_out_of).c_str());
                 htmlString.append("</span>"
                                   "\n                </li>");
-                htmlString.append(
-                            "\n        </div>");
             }
             htmlString.append(
                         "\n            </ul>");
@@ -171,7 +172,6 @@ void StudentDeliverable::add_general_comments(Submission *submission, QString &h
 }
 
 void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &htmlString){
-    htmlString.append("\n<div class = \"container\">");
     htmlString.append("\n      <h2>Detailed remarks</h2>");
     htmlString.append("\n      <div class = \"criterion comments\">");
     for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){

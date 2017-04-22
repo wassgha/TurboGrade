@@ -9,6 +9,8 @@
 #include "dashboard.h"
 #include "../tools/dirtools.h"
 #include "../tools/csvgenerator.h"
+#include "../tools/studentdeliverable.h"
+#include "../tools/htmltopdf.h"
 
 class SubmissionView;
 

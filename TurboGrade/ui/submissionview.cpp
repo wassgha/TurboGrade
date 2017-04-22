@@ -176,5 +176,15 @@ void SubmissionView::export_csv() {
 void SubmissionView::export_all_pdf() {
     QString folder = QFileDialog::getExistingDirectory(this, tr("Save reports in..."), QString(),
                                                        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    std::vector<HTMLToPDF*> pdf_generators;
+    for (Student *student : *_section->_students) {
+        if (student->get_submission(_assignment) != nullptr) {
+            StudentDeliverable s;
+            QString html = s.placeParameters(student->get_submission(_assignment));
+            pdf_generators.push_back(new HTMLToPDF(html, folder + "/" + student->_name + ".pdf"));
+
+        }
+    }
+
 }
 

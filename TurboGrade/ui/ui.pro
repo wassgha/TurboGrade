@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql printsupport script
+QT       += core gui sql printsupport webenginewidgets script
 QT          += sql widgets printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -35,6 +35,8 @@ SOURCES += main.cpp\
         "../tools/dirtools.cpp" \
         "../tools/csvgenerator.cpp" \
         "../tools/filewriter.cpp" \
+            "../tools/studentdeliverable.cpp" \
+            "../tools/htmltopdf.cpp" \
             "../db/dbengine.cpp" \
             "../db/coursedb.cpp" \
             "../db/sectiondb.cpp" \
@@ -85,6 +87,8 @@ HEADERS  +=\
             "../tools/dirtools.h" \
             "../tools/csvgenerator.h" \
             "../tools/filewriter.h" \
+            "../tools/studentdeliverable.h" \
+            "../tools/htmltopdf.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \
@@ -146,4 +150,5 @@ FORMS    += \
     criterionguidedialog.ui
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    "../tools/report.qrc"
