@@ -168,21 +168,25 @@ void SubmissionView::import_submission() {
 
 void SubmissionView::export_csv() {
     QString folder = QFileDialog::getSaveFileName(this, tr("Save CSV as"));
-    CSVGenerator g;
-    g.printProfessor(_section, _assignment, folder);
+    if (folder != "") {
+        CSVGenerator g;
+        g.printProfessor(_section, _assignment, folder);
+    }
 }
 
 
 void SubmissionView::export_all_pdf() {
     QString folder = QFileDialog::getExistingDirectory(this, tr("Save reports in..."), QString(),
                                                        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    std::vector<HTMLToPDF*> pdf_generators;
-    for (Student *student : *_section->_students) {
-        if (student->get_submission(_assignment) != nullptr) {
-            StudentDeliverable s;
-            QString html = s.placeParameters(student->get_submission(_assignment));
-            pdf_generators.push_back(new HTMLToPDF(html, folder + "/" + student->_name + ".pdf"));
+    if (folder != "") {
+        std::vector<HTMLToPDF*> pdf_generators;
+        for (Student *student : *_section->_students) {
+            if (student->get_submission(_assignment) != nullptr) {
+                StudentDeliverable s;
+                QString html = s.placeParameters(student->get_submission(_assignment));
+                pdf_generators.push_back(new HTMLToPDF(html, folder + "/" + student->_name + ".pdf"));
 
+            }
         }
     }
 

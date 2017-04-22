@@ -67,9 +67,10 @@ void GradeView::on_export_pdf_clicked()
 {
     QString folder = QFileDialog::getExistingDirectory(this, tr("Save report in..."), QString(),
                                                        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    StudentDeliverable s;
-    QString html = s.placeParameters(_parent->_submission);
-    HTMLToPDF* report = new HTMLToPDF(html, folder + "/" + _parent->_submission->_student->_name + ".pdf");
-
+    if (folder != "") {
+        StudentDeliverable s;
+        QString html = s.placeParameters(_parent->_submission);
+        HTMLToPDF* report = new HTMLToPDF(html, folder + "/" + _parent->_submission->_student->_name + ".pdf");
+    }
 
 }
