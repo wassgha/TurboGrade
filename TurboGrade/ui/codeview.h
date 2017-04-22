@@ -63,6 +63,7 @@ public slots:
     void add_comment();
     void highlight_comment(Comment * comment);
     void unhighlight_comments();
+    void auto_completed(QModelIndex index);
 
 private:
     void refresh_criteria();
@@ -72,7 +73,7 @@ private:
     void refresh_autocomplete();
 
     QFileSystemModel    *_model;
-    QCompleter          *_completer;
+    QCompleter          *_completer = nullptr;
     QModelIndex root_index;
 
 };

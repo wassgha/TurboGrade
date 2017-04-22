@@ -190,7 +190,8 @@ CodeView::~CodeView()
         delete comment_card;
     }
     _comment_cards.clear();
-    delete _completer;
+    if (_completer != nullptr)
+        delete _completer;
     delete _popup;
     delete _model;
     delete ui;
@@ -278,11 +279,24 @@ void CodeView::unhighlight_comments() {
 }
 
 void CodeView::refresh_autocomplete() {
+    if (_completer != nullptr)
+        delete _completer;
+
     _completer = new QCompleter(_controller->_all_comments, this);
     _completer->setCompletionMode(QCompleter::InlineCompletion);
     _completer->setCaseSensitivity(Qt::CaseInsensitive);
     _completer->setCompletionColumn(4);
     _popup->ui->comment->setCompleter(_completer);
+    connect(_completer, SIGNAL(highlighted(QModelIndex)), this, SLOT(auto_completed(QModelIndex)));
+}
+
+void CodeView::auto_completed(QModelIndex index) {
+    QModelIndex index_table_model = qobject_cast<QAbstractProxyModel*> (_completer->completionModel())->mapToSource(index);
+
+    qDebug()<<"Called autocompleted with index"<<index_table_model.row();
+    _popup->ui->adjust_grade->setValue(_controller->_all_comments->record(index_table_model.row()).value("grade").toInt());
+    int row = _popup->ui->criterion->findData(_controller->_all_comments->record(index_table_model.row()).value("rubric").toInt());
+    _popup->ui->criterion->setCurrentIndex(_popup->ui->criterion->model()->index(row, 0).row());
 }
 
 QString CodeView::current_file() {
