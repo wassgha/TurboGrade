@@ -203,3 +203,26 @@ h2 {
   width: 100%;
   margin-bottom: 10px;
 }
+
+
+.syntaxhighlighter {
+    border-radius: 3px;
+    background: transparent !important;
+}
+
+.syntaxhighlighter .line.alt1, .syntaxhighlighter .line.alt2 {
+  background: transparent !important;
+}
+
+.syntaxhighlighter .toolbar {
+    display: none;
+}
+
+.syntaxhighlighter .gutter .line {
+    border-right: none !important;
+}
+
+.file_name {
+    padding: 10px;
+    display: block;
+}

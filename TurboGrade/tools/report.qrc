@@ -2,5 +2,9 @@
     <qresource prefix="/css">
         <file>report/style.css</file>
         <file>report/logo.png</file>
+        <file>report/shAutoloader.js</file>
+        <file>report/shBrushJava.js</file>
+        <file>report/shCore.js</file>
+        <file>report/shThemeRDark.css</file>
     </qresource>
 </RCC>

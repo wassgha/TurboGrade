@@ -27,7 +27,7 @@ QString StudentDeliverable::placeParameters(Submission *submission){
     add_detailed_remarks(submission, htmlString);
     add_image(submission, htmlString);
     htmlString.append(                "\n  </div>");
-    htmlString.append("<script>hljs.initHighlightingOnLoad();</script>");
+    htmlString.append("<script>SyntaxHighlighter.all();</script>");
     htmlString.append("\n</body>");
     htmlString.append("\n</html>");
     std::cout << htmlString.toStdString() << "\n";
@@ -49,9 +49,11 @@ void StudentDeliverable::add_header(Submission *submission, QString &htmlString)
 }
 
 void StudentDeliverable::add_style(Submission *submission, QString &htmlString){
-    htmlString.append("<link href=\"qrc:///css/report/style.css\" rel=\"stylesheet\" type=\"text/css\" />");
-    htmlString.append("<link rel=\"stylesheet\" href=\"http://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/default.min.css\">"
-                      "<script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/highlight.min.js\"></script>");
+    htmlString.append("\n <link href=\"qrc:///css/report/shThemeRDark.css\" rel=\"stylesheet\" type=\"text/css\" />"
+                      "\n <script src=\"qrc:///css/report/shCore.js\" type=\"text/javascript\"></script>"
+                      "\n <script src=\"qrc:///css/report/shBrushJava.js\" type=\"text/javascript\"></script>"
+                      "\n <script src=\"qrc:///css/report/shAutoloader.js\" type=\"text/javascript\"></script>");
+    htmlString.append("\n <link href=\"qrc:///css/report/style.css\" rel=\"stylesheet\" type=\"text/css\" />");
 
 }
 
@@ -157,6 +159,7 @@ void StudentDeliverable::add_general_comments(Submission *submission, QString &h
 }
 
 void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &htmlString){
+    htmlString.append("\n<div id = \"container\">");
     htmlString.append("\n      <h2>Detailed remarks</h2>");
     htmlString.append("\n      <div class = \"criterion comments\">");
     for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
@@ -201,14 +204,15 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
     QFile file(fullPath);
     QString errMsg;
     QFileDevice::FileError err = QFileDevice::NoError;
-    //    if (!file.open(QIODevice::ReadOnly)) {
-    //        errMsg = file.errorString();
-    //        err = file.error();
-    //    }
-    qDebug() << errMsg;
-    htmlString += comment->_filename;
+//    if (!file.open(QIODevice::ReadOnly)) {
+//        errMsg = file.errorString();
+//        err = file.error();
+//    }
+    qDebug() << errMsg<<endl;
+    qDebug()<< fullPath;
+    htmlString += "\n <span class=\"file_name\">On \"" + comment->_filename + "\"</span>";
     htmlString += "\n            <div class = \"code-container\">";
-            if (file.open(QFile::ReadOnly | QFile::Text)){
+    if (file.open(QFile::ReadOnly | QFile::Text)){
         QTextStream in(&file);
         int start = comment->_start_pos;
         int end = comment->_end_pos;
@@ -232,21 +236,15 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
         }
 
 
-        QString lineNumbers = "\n                <div class = \"lines\">";
-        QString codeLines = "\n                <pre><code>";
+        QString codeLines = "\n                <pre class=\"brush: java\">";
         for(int i = lineIndexStart - linesBefore - 1; i < lineIndexEnd + linesAfter - 1 && i < (int)allLines.size(); i++){
             if(i >= 0){
                 codeLines.append("\n                   ");
-                lineNumbers.append("\n                   ");
-                lineNumbers.append(std::to_string(i).c_str());
-                lineNumbers.append("<br>");
                 codeLines.append(allLines[i]);
                 codeLines.append("<br>");
             }
         }
-        lineNumbers.append("\n                </div>");
-        codeLines.append("\n                </code></pre>");
-        htmlString.append(lineNumbers);
+        codeLines.append("\n                </pre>");
         htmlString.append(codeLines);
         file.close();
     }
