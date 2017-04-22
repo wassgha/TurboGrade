@@ -175,7 +175,7 @@ void StudentDeliverable::add_general_comments(Submission *submission, QString &h
 void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &htmlString){
     htmlString.append("\n      <h2>Detailed remarks</h2>");
     for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
-        htmlString.append("\n      <div class = \"criterion\">");
+        htmlString.append("\n      <div class = \"criterion comments\">");
         htmlString.append("\n          <div class = \"name\">  <span class = \"circle\"></span> ");
         htmlString.append(criterion->_name);
         htmlString.append("\n              <span class = \"grade\">");
@@ -185,7 +185,13 @@ void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &h
         htmlString.append("</span>"
                           "\n          </div>");
         std::vector<Comment *> comments = submission->get_comments(criterion);
-        if(comments.empty()){
+        // Count number of comments in total
+        int total_comments = comments.size();
+        for(Criterion *sub_criterion: *criterion->_sub_criteria){
+            total_comments += submission->get_comments(sub_criterion).size();
+        }
+        // Display comments
+        if(total_comments <= 0){
             htmlString.append("\n <p>No remarks on this criterion.</p>");
         } else {
             htmlString.append("\n <p><b>Remarks:</b></p>");
@@ -225,6 +231,7 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
 //    }
     qDebug() << errMsg<<endl;
     qDebug()<< fullPath;
+    htmlString += "\n <div class=\"comment-block\">";
     htmlString += "\n <span class=\"file_name\">On \"" + comment->_filename + "\" for \"" + comment->_criterion->_name + "\" </span>";
     htmlString += "\n            <div class = \"code-container\">";
     if (file.open(QFile::ReadOnly | QFile::Text)){
@@ -276,4 +283,5 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
     htmlString.append("\n                  " + comment->_text + "</p>"
                       "\n                </div>");
     htmlString.append("\n            </div>");
+    htmlString.append("\n       </div>");
 }

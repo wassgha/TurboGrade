@@ -160,7 +160,7 @@ void FormDialog::on_ok_btn_clicked()
 
 void FormDialog::select_folder() {
     _data = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-                                              "",
+                                              "~/",
                                               QFileDialog::ShowDirsOnly
                                               | QFileDialog::DontResolveSymlinks);
 }

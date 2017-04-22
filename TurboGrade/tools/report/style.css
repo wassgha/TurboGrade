@@ -29,11 +29,10 @@ h2 {
 
 .criterion:first-of-type {
   margin-top: 20px;
-  page-break-before: avoid;
 }
 
 .criterion.comments {
-  border: none;
+  page-break-inside: auto;
 }
 
 .criterion > .name {
@@ -164,7 +163,6 @@ h2 {
 }
 
 .code-container {
-  page-break-inside: avoid;
   background: #232730;
   color: #EBEBEB;
   padding: 20px;
@@ -172,6 +170,10 @@ h2 {
   position: relative;
   margin-bottom: 20px;
   overflow-x: scroll;
+}
+
+.comment-block {
+    page-break-inside: avoid;
 }
 
 .code {
@@ -275,6 +277,7 @@ h2 {
 
 #student {
   padding: 20px;
+  padding-top: 0px;
 }
 #student .avatar {
   color: white;

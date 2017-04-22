@@ -167,7 +167,7 @@ void SubmissionView::import_submission() {
 
 
 void SubmissionView::export_csv() {
-    QString folder = QFileDialog::getSaveFileName(this, tr("Save CSV as"));
+    QString folder = QFileDialog::getSaveFileName(this, tr("Save CSV as"), "~/");
     if (folder != "") {
         CSVGenerator g;
         g.printProfessor(_section, _assignment, folder);
@@ -176,7 +176,7 @@ void SubmissionView::export_csv() {
 
 
 void SubmissionView::export_all_pdf() {
-    QString folder = QFileDialog::getExistingDirectory(this, tr("Save reports in..."), QString(),
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Save reports in..."), "~/",
                                                        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if (folder != "") {
         std::vector<HTMLToPDF*> pdf_generators;

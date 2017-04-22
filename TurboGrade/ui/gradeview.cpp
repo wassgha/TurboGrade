@@ -65,7 +65,7 @@ void GradeView::on_finalize_clicked()
 
 void GradeView::on_export_pdf_clicked()
 {
-    QString folder = QFileDialog::getExistingDirectory(this, tr("Save report in..."), QString(),
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Save report in..."), "~/",
                                                        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
     if (folder != "") {
         StudentDeliverable s;
