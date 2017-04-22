@@ -71,6 +71,9 @@ void CodeView::getSelection() {
 
     // Display it
     _popup->show();
+    _popup->ui->comment->setDisabled(false);
+    _popup->ui->comment->setReadOnly(false);
+    _popup->ui->comment->setEnabled(true);
 }
 
 void CodeView::move_popup() {
