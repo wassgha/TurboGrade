@@ -76,7 +76,7 @@ h2 {
   color: darkgray;
   background-color: white;
   border: 1px solid rgb(236, 239, 239);
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 10px;
 }
 
@@ -84,12 +84,11 @@ h2 {
   color: black;
   background-color: white;
   border: 3px solid rgb(230, 212, 0);
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 10px;
 }
 
 #total {
-  border-top: 1px solid lightgray;
   padding: 20px;
   text-align: right;
   text-transform: uppercase;
@@ -98,7 +97,7 @@ h2 {
 }
 
 #total > .out-of {
-  color : gray;
+  color : lightgray;
   font-weight: normal;
 }
 
@@ -124,7 +123,7 @@ h2 {
 #grade {
   float: right;
   color: green;
-  border-radius: 5px;
+  border-radius: 3px;
   background: white;
   padding: 20px;
   font-size: 28px;
@@ -142,9 +141,9 @@ h2 {
   font-size: 24px;
 }
 
-#container {
+.container {
   color: black;
-  border-radius: 5px;
+  border-radius: 3px;
   background: white;
   padding: 20px;
   margin-top: 20px;
@@ -155,7 +154,7 @@ h2 {
   background: #232730;
   color: #EBEBEB;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 3px;
   position: relative;
   margin-bottom: 20px;
   overflow-x: scroll;
@@ -174,7 +173,7 @@ h2 {
 .comment {
   margin-top: 20px;
   background: #ffea8d;
-  border-radius: 5px;
+  border-radius: 3px;
   padding: 20px;
   color: black;
 }
@@ -199,7 +198,7 @@ h2 {
 }
 
 .chart {
-  border-radius: 5px;
+  border-radius: 3px;
   width: 100%;
   margin-bottom: 10px;
 }
@@ -220,6 +219,14 @@ h2 {
 
 .syntaxhighlighter .gutter .line {
     border-right: none !important;
+}
+
+.syntaxhighlighter .container {
+    background : transparent !important;
+    border-radius: none;
+    padding: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .file_name {

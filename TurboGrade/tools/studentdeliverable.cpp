@@ -76,6 +76,7 @@ void StudentDeliverable::add_total_grade(Submission *submission, QString &htmlSt
                 "\n Total grade : "
                 "   <span class = \"grade\">" + QString::number(submission->get_grade()) + "</span>"
                 "   <span class = \"out-of\">/" + QString::number(submission->_assignment->_rubric->total_grade()) + "</span>"
+                "   <span class = \"out-of\"> (" + QString::number(submission->grade_percent()) + "% )</span>"
                 "\n </div>"
                 );
 }
@@ -88,9 +89,9 @@ void StudentDeliverable::add_total_grade_sticker(Submission *submission, QString
                 "\n        TOTAL GRADE"
                 "\n      </div>\n      "
                 );
-    htmlString.append(QString::number(submission->get_grade()));
+    htmlString.append(QString::number(submission->grade_percent()));
     htmlString.append(
-                "\n    </div>"
+                "\n    %</div>"
                 "\n     <div class=\"clear\"></div>"
                 );
 }
@@ -112,7 +113,7 @@ void StudentDeliverable::add_comments(Submission* submission, QString &htmlStrin
 }
 
 void StudentDeliverable::add_assignment_obj(Submission *submission, QString &htmlString){
-    htmlString.append("\n    <div id = \"container\">");
+    htmlString.append("\n    <div class = \"container\">");
     htmlString.append(
                 "\n        <h2>Assignment Objective</h2>"
                 "\n        <p>");
@@ -170,16 +171,16 @@ void StudentDeliverable::add_general_comments(Submission *submission, QString &h
 }
 
 void StudentDeliverable::add_detailed_remarks(Submission *submission, QString &htmlString){
-    htmlString.append("\n<div id = \"container\">");
+    htmlString.append("\n<div class = \"container\">");
     htmlString.append("\n      <h2>Detailed remarks</h2>");
     htmlString.append("\n      <div class = \"criterion comments\">");
     for(Criterion *criterion : *submission->_assignment->_rubric->_criteria){
         htmlString.append("\n          <div class = \"name\">");
         htmlString.append(criterion->_name);
         htmlString.append("\n              <span class = \"grade\">");
-        htmlString.append(std::to_string(submission->get_grade(criterion)).c_str());
+        htmlString.append(QString::number(submission->get_grade(criterion)));
         htmlString.append("</span><span class = \"out-of\">/");
-        htmlString.append(std::to_string(criterion->_out_of).c_str());
+        htmlString.append(QString::number(criterion->_out_of));
         htmlString.append("</span>"
                           "\n          </div>");
         std::vector<Comment *> comments = submission->get_comments(criterion);

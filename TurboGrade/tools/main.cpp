@@ -4,7 +4,7 @@
 #include "macadress.h"
 #include "../engine/controller.h"
 #include "csvgenerator.h"
-#include "report.h"
+#include "studentdeliverable.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -56,8 +56,8 @@ int main(int argc, char *argv[])
 //    CSVGenerator g;
 //    g.printProfessor(section,assignment,"test.txt");
 
-    Report s;
-    QString html =  s.gen(section->get_student("Wassim Gharbi")->get_submission(assignment));
+    StudentDeliverable s;
+    QString html = s.placeParameters(section->get_student("Wassim Gharbi")->get_submission(assignment));
     HTMLToPDF w(html, "output3.pdf");
     w.show();
     a.exec();
