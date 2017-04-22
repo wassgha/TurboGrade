@@ -32,9 +32,15 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
         }
     }
 
+    update_status();
+
     ui->dummy1->hide();
     ui->dummy2->hide();
 
+}
+
+void GradeView::update_status() {
+    ui->finalize->setText((_parent->_submission->_status == 2)? "Unlock submission" : "Finalize");
 }
 
 void GradeView::update_grades() {
@@ -48,6 +54,7 @@ void GradeView::update_grades() {
                              " out of " +
                              QString::number(_parent->_submission->_assignment->_rubric->total_grade()) +
                              ")");
+    update_status();
 }
 
 GradeView::~GradeView()
@@ -60,7 +67,12 @@ GradeView::~GradeView()
 
 void GradeView::on_finalize_clicked()
 {
-    _parent->_submission->update_status(2);
+    if (_parent->_submission->_status == 2) {
+        _parent->_submission->update_status(1);
+    } else {
+        _parent->_submission->update_status(2);
+    }
+    update_status();
 }
 
 void GradeView::on_export_pdf_clicked()

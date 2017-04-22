@@ -30,7 +30,7 @@ QPushButton#run, QPushButton#toggle {
 	padding-right: 15px;
 	background: white;
 	border-radius: 18px;
-	margin-left : 5px;
+	margin-right : 10px;
 }
 
 QPushButton#run {
@@ -185,6 +185,9 @@ margin: 0px;
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="mouseTracking">
+        <bool>true</bool>
+       </property>
        <property name="text">
         <string>Run</string>
        </property>
@@ -204,6 +207,9 @@ margin: 0px;
       <widget class="QPushButton" name="toggle">
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="mouseTracking">
+        <bool>true</bool>
        </property>
        <property name="text">
         <string>View Grade</string>

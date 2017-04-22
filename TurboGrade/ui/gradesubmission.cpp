@@ -15,9 +15,6 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     setAttribute(Qt::WA_StyledBackground, true);
     setWindowState(Qt::WindowFullScreen);
 
-    ui->run->setCursor(Qt::PointingHandCursor);
-    ui->toggle->setCursor(Qt::PointingHandCursor);
-
     code_view = new CodeView(this, _controller);
     grade_view = new GradeView(this, _controller);
 
