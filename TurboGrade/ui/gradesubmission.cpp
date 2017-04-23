@@ -14,7 +14,7 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 
     setWindowTitle("TurboGrade - Grading submission");
     setAttribute(Qt::WA_StyledBackground, true);
-//    setWindowState(Qt::WindowFullScreen);
+    setWindowState(Qt::WindowFullScreen);
 
     code_view = new CodeView(this, _controller);
     grade_view = new GradeView(this, _controller);

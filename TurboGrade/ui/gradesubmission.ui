@@ -24,13 +24,17 @@ QCheckBox#hideName {
         color: white;
 }
 
-QPushButton#run, QPushButton#toggle {
+QPushButton#run, QPushButton#toggle, QPushButton#next {
 	padding: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
 	background: white;
 	border-radius: 18px;
-	margin-right : 10px;
+	margin-left : 10px;
+}
+
+QPushButton#next::disabled {
+	background: #EEE;
 }
 
 QPushButton#run {
@@ -164,6 +168,20 @@ margin: 0px;
        </property>
        <property name="checked">
         <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="next">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Next</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/misc/res/next.png</normaloff>:/misc/res/next.png</iconset>
        </property>
       </widget>
      </item>

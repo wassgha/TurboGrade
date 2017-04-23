@@ -4,8 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql printsupport webenginewidgets script
+QT       += core gui sql printsupport script
 QT          += sql widgets printsupport
+
+unix:!ios {
+    QT += webenginewidgets
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 

@@ -28,6 +28,7 @@
         <file>res/splitter2.png</file>
         <file>res/comment.png</file>
         <file>res/caret-down.png</file>
+        <file>res/next.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

@@ -239,8 +239,6 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
         int start = comment->_start_pos;
         int end = comment->_end_pos;
         int current = 0;
-        int lineIndexStart = -1;
-        int lineIndexEnd = -1;
         bool started = false;
         QString codeLines = "\n <pre class=\"brush: java\">";
         if (submission->_student->_name == "Wassim Gharbi") {
