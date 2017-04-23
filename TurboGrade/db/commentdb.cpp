@@ -93,7 +93,7 @@ void CommentDB::load_all(Submission *submission) {
  * @brief CommentDB::erase erases comment from comment db
  * @param comment_id the id of the comment
  */
-void CommentDB::erase(int comment_id){
+void CommentDB::remove(int comment_id){
     SHOW_WHERE;
 
     db.transaction();

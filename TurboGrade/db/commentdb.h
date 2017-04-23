@@ -30,7 +30,7 @@ public:
             int end_pos);
 
     // Erases a comment from the comment table
-    void erase(int comment_id);
+    void remove(int comment_id);
 
     // Loads comments for a specific submission
     void load_all(Submission *submission);

@@ -123,12 +123,12 @@ void Submission::update_grade(Criterion *criterion, int grade, bool load){
  * grade.
  * @param comment the comment to erase
  */
-void Submission::erase_comment(Comment *comment){
+void Submission::remove_comment(Comment *comment){
     if(comment == nullptr){
         return;
     }
     // erase from DB
-    _controller->_commentDB->erase(comment->_id);
+    _controller->_commentDB->remove(comment->_id);
     // erase comment from comments vector
     _comments->erase(std::remove(_comments->begin(), _comments->end(), comment),
                     _comments->end());

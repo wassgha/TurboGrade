@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
     gharbiw_01->add_comment("main.java", bst_assignment->_rubric->get_criterion("Correctness"),
                                                "This comment was meant to be erased", -1, 10, 20);
     std::vector<Comment *> * comments = gharbiw_01->_comments;
-    gharbiw_01->erase_comment(comments->at(comments->size() - 1));
+    gharbiw_01->remove_comment(comments->at(comments->size() - 1));
 
     // Show the courses and rubrics
     _controller->show_courses();

@@ -43,7 +43,7 @@ public:
                      int id = -1);
 
     //Erase comment from db and memory
-    void erase_comment(Comment *comment);
+    void remove_comment(Comment *comment);
 
     // Get comments on a file
     std::vector<Comment*> get_comment(QString filename);
