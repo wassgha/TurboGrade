@@ -117,6 +117,31 @@ void Submission::update_grade(Criterion *criterion, int grade, bool load){
     }
 }
 
+/**
+ * @brief Submission::erase_comment erases the comment from the database and
+ * from the local C++ memory. Also will remove the attribution to the student's
+ * grade.
+ * @param comment the comment to erase
+ */
+void Submission::erase_comment(Comment *comment){
+    if(comment == nullptr){
+        return;
+    }
+    // erase from DB
+    _controller->_commentDB->erase(comment->_id);
+    // erase comment from comments vector
+    _comments->erase(std::remove(_comments->begin(), _comments->end(), comment),
+                    _comments->end());
+    // Adjust the grade according to the comment
+    qDebug()<<"Adjusting grade for criterion after removing comment"<<endl;
+    Criterion *commentCriterion = comment->_criterion;
+    update_grade(commentCriterion,
+                 (get_grade(commentCriterion) ==
+                  -1 ? 0 : get_grade(commentCriterion)
+                       ) + comment->_grade);
+    delete comment;
+}
+
 
 /**
  * @brief Submission::attribute_full_grade sets every criterion to the maximum
