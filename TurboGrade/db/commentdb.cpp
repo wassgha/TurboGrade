@@ -89,6 +89,31 @@ void CommentDB::load_all(Submission *submission) {
     db.commit();
 }
 
+/**
+ * @brief CommentDB::erase erases comment from comment db
+ * @param comment_id the id of the comment
+ */
+void CommentDB::erase(int comment_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM comment "
+                    "WHERE id = ?;");
+    query.addBindValue(comment_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'comment' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
 
 /**
  * @brief CommentDB::load_all loads all comments on

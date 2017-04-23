@@ -28,8 +28,13 @@ public:
             int criterion_id, QString comment_text,
             int grade, int start_pos,
             int end_pos);
+
+    // Erases a comment from the comment table
+    void erase(int comment_id);
+
     // Loads comments for a specific submission
     void load_all(Submission *submission);
+
     // Load all comments for autocompleting
     QSqlTableModel* load_model();
 
