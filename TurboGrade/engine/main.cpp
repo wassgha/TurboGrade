@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     Controller *_controller;
 
     // Use new Controller(true) to drop tables
-    _controller = new Controller(true);
+    _controller = new Controller(true, "../ui/turbograde.sqlite");
 
     /**************************************************
      *     Populate the database with dummy objects   *
@@ -40,21 +40,29 @@ int main(int argc, char *argv[])
     cs150_02->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS150_02");
     Section* cs105_01 = cs105->_sections->at(0);
     cs105_01->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS105_01");
+    Section* cs105_02 = cs105->_sections->at(1);
+    cs105_02->add_assignment(bst_assignment, "/Users/wassgha/Downloads/CS105_02");
 
     // Create a rubric
     bst_assignment->_rubric->add_criterion("Correctness", nullptr, 10);
     bst_assignment->_rubric->add_criterion("Design", nullptr, 5);
-    Criterion* comments = bst_assignment->_rubric->add_criterion("Comments", nullptr, 2);
-    bst_assignment->_rubric->add_criterion("JavaDoc", comments, 2);
+    Criterion* criterion = bst_assignment->_rubric->add_criterion("Comments", nullptr, 2);
+    bst_assignment->_rubric->add_criterion("JavaDoc", criterion, 2);
 
     // Create a submission and grade it
-    Student * gharbiw = cs150_02->get_student("gharbiw");
+    Student * gharbiw = cs105_02->get_student("Wassim Gharbi");
     Submission* gharbiw_01 = gharbiw->add_submission(bst_assignment);
     gharbiw_01->add_comment("main.java", bst_assignment->_rubric->get_criterion("Correctness"),
                             "You screwed up bro", -2, 20, 150);
     gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Correctness"), 4);
     gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Design"), 3);
     gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("JavaDoc"), 2);
+
+    // Create a comment and erase it
+    gharbiw_01->add_comment("main.java", bst_assignment->_rubric->get_criterion("Correctness"),
+                                               "This comment was meant to be erased", -1, 10, 20);
+    std::vector<Comment *> * comments = gharbiw_01->_comments;
+    gharbiw_01->erase_comment(comments->at(comments->size() - 1));
 
     // Show the courses and rubrics
     _controller->show_courses();
