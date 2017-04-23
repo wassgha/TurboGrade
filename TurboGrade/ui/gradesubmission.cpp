@@ -3,7 +3,8 @@
 
 GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Controller *controller) :
     QWidget(parent, Qt::Window),
-    ui(new Ui::GradeSubmission)
+    ui(new Ui::GradeSubmission),
+    _parent(dynamic_cast<Dashboard*>(parent))
 {
 
     ui->setupUi(this);
@@ -13,7 +14,7 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 
     setWindowTitle("TurboGrade - Grading submission");
     setAttribute(Qt::WA_StyledBackground, true);
-    setWindowState(Qt::WindowFullScreen);
+//    setWindowState(Qt::WindowFullScreen);
 
     code_view = new CodeView(this, _controller);
     grade_view = new GradeView(this, _controller);
@@ -94,9 +95,10 @@ void GradeSubmission::refresh_students() {
     ui->studentName->clear();
     ui->studentName->addItem("Anonymous Grading", -1);
     for(Student* student : *_submission->_student->_section->_students) {
-        ui->studentName->addItem(student->_name, student->_id);
+        if (student->get_submission(_submission->_assignment) != nullptr)
+            ui->studentName->addItem(student->_name);
     }
-    ui->studentName->setCurrentIndex(ui->studentName->findData(_submission->_student->_id));
+    ui->studentName->setCurrentIndex(ui->studentName->findText(_submission->_student->_name));
 }
 
 void GradeSubmission::on_hideName_toggled(bool checked)
@@ -105,7 +107,7 @@ void GradeSubmission::on_hideName_toggled(bool checked)
         ui->studentName->setCurrentIndex(0);
         ui->studentName->setEnabled(false);
     } else {
-        ui->studentName->setCurrentIndex(ui->studentName->findData(_submission->_student->_id));
+        ui->studentName->setCurrentIndex(ui->studentName->findText(_submission->_student->_name));
         ui->studentName->setEnabled(true);
     }
 }
@@ -121,4 +123,16 @@ bool GradeSubmission::eventFilter(QObject *watched, QEvent *event) {
     }
 
     return QWidget::eventFilter(watched, event);
+}
+
+void GradeSubmission::on_studentName_currentIndexChanged(int index)
+{
+    qDebug()<<"Student name changed"<< index;
+    if (index <= 0 || index == ui->studentName->findText(_submission->_student->_name))
+        return;
+    QString student_name = ui->studentName->itemText(index);
+    qDebug()<<"name : "<< student_name;
+    Student *selected_student = _submission->_student->_section->get_student(student_name);
+    Submission *selected_submission = selected_student->get_submission(_submission->_assignment);
+    emit(switched_submission(selected_submission));
 }

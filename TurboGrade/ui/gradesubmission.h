@@ -16,8 +16,12 @@
 #include "gradeview.h"
 #include "ui_gradeview.h"
 
+#include "dashboard.h"
+#include "ui_dashboard.h"
+
 class GradeView;
 class CodeView;
+class Dashboard;
 
 namespace Ui {
 class GradeSubmission;
@@ -46,11 +50,17 @@ private slots:
 
     void on_hideName_toggled(bool checked);
 
+    void on_studentName_currentIndexChanged(int index);
+
 private:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
     Ui::GradeSubmission *ui;
     QProcess *compile = nullptr;
+    Dashboard* _parent = nullptr;
+
+signals:
+    void switched_submission(QObject* submission);
 };
 
 #endif // GRADESUBMISSION_H
