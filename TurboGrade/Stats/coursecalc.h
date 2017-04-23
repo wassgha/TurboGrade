@@ -1,4 +1,4 @@
-#ifndef CLASSCALC_H
+#ifndef COURSECALC_H
 #define COURSECALC_H
 
 #include "../db/gradedb.h"
@@ -18,6 +18,8 @@ public:
     ~CourseCalc();
     Course *current;
     float getTotMean();
+    float getTotal();
+    float getNumber();
     float getAssignMean(Assignment *assign);
 };
 
