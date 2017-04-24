@@ -201,7 +201,7 @@ Assignment* Controller::add_assignment(const QString name, const QString objecti
  * @param assignment the assignment to remove
  */
 void Controller::remove_assignment(Assignment *assignment){
-    if(assignemnt == nullptr){
+    if(assignment == nullptr){
         return;
     }
     // erase from DB
