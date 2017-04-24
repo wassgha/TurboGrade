@@ -41,6 +41,32 @@ int AssignmentDB::add(const QString name, const QString objective, bool full_gra
     return last_insert_id;
 }
 
+/**
+ * @brief AssignmentDB::remove remove the assignment from the assignment table
+ * @param assignment_id the assignment's id
+ */
+void AssignmentDB::remove(int assignment_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM assignment "
+                    "WHERE id = ?;");
+    query.addBindValue(assignment_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'assignment' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
+
 
 /**
  * @brief AssignmentDB::link Links an assignment to a section
