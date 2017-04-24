@@ -61,6 +61,8 @@ void Rubric::remove_criterion(Criterion* criterion) {
     // LIKE COMMENTS AND GRADES
     // TO DO : REMOVE CRITERION FROM DATABASE
     if (criterion != nullptr) {
+
+        //REMOVE FROM RUBRIC CRITERIA VECTOR
         auto it = std::find(_criteria->begin(), _criteria->end(), criterion);
         if(it != _criteria->end())
             _criteria->erase(it);
@@ -69,6 +71,36 @@ void Rubric::remove_criterion(Criterion* criterion) {
             if(it != parent->_sub_criteria->end())
                 parent->_sub_criteria->erase(it);
         }
+
+        //REMOVE CRITERION FROM DB
+        _controller->_rubricDB->remove(criterion->_id);
+        for(Criterion *subCriterion : *criterion->_sub_criteria){
+            _controller->_rubricDB->remove(subCriterion->_id);
+        }
+
+        //REMOVE COMMENTS RELATED TO CRITERION
+        for(Course *course: *_controller->get_courses()){
+            for(Section *section: *course->_sections){
+                for(Student *student : *section->_students){
+                    for(Submission *submission : *student->_submissions){
+                        if(submission->_assignment == _assignment){
+                            //remove comments related to sub criteria
+                            for(Criterion *subCriterion : *criterion->_sub_criteria){
+                                for(Comment *comment : submission->get_comments(subCriterion)){
+                                    submission->remove_comment(comment);
+                                }
+                            }
+                            //remove comments for this criterion
+                            for(Comment *comment : submission->get_comments(criterion)){
+                                submission->remove_comment(comment);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
 //        _controller->_rubricDB->remove_criterion(criterion->_id);
         delete criterion;
     }
