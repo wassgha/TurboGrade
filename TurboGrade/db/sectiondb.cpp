@@ -31,6 +31,31 @@ int SectionDB::add(int course_id, const QString name) {
     return last_insert_id;
 }
 
+/**
+ * @brief SectionDB::remove removes the section from the table
+ * @param section_id the section's id
+ */
+void SectionDB::remove(int section_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM section "
+                    "WHERE id = ?;");
+    query.addBindValue(section_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'section' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
 
 /**
  * @brief SectionDB::select Returns id of the row
