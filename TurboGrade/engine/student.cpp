@@ -85,6 +85,7 @@ void Student::remove_submission(Submission *submission){
     }
     // erase from DB
     _controller->_submissionDB->remove(submission->_id);
+    _controller->_gradeDB->remove(submission->_id);
 
     // erase all of submissions comments
     for(Comment *comment : *submission->_comments){
