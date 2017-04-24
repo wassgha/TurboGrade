@@ -14,6 +14,7 @@ SOURCES     += \
             "../db/rubricdb.cpp" \
             "../db/commentdb.cpp" \
             "../db/gradedb.cpp" \
+            "../tools/dirtools.cpp" \
             main.cpp \
             course.cpp \
             section.cpp \
@@ -28,6 +29,7 @@ SOURCES     += \
 HEADERS     += \
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
+            "../tools/dirtools.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \
