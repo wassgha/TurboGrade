@@ -153,6 +153,33 @@ void RubricDB::load_sub_criteria(Criterion *criterion) {
     db.commit();
 }
 
+/**
+ * @brief RubricDB::remove erases criterion from rubric db, does not remove
+ * sub criteria for criterion
+ * @param criterion_id the criterion to remove
+ */
+void RubricDB::remove(int criterion_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM rubric "
+                    "WHERE id = ?;");
+    query.addBindValue(criterion_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'comment' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
+
 
 
 /**

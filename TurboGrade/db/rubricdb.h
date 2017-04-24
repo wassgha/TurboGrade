@@ -32,6 +32,9 @@ public:
     void load_parent_criteria(Rubric *rubric);
     // Loads children criteria for a specific criterion
     void load_sub_criteria(Criterion *criterion);
+    // Remove a criterion from the table, only handles parent criterion
+    // Invoke this method for children criteria as well
+    void remove(int criterion_id);
 
 
     // Controller
