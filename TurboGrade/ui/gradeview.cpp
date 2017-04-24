@@ -32,9 +32,17 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
         }
     }
 
+    update_status();
+
     ui->dummy1->hide();
     ui->dummy2->hide();
 
+}
+
+void GradeView::update_status() {
+    ui->finalize->setText((_parent->_submission->_status == 2)? "Unlock submission" : "Finalize");
+    _parent->update_next();
+    _parent->update_progress();
 }
 
 void GradeView::update_grades() {
@@ -48,6 +56,7 @@ void GradeView::update_grades() {
                              " out of " +
                              QString::number(_parent->_submission->_assignment->_rubric->total_grade()) +
                              ")");
+    update_status();
 }
 
 GradeView::~GradeView()
@@ -60,5 +69,22 @@ GradeView::~GradeView()
 
 void GradeView::on_finalize_clicked()
 {
-    _parent->_submission->update_status(2);
+    if (_parent->_submission->_status == 2) {
+        _parent->_submission->update_status(1);
+    } else {
+        _parent->_submission->update_status(2);
+    }
+    update_status();
+}
+
+void GradeView::on_export_pdf_clicked()
+{
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Save report in..."), "~/",
+                                                       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (folder != "") {
+        StudentDeliverable s;
+        QString html = s.placeParameters(_parent->_submission);
+        HTMLToPDF* report = new HTMLToPDF(html, folder + "/" + _parent->_submission->_student->_name + ".pdf");
+    }
+
 }

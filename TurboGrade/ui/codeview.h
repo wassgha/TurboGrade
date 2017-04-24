@@ -54,7 +54,7 @@ public:
     Controller                  *_controller;
     GradeSubmission             *_parent;
     std::vector<CommentCard*>   _comment_cards;
-    CommentPopup        *_popup;
+    CommentPopup                *_popup;
 
 public slots:
     void getSelection();
@@ -63,6 +63,7 @@ public slots:
     void add_comment();
     void highlight_comment(Comment * comment);
     void unhighlight_comments();
+    void auto_completed(QModelIndex index);
 
 private:
     void refresh_criteria();
@@ -72,8 +73,10 @@ private:
     void refresh_autocomplete();
 
     QFileSystemModel    *_model;
-    QCompleter          *_completer;
-    QModelIndex root_index;
+    QCompleter          *_completer = nullptr;
+    QModelIndex         root_index;
+    QString             first_file;
+    QModelIndex         first_file_index;
 
 };
 

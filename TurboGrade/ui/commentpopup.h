@@ -18,6 +18,7 @@ public:
     explicit CommentPopup(QWidget *parent = 0, Controller* controller = nullptr);
     ~CommentPopup();
     QString val(QString name);
+    QString peek(QString name);
 
     Ui::CommentPopup *ui;
     Controller *_controller;

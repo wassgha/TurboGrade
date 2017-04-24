@@ -109,7 +109,7 @@ TEST(general,2SECTIONBUILD) {
 }
 
 TEST(general,2SECTIONBReplaceKeep) {
-    Controller* testControl = new Controller(true,"test.sql");
+    Controller* testControl = new Controller(true, "test.sql");
     testControl->add_course("testCourse", "Fall 2017");
     vector<Course*>* courseList = testControl->get_courses();
     Course* testCourse = courseList->at(0);

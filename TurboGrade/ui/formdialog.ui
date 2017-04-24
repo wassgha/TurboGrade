@@ -88,7 +88,27 @@ QLineEdit::focus, QTextEdit::focus {
 	padding: 10px;
 	padding-top: 20px;
 	padding-bottom: 20px;
-}</string>
+}
+
+QComboBox {
+	border: none;
+	outline:none;
+	padding: 10px;
+	min-width: 100px;
+	border-bottom: 2px solid rgba(0,0,0,10);
+}
+
+QComboBox::down-arrow {
+    width: 10px;
+    height: 10px;
+    border-image: url(:/misc/res/caret-down.png) 0 0 0 0 stretch stretch;
+}
+
+QComboBox::drop-down {
+	background: transparent;
+	border: none;
+}
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>

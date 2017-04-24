@@ -18,6 +18,7 @@ CriterionGradeCard::CriterionGradeCard(QWidget *parent, Criterion* criterion, Su
 
     ui->criterion->setTitle(criterion->_name);
     ui->out_of->setText("(out of " + QString::number(criterion->_out_of) + ")");
+    qDebug() << "testing";
     ui->grade->setMaximum(criterion->_out_of);
     ui->grade->setAttribute(Qt::WA_MacShowFocusRect, false);
     if (!criterion->has_children()) {

@@ -24,19 +24,32 @@ QCheckBox#hideName {
         color: white;
 }
 
-QPushButton#run, QPushButton#toggle {
+QPushButton#run, QPushButton#toggle, QPushButton#next {
 	padding: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
 	background: white;
 	border-radius: 18px;
-	margin-left : 5px;
+	margin-left : 10px;
+}
+
+QPushButton#next::disabled {
+	/*background: #EEE;*/
+	color: gray;
 }
 
 QPushButton#run {
 	color: white;
 	background: #63c46b;
 }
+
+QPushButton#next {
+	background: transparent;
+	border:none;
+	color: rgb(96, 151, 45);
+	padding-left: 5px;
+}
+
 QProgressBar#progressBar {
 color: white;
 max-height: 3px;
@@ -100,7 +113,7 @@ margin: 0px;
       <number>12</number>
      </property>
      <property name="topMargin">
-      <number>12</number>
+      <number>18</number>
      </property>
      <property name="rightMargin">
       <number>12</number>
@@ -109,7 +122,7 @@ margin: 0px;
       <number>12</number>
      </property>
      <item>
-      <widget class="QLabel" name="logo">
+      <widget class="ClickableLabel" name="logo">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -147,6 +160,9 @@ margin: 0px;
        <property name="editable">
         <bool>false</bool>
        </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QComboBox::AdjustToContents</enum>
+       </property>
        <item>
         <property name="text">
          <string>Student Name</string>
@@ -157,10 +173,25 @@ margin: 0px;
      <item>
       <widget class="QCheckBox" name="hideName">
        <property name="text">
-        <string>Hide student name</string>
+        <string>Hide name</string>
        </property>
        <property name="checked">
         <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="next">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="text">
+        <string>Next Submission</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/misc/res/next_green.png</normaloff>
+         <disabledoff>:/misc/res/next_gray.png</disabledoff>:/misc/res/next_green.png</iconset>
        </property>
       </widget>
      </item>
@@ -182,6 +213,9 @@ margin: 0px;
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
+       <property name="mouseTracking">
+        <bool>true</bool>
+       </property>
        <property name="text">
         <string>Run</string>
        </property>
@@ -201,6 +235,9 @@ margin: 0px;
       <widget class="QPushButton" name="toggle">
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="mouseTracking">
+        <bool>true</bool>
        </property>
        <property name="text">
         <string>View Grade</string>
@@ -230,6 +267,13 @@ margin: 0px;
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>clickablelabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>
