@@ -42,9 +42,11 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 }
 
 void GradeSubmission::update_next() {
-    ui->next->setEnabled(_submission->_status == 2);
-    if (_submission->_student->_section->num_submissions_ungraded(_submission->_assignment) > 0)
+    if (_submission->_status == 2 && _submission->_student->_section->num_submissions_ungraded(_submission->_assignment) > (_submission->_status == 2 ? 0 : 1)) {
+        ui->next->setEnabled(true);
+    } else {
         ui->next->setEnabled(false);
+    }
 }
 
 GradeSubmission::~GradeSubmission()

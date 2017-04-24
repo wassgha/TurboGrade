@@ -34,7 +34,7 @@ QPushButton#run, QPushButton#toggle, QPushButton#next {
 }
 
 QPushButton#next::disabled {
-	background: #EEE;
+	/*background: #EEE;*/
 	color: gray;
 }
 
@@ -44,8 +44,10 @@ QPushButton#run {
 }
 
 QPushButton#next {
-	background: #63c46b;
-	color: white;
+	background: transparent;
+	border:none;
+	color: rgb(96, 151, 45);
+	padding-left: 5px;
 }
 
 QProgressBar#progressBar {
@@ -171,7 +173,7 @@ margin: 0px;
      <item>
       <widget class="QCheckBox" name="hideName">
        <property name="text">
-        <string>Hide student name</string>
+        <string>Hide name</string>
        </property>
        <property name="checked">
         <bool>false</bool>
@@ -184,12 +186,12 @@ margin: 0px;
         <bool>false</bool>
        </property>
        <property name="text">
-        <string>Next</string>
+        <string>Next Submission</string>
        </property>
        <property name="icon">
         <iconset resource="resources.qrc">
-         <normaloff>:/misc/res/next_white.png</normaloff>
-         <disabledoff>:/misc/res/next_gray.png</disabledoff>:/misc/res/next_white.png</iconset>
+         <normaloff>:/misc/res/next_green.png</normaloff>
+         <disabledoff>:/misc/res/next_gray.png</disabledoff>:/misc/res/next_green.png</iconset>
        </property>
       </widget>
      </item>
