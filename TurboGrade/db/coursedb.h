@@ -25,6 +25,8 @@ public:
 
     // Adds a row to the table
     int add(const QString name, const QString semester);
+    // Removes a row from the table
+    void remove(int course_id);
     // Gets row id matching name
     int select(const QString name, const QString semester);
     // Load to controller

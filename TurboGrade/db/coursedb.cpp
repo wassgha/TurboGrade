@@ -29,6 +29,31 @@ int CourseDB::add(const QString name, const QString semester) {
     return last_insert_id;
 }
 
+/**
+ * @brief CourseDB::remove removes the course from the course table
+ * @param course_id the course to remove
+ */
+void CourseDB::remove(int course_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM course "
+                    "WHERE id = ?;");
+    query.addBindValue(course_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'course' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
 
 /**
  * @brief CourseDB::select Returns id of the row
