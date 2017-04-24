@@ -38,6 +38,8 @@ public:
     Student* add_student(const QString name, int id = -1);
     // Add an assignment to the section
     Assignment* add_assignment(Assignment* assignment, bool load = false);
+    // Remove an assignment from the section
+    void remove_assignment(Assignment* assignment);
     // Find a student in the section
     Student* get_student(const QString name);
     // Find an assignment in the section

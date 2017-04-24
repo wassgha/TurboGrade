@@ -103,6 +103,29 @@ Assignment* Section::get_assignment(const QString name) {
     exit(0);
 }
 
+/**
+ * @brief Section::remove_assignment erases the assignment from the section.
+ * This also propagates to delete all submissions for the students in the section
+ * for the given assignment.
+ *
+ * NOTE: THIS METHOD DOES NOT DELETE THE ASSIGNMENT, IT ONLY REMOVES THE
+ * SECTION -> ASSIGNMENT LINK
+ * @param assignment the assignment to delete
+ */
+void Section::remove_assignment(Assignment *assignment){
+    if(assignment == nullptr){
+        return;
+    }
+    // erase from DB
+    _controller->_assignmentDB->remove_link(assignment->_id, _id);
+    // erase assignment from assignment vector
+    _assignments->erase(std::remove(_assignments->begin(), _assignments->end(), assignment),
+                    _assignments->end());
+    for(Student *student : *_students){
+        student->remove_submission(student->get_submission(assignment));
+    }
+}
+
 std::vector<Assignment*>* Section::get_assignments() {
 
     return _assignments;
