@@ -9,8 +9,8 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
     to_dir += QDir::separator();
 
     qDebug()<<"Importing "<< from_dir << " to " << to_dir;
-
-    progress_bar->setMaximum(progress_bar->maximum() + dir.count());
+    if(progress_bar)
+        progress_bar->setMaximum(progress_bar->maximum() + dir.count());
     QApplication::processEvents();
 
     foreach (QString copy_file, dir.entryList(QDir::Files))
@@ -37,8 +37,8 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
         {
             return false;
         }
-
-        progress_bar->setValue(progress_bar->value() + 1);
+        if(progress_bar)
+            progress_bar->setValue(progress_bar->value() + 1);
         QApplication::processEvents();
     }
 
@@ -57,7 +57,8 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
         {
             return false;
         }
-        progress_bar->setValue(progress_bar->value() + 1);
+        if(progress_bar)
+            progress_bar->setValue(progress_bar->value() + 1);
         QApplication::processEvents();
     }
 
