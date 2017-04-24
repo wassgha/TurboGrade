@@ -1,5 +1,6 @@
 #include <iostream>
 #include "../tools/objectidentifier.h"
+#include "../tools/dirtools.h"
 #include "controller.h"
 #include "assignment.h"
 #include "student.h"
@@ -53,22 +54,54 @@ int main(int argc, char *argv[])
     bst_assignment->_rubric->add_criterion("This should be removed 1", removeCrit, 5);
     bst_assignment->_rubric->add_criterion("This should also be removed 2", removeCrit, 5);
 
+    QString local_path = QCoreApplication::applicationDirPath()
+            + "/../ui/data/"
+            + QString::number(cs105_02->_course->_id)
+            + "/"
+            + QString::number(cs105_02->_id)
+            + "/"
+            + QString::number(bst_assignment->_id);
+
+    DirTools::copy_dir_recursive( QCoreApplication::applicationDirPath() + "/../../Moodle Submissions", local_path,  true);
+
+    QDir dir;
+
+    dir.setPath(local_path);
+
+    foreach (QString submission_folder, dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot)) {
+        std::cout<<"Adding submission by "<< submission_folder.toStdString() << std::endl;
+        qDebug()<<"Adding submission by "<< submission_folder << endl;
+        Student* added_student = cs105_02->get_student(submission_folder);
+        if (added_student == nullptr) {
+            cs105_02->add_student(submission_folder);
+            added_student = cs105_02->get_student(submission_folder);
+        }
+        Submission* added_submission = added_student->get_submission(bst_assignment);
+        if (added_submission == nullptr) {
+            added_submission = added_student->add_submission(bst_assignment);
+            if (bst_assignment->_full_grade) {
+                added_submission->attribute_full_grade();
+            }
+        }
+    }
+
 
     // Create a submission and grade it
     Student * gharbiw = cs105_02->get_student("Wassim Gharbi");
-    Submission* gharbiw_01 = gharbiw->add_submission(bst_assignment);
-    gharbiw_01->add_comment("main.java", bst_assignment->_rubric->get_criterion("Correctness"),
+    Submission* gharbiw_01 = gharbiw->get_submission(bst_assignment);//gharbiw->add_submission(bst_assignment);
+    gharbiw_01->add_comment("yikyak/Comment.java", bst_assignment->_rubric->get_criterion("Correctness"),
                             "You screwed up bro", -2, 20, 150);
     gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Correctness"), 4);
     gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("Design"), 3);
     gharbiw_01->add_grade(bst_assignment->_rubric->get_criterion("JavaDoc"), 2);
+
 
     // Erase criteria
     bst_assignment->_rubric->remove_criterion(removeSubCrit);
     bst_assignment->_rubric->remove_criterion(removeCrit);
 
     // Create a comment and erase it
-    gharbiw_01->add_comment("main.java", bst_assignment->_rubric->get_criterion("Correctness"),
+    gharbiw_01->add_comment("yikyak/Comment.java", bst_assignment->_rubric->get_criterion("Correctness"),
                                                "This comment was meant to be erased", -1, 10, 20);
     std::vector<Comment *> * comments = gharbiw_01->_comments;
     gharbiw_01->remove_comment(comments->at(comments->size() - 1));
