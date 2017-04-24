@@ -31,7 +31,8 @@ public:
     void load_all(Student *student);
     // Updates the grading status of a submission
     void update_status(int submission_id, int status);
-
+    // Deletes a row from the submission table
+    void remove(int submission_id);
 
     // Controller
     Controller* _controller;

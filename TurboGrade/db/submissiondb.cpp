@@ -143,6 +143,32 @@ void SubmissionDB::update_status(int submission_id, int status){
     db.commit();
 }
 
+/**
+ * @brief SubmissionDB::remove erases submission from submission db
+ * @param submission_id the id of the submission
+ */
+void SubmissionDB::remove(int submission_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM submission "
+                    "WHERE id = ?;");
+    query.addBindValue(submission_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'submission' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
+
 
 /**
  * @brief Destructor
