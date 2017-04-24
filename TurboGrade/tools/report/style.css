@@ -141,6 +141,7 @@ h2 {
   text-align: center;
   font-family: sans-serif;
   vertical-align: middle;
+  background: url(:/css/report/grade_circle.png);
 }
 
 #grade > #label {
