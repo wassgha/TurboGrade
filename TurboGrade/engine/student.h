@@ -37,6 +37,9 @@ public:
     Submission* get_submission(Assignment* assignment);
     std::vector<Submission*>* get_submissions();
 
+    // Remove a subsmission
+    void remove_submission(Submission *submission);
+
     // Student id
     int _id;
     // Student's section

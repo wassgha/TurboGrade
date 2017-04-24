@@ -118,7 +118,7 @@ void Submission::update_grade(Criterion *criterion, int grade, bool load){
 }
 
 /**
- * @brief Submission::erase_comment erases the comment from the database and
+ * @brief Submission::remove_comment erases the comment from the database and
  * from the local C++ memory. Also will remove the attribution to the student's
  * grade.
  * @param comment the comment to erase

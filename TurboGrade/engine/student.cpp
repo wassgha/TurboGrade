@@ -73,3 +73,27 @@ std::vector<Submission*>* Student::get_submissions() {
     return _submissions;
 
 }
+
+/**
+ * @brief Student::remove_submission erases the submission from the database and
+ * from the local C++ memory. Also will remove all comments made on the submission.
+ * @param submission
+ */
+void Student::remove_submission(Submission *submission){
+    if(submission == nullptr){
+        return;
+    }
+    // erase from DB
+    _controller->_submissionDB->remove(submission->_id);
+
+    // erase all of submissions comments
+    for(Comment *comment : *submission->_comments){
+        submission->remove_comment(comment);
+    }
+
+    // erase submission from submissions vector
+    _submissions->erase(std::remove(_submissions->begin(), _submissions->end(), submission),
+                    _submissions->end());
+
+    delete submission;
+}
