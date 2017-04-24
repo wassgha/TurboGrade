@@ -95,6 +95,26 @@ Course* Controller::add_course(const QString name, const QString semester, int i
     return new_course;
 }
 
+/**
+ * @brief Controller::remove_course removes a course from the software.
+ * Also removes all of the courses sections
+ * @param course the course to remove
+ */
+void Controller::remove_course(Course *course){
+    if(course == nullptr){
+        return;
+    }
+    // erase from DB
+    _courseDB->remove(course->_id);
+    // erase comment from comments vector
+    _courses->erase(std::remove(_courses->begin(), _courses->end(), course),
+                    _courses->end());
+    for(Section *section: *course->_sections){
+        course->remove_section(section);
+    }
+    delete course;
+}
+
 
 /**
  * @brief Controller::get_course finds a course by its name

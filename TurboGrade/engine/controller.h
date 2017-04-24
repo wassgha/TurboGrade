@@ -58,6 +58,8 @@ public:
 
     // Add a course to the software
     Course* add_course(const QString name, const QString semester, int id = -1);
+    // Remove a course from the software
+    void remove_course(Course *course);
     // Searches for a course by name and returns it
     Course* get_course(const QString name, const QString semester);
     // Retuns vector of all courses in the system
