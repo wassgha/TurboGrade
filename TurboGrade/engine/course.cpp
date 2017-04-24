@@ -53,6 +53,29 @@ Section* Course::add_section(const QString name, int id) {
 }
 
 /**
+ * @brief Course::remove_section removes a section from the course.
+ * Also removes assignments and students in the section
+ * @param section the section to remove
+ */
+void Course::remove_section(Section *section){
+    if(section == nullptr){
+        return;
+    }
+    // erase from DB
+    _controller->_sectionDB->remove(section->_id);
+    // erase section from sections vector
+    _sections->erase(std::remove(_sections->begin(), _sections->end(), section),
+                    _sections->end());
+    for(Student *student: *section->_students){
+        section->remove_student(student);
+    }
+    for(Assignment *assignment : *section->_assignments){
+        section->remove_assignment(assignment);
+    }
+    delete section;
+}
+
+/**
  * @brief Course::get_section finds a section by its name
  * @param name the name of the section to search for
  * @return the section found

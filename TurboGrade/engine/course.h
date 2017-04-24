@@ -34,6 +34,8 @@ public:
     ~Course();
     // Add a section to the course
     Section* add_section(const QString name, int id = -1);
+    // Remove a section from the course
+    void remove_section(Section *section);
     // Find a section in the course
     Section* get_section(const QString name);
     // Gets all sections in the course
