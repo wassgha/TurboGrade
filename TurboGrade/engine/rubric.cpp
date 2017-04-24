@@ -82,18 +82,17 @@ void Rubric::remove_criterion(Criterion* criterion) {
         for(Course *course: *_controller->get_courses()){
             for(Section *section: *course->_sections){
                 for(Student *student : *section->_students){
-                    for(Submission *submission : *student->_submissions){
-                        if(submission->_assignment == _assignment){
-                            //remove comments related to sub criteria
-                            for(Criterion *subCriterion : *criterion->_sub_criteria){
-                                for(Comment *comment : submission->get_comments(subCriterion)){
-                                    submission->remove_comment(comment);
-                                }
-                            }
-                            //remove comments for this criterion
-                            for(Comment *comment : submission->get_comments(criterion)){
+                    Submission *submission = student->get_submission(_assignment);
+                    if(submission){
+                        //remove comments related to sub criteria
+                        for(Criterion *subCriterion : *criterion->_sub_criteria){
+                            for(Comment *comment : submission->get_comments(subCriterion)){
                                 submission->remove_comment(comment);
                             }
+                        }
+                        //remove comments for this criterion
+                        for(Comment *comment : submission->get_comments(criterion)){
+                            submission->remove_comment(comment);
                         }
                     }
                 }
