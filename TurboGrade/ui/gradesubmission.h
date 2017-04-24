@@ -34,6 +34,7 @@ class GradeSubmission : public QWidget
 public:
     explicit GradeSubmission(QWidget *parent = 0, Submission *submission = nullptr, Controller* controller = nullptr);
     ~GradeSubmission();
+    void update_next();
     CodeView *code_view;
     GradeView *grade_view;
     Controller *_controller;
@@ -51,6 +52,8 @@ private slots:
     void on_hideName_toggled(bool checked);
 
     void on_studentName_currentIndexChanged(int index);
+
+    void show_dashboard();
 
 private:
     bool eventFilter(QObject *watched, QEvent *event) override;

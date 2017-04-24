@@ -113,7 +113,7 @@ margin: 0px;
       <number>12</number>
      </property>
      <item>
-      <widget class="QLabel" name="logo">
+      <widget class="ClickableLabel" name="logo">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -257,6 +257,13 @@ margin: 0px;
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>ClickableLabel</class>
+   <extends>QLabel</extends>
+   <header>clickablelabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="resources.qrc"/>
  </resources>

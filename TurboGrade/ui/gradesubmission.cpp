@@ -27,6 +27,9 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->progressBar->setMaximum(_submission->_student->_section->num_submissions_total(_submission->_assignment));
     ui->progressBar->setValue(_submission->_student->_section->num_submissions_graded(_submission->_assignment));
 
+    ui->logo->setCursor(Qt::PointingHandCursor);
+    connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_dashboard()));
+
     refresh_students();
 
     ui->hideName->setChecked(true);
@@ -34,6 +37,9 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     installEventFilter(this);
 }
 
+void GradeSubmission::update_next() {
+    ui->next->setEnabled(_submission->_status == 2);
+}
 
 GradeSubmission::~GradeSubmission()
 {
@@ -135,4 +141,9 @@ void GradeSubmission::on_studentName_currentIndexChanged(int index)
     Student *selected_student = _submission->_student->_section->get_student(student_name);
     Submission *selected_submission = selected_student->get_submission(_submission->_assignment);
     emit(switched_submission(selected_submission));
+}
+
+void GradeSubmission::show_dashboard() {
+    hide();
+    _parent->raise();
 }

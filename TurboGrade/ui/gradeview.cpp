@@ -41,6 +41,7 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
 
 void GradeView::update_status() {
     ui->finalize->setText((_parent->_submission->_status == 2)? "Unlock submission" : "Finalize");
+    _parent->update_next();
 }
 
 void GradeView::update_grades() {

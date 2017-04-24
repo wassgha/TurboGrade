@@ -22,10 +22,12 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
      *          Construct the file tree               *
      **************************************************/
 
+    QString root_path = _parent->_submission->getPath();
     _model = new QFileSystemModel;
-    _model->setRootPath(_parent->_submission->getPath());
+    _model->setRootPath(root_path);
+    first_file = QDir(root_path).absoluteFilePath(QDir(root_path).relativeFilePath(DirTools::first_file(root_path)));
 
-    root_index = _model->index(_parent->_submission->getPath());
+    root_index = _model->index(root_path);
 
     ui->treeView->setModel(_model);
     ui->treeView->setRootIndex(root_index);
@@ -40,7 +42,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->comment_layout->setAlignment(Qt::AlignTop);
 
 
-    setupCodeEditor("Main.java");
+    setupCodeEditor(first_file);
     refresh_criteria();
 
     // Loads the first file
@@ -204,6 +206,7 @@ CodeView::~CodeView()
 void CodeView::loadFile(QModelIndex item)
 {
     if (!_model->isDir(item)) {
+        qDebug() << "Selected " << _model->filePath(item);
         QFile file(_model->filePath(item));
         if (file.open(QFile::ReadOnly | QFile::Text))
             ui->editor->setPlainText(file.readAll());
@@ -246,7 +249,7 @@ void CodeView::setupCodeEditor(const QString &file_name)
 
 
 void CodeView::finished_loading() {
-    ui->treeView->setCurrentIndex(_model->index(0, 0, root_index));
+    ui->treeView->setCurrentIndex(_model->index(first_file));
     ui->treeView->expandToDepth(0);
 }
 

@@ -2,7 +2,6 @@
 #define HTMLTOPDF_H
 
 #include <QWebEngineView>
-
 class HTMLToPDF : public QWebEngineView
 {
     Q_OBJECT

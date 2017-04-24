@@ -54,7 +54,7 @@ public:
     Controller                  *_controller;
     GradeSubmission             *_parent;
     std::vector<CommentCard*>   _comment_cards;
-    CommentPopup        *_popup;
+    CommentPopup                *_popup;
 
 public slots:
     void getSelection();
@@ -74,7 +74,9 @@ private:
 
     QFileSystemModel    *_model;
     QCompleter          *_completer = nullptr;
-    QModelIndex root_index;
+    QModelIndex         root_index;
+    QString             first_file;
+    QModelIndex         first_file_index;
 
 };
 

@@ -63,3 +63,22 @@ bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace
 
     return true;
 }
+
+QString DirTools::first_file(QString folder)
+{
+    QDir dir;
+    dir.setPath(folder);
+    qDebug()<<"Called for " + folder;
+    if (dir.entryList(QDir::Files).size() > 0) {
+        qDebug()<<"1";
+        return folder + QDir::separator() + dir.entryList(QDir::Files).at(0);
+    } else if (dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot).size() > 0) {
+        qDebug()<<"2";
+        return first_file(folder + QDir::separator() + dir.entryList(QDir::Dirs | QDir::NoDotAndDotDot).at(0));
+    } else {
+        qDebug()<<"3";
+        return folder;
+    }
+}
+
+
