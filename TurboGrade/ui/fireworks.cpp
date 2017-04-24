@@ -7,7 +7,9 @@ Fireworks::Fireworks(QWidget *parent) :
 
     QMovie *animation = new QMovie(":/misc/res/fireworks_1.gif");
     animation->setObjectName("animation");
-    animation->setScaledSize(QSize(400, 300));
+    QSize new_size = animation->scaledSize();
+    new_size.scale(400, 300, Qt::KeepAspectRatioByExpanding);
+    animation->setScaledSize(new_size);
     animation->start();
 
     QLabel *gif = new QLabel(this);
@@ -15,7 +17,7 @@ Fireworks::Fireworks(QWidget *parent) :
     gif->setObjectName("gif");
     gif->setAlignment(Qt::AlignCenter);
     gif->move(0,0);
-    gif->resize(400, 300);
+    gif->resize(animation->scaledSize());
     gif->setStyleSheet("#gif { background:rgb(99, 187, 169); border-radius: 4px; padding: 10px;}");
 
     resize(gif->width() + 20 , gif->height() + 20);
@@ -29,7 +31,7 @@ Fireworks::Fireworks(QWidget *parent) :
     text->setAlignment(Qt::AlignCenter);
     text->setFont(helvetica);
     text->setStyleSheet("#done { color: white;}");
-    text->move(width() / 2 - fm.width(text->text()) / 2, height() / 2 - 3 * fm.height()  / 4);
+    text->move(width() / 2 - fm.width(text->text()) / 2, 3 * height() / 4 - fm.height() / 2);
 
     setObjectName("fireworks");
     setStyleSheet("background: transparent;");
