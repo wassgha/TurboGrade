@@ -28,7 +28,9 @@
         <file>res/splitter2.png</file>
         <file>res/comment.png</file>
         <file>res/caret-down.png</file>
-        <file>res/next.png</file>
+        <file>res/next_black.png</file>
+        <file>res/next_white.png</file>
+        <file>res/next_gray.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

@@ -24,11 +24,15 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->mainWidget->setCurrentWidget(code_view);
 
     // Show grading progress (graded/total submissions)
-    ui->progressBar->setMaximum(_submission->_student->_section->num_submissions_total(_submission->_assignment));
-    ui->progressBar->setValue(_submission->_student->_section->num_submissions_graded(_submission->_assignment));
+    update_progress();
+
+    update_next();
 
     ui->logo->setCursor(Qt::PointingHandCursor);
     connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_dashboard()));
+
+    ui->next->setCursor(Qt::PointingHandCursor);
+    connect(ui->next, SIGNAL(clicked(bool)), this, SLOT(next_submission()));
 
     refresh_students();
 
@@ -39,6 +43,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 
 void GradeSubmission::update_next() {
     ui->next->setEnabled(_submission->_status == 2);
+    if (_submission->_student->_section->num_submissions_ungraded(_submission->_assignment) > 0)
+        ui->next->setEnabled(false);
 }
 
 GradeSubmission::~GradeSubmission()
@@ -146,4 +152,13 @@ void GradeSubmission::on_studentName_currentIndexChanged(int index)
 void GradeSubmission::show_dashboard() {
     hide();
     _parent->raise();
+}
+
+void GradeSubmission::next_submission() {
+    emit(switched_submission(_submission->_student->_section->get_random_ungraded(_submission->_assignment)));
+}
+
+void GradeSubmission::update_progress() {
+    ui->progressBar->setMaximum(_submission->_student->_section->num_submissions_total(_submission->_assignment));
+    ui->progressBar->setValue(_submission->_student->_section->num_submissions_graded(_submission->_assignment));
 }

@@ -108,7 +108,8 @@ void Dashboard::show_submissions(QObject* section, QObject* assignment) {
 }
 
 void Dashboard::start_grading(QObject* submission) {
-
+    if (submission == nullptr)
+        return;
     if (grade_submission != nullptr)
         grade_submission->deleteLater();
     grade_submission = new GradeSubmission(this, (Submission*)submission, _controller);
