@@ -72,6 +72,33 @@ bool AssignmentDB::link(int assignment_id,
     return true;
 }
 
+/**
+ * @brief CommentDB::erase erases comment from comment db
+ * @param comment_id the id of the comment
+ */
+void AssignmentDB::remove_link(int assignment_id, int section_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM assignment_section "
+                    "WHERE assignment = ? AND section = ?;");
+    query.addBindValue(assignment_id);
+    query.addBindValue(section_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'comment' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
+
 
 /**
  * @brief AssignmentDB::select Returns id of the row
