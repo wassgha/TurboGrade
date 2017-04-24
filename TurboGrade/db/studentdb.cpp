@@ -105,6 +105,31 @@ void StudentDB::load_all(Section* section) {
     db.commit();
 }
 
+/**
+ * @brief StudentDB::remove erases a student from the db
+ * @param student_id the student to remove
+ */
+void StudentDB::remove(int student_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM student "
+                  "WHERE id = ?;");
+    query.addBindValue(student_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'student' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
 
 
 /**

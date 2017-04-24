@@ -31,6 +31,8 @@ public:
     int select(const QString course_name, const QString section_name, const QString name);
     // Load students for a specific section to controller
     void load_all(Section* section);
+    // Remove a row from the table
+    void remove(int student_id);
     // Controller
     Controller* _controller;
 };
