@@ -63,6 +63,26 @@ Student* Section::add_student(const QString name, int id) {
 }
 
 /**
+ * @brief Section::remove_student removes student from section, and also
+ * deletes all submissions from student.
+ * @param student the student to remove
+ */
+void Section::remove_student(Student *student){
+    if(student == nullptr){
+        return;
+    }
+    // erase from DB
+    _controller->_studentDB->remove(student->_id);
+    // erase student from students vector
+    _students->erase(std::remove(_students->begin(), _students->end(), student),
+                    _students->end());
+    for(Submission *submission : *student->_submissions){
+        student->remove_submission(submission);
+    }
+    delete student;
+}
+
+/**
  * @brief Section::get_student finds a student by their name
  * @param name the student identifier
  * @return the student found

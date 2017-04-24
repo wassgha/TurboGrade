@@ -36,6 +36,8 @@ public:
     ~Section();
     // Add a student to the section
     Student* add_student(const QString name, int id = -1);
+    // Remove a student from the section
+    void remove_student(Student *student);
     // Add an assignment to the section
     Assignment* add_assignment(Assignment* assignment, bool load = false);
     // Remove an assignment from the section
