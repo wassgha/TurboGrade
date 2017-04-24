@@ -39,6 +39,7 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->hideName->setChecked(true);
 
     installEventFilter(this);
+
 }
 
 void GradeSubmission::update_next() {
@@ -55,6 +56,8 @@ GradeSubmission::~GradeSubmission()
         delete compile;
     delete code_view;
     delete grade_view;
+    if(fireworks != nullptr)
+        delete fireworks;
     delete ui;
 }
 
@@ -129,11 +132,17 @@ void GradeSubmission::on_hideName_toggled(bool checked)
 bool GradeSubmission::eventFilter(QObject *watched, QEvent *event) {
     if (event->type() == QEvent::Move) {
         code_view->move_popup();
+        if(fireworks != nullptr)
+            fireworks->update();
     }
     else if (event->type() == QEvent::FocusOut)
     {
         qDebug()<<"Lost focus";
         code_view->_popup->hide();
+    } else if (event->type() == QEvent::Resize)
+    {
+        if(fireworks != nullptr)
+            fireworks->update();
     }
 
     return QWidget::eventFilter(watched, event);
@@ -161,6 +170,24 @@ void GradeSubmission::next_submission() {
 }
 
 void GradeSubmission::update_progress() {
-    ui->progressBar->setMaximum(_submission->_student->_section->num_submissions_total(_submission->_assignment));
-    ui->progressBar->setValue(_submission->_student->_section->num_submissions_graded(_submission->_assignment));
+    Section *section = _submission->_student->_section;
+    ui->progressBar->setMaximum(section->num_submissions_total(_submission->_assignment));
+    ui->progressBar->setValue(section->num_submissions_graded(_submission->_assignment));
+    if (!_parent->submissions->_finished_grading && section->num_submissions_ungraded(_submission->_assignment) == 0 && section->num_submissions_total(_submission->_assignment) != 0) {
+        display_fireworks();
+        _parent->submissions->_finished_grading = true;
+    }
+}
+
+void GradeSubmission::display_fireworks() {
+    if(fireworks != nullptr)
+        delete fireworks;
+    fireworks = new Fireworks(this);
+    fireworks->show();
+    QTimer::singleShot(4000, this, SLOT(hide_fireworks()));
+}
+
+void GradeSubmission::hide_fireworks() {
+    if(fireworks != nullptr)
+        fireworks->hide();
 }

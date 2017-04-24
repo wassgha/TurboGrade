@@ -19,6 +19,8 @@
 #include "dashboard.h"
 #include "ui_dashboard.h"
 
+#include "fireworks.h"
+
 class GradeView;
 class CodeView;
 class Dashboard;
@@ -36,6 +38,7 @@ public:
     ~GradeSubmission();
     void update_next();
     void update_progress();
+    void display_fireworks();
     CodeView *code_view;
     GradeView *grade_view;
     Controller *_controller;
@@ -58,6 +61,8 @@ private slots:
 
     void next_submission();
 
+    void hide_fireworks();
+
 
 private:
     bool eventFilter(QObject *watched, QEvent *event) override;
@@ -65,6 +70,7 @@ private:
     Ui::GradeSubmission *ui;
     QProcess *compile = nullptr;
     Dashboard* _parent = nullptr;
+    Fireworks *fireworks = nullptr;
 
 signals:
     void switched_submission(QObject* submission);

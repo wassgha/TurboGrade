@@ -32,6 +32,8 @@
         <file>res/next_white.png</file>
         <file>res/next_gray.png</file>
         <file>res/next_green.png</file>
+        <file>res/fireworks.gif</file>
+        <file>res/fireworks_1.gif</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

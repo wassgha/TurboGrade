@@ -19,6 +19,7 @@ class SubmissionView: public ListView
     Q_OBJECT
 public:
     SubmissionView(QWidget* parent = 0, QObject* section = nullptr, QObject* assignment = nullptr, Controller* controller = nullptr);
+    bool _finished_grading = false;
 
 public slots:
     void refresh_cards() override;

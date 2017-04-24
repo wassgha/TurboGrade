@@ -50,6 +50,8 @@ SubmissionView::SubmissionView(QWidget* parent, QObject* section,
     _breadcrumb->add_to_back(export_pdf_btn);
     ui->verticalLayout->insertWidget(0, _breadcrumb);
 
+    _finished_grading = _section->num_submissions_ungraded(_assignment) == 0 && _section->num_submissions_total(_assignment) != 0;
+
     refresh_cards();
 }
 
