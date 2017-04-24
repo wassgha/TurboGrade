@@ -33,6 +33,9 @@ public:
     // Load grade for a single criterion
     void load_criterion(Submission* submission, Criterion* criterion);
 
+    // Remove a row from the table BASED ON SUBMISSION ID
+    void remove(int submission_id);
+
     //Controller
     Controller *_controller;
 };

@@ -176,3 +176,29 @@ void GradeDB::load_criterion(Submission *submission, Criterion* criterion) {
 
 
 }
+
+/**
+ * @brief GradeDB::remove remove the grade from the db based on the submission id
+ * @param submission_id the submission to remove the grade for
+ */
+void GradeDB::remove(int submission_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("DELETE FROM grade "
+                    "WHERE submission = ?;");
+    query.addBindValue(submission_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to delete from 'grade' table" << endl << "SQL ERROR: " << query.lastError();
+        db.commit();
+        return;
+    }
+
+    query.finish();
+
+    db.commit();
+}
