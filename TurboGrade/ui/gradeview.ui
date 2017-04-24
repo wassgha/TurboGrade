@@ -20,6 +20,7 @@
    <string notr="true">#export_pdf, #finalize {
 	color: white;
 	padding: 10px;
+	text-transform: uppercase;
 }
 
 
@@ -213,11 +214,7 @@ QWidget#general_comments_box {
          <item>
           <widget class="QPushButton" name="export_pdf">
            <property name="font">
-            <font>
-             <family>Open Sans</family>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
+            <font/>
            </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>
@@ -236,12 +233,7 @@ QWidget#general_comments_box {
          <item>
           <widget class="QPushButton" name="finalize">
            <property name="font">
-            <font>
-             <family>Open Sans</family>
-             <weight>75</weight>
-             <bold>true</bold>
-             <kerning>true</kerning>
-            </font>
+            <font/>
            </property>
            <property name="cursor">
             <cursorShape>PointingHandCursor</cursorShape>

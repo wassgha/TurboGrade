@@ -44,3 +44,17 @@ QString CommentPopup::val(QString name) {
     }
 
 }
+
+QString CommentPopup::peek(QString name) {
+
+    if (name == "adjust_grade") {
+        QString val = ui->adjust_grade->text();
+        return val;
+    } else if (name == "comment") {
+        QString val = ui->comment->text();
+        return val;
+    } else {
+        return QString();
+    }
+
+}

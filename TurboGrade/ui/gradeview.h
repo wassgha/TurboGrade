@@ -36,11 +36,15 @@ public:
     // Criterion cards
     std::map<Criterion*, CriterionGradeCard*> _cards;
 
+private:
+    void update_status();
+
 public slots:
     void update_grades();
 
 private slots:
     void on_finalize_clicked();
+    void on_export_pdf_clicked();
 };
 
 #endif // GRADEVIEW_H

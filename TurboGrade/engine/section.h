@@ -20,11 +20,13 @@
 #include "course.h"
 #include "assignment.h"
 #include "student.h"
+#include "submission.h"
 
 class Controller;
 class Course;
 class Student;
 class Assignment;
+class Submission;
 
 class Section : public ObjectIdentifier, public QObject
 {
@@ -53,6 +55,10 @@ public:
     int num_submissions_total(Assignment* assignment);
     // Returns number of finalized (graded) submissions for an assignment
     int num_submissions_graded(Assignment* assignment);
+    // Returns number of submission yet to grade for an assignment
+    int num_submissions_ungraded(Assignment* assignment);
+    // Get a random submission to grade
+    Submission* get_random_ungraded(Assignment* assignment);
 
     // Section id
     int _id;

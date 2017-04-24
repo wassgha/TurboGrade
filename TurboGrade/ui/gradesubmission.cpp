@@ -3,7 +3,8 @@
 
 GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Controller *controller) :
     QWidget(parent, Qt::Window),
-    ui(new Ui::GradeSubmission)
+    ui(new Ui::GradeSubmission),
+    _parent(dynamic_cast<Dashboard*>(parent))
 {
 
     ui->setupUi(this);
@@ -15,9 +16,6 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     setAttribute(Qt::WA_StyledBackground, true);
     setWindowState(Qt::WindowFullScreen);
 
-    ui->run->setCursor(Qt::PointingHandCursor);
-    ui->toggle->setCursor(Qt::PointingHandCursor);
-
     code_view = new CodeView(this, _controller);
     grade_view = new GradeView(this, _controller);
 
@@ -26,16 +24,31 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->mainWidget->setCurrentWidget(code_view);
 
     // Show grading progress (graded/total submissions)
-    ui->progressBar->setMaximum(_submission->_student->_section->num_submissions_total(_submission->_assignment));
-    ui->progressBar->setValue(_submission->_student->_section->num_submissions_graded(_submission->_assignment));
+    update_progress();
+
+    update_next();
+
+    ui->logo->setCursor(Qt::PointingHandCursor);
+    connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_dashboard()));
+
+    ui->next->setCursor(Qt::PointingHandCursor);
+    connect(ui->next, SIGNAL(clicked(bool)), this, SLOT(next_submission()));
 
     refresh_students();
 
     ui->hideName->setChecked(true);
 
     installEventFilter(this);
+
 }
 
+void GradeSubmission::update_next() {
+    if (_submission->_status == 2 && _submission->_student->_section->num_submissions_ungraded(_submission->_assignment) > (_submission->_status == 2 ? 0 : 1)) {
+        ui->next->setEnabled(true);
+    } else {
+        ui->next->setEnabled(false);
+    }
+}
 
 GradeSubmission::~GradeSubmission()
 {
@@ -43,6 +56,8 @@ GradeSubmission::~GradeSubmission()
         delete compile;
     delete code_view;
     delete grade_view;
+    if(fireworks != nullptr)
+        delete fireworks;
     delete ui;
 }
 
@@ -97,9 +112,10 @@ void GradeSubmission::refresh_students() {
     ui->studentName->clear();
     ui->studentName->addItem("Anonymous Grading", -1);
     for(Student* student : *_submission->_student->_section->_students) {
-        ui->studentName->addItem(student->_name, student->_id);
+        if (student->get_submission(_submission->_assignment) != nullptr)
+            ui->studentName->addItem(student->_name);
     }
-    ui->studentName->setCurrentIndex(ui->studentName->findData(_submission->_student->_id));
+    ui->studentName->setCurrentIndex(ui->studentName->findText(_submission->_student->_name));
 }
 
 void GradeSubmission::on_hideName_toggled(bool checked)
@@ -108,7 +124,7 @@ void GradeSubmission::on_hideName_toggled(bool checked)
         ui->studentName->setCurrentIndex(0);
         ui->studentName->setEnabled(false);
     } else {
-        ui->studentName->setCurrentIndex(ui->studentName->findData(_submission->_student->_id));
+        ui->studentName->setCurrentIndex(ui->studentName->findText(_submission->_student->_name));
         ui->studentName->setEnabled(true);
     }
 }
@@ -116,12 +132,62 @@ void GradeSubmission::on_hideName_toggled(bool checked)
 bool GradeSubmission::eventFilter(QObject *watched, QEvent *event) {
     if (event->type() == QEvent::Move) {
         code_view->move_popup();
+        if(fireworks != nullptr)
+            fireworks->update();
     }
     else if (event->type() == QEvent::FocusOut)
     {
         qDebug()<<"Lost focus";
         code_view->_popup->hide();
+    } else if (event->type() == QEvent::Resize)
+    {
+        if(fireworks != nullptr)
+            fireworks->update();
     }
 
     return QWidget::eventFilter(watched, event);
+}
+
+void GradeSubmission::on_studentName_currentIndexChanged(int index)
+{
+    qDebug()<<"Student name changed"<< index;
+    if (index <= 0 || index == ui->studentName->findText(_submission->_student->_name))
+        return;
+    QString student_name = ui->studentName->itemText(index);
+    qDebug()<<"name : "<< student_name;
+    Student *selected_student = _submission->_student->_section->get_student(student_name);
+    Submission *selected_submission = selected_student->get_submission(_submission->_assignment);
+    emit(switched_submission(selected_submission));
+}
+
+void GradeSubmission::show_dashboard() {
+    hide();
+    _parent->raise();
+}
+
+void GradeSubmission::next_submission() {
+    emit(switched_submission(_submission->_student->_section->get_random_ungraded(_submission->_assignment)));
+}
+
+void GradeSubmission::update_progress() {
+    Section *section = _submission->_student->_section;
+    ui->progressBar->setMaximum(section->num_submissions_total(_submission->_assignment));
+    ui->progressBar->setValue(section->num_submissions_graded(_submission->_assignment));
+    if (!_parent->submissions->_finished_grading && section->num_submissions_ungraded(_submission->_assignment) == 0 && section->num_submissions_total(_submission->_assignment) != 0) {
+        display_fireworks();
+        _parent->submissions->_finished_grading = true;
+    }
+}
+
+void GradeSubmission::display_fireworks() {
+    if(fireworks != nullptr)
+        delete fireworks;
+    fireworks = new Fireworks(this);
+    fireworks->show();
+    QTimer::singleShot(4000, this, SLOT(hide_fireworks()));
+}
+
+void GradeSubmission::hide_fireworks() {
+    if(fireworks != nullptr)
+        fireworks->hide();
 }

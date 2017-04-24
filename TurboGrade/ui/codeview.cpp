@@ -22,10 +22,12 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
      *          Construct the file tree               *
      **************************************************/
 
+    QString root_path = _parent->_submission->getPath();
     _model = new QFileSystemModel;
-    _model->setRootPath(_parent->_submission->getPath());
+    _model->setRootPath(root_path);
+    first_file = QDir(root_path).absoluteFilePath(QDir(root_path).relativeFilePath(DirTools::first_file(root_path)));
 
-    root_index = _model->index(_parent->_submission->getPath());
+    root_index = _model->index(root_path);
 
     ui->treeView->setModel(_model);
     ui->treeView->setRootIndex(root_index);
@@ -40,7 +42,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
     ui->comment_layout->setAlignment(Qt::AlignTop);
 
 
-    setupCodeEditor("Main.java");
+    setupCodeEditor(first_file);
     refresh_criteria();
 
     // Loads the first file
@@ -71,6 +73,9 @@ void CodeView::getSelection() {
 
     // Display it
     _popup->show();
+    _popup->ui->comment->setDisabled(false);
+    _popup->ui->comment->setReadOnly(false);
+    _popup->ui->comment->setEnabled(true);
 }
 
 void CodeView::move_popup() {
@@ -109,21 +114,9 @@ void CodeView::add_comment() {
         else
             criterion = _parent->_submission->_assignment->_rubric->get_criterion(criterion_id);
 
-        // Get grade adjustment
-        int grade_adjustment = _popup->val("adjust_grade").toInt();
 
-        if (criterion != nullptr) {
-            int adjusted_grade = _parent->_submission->get_grade(criterion) + grade_adjustment;
-            if(adjusted_grade > criterion->_out_of || adjusted_grade < 0) {
-                QMessageBox errorBox(QMessageBox::Critical,
-                                     "The point adjustment is out of grading range.",
-                                     "The point adjustment made by this comment is either higher than the"
-                                     " maximum score for this criterion or lower than 0, please change it.",
-                                     QMessageBox::Close, this, Qt::Sheet);
-                errorBox.exec();
-                return;
-            }
-        } else {
+        if (criterion == nullptr) {
+
             QMessageBox errorBox(QMessageBox::Critical,
                                  "No criterion selected.",
                                  "Please select a category for this comment.",
@@ -133,7 +126,7 @@ void CodeView::add_comment() {
         }
 
         // Get comment text
-        QString comment_text = _popup->val("comment");
+        QString comment_text = _popup->peek("comment");
 
         if(comment_text == "") {
             QMessageBox errorBox(QMessageBox::Critical,
@@ -144,14 +137,30 @@ void CodeView::add_comment() {
             return;
         }
 
+        // Get grade adjustment
+        int grade_adjustment = _popup->peek("adjust_grade").toInt();
+
+        int adjusted_grade = _parent->_submission->get_grade(criterion) + grade_adjustment;
+        if(adjusted_grade > criterion->_out_of || adjusted_grade < 0) {
+            QMessageBox errorBox(QMessageBox::Critical,
+                                 "The point adjustment is out of grading range.",
+                                 "The point adjustment made by this comment is either higher than the"
+                                 " maximum score for this criterion or lower than 0, please change it.",
+                                 QMessageBox::Close, this, Qt::Sheet);
+            errorBox.exec();
+            return;
+        }
+
+
+
         // Get the file name from the tree view
         QString file_name = QDir(_model->rootPath()).relativeFilePath(_model->filePath(ui->treeView->currentIndex()));
 
         // Add the comment
         _parent->_submission->add_comment(file_name,
                                           criterion,
-                                          comment_text,
-                                          grade_adjustment,
+                                          _popup->val("comment"),
+                                          _popup->val("adjust_grade").toInt(),
                                           ui->editor->textCursor().selectionStart(),
                                           ui->editor->textCursor().selectionEnd());
         _popup->val("criterion");
@@ -186,7 +195,8 @@ CodeView::~CodeView()
         delete comment_card;
     }
     _comment_cards.clear();
-    delete _completer;
+    if (_completer != nullptr)
+        delete _completer;
     delete _popup;
     delete _model;
     delete ui;
@@ -196,6 +206,7 @@ CodeView::~CodeView()
 void CodeView::loadFile(QModelIndex item)
 {
     if (!_model->isDir(item)) {
+        qDebug() << "Selected " << _model->filePath(item);
         QFile file(_model->filePath(item));
         if (file.open(QFile::ReadOnly | QFile::Text))
             ui->editor->setPlainText(file.readAll());
@@ -238,7 +249,7 @@ void CodeView::setupCodeEditor(const QString &file_name)
 
 
 void CodeView::finished_loading() {
-    ui->treeView->setCurrentIndex(_model->index(0, 0, root_index));
+    ui->treeView->setCurrentIndex(_model->index(first_file));
     ui->treeView->expandToDepth(0);
 }
 
@@ -274,11 +285,24 @@ void CodeView::unhighlight_comments() {
 }
 
 void CodeView::refresh_autocomplete() {
+    if (_completer != nullptr)
+        delete _completer;
+
     _completer = new QCompleter(_controller->_all_comments, this);
     _completer->setCompletionMode(QCompleter::InlineCompletion);
     _completer->setCaseSensitivity(Qt::CaseInsensitive);
     _completer->setCompletionColumn(4);
     _popup->ui->comment->setCompleter(_completer);
+    connect(_completer, SIGNAL(highlighted(QModelIndex)), this, SLOT(auto_completed(QModelIndex)));
+}
+
+void CodeView::auto_completed(QModelIndex index) {
+    QModelIndex index_table_model = qobject_cast<QAbstractProxyModel*> (_completer->completionModel())->mapToSource(index);
+
+    qDebug()<<"Called autocompleted with index"<<index_table_model.row();
+    _popup->ui->adjust_grade->setValue(_controller->_all_comments->record(index_table_model.row()).value("grade").toInt());
+    int row = _popup->ui->criterion->findData(_controller->_all_comments->record(index_table_model.row()).value("rubric").toInt());
+    _popup->ui->criterion->setCurrentIndex(_popup->ui->criterion->model()->index(row, 0).row());
 }
 
 QString CodeView::current_file() {

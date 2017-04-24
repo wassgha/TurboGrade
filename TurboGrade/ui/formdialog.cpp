@@ -71,6 +71,7 @@ QWidget* FormDialog::add_field(QString type, QString name,
     } else if (type == "QComboBox") {
 
         field = new QComboBox();
+        dynamic_cast<QComboBox*>(field)->setSizeAdjustPolicy(QComboBox::AdjustToContents);
         dynamic_cast<QComboBox*>(field)->setObjectName(name);
         ui->formLayout->addRow(label, field);
 
@@ -150,19 +151,27 @@ QString FormDialog::val(QString name) {
 void FormDialog::on_cancel_btn_clicked()
 {
     hide();
+    QPushButton* field = findChild<QPushButton*>("select_folder");
+    if (field != nullptr)
+        field->setText("Choose folder");
 }
 
 void FormDialog::on_ok_btn_clicked()
 {
     emit submit();
     hide();
+    QPushButton* field = findChild<QPushButton*>("select_folder");
+    if (field != nullptr)
+        field->setText("Choose folder");
 }
 
 void FormDialog::select_folder() {
     _data = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-                                              "",
+                                              "~/",
                                               QFileDialog::ShowDirsOnly
                                               | QFileDialog::DontResolveSymlinks);
+    QPushButton* field = findChild<QPushButton*>("select_folder");
+    field->setText("Selected: \" .. " + _data.right(20) + "\"");
 }
 
 void FormDialog::disableSubmit() {

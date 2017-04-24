@@ -4,8 +4,12 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql printsupport webenginewidgets script
+QT       += core gui sql printsupport script
 QT          += sql widgets printsupport
+
+unix:!ios {
+    QT += webenginewidgets
+}
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -77,7 +81,8 @@ SOURCES += main.cpp\
     criterionitem.cpp \
     criteriongradecard.cpp \
     criteriondialog.cpp \
-    criterionguidedialog.cpp
+    criterionguidedialog.cpp \
+    fireworks.cpp
 
 HEADERS  +=\
             "../tools/syntaxhighlight.h"\
@@ -129,7 +134,8 @@ HEADERS  +=\
     criterionitem.h \
     criteriongradecard.h \
     criteriondialog.h \
-    criterionguidedialog.h
+    criterionguidedialog.h \
+    fireworks.h
 
 FORMS    += \
     commentpopup.ui \

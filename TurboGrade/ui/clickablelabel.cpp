@@ -3,6 +3,7 @@
 ClickableLabel::ClickableLabel(QWidget* parent)
     : QLabel(parent)
 {
+    setCursor(Qt::PointingHandCursor);
 }
 
 ClickableLabel::~ClickableLabel()

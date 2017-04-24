@@ -188,3 +188,39 @@ int Section::num_submissions_graded(Assignment* assignment) {
     }
     return i;
 }
+
+/**
+ * @brief Section::num_submissions_graded returns the number
+ * of finalized (graded) submissions for a specified assignment
+ * @param assignment the assignment
+ * @return total number of graded submissions
+ */
+int Section::num_submissions_ungraded(Assignment* assignment) {
+    int i = 0;
+    for (Student* student : *_students) {
+        if (student->get_submission(assignment) != nullptr &&
+                student->get_submission(assignment)->_status != 2) {
+            i++;
+        }
+    }
+    return i;
+}
+
+/**
+ * @brief Section::get_random_ungraded selects a random submission
+ * to be graded for a specific assignment
+ * @param assignment the assignment
+ * @return the submission
+ */
+Submission* Section::get_random_ungraded(Assignment* assignment) {
+    if (num_submissions_ungraded(assignment) != 0 ) {
+        Student * rand_student = nullptr;
+        while (rand_student == nullptr ||
+               rand_student->get_submission(assignment) == nullptr ||
+               rand_student->get_submission(assignment)->_status == 2)
+            rand_student = _students->at(qrand() % ((int)_students->size()));
+        return rand_student->get_submission(assignment);
+    } else {
+        return nullptr;
+    }
+}
