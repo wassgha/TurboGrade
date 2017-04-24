@@ -196,6 +196,41 @@ Assignment* Controller::add_assignment(const QString name, const QString objecti
 }
 
 /**
+ * @brief Controller::remove_assignment remove the assignment from the program
+ * Also removes the assignment from all sections, and removes the rubric.
+ * @param assignment the assignment to remove
+ */
+void Controller::remove_assignment(Assignment *assignment){
+    if(assignemnt == nullptr){
+        return;
+    }
+    // erase from DB
+    _assignmentDB->remove(assignment->_id);
+    // erase from sections
+    for(Course *course : *_courses){
+        for(Section *section : *course->_sections){
+            for(Assignment *sectionAssignment: *section->_assignments){
+                if(assignment == sectionAssignment){
+                    section->remove_assignment(assignment);
+                }
+            }
+        }
+    }
+    // erase assignment from assignments vector
+    _assignments->erase(std::remove(_assignments->begin(), _assignments->end(), assignment),
+                    _assignments->end());
+
+    // erase the rubric with it
+    for(Criterion *criterion : *assignment->_rubric->_criteria){
+        for(Criterion *subCriterion : *criterion->_sub_criteria){
+            assignment->_rubric->remove_criterion(subCriterion);
+        }
+        assignment->_rubric->remove_criterion(criterion);
+    }
+    delete assignment;
+}
+
+/**
  * @brief Controller::get_assignment finds an assignment by its name
  * @param name the name of the assignment to search for
  * @return a pointer to the assignment found
