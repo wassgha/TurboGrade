@@ -75,7 +75,29 @@ void AssignmentDB::remove(int assignment_id){
  * @param assignment_id the assignment id in the table
  */
 void AssignmentDB::update(const QString name, const QString objective, bool full_grade, int assignment_id){
+    SHOW_WHERE;
 
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE assignment "
+                  "SET name = :name, objective = :objective, full_grade = :full_grade"
+                  "WHERE id = :id;");
+
+    query.bindValue(":name", name);
+    query.bindValue(":objective", objective);
+    query.bindValue(":full_grade", full_grade);
+    query.bindValue(":id", assignment_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update assignment "
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+    }
+
+    query.finish();
+    db.commit();
 }
 
 
