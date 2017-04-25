@@ -29,6 +29,9 @@ public:
     Student() = delete; //don't allow default constructor
     // Parametrized constructor
     Student(QString name, Section* section, Controller * controller, int id = -1);
+    // Update the student
+    void update(QString name);
+
     // Destructor
     ~Student();
     // Add a student submission
