@@ -17,24 +17,18 @@
    <bool>false</bool>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget#GradeView QWidget#scrollAreaWidgetContents {
-	background: #2b2f3b;
+   <string notr="true">QWidget#GradeView {
+	background-color: #2b2f3b;
 	border-radius: 3px;
 }
 
-#export_pdf, #finalize {
-	color: white;
-	padding: 10px;
-	text-transform: uppercase;
-}
-
-#scrollAreaWidgetContents &gt; #title {
+#GradeView &gt; #title {
 	color: white;
 	text-transform: uppercase;
 }
 
 
-#total_grade {
+#GradeView &gt; #total_grade {
 color:white;
 }
 
@@ -100,20 +94,30 @@ QGroupBox::title {
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <property name="spacing">
-    <number>0</number>
+    <number>-1</number>
    </property>
    <property name="leftMargin">
-    <number>0</number>
+    <number>8</number>
    </property>
    <property name="topMargin">
-    <number>0</number>
+    <number>8</number>
    </property>
    <property name="rightMargin">
-    <number>0</number>
+    <number>8</number>
    </property>
    <property name="bottomMargin">
-    <number>0</number>
+    <number>8</number>
    </property>
+   <item>
+    <widget class="QLabel" name="title">
+     <property name="text">
+      <string>RUBRIC &amp; GRADING</string>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
+    </widget>
+   </item>
    <item>
     <widget class="QScrollArea" name="scrollArea">
      <property name="sizePolicy">
@@ -142,8 +146,8 @@ QGroupBox::title {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>429</width>
-        <height>231</height>
+        <width>413</width>
+        <height>159</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -160,48 +164,44 @@ QGroupBox::title {
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <property name="spacing">
-        <number>12</number>
+        <number>-1</number>
        </property>
        <property name="leftMargin">
-        <number>12</number>
+        <number>0</number>
        </property>
        <property name="topMargin">
-        <number>12</number>
+        <number>0</number>
        </property>
        <property name="rightMargin">
-        <number>12</number>
+        <number>0</number>
        </property>
        <property name="bottomMargin">
-        <number>12</number>
+        <number>0</number>
        </property>
-       <item>
-        <widget class="QLabel" name="title">
-         <property name="text">
-          <string>RUBRIC &amp; GRADING</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="total_grade">
-         <property name="font">
-          <font>
-           <family>Open Sans</family>
-           <pointsize>16</pointsize>
-           <weight>50</weight>
-           <bold>false</bold>
-           <kerning>false</kerning>
-          </font>
-         </property>
-         <property name="text">
-          <string>Total Grade: 12 out of 15 (80%)</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="total_grade">
+     <property name="font">
+      <font>
+       <family>Open Sans</family>
+       <pointsize>16</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+       <kerning>false</kerning>
+      </font>
+     </property>
+     <property name="text">
+      <string>Total Grade: 12 out of 15 (80%)</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+     <property name="margin">
+      <number>0</number>
+     </property>
     </widget>
    </item>
   </layout>

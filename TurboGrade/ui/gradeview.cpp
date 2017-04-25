@@ -11,6 +11,7 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
 
     _controller = controller;
     _parent = dynamic_cast<GradeSubmission*>(parent);
+    setAttribute(Qt::WA_StyledBackground, true);
 
     for (Criterion* criterion : *_parent->_submission->_assignment->_rubric->_criteria) {
 
