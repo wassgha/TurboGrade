@@ -1,4 +1,4 @@
-#ifndef CLASSCALC_H
+#ifndef COURSECALC_H
 #define COURSECALC_H
 
 #include "../db/gradedb.h"
