@@ -58,6 +58,15 @@ void SectionDB::remove(int section_id){
 }
 
 /**
+ * @brief SectionDB::update the section to update
+ * @param name the new name
+ * @param section_id the section to update
+ */
+void SectionDB::update(const QString name, int section_id){
+
+}
+
+/**
  * @brief SectionDB::select Returns id of the row
  * that matches given name
  * @param course_name the name of the course (ex. CS 150)

@@ -27,6 +27,8 @@ public:
     int add(int course_id, const QString name);
     // Removes a row from the table
     void remove(int section_id);
+    // Update a row in the table
+    void update(const QString name, int section_id);
     // Gets row id matching name
     int select(const QString course_name, const QString name);
     // Load all sections to controller
