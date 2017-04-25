@@ -56,6 +56,16 @@ void CourseDB::remove(int course_id){
 }
 
 /**
+ * @brief CourseDB::update update the row given by the course_id
+ * @param name the new name
+ * @param semester the new semester text
+ * @param course_id the course to update
+ */
+void CourseDB::update(const QString name, const QString semester, int course_id){
+
+}
+
+/**
  * @brief CourseDB::select Returns id of the row
  * that matches given name
  * @param name the name of the course (ex. CS150)
