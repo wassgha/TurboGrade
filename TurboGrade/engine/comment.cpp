@@ -56,7 +56,7 @@ Comment::Comment(Submission* submission,
 }
 
 /**
- * @brief Comment::update updates the comment object
+ * @brief Comment::update updates the comment in memory and in DB
  * @param filename the new filename
  * @param criterion the new criterion
  * @param text the new text
