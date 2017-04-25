@@ -103,16 +103,16 @@ QWidget#general_comments_box {
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
-    <number>12</number>
+    <number>8</number>
    </property>
    <property name="topMargin">
-    <number>12</number>
+    <number>8</number>
    </property>
    <property name="rightMargin">
-    <number>12</number>
+    <number>8</number>
    </property>
    <property name="bottomMargin">
-    <number>12</number>
+    <number>8</number>
    </property>
    <item row="0" column="0">
     <widget class="QSplitter" name="splitter_3">
@@ -236,7 +236,7 @@ QWidget#general_comments_box {
           <x>8</x>
           <y>0</y>
           <width>284</width>
-          <height>338</height>
+          <height>346</height>
          </rect>
         </property>
         <property name="minimumSize">
@@ -259,13 +259,13 @@ QWidget#general_comments_box {
           <number>8</number>
          </property>
          <property name="topMargin">
-          <number>8</number>
+          <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>8</number>
+          <number>0</number>
          </property>
          <property name="bottomMargin">
-          <number>8</number>
+          <number>0</number>
          </property>
          <item>
           <widget class="QWidget" name="general_comments_box" native="true">
