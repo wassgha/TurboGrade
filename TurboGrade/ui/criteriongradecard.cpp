@@ -3,7 +3,8 @@
 
 CriterionGradeCard::CriterionGradeCard(QWidget *parent, Criterion* criterion, Submission* submission) :
     QWidget(parent),
-    ui(new Ui::CriterionGradeCard)
+    ui(new Ui::CriterionGradeCard),
+    _parent(dynamic_cast<GradeView*>(parent))
 {
 
     ui->setupUi(this);
@@ -61,16 +62,28 @@ void CriterionGradeCard::update_comments() {
     int i = 0;
 
     for (Comment *comment : _submission->get_comments(_criterion)) {
+        // Add the file name
+        QLabel *file_name = new QLabel("On file \"" + comment->_filename + "\"");
+        _comments.push_back(file_name);
+        ui->comments_container_layout->addWidget(file_name);
+        // Add the comment card
         CommentCard* comment_card = new CommentCard(this, comment, true);
         _comments.push_back(comment_card);
         ui->comments_container_layout->addWidget(comment_card);
+        connect(comment_card, SIGNAL(clicked(Comment*)), this, SLOT(show_comment(Comment*)));
         i++;
     }
     for (Criterion *child : _criterion->children()) {
         for (Comment *comment : _submission->get_comments(child)) {
+            // Add the file name
+            QLabel *file_name = new QLabel("On file \"" + comment->_filename + "\"");
+            _comments.push_back(file_name);
+            ui->comments_container_layout->addWidget(file_name);
+            // Add the comment card
             CommentCard* comment_card = new CommentCard(this, comment, true);
             _comments.push_back(comment_card);
             ui->comments_container_layout->addWidget(comment_card);
+            connect(comment_card, SIGNAL(clicked(Comment*)), this, SLOT(show_comment(Comment*)));
             i++;
         }
     }
@@ -103,4 +116,9 @@ void CriterionGradeCard::on_show_comments_clicked()
         ui->comments_container->show();
         ui->show_comments->setText("HIDE COMMENTS");
     }
+}
+
+void CriterionGradeCard::show_comment(Comment* comment) {
+    _parent->_parent->toggle();
+    _parent->_parent->code_view->show_comment(comment);
 }

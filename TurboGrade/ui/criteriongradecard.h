@@ -8,6 +8,11 @@
 #include "commentcard.h"
 #include "ui_commentcard.h"
 
+#include "gradeview.h"
+#include "ui_gradeview.h"
+
+class GradeView;
+
 namespace Ui {
 class CriterionGradeCard;
 }
@@ -25,6 +30,9 @@ public:
     void update_comments();
     void insert_child(QWidget* child);
 
+public slots:
+    void show_comment(Comment* comment);
+
 private slots:
     void on_grade_valueChanged(int grade);
 
@@ -38,6 +46,7 @@ private:
     Submission* _submission;
     Criterion* _criterion;
     std::vector<QWidget*> _comments;
+    GradeView* _parent;
 };
 
 #endif // CRITERIONGRADECARD_H

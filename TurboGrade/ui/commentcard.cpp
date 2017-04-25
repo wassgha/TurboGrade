@@ -1,7 +1,7 @@
 #include "commentcard.h"
 #include "ui_commentcard.h"
 
-CommentCard::CommentCard(QWidget *parent, Comment *comment, bool display_file) :
+CommentCard::CommentCard(QWidget *parent, Comment *comment, bool grade_view) :
     QWidget(parent),
     ui(new Ui::CommentCard)
 {
@@ -11,7 +11,7 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment, bool display_file) :
     setAttribute(Qt::WA_Hover);
     setMouseTracking(true);
 
-    if ( ! display_file ) {
+    if ( ! grade_view ) {
         QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
         effect->setBlurRadius(15);
         effect->setXOffset(0);
@@ -38,8 +38,7 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment, bool display_file) :
     }
 
     ui->comment->setText(_comment->_text);
-    if (display_file) {
-        ui->rubric->setText("On file: \"" + _comment->_filename + "\"");
+    if (grade_view) {
         ui->controls->hide();
     } else {
         if (_comment->_criterion != nullptr) {
@@ -65,4 +64,9 @@ void CommentCard::enterEvent(QEvent * event)
 void CommentCard::leaveEvent(QEvent * event)
 {
     emit mouseOut(_comment);
+}
+
+void CommentCard::mousePressEvent(QMouseEvent *event)
+{
+    emit clicked(_comment);
 }

@@ -50,6 +50,7 @@ public:
     QString current_folder();
     QString current_file();
     void move_popup();
+    void show_comment(Comment * comment);
     Ui::CodeView                *ui;
     Controller                  *_controller;
     GradeSubmission             *_parent;
@@ -74,6 +75,7 @@ private:
 
     QFileSystemModel    *_model;
     QCompleter          *_completer = nullptr;
+    QString             _root_path;
     QModelIndex         root_index;
     QString             first_file;
     QModelIndex         first_file_index;

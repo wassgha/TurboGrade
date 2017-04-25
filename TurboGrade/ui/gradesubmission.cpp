@@ -91,6 +91,10 @@ void GradeSubmission::finished_running() {
 
 }
 
+void GradeSubmission::toggle() {
+    ui->toggle->click();
+}
+
 void GradeSubmission::on_toggle_clicked()
 {
     if(ui->mainWidget->currentWidget() == code_view) {

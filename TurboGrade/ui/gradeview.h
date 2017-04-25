@@ -16,6 +16,8 @@
 #include <QMainWindow>
 #include <QWidget>
 
+class CriterionGradeCard;
+
 class GradeSubmission;
 
 namespace Ui {

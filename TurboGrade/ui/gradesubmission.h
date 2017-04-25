@@ -39,6 +39,7 @@ public:
     void update_next();
     void update_progress();
     void display_fireworks();
+    void toggle();
     CodeView *code_view;
     GradeView *grade_view;
     Controller *_controller;
