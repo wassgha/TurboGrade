@@ -24,10 +24,19 @@
 	padding: 0px;
 	margin: 0px;
 	font-weight: bold;
-        background: transparent;
-        border: none;
-    }
-    </string>
+     background: transparent;
+     border: none;
+}
+    
+#out_of {
+	color:gray;
+}
+
+#grade {
+	text-align:center;
+	background:white;
+	border-radius: 3px;
+}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -64,7 +73,7 @@
       </font>
      </property>
      <property name="title">
-      <string>COMPLETENESS</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -76,15 +85,39 @@
       <item>
        <layout class="QHBoxLayout" name="horizontal_layout_2">
         <item>
-         <widget class="QLabel" name="grade_label">
+         <widget class="QLabel" name="title">
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>Grade :</string>
+           <string>COMPLETENESS</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSpinBox" name="grade">
           <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="wrapping">
+           <bool>false</bool>
+          </property>
+          <property name="frame">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="accelerated">
+           <bool>false</bool>
+          </property>
+          <property name="showGroupSeparator" stdset="0">
            <bool>false</bool>
           </property>
           <property name="value">
@@ -95,7 +128,7 @@
         <item>
          <widget class="QLabel" name="out_of">
           <property name="text">
-           <string> (out of 12)</string>
+           <string>/ 12</string>
           </property>
          </widget>
         </item>
@@ -116,6 +149,9 @@
       </item>
       <item>
        <layout class="QVBoxLayout" name="children"/>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="comments_container"/>
       </item>
       <item>
        <widget class="QWidget" name="comments_box" native="true">

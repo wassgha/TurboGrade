@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>309</height>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -27,19 +27,6 @@ QLabel {
         text-transform: capitalize;
         font-size: 16px;
         font-weight: bold;
-}
-
-QLineEdit, QTextEdit {
-        border: none;
-        border-bottom: 2px solid rgba(0,0,0,10);
-        outline:none;
-        padding: 5px;
-}
-
-QLineEdit::focus, QTextEdit::focus {
-        border: none;
-        border-bottom: 2px solid lightgray;
-        outline:none;
 }
 
 #cancel_btn {
@@ -79,15 +66,21 @@ QLineEdit::focus, QTextEdit::focus {
 
 #info {
         background: #61b4ff;
+
 }
 
-#select_folder {
-        background: white;
-        border: 1px solid lightgray;
-        border-radius: 3px;
-        padding: 10px;
-        padding-top: 20px;
-        padding-bottom: 20px;
+#guide {
+	border: none;
+	background:transparent;
+    outline: 0; /* Disable focus rect*/
+}
+
+#guide::item {
+	border: 2px solid lightgray;
+	margin-left: 5px;
+	margin-right: 5px;
+	border-radius: 3px;
+	text-align: left;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -126,6 +119,16 @@ QLineEdit::focus, QTextEdit::focus {
       <number>20</number>
      </property>
      <item>
+      <widget class="QLabel" name="info">
+       <property name="text">
+        <string>Please set a number of levels and describe the profeciency required at each level</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QSlider" name="row_count">
        <property name="minimum">
         <number>2</number>
@@ -151,7 +154,7 @@ QLineEdit::focus, QTextEdit::focus {
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="label">
+      <widget class="QLabel" name="score_per_level">
        <property name="text">
         <string>Grade per level : </string>
        </property>
@@ -160,7 +163,7 @@ QLineEdit::focus, QTextEdit::focus {
      <item>
       <widget class="QTableWidget" name="guide">
        <property name="frameShape">
-        <enum>QFrame::StyledPanel</enum>
+        <enum>QFrame::NoFrame</enum>
        </property>
        <property name="frameShadow">
         <enum>QFrame::Plain</enum>
@@ -169,7 +172,7 @@ QLineEdit::focus, QTextEdit::focus {
         <number>0</number>
        </property>
        <property name="sizeAdjustPolicy">
-        <enum>QAbstractScrollArea::AdjustIgnored</enum>
+        <enum>QAbstractScrollArea::AdjustToContents</enum>
        </property>
        <property name="autoScroll">
         <bool>true</bool>
@@ -184,7 +187,7 @@ QLineEdit::focus, QTextEdit::focus {
         <bool>true</bool>
        </property>
        <property name="gridStyle">
-        <enum>Qt::SolidLine</enum>
+        <enum>Qt::NoPen</enum>
        </property>
        <property name="sortingEnabled">
         <bool>false</bool>
@@ -242,15 +245,15 @@ QLineEdit::focus, QTextEdit::focus {
        <column/>
        <item row="0" column="0">
         <property name="text">
-         <string/>
+         <string>Define the expectation from each level</string>
         </property>
        </item>
        <item row="0" column="1">
         <property name="text">
-         <string/>
+         <string>Define the expectation from each level</string>
         </property>
         <property name="textAlignment">
-         <set>AlignCenter</set>
+         <set>AlignLeading|AlignVCenter</set>
         </property>
         <property name="flags">
          <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>

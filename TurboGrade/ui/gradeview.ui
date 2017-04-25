@@ -74,17 +74,18 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
 QGroupBox {
     background-color: white;
 	border-radius:3px;
-	padding-top: 3ex;
 	border: 1px solid rgb(236, 239, 239);
 }
+
+QGroupBox&gt;QGroupBox {
+	border: none
+}
+
+QGroupBox #title {
+}
+
 QGroupBox::title {
-	font-family:Montserrat;
-	font-size:18px;
-	margin-top: 10px;
-	margin-left: 10px;
-	background:transparent;
-	font-weight: bold;
-	text-transform: uppercase;
+	display:none;
 }
 
 
@@ -99,9 +100,11 @@ QWidget#general_comments_box {
 #general_comments_label {
 	text-transform: uppercase;
 	color: rgb(107, 100, 51);
+	font-family: &quot;Montserrat&quot;, sans-serif;
 	font-weight: bold;
+	font-weight: 400;
 	padding: 0px;
-}</string>
+} </string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <property name="leftMargin">
@@ -145,7 +148,7 @@ QWidget#general_comments_box {
         <x>0</x>
         <y>0</y>
         <width>659</width>
-        <height>811</height>
+        <height>744</height>
        </rect>
       </property>
       <property name="sizePolicy">

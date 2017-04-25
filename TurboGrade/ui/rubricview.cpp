@@ -156,8 +156,8 @@ void RubricView::on_suggestion_compiles_clicked()
 
 void RubricView::on_suggestion_extracredit_clicked()
 {
-    ui->criterion_grade->setValue(4);
-    ui->criterion_name->setText("Design");
+    ui->criterion_grade->setValue(5);
+    ui->criterion_name->setText("Extra-credit");
 }
 
 void RubricView::on_suggestion_documentation_clicked()
