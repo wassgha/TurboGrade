@@ -34,6 +34,10 @@ Criterion::Criterion(const QString name, Criterion* parent, int out_of, Rubric* 
     _controller->_rubricDB->load_sub_criteria(this);
 }
 
+void Criterion::update(const QString name, int out_of){
+
+}
+
 /**
  * @brief Criterion::~Criterion Destructor
  */

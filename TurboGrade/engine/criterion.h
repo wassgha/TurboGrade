@@ -28,6 +28,8 @@ public:
     Criterion() = delete; //don't allow default constructor
     // Parametrized constructor
     Criterion(const QString name, Criterion* parent, int out_of, Rubric* rubric, Controller * controller, int id = -1);
+    // Update Criterion
+    void update(const QString name, int out_of);
     // Destructor
     ~Criterion();
     // Add sub-criterion
