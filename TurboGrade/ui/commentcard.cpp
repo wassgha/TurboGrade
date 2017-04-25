@@ -1,7 +1,7 @@
 #include "commentcard.h"
 #include "ui_commentcard.h"
 
-CommentCard::CommentCard(QWidget *parent, Comment *comment) :
+CommentCard::CommentCard(QWidget *parent, Comment *comment, bool display_file) :
     QWidget(parent),
     ui(new Ui::CommentCard)
 {
@@ -10,6 +10,17 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
     setAttribute(Qt::WA_StyledBackground, true);
     setAttribute(Qt::WA_Hover);
     setMouseTracking(true);
+
+    if ( ! display_file ) {
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+        effect->setBlurRadius(15);
+        effect->setXOffset(0);
+        effect->setYOffset(5);
+        effect->setColor(QColor(0, 0, 0, 60));
+
+        setGraphicsEffect(effect);
+    }
+
 
     _comment = comment;
 
@@ -27,12 +38,17 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
     }
 
     ui->comment->setText(_comment->_text);
-    if (_comment->_criterion != nullptr) {
-        ui->rubric->setText("On rubric: \"" + _comment->_criterion->_name + "\"");
+    if (display_file) {
+        ui->rubric->setText("On file: \"" + _comment->_filename + "\"");
+        ui->controls->hide();
     } else {
-        ui->rubric->setText("No rubric specified");
-        if (_comment->_grade == 0)
-            ui->info_container->hide();
+        if (_comment->_criterion != nullptr) {
+            ui->rubric->setText("On rubric: \"" + _comment->_criterion->_name + "\"");
+        } else {
+            ui->rubric->setText("No rubric specified");
+            if (_comment->_grade == 0)
+                ui->info_container->hide();
+        }
     }
 }
 

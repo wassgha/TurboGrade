@@ -251,6 +251,7 @@ void CodeView::setupCodeEditor(const QString &file_name)
 void CodeView::finished_loading() {
     ui->treeView->setCurrentIndex(_model->index(first_file));
     ui->treeView->expandToDepth(0);
+    refresh_comments();
 }
 
 bool CodeView::eventFilter(QObject *obj, QEvent *event) {

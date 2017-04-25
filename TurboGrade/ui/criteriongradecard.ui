@@ -36,6 +36,17 @@
 	text-align:center;
 	background:white;
 	border-radius: 3px;
+}
+
+#comments_container {
+	padding: 10px;
+	background: black;
+	border-radius: 3px;
+}
+
+#comments_container&gt;QLabel {
+	color:white;
+	text-align: center;
 }</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -145,75 +156,43 @@
           </property>
          </spacer>
         </item>
+        <item>
+         <widget class="QPushButton" name="show_comments">
+          <property name="font">
+           <font>
+            <pointsize>13</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>SHOW COMMENTS</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
        <layout class="QVBoxLayout" name="children"/>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="comments_container"/>
-      </item>
-      <item>
-       <widget class="QWidget" name="comments_box" native="true">
-        <layout class="QHBoxLayout" name="comments_box_layout">
-         <property name="spacing">
-          <number>0</number>
-         </property>
+       <widget class="QWidget" name="comments_container" native="true">
+        <layout class="QVBoxLayout" name="comments_container_layout">
          <property name="leftMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
-         <item>
-          <spacer name="spacer2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="show_comments">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="text">
-            <string>SHOW COMMENTS</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
         </layout>
        </widget>
       </item>

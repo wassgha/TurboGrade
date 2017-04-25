@@ -48,6 +48,7 @@ void GradeView::update_status() {
 void GradeView::update_grades() {
     for (std::pair<Criterion*, CriterionGradeCard*>card : _cards) {
         card.second->update_grade();
+        card.second->update_comments();
     }
     ui->total_grade->setText("Total Grade : " +
                              QString::number(_parent->_submission->grade_percent()) +

@@ -26,6 +26,7 @@
 	border-radius: 3px;
 }
 #comment {
+
 	background: transparent;
 /*	border-radius: 3px;
 	border: 1px solid rgb(127, 120, 71);*/

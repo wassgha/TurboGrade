@@ -148,7 +148,7 @@ QWidget#general_comments_box {
         <x>0</x>
         <y>0</y>
         <width>659</width>
-        <height>744</height>
+        <height>746</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -164,20 +164,29 @@ QWidget#general_comments_box {
        </size>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>12</number>
+       </property>
        <property name="leftMargin">
-        <number>15</number>
+        <number>12</number>
        </property>
        <property name="topMargin">
-        <number>15</number>
+        <number>12</number>
        </property>
        <property name="rightMargin">
-        <number>15</number>
+        <number>12</number>
        </property>
        <property name="bottomMargin">
-        <number>15</number>
+        <number>12</number>
        </property>
        <item>
         <widget class="QWidget" name="general_comments_box" native="true">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
            <widget class="QLabel" name="general_comments_label">
