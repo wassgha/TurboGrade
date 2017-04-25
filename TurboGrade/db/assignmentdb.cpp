@@ -67,6 +67,17 @@ void AssignmentDB::remove(int assignment_id){
     db.commit();
 }
 
+/**
+ * @brief AssignmentDB::update updates the row given by assignment_id
+ * @param name the new name
+ * @param objective the new object
+ * @param full_grade the new starting grade variable (True if starting max score)
+ * @param assignment_id the assignment id in the table
+ */
+void AssignmentDB::update(const QString name, const QString objective, bool full_grade, int assignment_id){
+
+}
+
 
 /**
  * @brief AssignmentDB::link Links an assignment to a section
