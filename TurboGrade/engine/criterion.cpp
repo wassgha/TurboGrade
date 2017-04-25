@@ -34,6 +34,11 @@ Criterion::Criterion(const QString name, Criterion* parent, int out_of, Rubric* 
     _controller->_rubricDB->load_sub_criteria(this);
 }
 
+/**
+ * @brief Criterion::update updates the Criterion in memory and the DB
+ * @param name the name of the criterion
+ * @param out_of the max grade
+ */
 void Criterion::update(const QString name, int out_of){
 
 }
