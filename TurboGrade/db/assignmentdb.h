@@ -28,7 +28,7 @@ public:
     // Remove a row from the table
     void remove(int assignment_id);
     // Update a row from the table
-    void update(const QString name, const QString objective, bool full_grade, int assignment_id);
+    int update(const QString name, const QString objective, bool full_grade, int assignment_id);
     // Link assignment to section
     bool link(int assignment_id, int section_id);
     // Remove link from assignment to section

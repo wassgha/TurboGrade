@@ -30,7 +30,7 @@ public:
     // Gets row id matching student
     int select(const QString course_name, const QString section_name, const QString name);
     // Update row in the table
-    void update(const QString name, int student_id);
+    int update(const QString name, int student_id);
     // Load students for a specific section to controller
     void load_all(Section* section);
     // Remove a row from the table

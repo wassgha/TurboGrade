@@ -33,7 +33,7 @@ public:
     void remove(int comment_id);
 
     // Updates a comment from the comment table
-    void update(QString filename,
+    int update(QString filename,
                 int criterion_id, QString comment_text,
                 int grade, int start_pos,
                 int end_pos, int comment_id);
