@@ -36,6 +36,14 @@ Section::Section(QString name, Course* course, Controller* controller, int id)
 }
 
 /**
+ * @brief Section::update updates the Section in memory and DB
+ * @param name the new name of the section
+ */
+void Section::update(QString name){
+
+}
+
+/**
  * @brief Section::~Section Destructor
  */
 Section::~Section()
