@@ -30,6 +30,15 @@ int StudentDB::add(int section_id, const QString name) {
     return last_insert_id;
 }
 
+/**
+ * @brief StudentDB::update updates a row based on the student id
+ * @param name the new name of the student
+ * @param student_id the student to update
+ */
+void StudentDB::update(const QString name, int student_id){
+
+}
+
 
 /**
  * @brief StudentDB::select Returns id of the row
