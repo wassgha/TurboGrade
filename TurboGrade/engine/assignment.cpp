@@ -33,6 +33,16 @@ Assignment::Assignment(const QString name, const QString objective, Controller *
 }
 
 /**
+ * @brief Assignment::update updates the assignment in memory and in DB
+ * @param name the new assignment name
+ * @param objective the new objective
+ * @param full_grade the option to grade starting at max (true) or 0 (false)
+ */
+void Assignment::update(const QString name, const QString objective, bool full_grade){
+
+}
+
+/**
  * @brief Assignment::~Assignment Destructor
  */
 Assignment::~Assignment()
