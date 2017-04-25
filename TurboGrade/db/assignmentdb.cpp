@@ -74,7 +74,7 @@ void AssignmentDB::remove(int assignment_id){
  * @param full_grade the new starting grade variable (True if starting max score)
  * @param assignment_id the assignment id in the table
  */
-void AssignmentDB::update(const QString name, const QString objective, bool full_grade, int assignment_id){
+int AssignmentDB::update(const QString name, const QString objective, bool full_grade, int assignment_id){
     SHOW_WHERE;
 
     db.transaction();
@@ -82,7 +82,7 @@ void AssignmentDB::update(const QString name, const QString objective, bool full
 
 
     query.prepare("UPDATE assignment "
-                  "SET name = :name, objective = :objective, full_grade = :full_grade"
+                  "SET name = :name, objective = :objective, full_grade = :full_grade "
                   "WHERE id = :id;");
 
     query.bindValue(":name", name);
@@ -94,10 +94,14 @@ void AssignmentDB::update(const QString name, const QString objective, bool full
         qDebug() << "Failed to update assignment "
                  << query.lastQuery() << endl
                  << "SQL ERROR: " << query.lastError();
+        return -1;
     }
 
     query.finish();
     db.commit();
+
+    int last_id = query.lastInsertId().toInt();
+    return last_id;
 }
 
 
