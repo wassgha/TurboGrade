@@ -167,6 +167,8 @@ void CodeView::add_comment() {
     }
     _popup->hide();
     refresh_comments();
+    refresh_autocomplete();
+    _parent->grade_view->update_grades();
 }
 
 void CodeView::refresh_criteria() {
@@ -228,7 +230,7 @@ void CodeView::refresh_comments() {
     for (Comment* comment : _parent->_submission->get_comment(file_name)) {
 
         // Add the comment card
-        CommentCard *comment_card = new CommentCard(this, comment);
+        CommentCard *comment_card = new CommentCard(this, comment, _parent);
         _comment_cards.push_back(comment_card);
         ui->comment_layout->addWidget(comment_card);
 

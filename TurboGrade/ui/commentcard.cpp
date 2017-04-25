@@ -1,8 +1,9 @@
 #include "commentcard.h"
 #include "ui_commentcard.h"
 
-CommentCard::CommentCard(QWidget *parent, Comment *comment, bool grade_view) :
+CommentCard::CommentCard(QWidget *parent, Comment *comment, GradeSubmission* grade_submission, bool grade_view) :
     QWidget(parent),
+    _grade_submission(grade_submission),
     ui(new Ui::CommentCard)
 {
     ui->setupUi(this);
@@ -69,4 +70,12 @@ void CommentCard::leaveEvent(QEvent * event)
 void CommentCard::mousePressEvent(QMouseEvent *event)
 {
     emit clicked(_comment);
+}
+
+void CommentCard::on_delete_btn_clicked()
+{
+    _comment->_submission->remove_comment(_comment);
+    _grade_submission->code_view->refresh_autocomplete();
+    _grade_submission->grade_view->update_grades();
+    _grade_submission->code_view->refresh_comments();
 }

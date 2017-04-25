@@ -136,9 +136,7 @@ void Submission::remove_comment(Comment *comment){
     qDebug()<<"Adjusting grade for criterion after removing comment"<<endl;
     Criterion *commentCriterion = comment->_criterion;
     update_grade(commentCriterion,
-                 (get_grade(commentCriterion) ==
-                  -1 ? 0 : get_grade(commentCriterion)
-                       ) + comment->_grade);
+                 get_grade(commentCriterion) - comment->_grade);
     delete comment;
 }
 

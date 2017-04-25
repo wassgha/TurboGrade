@@ -24,6 +24,7 @@
 class GradeView;
 class CodeView;
 class Dashboard;
+class CommentCard;
 
 namespace Ui {
 class GradeSubmission;

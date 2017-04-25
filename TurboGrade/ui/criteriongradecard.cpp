@@ -67,7 +67,7 @@ void CriterionGradeCard::update_comments() {
         _comments.push_back(file_name);
         ui->comments_container_layout->addWidget(file_name);
         // Add the comment card
-        CommentCard* comment_card = new CommentCard(this, comment, true);
+        CommentCard* comment_card = new CommentCard(this, comment, _parent->_parent, true);
         _comments.push_back(comment_card);
         ui->comments_container_layout->addWidget(comment_card);
         connect(comment_card, SIGNAL(clicked(Comment*)), this, SLOT(show_comment(Comment*)));
@@ -80,7 +80,7 @@ void CriterionGradeCard::update_comments() {
             _comments.push_back(file_name);
             ui->comments_container_layout->addWidget(file_name);
             // Add the comment card
-            CommentCard* comment_card = new CommentCard(this, comment, true);
+            CommentCard* comment_card = new CommentCard(this, comment, _parent->_parent, true);
             _comments.push_back(comment_card);
             ui->comments_container_layout->addWidget(comment_card);
             connect(comment_card, SIGNAL(clicked(Comment*)), this, SLOT(show_comment(Comment*)));

@@ -35,6 +35,7 @@
 #include <QCloseEvent>
 
 class GradeSubmission;
+class CommentCard;
 
 namespace Ui {
     class CodeView;
@@ -51,6 +52,9 @@ public:
     QString current_file();
     void move_popup();
     void show_comment(Comment * comment);
+    void refresh_criteria();
+    void refresh_comments();
+    void refresh_autocomplete();
     Ui::CodeView                *ui;
     Controller                  *_controller;
     GradeSubmission             *_parent;
@@ -67,11 +71,8 @@ public slots:
     void auto_completed(QModelIndex index);
 
 private:
-    void refresh_criteria();
     void setupCodeEditor(const QString &file_name);
     bool eventFilter(QObject *obj, QEvent *event) override;
-    void refresh_comments();
-    void refresh_autocomplete();
 
     QFileSystemModel    *_model;
     QCompleter          *_completer = nullptr;
