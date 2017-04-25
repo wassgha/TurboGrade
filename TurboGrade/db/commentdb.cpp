@@ -116,6 +116,20 @@ void CommentDB::remove(int comment_id){
 }
 
 /**
+ * @brief CommentDB::update updates the comment given by the comment_id
+ * @param filename the new filename
+ * @param criterion_id the new criterion id
+ * @param comment_text the new text
+ * @param grade the new grade
+ * @param start_pos the new starting position
+ * @param end_pos the new end position
+ * @param comment_id the comment id to update
+ */
+void CommentDB::update(QString filename, int criterion_id, QString comment_text, int grade, int start_pos, int end_pos, int comment_id){
+
+}
+
+/**
  * @brief CommentDB::load_all loads all comments on
  * a specific submission
  */
