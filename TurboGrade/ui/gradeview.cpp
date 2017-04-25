@@ -19,7 +19,7 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
                     criterion,
                     _parent->_submission);
         _cards[criterion] = card;
-        ui->verticalLayout_3->insertWidget(2, card);
+        ui->verticalLayout_3->insertWidget(1, card);
         connect(card, SIGNAL(grade_changed()), this, SLOT(update_grades()));
         for (Criterion* child : *criterion->_sub_criteria) {
 
@@ -32,15 +32,15 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
         }
     }
 
-    update_status();
+    ui->scrollAreaWidgetContents->layout()->setAlignment(Qt::AlignTop);
 
-    ui->dummy1->hide();
-    ui->dummy2->hide();
+    update_grades();
+    update_status();
 
 }
 
 void GradeView::update_status() {
-    ui->finalize->setText((_parent->_submission->_status == 2)? "Unlock submission" : "Finalize");
+    _parent->update_finalize_button();
     _parent->update_next();
     _parent->update_progress();
 }
@@ -68,24 +68,3 @@ GradeView::~GradeView()
     delete ui;
 }
 
-void GradeView::on_finalize_clicked()
-{
-    if (_parent->_submission->_status == 2) {
-        _parent->_submission->update_status(1);
-    } else {
-        _parent->_submission->update_status(2);
-    }
-    update_status();
-}
-
-void GradeView::on_export_pdf_clicked()
-{
-    QString folder = QFileDialog::getExistingDirectory(this, tr("Save report in..."), "~/",
-                                                       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    if (folder != "") {
-        StudentDeliverable s;
-        QString html = s.placeParameters(_parent->_submission);
-        HTMLToPDF* report = new HTMLToPDF(html, folder + "/" + _parent->_submission->_student->_name + ".pdf");
-    }
-
-}

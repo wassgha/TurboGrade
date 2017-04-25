@@ -20,8 +20,9 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     grade_view = new GradeView(this, _controller);
 
     ui->mainWidget->addWidget(code_view);
-    ui->mainWidget->addWidget(grade_view);
+//    ui->mainWidget->addWidget(grade_view);
     ui->mainWidget->setCurrentWidget(code_view);
+    code_view->ui->grade_view->addWidget(grade_view);
 
     // Show grading progress (graded/total submissions)
     update_progress();
@@ -55,7 +56,6 @@ GradeSubmission::~GradeSubmission()
     if(compile !=nullptr)
         delete compile;
     delete code_view;
-    delete grade_view;
     if(fireworks != nullptr)
         delete fireworks;
     delete ui;
@@ -89,26 +89,6 @@ void GradeSubmission::finished_running() {
     }
     code_view->ui->terminal->append(compile->readAllStandardOutput());
 
-}
-
-void GradeSubmission::toggle() {
-    ui->toggle->click();
-}
-
-void GradeSubmission::on_toggle_clicked()
-{
-    if(ui->mainWidget->currentWidget() == code_view) {
-        grade_view->update_grades();
-        QPixmap pixmap(":/misc/res/code.png");
-        ui->toggle->setIcon(QIcon(pixmap).pixmap(64));
-        ui->toggle->setText("View Code");
-        ui->mainWidget->setCurrentWidget(grade_view);
-    } else {
-        QPixmap pixmap(":/misc/res/grade.png");
-        ui->toggle->setIcon(QIcon(pixmap).pixmap(64));
-        ui->toggle->setText("View Grade");
-        ui->mainWidget->setCurrentWidget(code_view);
-    }
 }
 
 
@@ -194,4 +174,31 @@ void GradeSubmission::display_fireworks() {
 void GradeSubmission::hide_fireworks() {
     if(fireworks != nullptr)
         fireworks->hide();
+}
+
+void GradeSubmission::on_finalize_clicked()
+{
+    if (_submission->_status == 2) {
+        _submission->update_status(1);
+    } else {
+        _submission->update_status(2);
+    }
+    grade_view->update_status();
+
+}
+
+void GradeSubmission::on_exportpdf_clicked()
+{
+    QString folder = QFileDialog::getExistingDirectory(this, tr("Save report in..."), "~/",
+                                                       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+    if (folder != "") {
+        StudentDeliverable s;
+        QString html = s.placeParameters(_submission);
+        HTMLToPDF* report = new HTMLToPDF(html, folder + "/" + _submission->_student->_name + ".pdf");
+    }
+}
+
+void GradeSubmission::update_finalize_button()
+{
+    ui->finalize->setText((_submission->_status == 2)? "Unlock submission" : "Finalize");
 }

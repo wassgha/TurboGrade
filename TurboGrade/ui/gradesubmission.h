@@ -39,7 +39,7 @@ public:
     void update_next();
     void update_progress();
     void display_fireworks();
-    void toggle();
+    void update_finalize_button();
     CodeView *code_view;
     GradeView *grade_view;
     Controller *_controller;
@@ -49,8 +49,6 @@ private slots:
     void refresh_students();
 
     void on_run_clicked();
-
-    void on_toggle_clicked();
 
     void finished_running();
 
@@ -64,6 +62,9 @@ private slots:
 
     void hide_fireworks();
 
+    void on_finalize_clicked();
+
+    void on_exportpdf_clicked();
 
 private:
     bool eventFilter(QObject *watched, QEvent *event) override;

@@ -119,6 +119,5 @@ void CriterionGradeCard::on_show_comments_clicked()
 }
 
 void CriterionGradeCard::show_comment(Comment* comment) {
-    _parent->_parent->toggle();
     _parent->_parent->code_view->show_comment(comment);
 }
