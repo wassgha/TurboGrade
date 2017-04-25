@@ -42,8 +42,34 @@ int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id
  * @param out_of the new max score
  * @param criterion_id the criterion to update
  */
-void RubricDB::update(const QString name, int out_of, int criterion_id){
+int RubricDB::update(const QString name, int out_of, int criterion_id){
+    SHOW_WHERE;
 
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE rubric "
+                  "SET name = :name, out_of = :out_of "
+                  "WHERE id = :criterion_id");
+
+    query.bindValue(":name", name);
+    query.bindValue(":out_of", out_of);
+    query.bindValue(":criterion_id", criterion_id);
+
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update rubric "
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+        return -1;
+    }
+
+    query.finish();
+    db.commit();
+
+    int last_id = query.lastInsertId().toInt();
+    return last_id;
 }
 
 /**
