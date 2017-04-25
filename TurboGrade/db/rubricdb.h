@@ -26,6 +26,8 @@ public:
 
     // Adds a row to the table
     int add_criterion(const QString name, int assignment_id, int parent_id, int out_of);
+    // Update a row in the table
+    void update(const QString name, int out_of, int criterion_id);
     // Gets row id matching rubric criterion
     int select(int assignment_id, const QString name);
     // Loads criteria to a rubric

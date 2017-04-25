@@ -37,6 +37,16 @@ int RubricDB::add_criterion(const QString name, int assignment_id, int parent_id
 }
 
 /**
+ * @brief RubricDB::update update the row in the table given by the criterion_id
+ * @param name the new name
+ * @param out_of the new max score
+ * @param criterion_id the criterion to update
+ */
+void RubricDB::update(const QString name, int out_of, int criterion_id){
+
+}
+
+/**
  * @brief RubricDB::select Returns id of the row
  * that matches given information
  * @param assignment_id the assignment this rubric belongs to
