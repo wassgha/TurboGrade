@@ -32,6 +32,10 @@ Course::Course(QString name, QString semester, Controller* controller, int id)
     _controller->_sectionDB->load_all(this);
 }
 
+void Course::update(QString name, QString semester){
+
+}
+
 Course::~Course()
 {
     for(Section* section:*_sections)
