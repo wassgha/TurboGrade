@@ -56,6 +56,21 @@ Comment::Comment(Submission* submission,
 }
 
 /**
+ * @brief Comment::update updates the comment object
+ * @param filename the new filename
+ * @param criterion the new criterion
+ * @param text the new text
+ * @param grade the new grade
+ * @param start_pos the new start position
+ * @param end_pos the new end position
+ */
+void Comment::update( QString filename, Criterion* criterion,
+                      QString text, int grade,
+                      int start_pos, int end_pos){
+
+}
+
+/**
  * @brief Comment::~Comment Destructor
  */
 Comment::~Comment()
