@@ -40,7 +40,7 @@
 
 #comments_container {
 	padding: 10px;
-	background: black;
+	background: #232730;
 	border-radius: 3px;
 }
 
