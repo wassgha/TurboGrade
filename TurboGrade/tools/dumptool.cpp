@@ -5,7 +5,7 @@ DumpTool::DumpTool()
 
 }
 
-void DumpTool::run_process(QString command, QString inputFile = "", QString outputFile = ""){
+void DumpTool::run_process(QString command, QString inputFile, QString outputFile){
     qDebug() << "Running : " << command;
     QProcess process;
     if(!inputFile.isEmpty()){
