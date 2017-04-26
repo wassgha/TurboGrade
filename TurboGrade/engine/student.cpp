@@ -46,7 +46,8 @@ Student::~Student()
  * @param name the new name
  */
 void Student::update(QString name){
-
+    _name = name;
+    _controller->_studentDB->update(name, _id);
 }
 
 /**
