@@ -88,7 +88,7 @@ void CriterionGradeCard::update_comments() {
         }
     }
 
-    if (i == 0 && !_criterion->has_children()) {
+    if (i == 0) {
         QLabel *no_comments = new QLabel("No comments on this criterion");
         _comments.push_back(no_comments);
         ui->comments_container_layout->addWidget(no_comments);
