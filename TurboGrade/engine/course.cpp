@@ -38,7 +38,10 @@ Course::Course(QString name, QString semester, Controller* controller, int id)
  * @param semester the new semester
  */
 void Course::update(QString name, QString semester){
+    _name = name;
+    _semester = semester;
 
+    _controller->_courseDB->update(name, semester, _id);
 }
 
 Course::~Course()
