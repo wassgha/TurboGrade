@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Installer>
+    <Name>TurboGrade</Name>
+    <Version>1.0.0</Version>
+    <Title>TurboGrade Installer</Title>
+    <Publisher>PfaffCorp Inc.</Publisher>
+    <StartMenuDir>TurboGrade</StartMenuDir>
+    <TargetDir>/Applications/TurboGrade</TargetDir>
+</Installer>
