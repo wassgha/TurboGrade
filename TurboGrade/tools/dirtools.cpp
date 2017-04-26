@@ -3,6 +3,8 @@
 bool DirTools::copy_dir_recursive(QString from_dir, QString to_dir, bool replace_on_conflit, QProgressBar* progress_bar)
 {
     QDir dir;
+    from_dir = QDir(qApp->applicationDirPath()).absoluteFilePath(from_dir);
+    to_dir = QDir(qApp->applicationDirPath()).absoluteFilePath(to_dir);
     dir.setPath(from_dir);
 
     from_dir += QDir::separator();
