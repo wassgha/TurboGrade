@@ -19,7 +19,7 @@ void CSVGenerator::printProfessor(Section *section, Assignment *assignment, QStr
     std::string body = "";
     std::string criteria ="";
     for(Criterion *crit: *assignment->_rubric->_criteria){
-        criteria.append(crit->in_order_names());
+        criteria.append(crit->in_order_names().toStdString());
         criteria.append(", ");
     }
     std::string header = "Student, ";
