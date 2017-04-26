@@ -40,7 +40,9 @@ Section::Section(QString name, Course* course, Controller* controller, int id)
  * @param name the new name of the section
  */
 void Section::update(QString name){
+    _name = name;
 
+    _controller->_sectionDB->update(name, _id);
 }
 
 /**
