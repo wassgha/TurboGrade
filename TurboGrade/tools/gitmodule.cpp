@@ -171,7 +171,55 @@ void GitModule::push(QString workingDirectory){
     qDebug() << "Process trying to run command : git push";
     qDebug() << "In : " << process.workingDirectory();
 
-    // git commit -m message
+    // git add
+    process.start("git", arguments);
+
+    if(process.waitForFinished()){
+        // get standard out string
+        QString out = process.readAllStandardOutput();
+        // get error string
+        QString error = process.readAllStandardError();
+        if(!out.isEmpty()){
+            qDebug() << "Standard Out: ";
+            QStringList lines = out.split("\n");
+            for(QString line : lines){
+                qDebug() << line;
+            }
+        }
+        if(!error.isEmpty()){
+            qDebug() << "Errors: ";
+            lines = error.split("\n");
+            for(QString line : lines){
+                qDebug() << line;
+            }
+        }
+    }
+
+    QProcess::ExitStatus Status = process.exitStatus();
+    if(Status == 0){
+        qDebug() << "Finished ok";
+    }
+}
+
+/**
+ * @brief GitModule::pull pulls the repo from the origin
+ * @param workingDirectory the working directory of the repo
+ */
+void GitModule::pull(QString workingDirectory){
+    // create process
+    QProcess process;
+    process.setProcessChannelMode(QProcess::ForwardedChannels);
+    // add some arguments
+    QStringList arguments;
+    process.setWorkingDirectory(workingDirectory);
+
+    // arguments are pull
+    arguments << "pull";
+
+    qDebug() << "Process trying to run command : git pull";
+    qDebug() << "In : " << process.workingDirectory();
+
+    // git pull
     process.start("git", arguments);
 
     if(process.waitForFinished()){
