@@ -102,3 +102,53 @@ void GitModule::add(QString workingDirectory, QString fileToAdd){
         qDebug() << "Finished ok";
     }
 }
+
+/**
+ * @brief GitModule::commit commits the current revisions to the repo in the
+ * workingDirectory, with the message
+ * @param workingDirectory the working directory of the repo
+ * @param message the commit message
+ */
+void GitModule::commit(QString workingDirectory, QString message){
+    // create process
+    QProcess process;
+    process.setProcessChannelMode(QProcess::ForwardedChannels);
+    // add some arguments
+    QStringList arguments;
+    process.setWorkingDirectory(workingDirectory);
+
+    // arguments are commit, -m, and the message
+    arguments << "commit" << "-m" << message;
+
+    qDebug() << "Process trying to run command : git commit -m " << message;
+    qDebug() << "In : " << process.workingDirectory();
+
+    // git commit -m message
+    process.start("git", arguments);
+
+    if(process.waitForFinished()){
+        // get standard out string
+        QString out = process.readAllStandardOutput();
+        // get error string
+        QString error = process.readAllStandardError();
+        if(!out.isEmpty()){
+            qDebug() << "Standard Out: ";
+            QStringList lines = out.split("\n");
+            for(QString line : lines){
+                qDebug() << line;
+            }
+        }
+        if(!error.isEmpty()){
+            qDebug() << "Errors: ";
+            lines = error.split("\n");
+            for(QString line : lines){
+                qDebug() << line;
+            }
+        }
+    }
+
+    QProcess::ExitStatus Status = process.exitStatus();
+    if(Status == 0){
+        qDebug() << "Finished ok";
+    }
+}
