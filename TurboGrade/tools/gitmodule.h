@@ -2,6 +2,7 @@
 #define GITMODULE_H
 #include <QString>
 #include <QProcess>
+#include <QDebug>
 
 class GitModule
 {
