@@ -22,12 +22,12 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
      *          Construct the file tree               *
      **************************************************/
 
-    QString root_path = _parent->_submission->getPath();
+    _root_path = _parent->_submission->getPath();
     _model = new QFileSystemModel;
-    _model->setRootPath(root_path);
-    first_file = QDir(root_path).absoluteFilePath(QDir(root_path).relativeFilePath(DirTools::first_file(root_path)));
+    _model->setRootPath(_root_path);
+    first_file = QDir(_root_path).absoluteFilePath(QDir(_root_path).relativeFilePath(DirTools::first_file(_root_path)));
 
-    root_index = _model->index(root_path);
+    root_index = _model->index(_root_path);
 
     ui->treeView->setModel(_model);
     ui->treeView->setRootIndex(root_index);
@@ -167,6 +167,8 @@ void CodeView::add_comment() {
     }
     _popup->hide();
     refresh_comments();
+    refresh_autocomplete();
+    _parent->grade_view->update_grades();
 }
 
 void CodeView::refresh_criteria() {
@@ -228,7 +230,7 @@ void CodeView::refresh_comments() {
     for (Comment* comment : _parent->_submission->get_comment(file_name)) {
 
         // Add the comment card
-        CommentCard *comment_card = new CommentCard(this, comment);
+        CommentCard *comment_card = new CommentCard(this, comment, _parent);
         _comment_cards.push_back(comment_card);
         ui->comment_layout->addWidget(comment_card);
 
@@ -251,6 +253,7 @@ void CodeView::setupCodeEditor(const QString &file_name)
 void CodeView::finished_loading() {
     ui->treeView->setCurrentIndex(_model->index(first_file));
     ui->treeView->expandToDepth(0);
+    refresh_comments();
 }
 
 bool CodeView::eventFilter(QObject *obj, QEvent *event) {
@@ -316,4 +319,10 @@ QString CodeView::current_folder() {
         return _model->filePath(ui->treeView->currentIndex());
 
     return _model->filePath(ui->treeView->currentIndex().parent());
+}
+
+void CodeView::show_comment(Comment * comment)
+{
+    ui->treeView->setCurrentIndex(_model->index(QDir(_root_path).absoluteFilePath(comment->_filename)));
+    refresh_comments();
 }

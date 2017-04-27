@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>553</width>
-    <height>371</height>
+    <width>510</width>
+    <height>272</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="font">
    <font>
@@ -24,10 +30,30 @@
 	padding: 0px;
 	margin: 0px;
 	font-weight: bold;
-        background: transparent;
-        border: none;
-    }
-    </string>
+     background: transparent;
+     border: none;
+}
+    
+#out_of {
+	color:gray;
+}
+
+#grade {
+	text-align:center;
+	background:white;
+	border-radius: 3px;
+}
+
+#comments_container {
+	padding: 10px;
+	background: #232730;
+	border-radius: 3px;
+}
+
+#comments_container&gt;QLabel {
+	color:white;
+	text-align: center;
+}</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -64,7 +90,7 @@
       </font>
      </property>
      <property name="title">
-      <string>COMPLETENESS</string>
+      <string/>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -76,15 +102,51 @@
       <item>
        <layout class="QHBoxLayout" name="horizontal_layout_2">
         <item>
-         <widget class="QLabel" name="grade_label">
+         <widget class="QLabel" name="title">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="text">
-           <string>Grade :</string>
+           <string>COMPLETENESS</string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QSpinBox" name="grade">
           <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="wrapping">
+           <bool>false</bool>
+          </property>
+          <property name="frame">
+           <bool>false</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::UpDownArrows</enum>
+          </property>
+          <property name="accelerated">
+           <bool>false</bool>
+          </property>
+          <property name="showGroupSeparator" stdset="0">
            <bool>false</bool>
           </property>
           <property name="value">
@@ -94,8 +156,14 @@
         </item>
         <item>
          <widget class="QLabel" name="out_of">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="text">
-           <string> (out of 12)</string>
+           <string>/ 12</string>
           </property>
          </widget>
         </item>
@@ -104,13 +172,33 @@
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Expanding</enum>
+          </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>40</width>
+            <width>0</width>
             <height>20</height>
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QPushButton" name="show_comments">
+          <property name="font">
+           <font>
+            <pointsize>13</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="text">
+           <string>SHOW COMMENTS</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
@@ -118,66 +206,26 @@
        <layout class="QVBoxLayout" name="children"/>
       </item>
       <item>
-       <widget class="QWidget" name="comments_box" native="true">
-        <layout class="QHBoxLayout" name="comments_box_layout">
-         <property name="spacing">
-          <number>0</number>
-         </property>
+       <widget class="QWidget" name="comments_container" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <layout class="QVBoxLayout" name="comments_container_layout">
          <property name="leftMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>12</number>
          </property>
-         <item>
-          <spacer name="spacer2">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="show_comments">
-           <property name="font">
-            <font>
-             <pointsize>13</pointsize>
-             <weight>75</weight>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="cursor">
-            <cursorShape>PointingHandCursor</cursorShape>
-           </property>
-           <property name="text">
-            <string>SHOW COMMENTS</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="horizontalSpacer">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
         </layout>
        </widget>
       </item>

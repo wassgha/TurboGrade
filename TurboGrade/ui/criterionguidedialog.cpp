@@ -10,7 +10,9 @@ CriterionGuideDialog::CriterionGuideDialog(QWidget *parent, Criterion* parent_cr
     setWindowTitle("Add Guide");
     setAttribute(Qt::WA_StyledBackground, true);
     ui->title->setText("Grading Guide for : " + _parent_criterion->_name);
+    ui->score_per_level->setText("Score per level : " + QString::number(_parent_criterion->total_grade()/2));
     QWidget::setWindowModality(Qt::WindowModal);
+    ui->row_count->setValue(2);
 
 }
 
@@ -50,6 +52,7 @@ void CriterionGuideDialog::on_cancel_btn_clicked()
 
 void CriterionGuideDialog::on_row_count_valueChanged(int value)
 {
+    ui->score_per_level->setText("Score per level : " + QString::number(_parent_criterion->total_grade()/value));
     ui->guide->setColumnCount(value);
     set_column_width();
 }

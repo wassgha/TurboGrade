@@ -98,6 +98,7 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
                FOREIGN KEY(rubric) REFERENCES rubric(id),\
                FOREIGN KEY(submission) REFERENCES submission(id),\
                CONSTRAINT unq UNIQUE (rubric, submission))");
+
 }
 
 /**

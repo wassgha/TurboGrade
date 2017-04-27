@@ -11,6 +11,8 @@ Controller::Controller(bool drop_tables, QString dbname)
 
     SHOW_WHERE;
 
+    dbname = QDir(qApp->applicationDirPath()).absoluteFilePath(dbname);
+
     // Initialize random number generator
     qsrand(QTime::currentTime().msec());
 
@@ -50,6 +52,8 @@ Controller::Controller(bool drop_tables, QString dbname)
 
     // Load all comments for autocomplete
     refresh_autocomplete();
+
+
 }
 
 

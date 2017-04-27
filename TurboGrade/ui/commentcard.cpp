@@ -1,8 +1,9 @@
 #include "commentcard.h"
 #include "ui_commentcard.h"
 
-CommentCard::CommentCard(QWidget *parent, Comment *comment) :
+CommentCard::CommentCard(QWidget *parent, Comment *comment, GradeSubmission* grade_submission, bool grade_view) :
     QWidget(parent),
+    _grade_submission(grade_submission),
     ui(new Ui::CommentCard)
 {
     ui->setupUi(this);
@@ -10,6 +11,17 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
     setAttribute(Qt::WA_StyledBackground, true);
     setAttribute(Qt::WA_Hover);
     setMouseTracking(true);
+
+    if ( ! grade_view ) {
+        QGraphicsDropShadowEffect *effect = new QGraphicsDropShadowEffect;
+        effect->setBlurRadius(15);
+        effect->setXOffset(0);
+        effect->setYOffset(5);
+        effect->setColor(QColor(0, 0, 0, 60));
+
+        setGraphicsEffect(effect);
+    }
+
 
     _comment = comment;
 
@@ -27,12 +39,16 @@ CommentCard::CommentCard(QWidget *parent, Comment *comment) :
     }
 
     ui->comment->setText(_comment->_text);
-    if (_comment->_criterion != nullptr) {
-        ui->rubric->setText("On rubric: \"" + _comment->_criterion->_name + "\"");
+    if (grade_view) {
+        ui->controls->hide();
     } else {
-        ui->rubric->setText("No rubric specified");
-        if (_comment->_grade == 0)
-            ui->info_container->hide();
+        if (_comment->_criterion != nullptr) {
+            ui->rubric->setText("On rubric: \"" + _comment->_criterion->_name + "\"");
+        } else {
+            ui->rubric->setText("No rubric specified");
+            if (_comment->_grade == 0)
+                ui->info_container->hide();
+        }
     }
 }
 
@@ -49,4 +65,17 @@ void CommentCard::enterEvent(QEvent * event)
 void CommentCard::leaveEvent(QEvent * event)
 {
     emit mouseOut(_comment);
+}
+
+void CommentCard::mousePressEvent(QMouseEvent *event)
+{
+    emit clicked(_comment);
+}
+
+void CommentCard::on_delete_btn_clicked()
+{
+    _comment->_submission->remove_comment(_comment);
+    _grade_submission->code_view->refresh_autocomplete();
+    _grade_submission->grade_view->update_grades();
+    _grade_submission->code_view->refresh_comments();
 }

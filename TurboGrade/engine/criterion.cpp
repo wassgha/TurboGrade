@@ -180,12 +180,14 @@ int Criterion::total_grade() {
  * names and this name
  * @return the string of all sub_criteria in_order_names and this name
  */
-std::string Criterion::in_order_names() {
-    std::string s = "";
+QString Criterion::in_order_names() {
+    QString s = "";
     for(Criterion *crit : children()){
-        s.append(crit->in_order_names());
-        s.append(", ");
+        s += crit->in_order_names();
+        s += ", ";
     }
-    s.append(_name.toStdString());
+    if (_parent != nullptr)
+        s += _parent->_name + " - ";
+    s += _name + " (" + QString::number(_out_of) + ")";
     return s;
 }

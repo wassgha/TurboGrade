@@ -6,15 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>700</width>
-    <height>478</height>
+    <width>799</width>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>CodeView</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <property name="styleSheet">
-   <string notr="true">QTreeView#treeView {
+   <string notr="true">QWidget#CodeView {
+	background: #232730;
+}
+
+#comments #scrollAreaWidgetContents {
+	background: transparent;
+}
+
+QTreeView#treeView {
         /* background: rgb(66, 76, 96); */
 		/* background: #535663; */
 		background: transparent;
@@ -23,6 +34,7 @@
         padding-top: 10px;
         /* border-radius: 3px; */
     	   show-decoration-selected: 1;
+	   width: 360px;
 }
 
 QTreeView::item {
@@ -37,11 +49,11 @@ QTreeView::item:selected:!active {
 	color: white;
 }
 
-QSplitter#splitter::handle:horizontal {
+QSplitter::handle:horizontal {
         image: url(:/misc/res/splitter.png);
 }
 
-QSplitter#splitter_2::handle:vertical {
+QSplitter::handle:vertical {
         image: url(:/misc/res/splitter2.png);
 }
 
@@ -62,10 +74,6 @@ QScrollArea#comments &gt; #scrollAreaWidgetContents {
 	background: transparent;
 }
 
-QAbstractScrollArea #scrollAreaWidgetContents  {
- background-color:transparent;
-}
-
 #terminal {
 	background: rgba(0, 0, 0, 60);
 	border-radius: 3px;
@@ -74,55 +82,117 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
 	color: #EFEFEF;
 	max-height: 100px;
 }
-</string>
+
+
+
+QWidget#general_comments_box {
+	background: #ffea8d;
+	border-radius: 3px;
+}
+#general_comments {
+	background: transparent;
+}
+#general_comments_label {
+	text-transform: uppercase;
+	color: rgb(107, 100, 51);
+	font-family: &quot;Montserrat&quot;, sans-serif;
+	font-weight: bold;
+	font-weight: 400;
+	padding: 0px;
+} </string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>8</number>
+   </property>
+   <property name="topMargin">
+    <number>8</number>
+   </property>
+   <property name="rightMargin">
+    <number>8</number>
+   </property>
+   <property name="bottomMargin">
+    <number>8</number>
+   </property>
    <item row="0" column="0">
-    <widget class="QSplitter" name="splitter_2">
+    <widget class="QSplitter" name="splitter_3">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <widget class="QSplitter" name="splitter">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
+     <widget class="QSplitter" name="splitter_2">
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QTreeView" name="treeView">
+      <widget class="QSplitter" name="splitter">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
-         <width>120</width>
+         <width>360</width>
          <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>250</width>
+         <width>360</width>
          <height>16777215</height>
         </size>
        </property>
-       <property name="baseSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
        </property>
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="headerHidden">
-        <bool>true</bool>
-       </property>
+       <widget class="QTreeView" name="treeView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>360</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="autoFillBackground">
+         <bool>false</bool>
+        </property>
+        <property name="headerHidden">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <layout class="QVBoxLayout" name="grade_view">
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>8</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
       </widget>
       <widget class="CodeEditor" name="editor" native="true">
        <property name="sizePolicy">
@@ -166,7 +236,7 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
           <x>8</x>
           <y>0</y>
           <width>284</width>
-          <height>326</height>
+          <height>346</height>
          </rect>
         </property>
         <property name="minimumSize">
@@ -182,11 +252,55 @@ QAbstractScrollArea #scrollAreaWidgetContents  {
          </size>
         </property>
         <layout class="QVBoxLayout" name="comment_layout">
-         <property name="leftMargin">
+         <property name="spacing">
           <number>12</number>
          </property>
+         <property name="leftMargin">
+          <number>8</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QWidget" name="general_comments_box" native="true">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>100</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout">
+            <item>
+             <widget class="QLabel" name="general_comments_label">
+              <property name="text">
+               <string>GENERAL COMMENTS</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPlainTextEdit" name="general_comments">
+              <property name="plainText">
+               <string>Enter general comments on this submission here</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
          <item>
           <widget class="QLabel" name="comments_title">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <property name="text">
             <string>Comments on this file</string>
            </property>

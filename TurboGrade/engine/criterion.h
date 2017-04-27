@@ -47,7 +47,7 @@ public:
     // Show criteria tree
     void show_children();
     // Recursively return in_order of names of sub criteria and this name
-    std::string in_order_names();
+    QString in_order_names();
 
     // This Criterion's id
     int _id;

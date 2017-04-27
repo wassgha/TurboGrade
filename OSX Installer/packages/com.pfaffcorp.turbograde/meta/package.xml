@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package>
+    <DisplayName>TurboGrade Desktop</DisplayName>
+    <Description>Install the main TurboGrade software.</Description>
+    <Version>1.0.0-1</Version>
+    <ReleaseDate>2017-04-26</ReleaseDate>
+    <Licenses>
+        <License name="GNU General Public License" file="license.txt" />
+    </Licenses>
+    <Default>script</Default>
+    <Script>installscript.qs</Script>
+</Package>

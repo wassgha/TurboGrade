@@ -97,6 +97,43 @@ QComboBox::down-arrow {
 QComboBox::drop-down {
 	background: transparent;
 	border: none;
+}
+
+
+QSpinBox {
+	border: none;
+	outline:none;
+	padding: 5px;
+	border-radius: 3px;
+}
+
+QSpinBox::disabled {
+    background: #E1E1E1;
+	color: gray;
+}
+
+QSpinBox::down-button {
+	background:transparent;
+	border: none;
+	padding: 0px;
+}
+
+QSpinBox::down-arrow {
+    width: 10px;
+    height: 10px;
+    border-image: url(:/misc/res/caret-down.png) 0 0 0 0 stretch stretch;
+}
+
+QSpinBox::up-button {
+	background:transparent;
+	border: none;
+	padding: 0px;
+}
+
+QSpinBox::up-arrow {
+    width: 10px;
+    height: 10px;
+    border-image: url(:/misc/res/caret-up.png) 0 0 0 0 stretch stretch;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -311,6 +348,9 @@ QComboBox::drop-down {
    <class>ClickableLabel</class>
    <extends>QLabel</extends>
    <header>clickablelabel.h</header>
+   <slots>
+    <signal>clicked()</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources>

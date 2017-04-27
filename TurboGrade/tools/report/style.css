@@ -137,15 +137,15 @@ h2 {
   float: right;
   color: green;
   border-radius: 3px;
-  font-size: 28px;
+  font-size: 32px;
   text-align: center;
   font-family: sans-serif;
   vertical-align: middle;
-  background: url(:/css/report/grade_circle.png);
+  background-repeat: none;
 }
 
 #grade > #label {
-  font-size: 13px;
+  font-size: 16px;
   text-transform: uppercase;
   color: gray;
   margin-bottom: 5px;
