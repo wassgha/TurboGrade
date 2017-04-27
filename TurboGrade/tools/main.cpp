@@ -71,6 +71,12 @@ int main(int argc, char *argv[])
     // you will see that this prints nothing
     d.run_process("diff dump.sqlite dump2.sqlite");
 
+//    GitModule::clone("./", "giturl:~/ExampleRepo");
+//    dump("turbograde.sqlite", "./ExampleRepo/dump.sqlite");
+//    GitModule::add("./ExampleRepo", "dump.sqlite");
+//    GitModule::commit("./ExampleRepo", "Committing dump");
+//    GitModule::push("./ExampleRepo");
+
     return 0;
 }
 
