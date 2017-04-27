@@ -36,7 +36,8 @@ SOURCES     +=  main.cpp \
             "../engine/comment.cpp" \
             studentdeliverable.cpp \
     report.cpp \
-    dumptool.cpp
+    dumptool.cpp \
+    gitmodule.cpp
 
 
 HEADERS     += \
@@ -61,7 +62,8 @@ HEADERS     += \
             studentdeliverable.h \
     jtemplate.h \
     report.h \
-    dumptool.h
+    dumptool.h \
+    gitmodule.h
 
 FORMS +=
 
