@@ -70,7 +70,7 @@ void GitModule::add(QString workingDirectory, QString fileToAdd){
     // arguments are add and the fileToAdd
     arguments << "add" << fileToAdd;
 
-    qDebug() << "Process trying to run command : git add " << repoUrl;
+    qDebug() << "Process trying to run command : git add " << fileToAdd;
     qDebug() << "In : " << process.workingDirectory();
 
     // start process git with args add fileToAdd
@@ -237,7 +237,7 @@ void GitModule::pull(QString workingDirectory){
         }
         if(!error.isEmpty()){
             qDebug() << "Errors: ";
-            lines = error.split("\n");
+            QStringList lines = error.split("\n");
             for(QString line : lines){
                 qDebug() << line;
             }
