@@ -41,7 +41,7 @@ void GitModule::clone(QString workingDirectory, QString repoUrl){
         }
         if(!error.isEmpty()){
             qDebug() << "Errors: ";
-            lines = error.split("\n");
+            QStringList lines = error.split("\n");
             for(QString line : lines){
                 qDebug() << line;
             }
@@ -90,7 +90,7 @@ void GitModule::add(QString workingDirectory, QString fileToAdd){
         }
         if(!error.isEmpty()){
             qDebug() << "Errors: ";
-            lines = error.split("\n");
+            QStringList lines = error.split("\n");
             for(QString line : lines){
                 qDebug() << line;
             }
@@ -140,7 +140,7 @@ void GitModule::commit(QString workingDirectory, QString message){
         }
         if(!error.isEmpty()){
             qDebug() << "Errors: ";
-            lines = error.split("\n");
+            QStringList lines = error.split("\n");
             for(QString line : lines){
                 qDebug() << line;
             }
@@ -188,6 +188,7 @@ void GitModule::push(QString workingDirectory){
         }
         if(!error.isEmpty()){
             qDebug() << "Errors: ";
+            QStringList lines = error.split("\n");
             lines = error.split("\n");
             for(QString line : lines){
                 qDebug() << line;
