@@ -81,6 +81,7 @@ public:
 
     //gets the comments for the given criterion
     std::vector<Comment*> get_comments(Criterion *criterion);
+    std::vector<Comment*>* get_comments();
 
     // Submission id
     int _id;

@@ -244,6 +244,10 @@ std::vector<Comment *> Submission::get_comments(Criterion *criterion){
     return comment_vec;
 }
 
+std::vector<Comment*>* Submission::get_comments(){
+    return _comments;
+}
+
 /**
  * @brief Submission::~Submission Destructor
  */
