@@ -41,7 +41,7 @@ signals:
     void clicked(Comment* comment);
 
 private:
-    GradeSubmission* _grade_submission;
+    GradeSubmission* _grade_submission = nullptr;
 };
 
 #endif // COMMENTCARD_H

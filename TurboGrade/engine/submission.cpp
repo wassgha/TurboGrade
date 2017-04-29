@@ -63,7 +63,7 @@ void Submission::add_comment(QString filename,
 
     _comments->push_back(new_comment);
 
-    _controller->refresh_autocomplete();
+    _controller->refresh_autocomplete(_assignment);
 
 }
 

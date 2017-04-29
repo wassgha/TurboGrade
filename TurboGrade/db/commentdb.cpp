@@ -116,16 +116,18 @@ void CommentDB::remove(int comment_id){
 }
 
 /**
- * @brief CommentDB::load_all loads all comments on
- * a specific submission
+ * @brief CommentDB::load_model loads all comments on
+ * a specific submission and returns the model
+ * @return the query model for the comments
  */
-QSqlTableModel* CommentDB::load_model() {
+QSqlTableModel* CommentDB::load_model(Assignment* assignment) {
 
     SHOW_WHERE;
 
     db.transaction();
 
     QSqlTableModel *model = new QSqlTableModel(0, db);
+    model->setFilter("submission IN (SELECT id FROM submission WHERE submission.assignment = '" + QString::number(assignment->_id) + "')");
     model->setTable("comment");
     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     model->select();

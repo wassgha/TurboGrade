@@ -41,6 +41,8 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 
     installEventFilter(this);
 
+    setAttribute( Qt::WA_DeleteOnClose );
+
 }
 
 void GradeSubmission::update_next() {
@@ -142,6 +144,7 @@ void GradeSubmission::on_studentName_currentIndexChanged(int index)
     Student *selected_student = _submission->_student->_section->get_student(student_name);
     Submission *selected_submission = selected_student->get_submission(_submission->_assignment);
     emit(switched_submission(selected_submission));
+    close();
 }
 
 void GradeSubmission::show_dashboard() {
@@ -151,6 +154,7 @@ void GradeSubmission::show_dashboard() {
 
 void GradeSubmission::next_submission() {
     emit(switched_submission(_submission->_student->_section->get_random_ungraded(_submission->_assignment)));
+    close();
 }
 
 void GradeSubmission::update_progress() {

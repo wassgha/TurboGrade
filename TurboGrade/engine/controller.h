@@ -85,7 +85,7 @@ public:
     // Shows rubric for all assignments
     void show_rubrics();
     // Refresh auto-complete
-    void refresh_autocomplete();
+    void refresh_autocomplete(Assignment *assignment);
 
     /**********************************
      *       UI Related Operations    *

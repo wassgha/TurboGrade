@@ -36,7 +36,7 @@ public:
     void load_all(Submission *submission);
 
     // Load all comments for autocompleting
-    QSqlTableModel* load_model();
+    QSqlTableModel* load_model(Assignment* assignment);
 
 
     // Controller

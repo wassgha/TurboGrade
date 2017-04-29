@@ -291,6 +291,7 @@ void CodeView::refresh_autocomplete() {
     if (_completer != nullptr)
         delete _completer;
 
+    _controller->refresh_autocomplete(_parent->_submission->_assignment);
     _completer = new QCompleter(_controller->_all_comments, this);
     _completer->setCompletionMode(QCompleter::InlineCompletion);
     _completer->setCaseSensitivity(Qt::CaseInsensitive);

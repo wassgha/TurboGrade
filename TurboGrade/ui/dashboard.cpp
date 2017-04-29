@@ -32,8 +32,6 @@ Dashboard::Dashboard(QWidget *parent) :
 Dashboard::~Dashboard()
 {
     delete _controller;
-    if (grade_submission != nullptr)
-        delete grade_submission;
     delete ui;
     delete courses;
     if (sections != nullptr)
@@ -111,7 +109,7 @@ void Dashboard::start_grading(QObject* submission) {
     if (submission == nullptr)
         return;
     if (grade_submission != nullptr)
-        grade_submission->deleteLater();
+        delete grade_submission;
     grade_submission = new GradeSubmission(this, (Submission*)submission, _controller);
     grade_submission->show();
     connect(grade_submission, SIGNAL(switched_submission(QObject*)), this, SLOT(start_grading(QObject*)));
