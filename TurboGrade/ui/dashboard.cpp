@@ -109,11 +109,11 @@ void Dashboard::toggle_headers(bool show) {
     if (show) {
         ui->tutorial->show();
         ui->header->show();
-        setWindowState(Qt::WindowNoState | Qt::WindowActive);
+        setWindowState(Qt::WindowActive);
         resize(760, 475);
     } else {
         ui->tutorial->hide();
         ui->header->hide();
-        setWindowState(Qt::WindowFullScreen | Qt::WindowActive);
+        showFullScreen();
     }
 }
