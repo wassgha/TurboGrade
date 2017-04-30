@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDesktopServices>
 #include <QFontDatabase>
+#include <QTimer>
 
 #include "../engine/controller.h"
 #include "../engine/controller.h"
@@ -58,6 +59,8 @@ public slots:
     void show_students(QObject* section);
     void show_submissions(QObject* section, QObject* assignment);
     void start_grading(QObject* submission);
+    void toggle_headers(bool show);
+    void remove_current_widget();
 
 private:
     Ui::Dashboard *ui;

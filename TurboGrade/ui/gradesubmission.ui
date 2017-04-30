@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>919</width>
+    <width>950</width>
     <height>369</height>
    </rect>
   </property>
@@ -134,6 +134,31 @@ margin: 0px;
      <property name="bottomMargin">
       <number>18</number>
      </property>
+     <item>
+      <widget class="ClickableLabel" name="back">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="pixmap">
+        <pixmap resource="resources.qrc">:/misc/res/back.png</pixmap>
+       </property>
+       <property name="scaledContents">
+        <bool>true</bool>
+       </property>
+       <property name="indent">
+        <number>0</number>
+       </property>
+      </widget>
+     </item>
      <item>
       <widget class="ClickableLabel" name="logo">
        <property name="sizePolicy">

@@ -44,73 +44,76 @@ void Dashboard::on_tutorial_btn_clicked()
 }
 
 void Dashboard::show_courses() {
-
-    if (courses != nullptr) {
-        ui->mainWidget->removeWidget(courses);
-        delete courses;
-    }
+    remove_current_widget();
     courses = new CourseView(this, _controller);
     ui->mainWidget->addWidget(courses);
     ui->mainWidget->setCurrentWidget(courses);
+    toggle_headers(true);
 
 }
 
 void Dashboard::show_sections(QObject* course) {
-
-    if (sections != nullptr) {
-        ui->mainWidget->removeWidget(sections);
-        delete sections;
-    }
+    remove_current_widget();
     sections = new SectionView(this, course, _controller);
     ui->mainWidget->addWidget(sections);
     ui->mainWidget->setCurrentWidget(sections);
+    toggle_headers(true);
 
 }
 
 void Dashboard::show_assignments(QObject* section) {
-
-    if (assignments != nullptr) {
-        ui->mainWidget->removeWidget(assignments);
-        delete assignments;
-    }
+    remove_current_widget();
     assignments = new AssignmentView(this, section, _controller);
     ui->mainWidget->addWidget(assignments);
     ui->mainWidget->setCurrentWidget(assignments);
-
+    toggle_headers(true);
 }
 
 
 void Dashboard::show_students(QObject* section) {
-
-    if (students != nullptr) {
-        ui->mainWidget->removeWidget(students);
-        delete students;
-    }
+    remove_current_widget();
     students = new StudentView(this, section, _controller);
     ui->mainWidget->addWidget(students);
     ui->mainWidget->setCurrentWidget(students);
-
+    toggle_headers(true);
 }
 
 
 void Dashboard::show_submissions(QObject* section, QObject* assignment) {
-
-    if (submissions != nullptr) {
-        ui->mainWidget->removeWidget(submissions);
-        delete submissions;
-    }
+    remove_current_widget();
     submissions = new SubmissionView(this, section, assignment, _controller);
     ui->mainWidget->addWidget(submissions);
     ui->mainWidget->setCurrentWidget(submissions);
-
+    toggle_headers(true);
 }
 
 void Dashboard::start_grading(QObject* submission) {
     if (submission == nullptr)
         return;
-    if (grade_submission != nullptr)
-        delete grade_submission;
+    remove_current_widget();
     grade_submission = new GradeSubmission(this, (Submission*)submission, _controller);
-    grade_submission->show();
+    ui->mainWidget->addWidget(grade_submission);
+    ui->mainWidget->setCurrentWidget(grade_submission);
+    toggle_headers(false);
     connect(grade_submission, SIGNAL(switched_submission(QObject*)), this, SLOT(start_grading(QObject*)));
+}
+
+void Dashboard::remove_current_widget() {
+    if (ui->mainWidget->currentWidget() != nullptr) {
+        ui->mainWidget->removeWidget(ui->mainWidget->currentWidget());
+        delete ui->mainWidget->currentWidget();
+    }
+}
+
+void Dashboard::toggle_headers(bool show) {
+    if (show) {
+        ui->tutorial->show();
+        ui->header->show();
+        setWindowState(Qt::WindowNoState | Qt::WindowActive);
+        resize(760, 475);
+    } else {
+        ui->tutorial->hide();
+        ui->header->hide();
+        setWindowState(Qt::WindowFullScreen | Qt::WindowActive);
+    }
 }

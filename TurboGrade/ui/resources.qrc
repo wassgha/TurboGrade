@@ -36,6 +36,7 @@
         <file>res/fireworks_1.gif</file>
         <file>res/fireworks_2.gif</file>
         <file>res/caret-up.png</file>
+        <file>res/back.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

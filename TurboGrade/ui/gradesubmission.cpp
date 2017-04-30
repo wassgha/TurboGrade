@@ -2,7 +2,7 @@
 #include "ui_gradesubmission.h"
 
 GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Controller *controller) :
-    QWidget(parent, Qt::Window),
+    QWidget(parent),
     ui(new Ui::GradeSubmission),
     _parent(dynamic_cast<Dashboard*>(parent))
 {
@@ -14,13 +14,11 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 
     setWindowTitle("TurboGrade - Grading submission");
     setAttribute(Qt::WA_StyledBackground, true);
-    setWindowState(Qt::WindowFullScreen);
 
     code_view = new CodeView(this, _controller);
     grade_view = new GradeView(this, _controller);
 
     ui->mainWidget->addWidget(code_view);
-//    ui->mainWidget->addWidget(grade_view);
     ui->mainWidget->setCurrentWidget(code_view);
     code_view->ui->grade_view->addWidget(grade_view);
 
@@ -31,6 +29,7 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
 
     ui->logo->setCursor(Qt::PointingHandCursor);
     connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_dashboard()));
+    connect(ui->back, SIGNAL(clicked()), this, SLOT(show_dashboard()));
 
     ui->next->setCursor(Qt::PointingHandCursor);
     connect(ui->next, SIGNAL(clicked(bool)), this, SLOT(next_submission()));
@@ -40,9 +39,6 @@ GradeSubmission::GradeSubmission(QWidget *parent, Submission *submission, Contro
     ui->hideName->setChecked(true);
 
     installEventFilter(this);
-
-    setAttribute( Qt::WA_DeleteOnClose );
-
 }
 
 void GradeSubmission::update_next() {
@@ -144,17 +140,15 @@ void GradeSubmission::on_studentName_currentIndexChanged(int index)
     Student *selected_student = _submission->_student->_section->get_student(student_name);
     Submission *selected_submission = selected_student->get_submission(_submission->_assignment);
     emit(switched_submission(selected_submission));
-    close();
 }
 
 void GradeSubmission::show_dashboard() {
-    hide();
-    _parent->raise();
+    _parent->show_submissions(_submission->_student->_section,
+                              _submission->_assignment);
 }
 
 void GradeSubmission::next_submission() {
     emit(switched_submission(_submission->_student->_section->get_random_ungraded(_submission->_assignment)));
-    close();
 }
 
 void GradeSubmission::update_progress() {
