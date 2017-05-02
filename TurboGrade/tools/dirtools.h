@@ -6,6 +6,7 @@
 #include "QFile"
 #include "QDir"
 #include <QApplication>
+#include <QStandardPaths>
 #include <QDebug>
 #include <QProgressBar>
 #include <iostream>

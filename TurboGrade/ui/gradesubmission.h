@@ -49,10 +49,6 @@ public:
 private slots:
     void refresh_students();
 
-    void on_run_clicked();
-
-    void finished_running();
-
     void on_hideName_toggled(bool checked);
 
     void on_studentName_currentIndexChanged(int index);
@@ -65,13 +61,10 @@ private slots:
 
     void on_finalize_clicked();
 
-    void on_exportpdf_clicked();
-
 private:
     bool eventFilter(QObject *watched, QEvent *event) override;
 
     Ui::GradeSubmission *ui;
-    QProcess *compile = nullptr;
     Dashboard* _parent = nullptr;
     Fireworks *fireworks = nullptr;
 

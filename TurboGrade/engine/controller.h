@@ -11,6 +11,7 @@
 #include <vector>
 #include <algorithm>
 #include <QObject>
+#include <QStandardPaths>
 #include <map>
 
 #include "../tools/macro.h"

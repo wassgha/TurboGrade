@@ -2,6 +2,7 @@
 #define SUBMISSIONVIEW_H
 
 #include <QProgressBar>
+#include <QStandardPaths>
 
 #include "listview.h"
 #include "ui_listview.h"
@@ -9,8 +10,6 @@
 #include "dashboard.h"
 #include "../tools/dirtools.h"
 #include "../tools/csvgenerator.h"
-#include "../tools/studentdeliverable.h"
-#include "../tools/htmltopdf.h"
 
 class SubmissionView;
 
@@ -26,9 +25,6 @@ public slots:
     void show_assignments();
     void show_submissions(QObject* assignment);
     void import_submission();
-    void export_csv();
-    void export_all_pdf();
-
 private:
     Controller *_controller;
     Section* _section;

@@ -13,7 +13,6 @@ CriterionGradeCard::CriterionGradeCard(QWidget *parent, Criterion* criterion, Su
     _criterion = criterion;
 
     if (criterion->_parent != nullptr) {
-        ui->show_comments->hide();
         ui->children->setContentsMargins(0,0,0,0);
     }
 
@@ -105,17 +104,6 @@ void CriterionGradeCard::on_grade_valueChanged(int grade)
 
 void CriterionGradeCard::insert_child(QWidget* child) {
     ui->children->addWidget(child);
-}
-
-void CriterionGradeCard::on_show_comments_clicked()
-{
-    if (!ui->comments_container->isHidden()) {
-        ui->comments_container->hide();
-        ui->show_comments->setText("SHOW COMMENTS");
-    } else {
-        ui->comments_container->show();
-        ui->show_comments->setText("HIDE COMMENTS");
-    }
 }
 
 void CriterionGradeCard::show_comment(Comment* comment) {

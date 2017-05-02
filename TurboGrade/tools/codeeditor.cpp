@@ -59,8 +59,6 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     setStyleSheet("CodeEditor { border: none; border-radius : 3px; background: #2b303c; color: #abb2be; selection-color: #000000; selection-background-color: #ffea8d; }");
 
-    int font_id = QFontDatabase::addApplicationFont(":/fonts/res/FiraMono-Regular.ttf");
-    font.setFamily(QFontDatabase::applicationFontFamilies(font_id).at(0));
     font.setStyleHint(QFont::TypeWriter);
     font.setFixedPitch(true);
     font.setPointSize(12);

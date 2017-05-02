@@ -11,8 +11,8 @@ Controller::Controller(bool drop_tables, QString dbname)
 
     SHOW_WHERE;
 
-    dbname = QDir(qApp->applicationDirPath()).absoluteFilePath(dbname);
-
+    dbname = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/" + dbname;
+    qDebug()<<dbname;
     // Initialize random number generator
     qsrand(QTime::currentTime().msec());
 

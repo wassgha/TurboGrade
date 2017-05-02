@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>510</width>
+    <width>474</width>
     <height>272</height>
    </rect>
   </property>
@@ -26,15 +26,7 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">#show_comments {
-	padding: 0px;
-	margin: 0px;
-	font-weight: bold;
-     background: transparent;
-     border: none;
-}
-    
-#out_of {
+   <string notr="true">#out_of {
 	color:gray;
 }
 
@@ -182,23 +174,6 @@
            </size>
           </property>
          </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="show_comments">
-          <property name="font">
-           <font>
-            <pointsize>13</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>SHOW COMMENTS</string>
-          </property>
-         </widget>
         </item>
        </layout>
       </item>

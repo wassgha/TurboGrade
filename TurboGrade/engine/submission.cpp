@@ -238,7 +238,7 @@ int Submission::get_grade(){
  */
 QString Submission::getPath() {
 
-    return QCoreApplication::applicationDirPath()
+    return QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation)
     + "/data/"
     + QString::number(_student->_section->_course->_id)
     + "/"

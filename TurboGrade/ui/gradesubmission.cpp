@@ -51,44 +51,11 @@ void GradeSubmission::update_next() {
 
 GradeSubmission::~GradeSubmission()
 {
-    if(compile !=nullptr)
-        delete compile;
     delete code_view;
     if(fireworks != nullptr)
         delete fireworks;
     delete ui;
 }
-
-void GradeSubmission::on_run_clicked()
-{
-    ui->run->setText("Running");
-    ui->run->setDisabled(true);
-    code_view->ui->terminal->append("Running project...");
-
-    if(compile != nullptr)
-        delete compile;
-
-    compile = new QProcess(this);
-    compile->start("/usr/local/bin/processing-java",QStringList() << "--sketch=" +  code_view->current_folder() <<"--run");
-
-    connect(compile, SIGNAL(finished(int)), this, SLOT(finished_running()));
-}
-
-void GradeSubmission::finished_running() {
-
-    ui->run->setText("Run");
-    ui->run->setEnabled(true);
-    QByteArray errors = compile->readAllStandardError();
-    if (errors != QByteArray("")) {
-        code_view->ui->terminal->append("<code style=\"color:white; background:#e74c3c; padding-top:10px; padding-right:10px;padding-left:10px;padding-bottom:10px;\">"
-                                            + errors + "</code>");
-        activateWindow();
-        raise();
-    }
-    code_view->ui->terminal->append(compile->readAllStandardOutput());
-
-}
-
 
 void GradeSubmission::refresh_students() {
     ui->studentName->clear();
@@ -183,17 +150,6 @@ void GradeSubmission::on_finalize_clicked()
     }
     grade_view->update_status();
 
-}
-
-void GradeSubmission::on_exportpdf_clicked()
-{
-    QString folder = QFileDialog::getExistingDirectory(this, tr("Save report in..."), "~/",
-                                                       QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-    if (folder != "") {
-        StudentDeliverable s;
-        QString html = s.placeParameters(_submission);
-        HTMLToPDF* report = new HTMLToPDF(html, folder + "/" + _submission->_student->_name + ".pdf");
-    }
 }
 
 void GradeSubmission::update_finalize_button()

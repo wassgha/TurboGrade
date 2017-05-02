@@ -49,9 +49,6 @@ public:
     GradeSubmission *grade_submission = nullptr;
     QFont roboto;
 
-private slots:
-    void on_tutorial_btn_clicked();
-
 public slots:
     void show_courses();
     void show_sections(QObject* course);
@@ -59,7 +56,6 @@ public slots:
     void show_students(QObject* section);
     void show_submissions(QObject* section, QObject* assignment);
     void start_grading(QObject* submission);
-    void toggle_headers(bool show);
     void remove_current_widget();
 
 private:

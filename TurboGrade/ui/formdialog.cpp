@@ -167,7 +167,7 @@ void FormDialog::on_ok_btn_clicked()
 
 void FormDialog::select_folder() {
     _data = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
-                                              "~/",
+                                              QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation),
                                               QFileDialog::ShowDirsOnly
                                               | QFileDialog::DontResolveSymlinks);
     QPushButton* field = findChild<QPushButton*>("select_folder");

@@ -4,12 +4,8 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql printsupport script
-QT          += sql widgets printsupport
-
-unix:!ios {
-    QT += webenginewidgets
-}
+QT       += core gui sql script
+QT          += sql widgets
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -37,10 +33,7 @@ SOURCES += main.cpp\
         "../tools/syntaxhighlight.cpp"\
         "../tools/codeeditor.cpp" \
         "../tools/dirtools.cpp" \
-        "../tools/csvgenerator.cpp" \
         "../tools/filewriter.cpp" \
-            "../tools/studentdeliverable.cpp" \
-            "../tools/htmltopdf.cpp" \
             "../db/dbengine.cpp" \
             "../db/coursedb.cpp" \
             "../db/sectiondb.cpp" \
@@ -90,10 +83,7 @@ HEADERS  +=\
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
             "../tools/dirtools.h" \
-            "../tools/csvgenerator.h" \
             "../tools/filewriter.h" \
-            "../tools/studentdeliverable.h" \
-            "../tools/htmltopdf.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \

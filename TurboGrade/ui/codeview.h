@@ -29,7 +29,6 @@
 #include <QMoveEvent>
 #include <QModelIndex>
 #include <QFileSystemModel>
-#include <QProcess>
 #include <QCompleter>
 #include <iostream>
 #include <QCloseEvent>

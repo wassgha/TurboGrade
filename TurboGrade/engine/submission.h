@@ -12,6 +12,7 @@
 #include <vector>
 #include <QString>
 #include <QObject>
+#include <QStandardPaths>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"

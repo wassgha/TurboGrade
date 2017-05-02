@@ -10,6 +10,7 @@
 #include <QTextEdit>
 #include <QProgressBar>
 #include <QCheckBox>
+#include <QStandardPaths>
 
 namespace Ui {
 class FormDialog;

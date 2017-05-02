@@ -36,8 +36,6 @@ public slots:
 private slots:
     void on_grade_valueChanged(int grade);
 
-    void on_show_comments_clicked();
-
 signals:
     void grade_changed();
 

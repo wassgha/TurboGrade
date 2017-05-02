@@ -12,7 +12,6 @@ SOURCES     +=  main.cpp \
                 codeeditor.cpp \
                 objectidentifier.cpp \
                 filewriter.cpp \
-    htmltopdf.cpp \
     dirtools.cpp \
     macadress.cpp \
     csvgenerator.cpp \
@@ -34,7 +33,6 @@ SOURCES     +=  main.cpp \
             "../engine/rubric.cpp" \
             "../engine/criterion.cpp" \
             "../engine/comment.cpp" \
-            studentdeliverable.cpp \
     report.cpp
 
 
@@ -44,7 +42,6 @@ HEADERS     += \
                 objectidentifier.h \
                 macro.h \
                 filewriter.h \
-    htmltopdf.h \
     dirtools.h \
     macadress.h \
     csvgenerator.h \
@@ -57,7 +54,6 @@ HEADERS     += \
             "../engine/rubric.h" \
             "../engine/criterion.h" \
             "../engine/comment.h" \
-            studentdeliverable.h \
     jtemplate.h \
     report.h
 
