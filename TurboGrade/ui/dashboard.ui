@@ -140,18 +140,18 @@ QScrollBar {
 	border:none;
 }
 QScrollBar:vertical {
-	max-width: 10px;
+	max-width: 12px;
     background: transparent;
 }
 
 QScrollBar:horizontal {
-	max-height: 10px;
+	max-height: 12px;
     background: transparent;
 }
 QScrollBar::handle:horizontal, QScrollBar::handle:vertical {
 	background: rgba(0,0,0, 0.2);
-	border-radius: 5px;
-	margin:5px;
+	border-radius: 3px;
+	margin:3px;
 }
 
 QScrollBar:left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
