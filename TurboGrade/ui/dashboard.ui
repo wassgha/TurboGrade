@@ -134,6 +134,45 @@ QSpinBox::up-arrow {
     width: 10px;
     height: 10px;
     border-image: url(:/misc/res/caret-up.png) 0 0 0 0 stretch stretch;
+}
+QScrollBar {
+	background:transparent;
+	border:none;
+}
+QScrollBar:vertical {
+	max-width: 12px;
+    background: transparent;
+}
+
+QScrollBar:horizontal {
+	max-height: 12px;
+    background: transparent;
+}
+QScrollBar::handle:horizontal, QScrollBar::handle:vertical {
+	background: rgba(0,0,0, 0.2);
+	border-radius: 3px;
+	margin:3px;
+}
+
+QScrollBar:left-arrow:horizontal, QScrollBar::right-arrow:horizontal {
+    background: none;
+}
+
+QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
+    background: none;
+}
+QScrollBar::add-line:horizontal, QScrollBar::add-line:vertical {
+    border: none;
+    background: none;
+    subcontrol-position: right;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:horizontal, QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    subcontrol-position: left;
+    subcontrol-origin: margin;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
