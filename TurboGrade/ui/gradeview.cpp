@@ -34,6 +34,9 @@ GradeView::GradeView(QWidget *parent, Controller *controller) :
     }
 
     ui->scrollAreaWidgetContents->layout()->setAlignment(Qt::AlignTop);
+    ui->scrollArea->viewport()->setAttribute(Qt::WA_AcceptTouchEvents, true);
+    ui->scrollArea->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+    ui->scrollArea->setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
 
     update_grades();
     update_status();

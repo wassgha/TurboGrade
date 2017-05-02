@@ -11,6 +11,9 @@ CardsView::CardsView(QWidget *parent) :
     _breadcrumb = new Breadcrumb(parent);
 
     setAttribute(Qt::WA_StyledBackground, true);
+    ui->scrollArea->viewport()->setAttribute(Qt::WA_AcceptTouchEvents, true);
+    ui->scrollArea->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+    ui->scrollArea->setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
 
 //    ui->gridLayout_2->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 

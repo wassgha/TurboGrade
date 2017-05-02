@@ -8,6 +8,9 @@ ListView::ListView(QWidget *parent) :
     ui->setupUi(this);
 
     ui->scrollAreaWidgetContents->layout()->setAlignment(Qt::AlignTop);
+    ui->scrollArea->viewport()->setAttribute(Qt::WA_AcceptTouchEvents, true);
+    ui->scrollArea->setHorizontalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
+    ui->scrollArea->setVerticalScrollBarPolicy ( Qt::ScrollBarAlwaysOff );
 
     _parent = parent;
     _breadcrumb = new Breadcrumb(parent);

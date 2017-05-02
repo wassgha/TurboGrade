@@ -25,6 +25,9 @@ Dashboard::Dashboard(QWidget *parent) :
 
     ui->mainWidget->addWidget(courses);
     ui->mainWidget->setCurrentWidget(courses);
+
+    setAttribute(Qt::WA_AcceptTouchEvents, true);
+
 }
 
 Dashboard::~Dashboard()
