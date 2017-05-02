@@ -54,6 +54,7 @@ void StudentDeliverable::add_header(Submission *submission, QString &htmlString)
 
 void StudentDeliverable::add_style(Submission *submission, QString &htmlString){
     htmlString.append("\n <link href=\"qrc:///css/report/shThemeRDark.css\" rel=\"stylesheet\" type=\"text/css\" />"
+                      "\n <link href=\"qrc:///css/report/shCore.css\" rel=\"stylesheet\" type=\"text/css\" />"
                       "\n <script src=\"qrc:///css/report/shCore.js\" type=\"text/javascript\"></script>"
                       "\n <script src=\"qrc:///css/report/shBrushJava.js\" type=\"text/javascript\"></script>"
                       "\n <script src=\"qrc:///css/report/shAutoloader.js\" type=\"text/javascript\"></script>");
@@ -239,22 +240,21 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
         int start = comment->_start_pos;
         int end = comment->_end_pos;
         int current = 0;
+        int curline = 1;
         bool started = false;
-        QString codeLines = "\n <pre class=\"brush: java\">";
-        if (submission->_student->_name == "Wassim Gharbi") {
-
-        }
+        QString codeLines = "\n";
         while (!in.atEnd()) {
             QString line = in.readLine();
-            int size = line.size();
-            if (end > current && end < current + size) {
+            int size = line.length() + 1;
+            if (end >= current && end <= current + size) {
                 codeLines.append(line);
                 codeLines.append("\n");
                 started = false;
                 break;
             }
-                else if (start > current && start < current + size)
+                else if (start >= current && start <= current + size)
             {
+                codeLines.append("<pre class=\"brush: java; first-line: " + QString::number(curline) + "\">");
                 codeLines.append(line);
                 codeLines.append("\n");
                 started = true;
@@ -265,8 +265,10 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
                 codeLines.append("\n");
             }
             current += size;
+            curline++;
         }
         codeLines.append("\n </pre>");
+        qDebug()<<codeLines;
         htmlString.append(codeLines);
         file.close();
     }
