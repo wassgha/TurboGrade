@@ -35,10 +35,15 @@ private slots:
 
     void on_delete_btn_clicked();
 
+
 signals:
     void mouseOver(Comment* comment);
     void mouseOut(Comment* comment);
     void clicked(Comment* comment);
+
+public slots:
+    void highlight();
+    void unhighlight();
 
 private:
     GradeSubmission* _grade_submission = nullptr;

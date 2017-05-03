@@ -265,6 +265,7 @@ bool CodeView::eventFilter(QObject *obj, QEvent *event) {
 }
 
 void CodeView::highlight_comment(Comment * comment) {
+
     QList<QTextEdit::ExtraSelection> extraSelections;
     QTextEdit::ExtraSelection selection;
 
@@ -280,11 +281,23 @@ void CodeView::highlight_comment(Comment * comment) {
     ui->editor->setTextCursor(cursor);
 
     ui->editor->setExtraSelections(extraSelections);
+
+    for (CommentCard *card : _comment_cards) {
+        if (card->_comment == comment) {
+            card->highlight();
+        } else {
+            card->unhighlight();
+        }
+    }
 }
 
 void CodeView::unhighlight_comments() {
     QList<QTextEdit::ExtraSelection> extraSelections;
     ui->editor->setExtraSelections(extraSelections);
+
+    for (CommentCard *card : _comment_cards) {
+        card->highlight();
+    }
 }
 
 void CodeView::refresh_autocomplete() {
@@ -324,6 +337,9 @@ QString CodeView::current_folder() {
 
 void CodeView::show_comment(Comment * comment)
 {
-    ui->treeView->setCurrentIndex(_model->index(QDir(_root_path).absoluteFilePath(comment->_filename)));
+    QModelIndex new_index = _model->index(QDir(_root_path).absoluteFilePath(comment->_filename));
+    ui->treeView->setCurrentIndex(new_index);
+    loadFile(new_index);
     refresh_comments();
+    highlight_comment(comment);
 }

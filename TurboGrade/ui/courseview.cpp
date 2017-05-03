@@ -65,6 +65,8 @@ void CourseView::refresh_cards() {
         }
     }
 
+    _semester_select->setCurrentIndex(_semester_switch->currentIndex());
+
 }
 
 void CourseView::save_new() {

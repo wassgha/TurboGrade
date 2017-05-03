@@ -36,24 +36,6 @@
 	/*background: rgb(255, 242, 160);*/
 	background: #ffea8d;
 	border-radius: 3px;
-}
-#comment, #rubric {
-	background: transparent;
-	color: rgb(107, 100, 51);
-/*	border-radius: 3px;
-	border: 1px solid rgb(127, 120, 71);*/
-}
-#edit_btn, #delete_btn {
-	background: transparent;
-	text-transform: uppercase;
-	color: rgb(107, 100, 51);
-	font-weight: bold;
-	padding: 0px;
-}
-
-#delete_btn {
-	color: rgb(204, 0, 0);
-
 }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -99,6 +81,12 @@
       </item>
       <item>
        <widget class="QLabel" name="rubric">
+        <property name="styleSheet">
+         <string notr="true">#rubric {
+	background: transparent;
+	color: rgb(107, 100, 51);
+}</string>
+        </property>
         <property name="text">
          <string>On rubric &quot;Completeness&quot;</string>
         </property>
@@ -114,6 +102,12 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#comment {
+	background: transparent;
+	color: rgb(107, 100, 51);
+}</string>
      </property>
      <property name="text">
       <string>TextLabel</string>
@@ -157,7 +151,13 @@
       <item>
        <widget class="QPushButton" name="edit_btn">
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">#edit_btn {
+	background: transparent;
+	text-transform: uppercase;
+	color: rgb(107, 100, 51);
+	font-weight: bold;
+	padding: 0px;
+}</string>
         </property>
         <property name="text">
          <string>EDIT</string>
@@ -169,6 +169,15 @@
       </item>
       <item>
        <widget class="QPushButton" name="delete_btn">
+        <property name="styleSheet">
+         <string notr="true">#delete_btn {
+	background: transparent;
+	text-transform: uppercase;
+	color: rgb(204, 0, 0);
+	font-weight: bold;
+	padding: 0px;
+}</string>
+        </property>
         <property name="text">
          <string>DELETE</string>
         </property>

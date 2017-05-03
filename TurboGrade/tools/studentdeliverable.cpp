@@ -246,6 +246,7 @@ void StudentDeliverable::add_code_lines(Submission *submission, Comment *comment
         while (!in.atEnd()) {
             QString line = in.readLine();
             int size = line.length() + 1;
+            line = line.toHtmlEscaped();
             if (end >= current && end <= current + size) {
                 codeLines.append(line);
                 codeLines.append("\n");

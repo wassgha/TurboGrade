@@ -166,7 +166,7 @@ void GradeSubmission::display_fireworks() {
         delete fireworks;
     fireworks = new Fireworks(this);
     fireworks->show();
-    QTimer::singleShot(4000, this, SLOT(hide_fireworks()));
+    QTimer::singleShot(6000, this, SLOT(hide_fireworks()));
 }
 
 void GradeSubmission::hide_fireworks() {

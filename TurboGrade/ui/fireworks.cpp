@@ -5,9 +5,9 @@ Fireworks::Fireworks(QWidget *parent) :
     _parent(parent)
 {
 
-    QMovie *animation = new QMovie(":/misc/res/fireworks_1.gif");
+    QMovie *animation = new QMovie(":/misc/res/fireworks_2.gif");
     animation->setObjectName("animation");
-    QSize new_size(720, (animation->scaledSize().height()/animation->scaledSize().width()) * 720);
+    QSize new_size(420, (float(animation->scaledSize().height())/animation->scaledSize().width()) * 420);
     animation->setScaledSize(new_size);
     animation->start();
 
@@ -17,7 +17,7 @@ Fireworks::Fireworks(QWidget *parent) :
     gif->setAlignment(Qt::AlignCenter);
     gif->move(0,0);
     gif->resize(animation->scaledSize());
-    gif->setStyleSheet("#gif { background:rgb(99, 187, 169); border-radius: 4px; padding: 10px;}");
+    gif->setStyleSheet("#gif { background:black; border-radius: 4px; padding: 10px;}");
 
     resize(gif->width() + 20 , gif->height() + 20);
 

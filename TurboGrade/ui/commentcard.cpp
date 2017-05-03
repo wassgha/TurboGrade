@@ -79,3 +79,11 @@ void CommentCard::on_delete_btn_clicked()
     _grade_submission->grade_view->update_grades();
     _grade_submission->code_view->refresh_comments();
 }
+
+void CommentCard::highlight() {
+    setStyleSheet("QWidget#CommentCard { border-radius: 3px; background: rgb(255, 234, 141); }");
+}
+
+void CommentCard::unhighlight() {
+    setStyleSheet("QWidget#CommentCard { border-radius: 3px; background: rgb(255, 234, 141, 200); }");
+}
