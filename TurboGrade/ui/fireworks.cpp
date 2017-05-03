@@ -7,8 +7,7 @@ Fireworks::Fireworks(QWidget *parent) :
 
     QMovie *animation = new QMovie(":/misc/res/fireworks_2.gif");
     animation->setObjectName("animation");
-    QSize new_size(420, (float(animation->scaledSize().height())/animation->scaledSize().width()) * 420);
-    animation->setScaledSize(new_size);
+    animation->setScaledSize(QSize(480, 320));
     animation->start();
 
     QLabel *gif = new QLabel(this);
