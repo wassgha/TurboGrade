@@ -207,8 +207,9 @@ void GitModule::commit(QString message){
 
 /**
  * @brief GitModule::push pushes commits to the repository in workingDirectory
+ * @param force force push or solve conflicts
  */
-void GitModule::push(){
+void GitModule::push(bool force){
     // create process
     QProcess process;
     process.setProcessChannelMode(QProcess::ForwardedChannels);
@@ -218,6 +219,8 @@ void GitModule::push(){
 
     // arguments are push
     arguments << "push";
+    if (force)
+        arguments << "origin" << "master" << "--force";
 
     qDebug() << "Process trying to run command : git push";
     qDebug() << "In : " << process.workingDirectory();

@@ -19,7 +19,7 @@ public:
     // commit in the workingDirectory with message
     void commit(QString message);
     // push the repo in the workingDirectory
-    void push();
+    void push(bool force);
     // pull from origin
     void pull();
     // Configuration parameters

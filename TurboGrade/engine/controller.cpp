@@ -317,5 +317,5 @@ void Controller::sync_git() {
     _git->pull();
     _git->add_all();
     _git->commit("TurboGrade Synchronization");
-    _git->push();
+    _git->push(true);
 }
