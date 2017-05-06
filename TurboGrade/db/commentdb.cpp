@@ -169,7 +169,6 @@ int CommentDB::update(QString filename, int criterion_id, QString comment_text, 
 /**
  * @brief CommentDB::load_all loads all comments on
  * a specific submission
->>>>>>> ba857e04d0d53865a691b3b2a2226ae358e759e5
  */
 QSqlTableModel* CommentDB::load_model(Assignment* assignment) {
 

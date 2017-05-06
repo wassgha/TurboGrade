@@ -6,6 +6,7 @@
 #include "csvgenerator.h"
 #include "studentdeliverable.h"
 #include "dumptool.h"
+#include "gitmodule.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -63,19 +64,20 @@ int main(int argc, char *argv[])
 //    w.show();
 //    a.exec();
 
-    DumpTool d;
-    d.run_process("scp ../ui/turbograde.sqlite turbograde.sqlite");
-    d.dump("turbograde.sqlite", "dump.sqlite");
-    d.restore("turbograde2.sqlite", "dump.sqlite");
-    d.dump("turbograde2.sqlite", "dump2.sqlite");
-    // you will see that this prints nothing
-    d.run_process("diff dump.sqlite dump2.sqlite");
+//    DumpTool d;
+//    d.run_process("scp ../ui/turbograde.sqlite turbograde.sqlite");
+//    d.dump("turbograde.sqlite", "dump.sqlite");
+//    d.restore("turbograde2.sqlite", "dump.sqlite");
+//    d.dump("turbograde2.sqlite", "dump2.sqlite");
+//    // you will see that this prints nothing
+//    d.run_process("diff dump.sqlite dump2.sqlite");
 
-//    GitModule::clone("./", "giturl:~/ExampleRepo");
-//    dump("turbograde.sqlite", "./ExampleRepo/dump.sqlite");
-//    GitModule::add("./ExampleRepo", "dump.sqlite");
-//    GitModule::commit("./ExampleRepo", "Committing dump");
-//    GitModule::push("./ExampleRepo");
+    GitModule git("sync", "ssh://spr2017_l1g4@139.147.9.185/home/spr2017_l1g4/sync.git", "637492638");
+    git.clone();
+    git.pull();
+//    git.add("dump.sqlite");
+//    git.commit("Committing dump");
+//    git.push();
 
     return 0;
 }

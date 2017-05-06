@@ -80,7 +80,7 @@ void Comment::update( QString filename, Criterion* criterion,
     _end_pos = end_pos;
 
     // refresh auto complete
-    _controller->refresh_autocomplete();
+    _controller->refresh_autocomplete(_submission->_assignment);
 
 }
 

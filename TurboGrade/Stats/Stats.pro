@@ -21,6 +21,7 @@ HEADERS += \
 
 SOURCES     += \
             "../tools/objectidentifier.cpp" \
+            "../tools/gitmodule.cpp" \
             "../engine/controller.cpp" \
             "../engine/course.cpp" \
             "../engine/section.cpp" \
@@ -43,6 +44,7 @@ SOURCES     += \
 HEADERS     += \
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
+            "../tools/gitmodule.h" \
             "../engine/controller.h" \
             "../engine/course.h" \
             "../engine/section.h" \

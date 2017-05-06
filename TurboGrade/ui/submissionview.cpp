@@ -126,7 +126,7 @@ void SubmissionView::refresh_cards() {
 void SubmissionView::import_submission() {
 
     QString local_path = QCoreApplication::applicationDirPath()
-            + "/data/"
+            + "/sync/data/"
             + QString::number(_section->_course->_id)
             + "/"
             + QString::number(_section->_id)

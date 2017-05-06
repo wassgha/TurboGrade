@@ -15,6 +15,7 @@ SOURCES += main.cpp                                        \
     filewritertest.cpp  \
     ../tools/objectidentifier.cpp \
     ../tools/filewriter.cpp \
+    ../tools/gitmodule.cpp \
 
 INCLUDEPATH +=  ../tools/gtest                             \
                 ../tools/gtest/googletest                  \
@@ -49,6 +50,7 @@ SOURCES     += \
 
 HEADERS     += \
             "../tools/macro.h" \
+            "../tools/gitmodule.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \

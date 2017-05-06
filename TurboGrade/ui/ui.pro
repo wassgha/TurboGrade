@@ -38,6 +38,7 @@ SOURCES += main.cpp\
         "../tools/codeeditor.cpp" \
         "../tools/dirtools.cpp" \
         "../tools/csvgenerator.cpp" \
+        "../tools/gitmodule.cpp" \
         "../tools/filewriter.cpp" \
             "../tools/studentdeliverable.cpp" \
             "../tools/htmltopdf.cpp" \
@@ -92,6 +93,7 @@ HEADERS  +=\
             "../tools/dirtools.h" \
             "../tools/csvgenerator.h" \
             "../tools/filewriter.h" \
+            "../tools/gitmodule.h" \
             "../tools/studentdeliverable.h" \
             "../tools/htmltopdf.h" \
             "../db/dbengine.h" \

@@ -3,21 +3,29 @@
 #include <QString>
 #include <QProcess>
 #include <QDebug>
+#include <QApplication>
+#include "QDir"
 
 class GitModule
 {
 public:
-    GitModule();
+    GitModule(QString workingDirectory = "", QString repoUrl = "", QString password = "");
     // clone the Git repo to the workingDirectory
-    static void clone(QString workingDirectory, QString repoUrl);
+    void clone();
     // add the file/directory/regex to the Git Repo in the workingDirectory
-    static void add(QString workingDirectory, QString fileToAdd);
+    void add(QString fileToAdd);
+    // adds every file
+    void add_all();
     // commit in the workingDirectory with message
-    static void commit(QString workingDirectory, QString message);
+    void commit(QString message);
     // push the repo in the workingDirectory
-    static void push(QString workingDirectory);
+    void push();
     // pull from origin
-    static void pull(QString workingDirectory);
+    void pull();
+    // Configuration parameters
+    QString _workingDirectory;
+    QString _repoUrl;
+    QString _password;
 };
 
 #endif // GITMODULE_H

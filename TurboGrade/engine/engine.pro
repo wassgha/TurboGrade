@@ -19,6 +19,7 @@ SOURCES     += \
             "../db/commentdb.cpp" \
             "../db/gradedb.cpp" \
             "../tools/dirtools.cpp" \
+            "../tools/gitmodule.cpp" \
             main.cpp \
             course.cpp \
             section.cpp \
@@ -34,6 +35,7 @@ HEADERS     += \
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
             "../tools/dirtools.h" \
+            "../tools/gitmodule.h" \
             "../db/dbengine.h" \
             "../db/coursedb.h" \
             "../db/sectiondb.h" \

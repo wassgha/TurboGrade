@@ -16,6 +16,11 @@ Controller::Controller(bool drop_tables, QString dbname)
     // Initialize random number generator
     qsrand(QTime::currentTime().msec());
 
+    // Create Git connection and pull data/database
+    _git = new GitModule("sync", "ssh://spr2017_l1g4@139.147.9.185/home/spr2017_l1g4/sync.git", "637492638");
+    _git->clone();
+    sync_git();
+
     // If tables are to be dropped then drop them
     if (drop_tables) {
         DBEngine *_tmpDB = new DBEngine("DropConnection", dbname);
@@ -58,6 +63,8 @@ Controller::Controller(bool drop_tables, QString dbname)
  */
 Controller::~Controller()
 {
+    sync_git();
+
     delete _commentDB;
     delete _submissionDB;
     delete _assignmentDB;
@@ -296,4 +303,19 @@ void Controller::show_rubrics() {
  */
 QString Controller::rand_color() {
     return _flat_colors.at(qrand() % _flat_colors.count());
+}
+
+/**************************************
+ *        Git synchronization               *
+ **************************************/
+
+/**
+ * @brief Controller::sync_git pulls then pushes
+ * to the git repository
+ */
+void Controller::sync_git() {
+    _git->pull();
+    _git->add_all();
+    _git->commit("TurboGrade Synchronization");
+    _git->push();
 }

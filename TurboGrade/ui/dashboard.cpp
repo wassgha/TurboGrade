@@ -27,6 +27,17 @@ Dashboard::Dashboard(QWidget *parent) :
     ui->mainWidget->setCurrentWidget(courses);
 
     connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_courses()));
+
+    // Create Git connection and pull data/database
+    _sync_interval = 15000;
+    _timer = new QTimer(this);
+    connect(_timer, SIGNAL(timeout()), this, SLOT(update_git()));
+    _timer->start(_sync_interval);
+
+    _timer2 = new QTimer(this);
+    connect(_timer2, SIGNAL(timeout()), this, SLOT(update_sync()));
+    _timer2->start(1000);
+
 }
 
 Dashboard::~Dashboard()
@@ -34,6 +45,8 @@ Dashboard::~Dashboard()
     delete _controller;
     delete ui;
     delete courses;
+    delete _timer;
+    delete _timer2;
     if (sections != nullptr)
         delete sections;
 }
@@ -116,4 +129,17 @@ void Dashboard::toggle_headers(bool show) {
         ui->header->hide();
         showFullScreen();
     }
+}
+
+
+/**************************************
+ *        Git synchronization               *
+ **************************************/
+
+void Dashboard::update_git() {
+    _controller->sync_git();
+}
+
+void Dashboard::update_sync() {
+    ui->last_synced->setText("Last Synced : " + QString::number(abs(_timer->remainingTime() - _sync_interval)/1000) + " seconds ago");
 }

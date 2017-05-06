@@ -11,10 +11,12 @@
 #include <vector>
 #include <algorithm>
 #include <QObject>
+#include <QTimer>
 #include <map>
 
 #include "../tools/macro.h"
 #include "../tools/objectidentifier.h"
+#include "../tools/gitmodule.h"
 
 #include "course.h"
 #include "section.h"
@@ -48,7 +50,7 @@ class Controller : public ObjectIdentifier
 public:
 
     // Constructor used to initialize database
-    Controller(bool drop_tables = false, QString dbname = "turbograde.sqlite");
+    Controller(bool drop_tables = false, QString dbname = "sync/turbograde.sqlite");
     // Destructor
     ~Controller();
 
@@ -92,6 +94,12 @@ public:
      **********************************/
     QString rand_color();
 
+
+    /**************************************
+     *        Git synchronization               *
+     **************************************/
+    void sync_git();
+
     /*
      * Database containers
      */
@@ -129,6 +137,8 @@ public:
                                                     <<"#462446"<<"#FFC153"
                                                     <<"#47B39D"<<"#897FBA"
                                                     <<"#60646D"<<"#65878F";
+public slots:
+    void update_git();
 
 private:
 
@@ -141,6 +151,9 @@ private:
 
     // All assignments in the engine
     std::vector<Assignment*> *_assignments;
+
+    // Git sync variables
+    GitModule *_git;
 };
 
 #endif // CONTROLLER_H

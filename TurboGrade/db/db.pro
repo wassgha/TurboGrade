@@ -9,6 +9,7 @@ unix:!ios {
 
 SOURCES     += \
             "../tools/objectidentifier.cpp" \
+            "../tools/gitmodule.cpp" \
             main.cpp \
             dbengine.cpp \
             "../engine/controller.cpp" \
@@ -32,6 +33,7 @@ SOURCES     += \
 HEADERS     += \
             "../tools/macro.h" \
             "../tools/objectidentifier.h" \
+            "../tools/gitmodule.h" \
             dbengine.h \
             "../engine/controller.h" \
             "../engine/course.h" \

@@ -242,7 +242,7 @@ int Submission::get_grade(){
 QString Submission::getPath() {
 
     return QCoreApplication::applicationDirPath()
-    + "/data/"
+    + "/sync/data/"
     + QString::number(_student->_section->_course->_id)
     + "/"
     + QString::number(_student->_section->_id)

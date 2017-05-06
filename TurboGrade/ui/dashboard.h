@@ -61,9 +61,16 @@ public slots:
     void start_grading(QObject* submission);
     void toggle_headers(bool show);
     void remove_current_widget();
+    void update_sync();
+    void update_git();
 
 private:
     Ui::Dashboard *ui;
+
+    // Git sync variables
+    QTimer *_timer;
+    QTimer *_timer2;
+    int _sync_interval;
 };
 
 #endif // DASHBOARD_H
