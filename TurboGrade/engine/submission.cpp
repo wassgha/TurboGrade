@@ -295,3 +295,16 @@ float Submission::grade_percent() {
          100*get_grade()/_assignment->_rubric->total_grade()
      );
 }
+
+/**
+ * @brief Submission::general_comment
+ * @return the current general comment
+ */
+QString Submission::general_comment() {
+    return _general_comment;
+}
+
+void Submission::update_general_comment(QString general_comment) {
+    _general_comment = general_comment;
+    _controller->_submissionDB->update_general_comment(_id, _general_comment);
+}

@@ -167,7 +167,7 @@ void StudentDeliverable::add_general_comments(Submission *submission, QString &h
                 "\n    <div class = \"comment\">"
                 "\n        <div class = \"title\"> General Comments </div>"
                 "\n        <p>"
-                "\n         You did well on this assignment, beware of commenting and documentation."
+                "\n         " + submission->general_comment() +
                 "\n        </p>"
                 "\n    </div>");
 

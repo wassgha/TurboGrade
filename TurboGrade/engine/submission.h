@@ -79,6 +79,12 @@ public:
     //Returns the local path where submission files are stored
     QString getPath();
 
+    // Returns the general comment
+    QString general_comment();
+
+    // Update the general comment
+    void update_general_comment(QString general_comment);
+
     //gets the total maximum score
     int get_out_of();
 

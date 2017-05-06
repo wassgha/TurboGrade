@@ -41,6 +41,7 @@ CodeView::CodeView(QWidget *parent, Controller *controller) :
 
     ui->comment_layout->setAlignment(Qt::AlignTop);
 
+    ui->general_comments->setPlainText(_parent->_submission->general_comment());
 
     setupCodeEditor(first_file);
     refresh_criteria();
@@ -342,4 +343,22 @@ void CodeView::show_comment(Comment * comment)
     loadFile(new_index);
     refresh_comments();
     highlight_comment(comment);
+}
+
+void CodeView::on_general_comments_textChanged()
+{
+    if (ui->general_comments->toPlainText() == _parent->_submission->general_comment()) {
+        ui->save_general_comment->setEnabled(false);
+        ui->save_general_comment->setText("SAVED");
+    } else {
+        ui->save_general_comment->setEnabled(true);
+        ui->save_general_comment->setText("SAVE");
+    }
+}
+
+void CodeView::on_save_general_comment_clicked()
+{
+    _parent->_submission->update_general_comment(ui->general_comments->toPlainText());
+    ui->save_general_comment->setEnabled(false);
+    ui->save_general_comment->setText("SAVED");
 }

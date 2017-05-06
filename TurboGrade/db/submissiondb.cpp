@@ -87,7 +87,7 @@ void SubmissionDB::load_all(Student *student) {
     query.prepare("SELECT "
                   "submission.status AS submission_status,"
                   "submission.id AS submission_id,"
-                  "submission.general_comment AS general_comment"
+                  "submission.general_comment AS general_comment,"
                   "assignment.name AS assignment_name "
                   "FROM submission, assignment "
                   "WHERE assignment.id = submission.assignment "

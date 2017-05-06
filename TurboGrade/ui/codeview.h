@@ -70,6 +70,11 @@ public slots:
     void unhighlight_comments();
     void auto_completed(QModelIndex index);
 
+private slots:
+    void on_general_comments_textChanged();
+
+    void on_save_general_comment_clicked();
+
 private:
     void setupCodeEditor(const QString &file_name);
     bool eventFilter(QObject *obj, QEvent *event) override;
