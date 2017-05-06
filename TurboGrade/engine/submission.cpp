@@ -10,7 +10,7 @@
  * @param controller the current controller
  */
 Submission::Submission(Assignment *assignment,
-                       Student* student, Controller * controller, int status,
+                       Student* student, Controller * controller, QString general_comment, int status,
                        int id)
 {
 
@@ -20,13 +20,14 @@ Submission::Submission(Assignment *assignment,
 
     // If id is -1 then we're creating locally and we should add to the database
     if (id == -1)
-        _id = _controller->_submissionDB->add(student->_id, assignment->_id, status);
+        _id = _controller->_submissionDB->add(student->_id, assignment->_id, general_comment, status);
     else
         _id = id;
 
     _assignment = assignment;
     _student = student;
     _status = status;
+    _general_comment = general_comment;
 
     // Submission comments
     _comments = new std::vector<Comment*>();

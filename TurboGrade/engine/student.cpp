@@ -55,9 +55,9 @@ void Student::update(QString name){
  * @param assignment a pointer to the assignment the submission belongs to
  * @param status whether the submission was graded or not
  */
-Submission* Student::add_submission(Assignment* assignment, int status, int id) {
+Submission* Student::add_submission(Assignment* assignment, QString general_comment, int status, int id) {
 
-    Submission *new_submission = new Submission(assignment, this, _controller, status, id);
+    Submission *new_submission = new Submission(assignment, this, _controller, general_comment, status, id);
 
     _submissions->push_back(new_submission);
 

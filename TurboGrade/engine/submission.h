@@ -31,7 +31,7 @@ class Submission : public ObjectIdentifier, public QObject
 public:
     Submission() = delete; //don't allow default constructor
     // Parametrized constructor
-    Submission(Assignment* assignment, Student* student, Controller * controller, int status = 0, int id = -1);
+    Submission(Assignment* assignment, Student* student, Controller * controller, QString general_comment = "", int status = 0, int id = -1);
     // Destructor
     ~Submission();
 
@@ -95,6 +95,8 @@ public:
     std::vector<Comment*> *_comments;    
     // The collection of criterion and their grades for the current submission
     std::map<Criterion*, int> *_grades;
+    // General Comment
+    QString _general_comment = "";
     // Status of the submission ("started", "finalized or "unopened")
     int _status = 0;
     // Controller

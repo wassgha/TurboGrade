@@ -4,10 +4,11 @@
  * @brief SubmissionDB::add Insert a row to the database
  * @param student_id the student's unique identifier
  * @param assignment_id the assignment this submission belongs to
+ * @param general_comment the general comment about this submission
  * @param status whether the submission has been graded or not
  * @return the id if the query succeeded
  */
-int SubmissionDB::add(int student_id, int assignment_id, int status) {
+int SubmissionDB::add(int student_id, int assignment_id, QString general_comment, int status) {
 
     SHOW_WHERE;
 
@@ -15,10 +16,11 @@ int SubmissionDB::add(int student_id, int assignment_id, int status) {
     QSqlQuery query(db);
 
 
-    query.prepare("INSERT INTO submission (id, student, assignment, status) "
-                  "VALUES (NULL, ?, ?, ?)");
+    query.prepare("INSERT INTO submission (id, student, assignment, general_comment, status) "
+                  "VALUES (NULL, ?, ?, ?, ?)");
     query.addBindValue(student_id);
     query.addBindValue(assignment_id);
+    query.addBindValue(general_comment);
     query.addBindValue(status);
 
     if (!query.exec()) {
@@ -85,6 +87,7 @@ void SubmissionDB::load_all(Student *student) {
     query.prepare("SELECT "
                   "submission.status AS submission_status,"
                   "submission.id AS submission_id,"
+                  "submission.general_comment AS general_comment"
                   "assignment.name AS assignment_name "
                   "FROM submission, assignment "
                   "WHERE assignment.id = submission.assignment "
@@ -101,9 +104,11 @@ void SubmissionDB::load_all(Student *student) {
     int assignment_name_field = query.record().indexOf("assignment_name");
     int submission_id_field = query.record().indexOf("submission_id");
     int submission_status_field = query.record().indexOf("submission_status");
+    int general_comment_field = query.record().indexOf("general_comment");
 
     while(query.next()) {
         student->add_submission(_controller->get_assignment(query.value(assignment_name_field).toString()),
+                                query.value(general_comment_field).toString(),
                                 query.value(submission_status_field).toInt(),
                                 query.value(submission_id_field).toInt());
     }
@@ -135,6 +140,37 @@ void SubmissionDB::update_status(int submission_id, int status){
 
     if (!query.exec()) {
         qDebug() << "Failed to update submission status"
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+    }
+
+    query.finish();
+    db.commit();
+}
+
+
+/**
+ * @brief SubmissionDB::update_general_comment updates the comment associated
+ * with the submission
+ * of a specific submission
+ * @param submission_id the submission id
+ * @param general_comment the text for the general comment
+ */
+void SubmissionDB::update_general_comment(int submission_id, QString general_comment){
+
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE submission SET general_comment = :general_comment WHERE id = :submission_id");
+
+    query.bindValue(":general_comment", general_comment);
+    query.bindValue(":submission_id", submission_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update submission general comment"
                  << query.lastQuery() << endl
                  << "SQL ERROR: " << query.lastError();
     }

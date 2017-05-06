@@ -63,6 +63,7 @@ DBEngine::DBEngine(QString connectionName, QString dbname)
     sql_query("CREATE TABLE IF NOT EXISTS submission (id INTEGER PRIMARY KEY, \
                student INTEGER,\
                assignment INTEGER,\
+               general_comment TEXT,\
                status INT,\
                FOREIGN KEY(student) REFERENCES student(id),\
                FOREIGN KEY(assignment) REFERENCES assignment(id))");

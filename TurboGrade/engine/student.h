@@ -35,7 +35,7 @@ public:
     // Destructor
     ~Student();
     // Add a student submission
-    Submission* add_submission(Assignment* assignment, int status = 0, int id = -1);
+    Submission* add_submission(Assignment* assignment, QString general_comment = "", int status = 0, int id = -1);
     // Find a submission
     Submission* get_submission(Assignment* assignment);
     std::vector<Submission*>* get_submissions();
