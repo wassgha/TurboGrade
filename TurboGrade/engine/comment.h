@@ -43,6 +43,12 @@ public:
             int end_pos,
             Controller * controller,
             int id = -1);
+
+    // Update fields in Comment
+    void update(QString filename, Criterion* criterion,
+                QString text, int grade,
+                int start_pos, int end_pos);
+
     // Destructor
     ~Comment();
 

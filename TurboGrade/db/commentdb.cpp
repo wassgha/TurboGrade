@@ -116,9 +116,60 @@ void CommentDB::remove(int comment_id){
 }
 
 /**
+<<<<<<< HEAD
  * @brief CommentDB::load_model loads all comments on
  * a specific submission and returns the model
  * @return the query model for the comments
+=======
+ * @brief CommentDB::update updates the comment given by the comment_id
+ * @param filename the new filename
+ * @param criterion_id the new criterion id
+ * @param comment_text the new text
+ * @param grade the new grade
+ * @param start_pos the new starting position
+ * @param end_pos the new end position
+ * @param comment_id the comment id to update
+ */
+int CommentDB::update(QString filename, int criterion_id, QString comment_text, int grade, int start_pos, int end_pos, int comment_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE comment "
+                  "SET filename = :filename, criterion_id = :criterion_id, "
+                    "comment_text = :comment_text, grade = :grade, "
+                    "start_pos = :start_pos, end_pos = :end_pos "
+                  "WHERE id = :comment_id");
+
+    query.bindValue(":filename", filename);
+    query.bindValue(":criterion_id", criterion_id);
+    query.bindValue(":comment_text", comment_text);
+    query.bindValue(":grade", grade);
+    query.bindValue(":start_pos", start_pos);
+    query.bindValue(":end_post", end_pos);
+    query.bindValue(":comment_id", comment_id);
+
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update comment "
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+        return -1;
+    }
+
+    query.finish();
+    db.commit();
+
+    int last_id = query.lastInsertId().toInt();
+    return last_id;
+}
+
+/**
+ * @brief CommentDB::load_all loads all comments on
+ * a specific submission
+>>>>>>> ba857e04d0d53865a691b3b2a2226ae358e759e5
  */
 QSqlTableModel* CommentDB::load_model(Assignment* assignment) {
 

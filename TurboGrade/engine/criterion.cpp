@@ -35,6 +35,30 @@ Criterion::Criterion(const QString name, Criterion* parent, int out_of, Rubric* 
 }
 
 /**
+ * @brief Criterion::update updates the Criterion in memory and the DB
+ * @param name the name of the criterion
+ * @param out_of the max grade
+ */
+void Criterion::update(const QString name, int out_of){
+    if(out_of != _out_of){
+        for(Course *course : *_controller->get_courses()){
+            for(Section *section : *course->_sections){
+                for(Student *student : *section->_students){
+                    Submission *submission = student->get_submission(_rubric->_assignment);
+                    // update the grade by subtracting old total and adding new
+                    submission->update_grade(this, submission->get_grade(this) - _out_of + out_of);
+                }
+            }
+        }
+    }
+
+    _name = name;
+    _out_of = out_of;
+
+    _controller->_rubricDB->update(name, out_of, _id);
+}
+
+/**
  * @brief Criterion::~Criterion Destructor
  */
 

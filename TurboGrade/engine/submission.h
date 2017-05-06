@@ -58,8 +58,8 @@ public:
     // adds a grade to the map
     void add_grade(Criterion* criterion, int grade, bool load = false);
 
-    // makes all grades 100%
-    void attribute_full_grade();
+    // makes all grades 100% or 0%
+    void attribute_full_grade(bool full = true);
 
     // Changes submission's grading status
     void update_status(int status);

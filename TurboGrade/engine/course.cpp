@@ -32,6 +32,18 @@ Course::Course(QString name, QString semester, Controller* controller, int id)
     _controller->_sectionDB->load_all(this);
 }
 
+/**
+ * @brief Course::update updates the Course in memory and DB
+ * @param name the new name
+ * @param semester the new semester
+ */
+void Course::update(QString name, QString semester){
+    _name = name;
+    _semester = semester;
+
+    _controller->_courseDB->update(name, semester, _id);
+}
+
 Course::~Course()
 {
     for(Section* section:*_sections)

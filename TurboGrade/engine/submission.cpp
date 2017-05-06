@@ -144,16 +144,19 @@ void Submission::remove_comment(Comment *comment){
 /**
  * @brief Submission::attribute_full_grade sets every criterion to the maximum
  * grade available
+ * @param full true if the full grade should be used, 0 otherwise
  */
-void Submission::attribute_full_grade() {
+void Submission::attribute_full_grade(bool full) {
     int old_status = _status;
     for (Criterion* criterion : *_assignment->_rubric->_criteria) {
         if (criterion->has_children()) {
             for (Criterion* child : criterion->children()) {
-                update_grade(child, child->_out_of);
+                int newScore = full ? child->_out_of : 0;
+                update_grade(child, newScore);
             }
         } else {
-            update_grade(criterion, criterion->_out_of);
+            int newScore = full ? criterion->_out_of : 0;
+            update_grade(criterion, newScore);
         }
     }
     update_status(old_status);

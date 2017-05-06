@@ -34,6 +34,8 @@ public:
     Section() = delete; //don't allow default constructor
     // Parametrized constructor
     Section(QString name, Course* course, Controller * controller, int id = -1);
+    // Update Section
+    void update(QString name);
     // Destructor
     ~Section();
     // Add a student to the section

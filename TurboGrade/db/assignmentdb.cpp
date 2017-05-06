@@ -67,6 +67,43 @@ void AssignmentDB::remove(int assignment_id){
     db.commit();
 }
 
+/**
+ * @brief AssignmentDB::update updates the row given by assignment_id
+ * @param name the new name
+ * @param objective the new object
+ * @param full_grade the new starting grade variable (True if starting max score)
+ * @param assignment_id the assignment id in the table
+ */
+int AssignmentDB::update(const QString name, const QString objective, bool full_grade, int assignment_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE assignment "
+                  "SET name = :name, objective = :objective, full_grade = :full_grade "
+                  "WHERE id = :id;");
+
+    query.bindValue(":name", name);
+    query.bindValue(":objective", objective);
+    query.bindValue(":full_grade", full_grade);
+    query.bindValue(":id", assignment_id);
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update assignment "
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+        return -1;
+    }
+
+    query.finish();
+    db.commit();
+
+    int last_id = query.lastInsertId().toInt();
+    return last_id;
+}
+
 
 /**
  * @brief AssignmentDB::link Links an assignment to a section

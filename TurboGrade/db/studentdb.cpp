@@ -30,6 +30,40 @@ int StudentDB::add(int section_id, const QString name) {
     return last_insert_id;
 }
 
+/**
+ * @brief StudentDB::update updates a row based on the student id
+ * @param name the new name of the student
+ * @param student_id the student to update
+ */
+int StudentDB::update(const QString name, int student_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE student "
+                  "SET name = :name,"
+                  "WHERE id = :student_id");
+
+    query.bindValue(":name", name);
+    query.bindValue(":student_id", student_id);
+
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update student "
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+        return -1;
+    }
+
+    query.finish();
+    db.commit();
+
+    int last_id = query.lastInsertId().toInt();
+    return last_id;
+}
+
 
 /**
  * @brief StudentDB::select Returns id of the row

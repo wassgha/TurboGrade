@@ -30,6 +30,8 @@ public:
     Assignment(const QString name, const QString objective, Controller *controller, bool full_grade = false, int id = -1);
     // Destructor
     ~Assignment();
+    // Update Assignment
+    void update(const QString name, const QString objective, bool full_grade = false);
 
     int _id;
     // Name of the assignment

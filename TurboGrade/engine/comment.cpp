@@ -56,6 +56,35 @@ Comment::Comment(Submission* submission,
 }
 
 /**
+ * @brief Comment::update updates the comment in memory and in DB
+ * @param filename the new filename
+ * @param criterion the new criterion
+ * @param text the new text
+ * @param grade the new grade
+ * @param start_pos the new start position
+ * @param end_pos the new end position
+ */
+void Comment::update( QString filename, Criterion* criterion,
+                      QString text, int grade,
+                      int start_pos, int end_pos){
+    if(grade != _grade){
+        //update grade by subtracting old_grade and adding new_grade
+        _submission->update_grade(_criterion, _submission->get_grade(criterion) - _grade + grade);
+    }
+
+    _filename = filename;
+    _criterion = criterion;
+    _text = text;
+    _grade = grade;
+    _start_pos = start_pos;
+    _end_pos = end_pos;
+
+    // refresh auto complete
+    _controller->refresh_autocomplete();
+
+}
+
+/**
  * @brief Comment::~Comment Destructor
  */
 Comment::~Comment()

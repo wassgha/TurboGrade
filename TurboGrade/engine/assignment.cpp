@@ -33,6 +33,34 @@ Assignment::Assignment(const QString name, const QString objective, Controller *
 }
 
 /**
+ * @brief Assignment::update updates the assignment in memory and in DB
+ * @param name the new assignment name
+ * @param objective the new objective
+ * @param full_grade the option to grade starting at max (true) or 0 (false)
+ */
+void Assignment::update(const QString name, const QString objective, bool full_grade){
+    // if we have changed the full_grade, then regrade
+    if(full_grade != _full_grade){
+        for(Course *course: *_controller->get_courses()){
+            for(Section *section : *course->_sections){
+                for(Student *student : *section->_students){
+                    Submission *submission = student->get_submission(this);
+                    submission->attribute_full_grade(full_grade);
+                }
+            }
+        }
+    }
+
+    //set new parameters
+    _name = name;
+    _objective = objective;
+    _full_grade = full_grade;
+
+    //update DB
+    _controller->_assignmentDB->update(name, objective, full_grade, _id);
+}
+
+/**
  * @brief Assignment::~Assignment Destructor
  */
 Assignment::~Assignment()

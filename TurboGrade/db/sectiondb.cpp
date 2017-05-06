@@ -58,6 +58,40 @@ void SectionDB::remove(int section_id){
 }
 
 /**
+ * @brief SectionDB::update the section to update
+ * @param name the new name
+ * @param section_id the section to update
+ */
+int SectionDB::update(const QString name, int section_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE section "
+                  "SET name = :name "
+                  "WHERE id = :section_id");
+
+    query.bindValue(":name", name);
+    query.bindValue(":section_id", section_id);
+
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update section "
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+        return -1;
+    }
+
+    query.finish();
+    db.commit();
+
+    int last_id = query.lastInsertId().toInt();
+    return last_id;
+}
+
+/**
  * @brief SectionDB::select Returns id of the row
  * that matches given name
  * @param course_name the name of the course (ex. CS 150)

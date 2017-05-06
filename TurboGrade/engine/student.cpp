@@ -41,6 +41,14 @@ Student::~Student()
     delete _submissions;
 }
 
+/**
+ * @brief Student::update updates the Student in memory and DB
+ * @param name the new name
+ */
+void Student::update(QString name){
+    _name = name;
+    _controller->_studentDB->update(name, _id);
+}
 
 /**
  * @brief Student::add_submission adds a submission made by this student

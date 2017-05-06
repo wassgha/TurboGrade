@@ -56,6 +56,42 @@ void CourseDB::remove(int course_id){
 }
 
 /**
+ * @brief CourseDB::update update the row given by the course_id
+ * @param name the new name
+ * @param semester the new semester text
+ * @param course_id the course to update
+ */
+int CourseDB::update(const QString name, const QString semester, int course_id){
+    SHOW_WHERE;
+
+    db.transaction();
+    QSqlQuery query(db);
+
+
+    query.prepare("UPDATE course "
+                  "SET name = :name, semester = :semester, "
+                  "WHERE id = :course_id");
+
+    query.bindValue(":name", name);
+    query.bindValue(":semester", semester);
+    query.bindValue(":course_id", course_id);
+
+
+    if (!query.exec()) {
+        qDebug() << "Failed to update course "
+                 << query.lastQuery() << endl
+                 << "SQL ERROR: " << query.lastError();
+        return -1;
+    }
+
+    query.finish();
+    db.commit();
+
+    int last_id = query.lastInsertId().toInt();
+    return last_id;
+}
+
+/**
  * @brief CourseDB::select Returns id of the row
  * that matches given name
  * @param name the name of the course (ex. CS150)

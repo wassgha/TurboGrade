@@ -30,6 +30,8 @@ public:
     Course() = delete; //don't allow default constructor
     // Parametrized constructor
     Course(QString name, QString semester, Controller * controller, int id = -1);
+    // Update Course
+    void update(QString name, QString semester);
     // Destructor
     ~Course();
     // Add a section to the course
