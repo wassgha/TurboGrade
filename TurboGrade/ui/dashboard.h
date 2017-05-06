@@ -40,6 +40,7 @@ class Dashboard : public QWidget
 public:
     explicit Dashboard(QWidget *parent = 0);
     ~Dashboard();
+    QString time_elapsed(int time);
     CourseView *courses = nullptr;
     SectionView *sections = nullptr;
     AssignmentView *assignments = nullptr;
@@ -51,6 +52,8 @@ public:
 
 private slots:
     void on_tutorial_btn_clicked();
+
+    void on_sync_now_clicked();
 
 public slots:
     void show_courses();
@@ -69,8 +72,7 @@ private:
 
     // Git sync variables
     QTimer *_timer;
-    QTimer *_timer2;
-    int _sync_interval;
+    QTime _last_sync;
 };
 
 #endif // DASHBOARD_H

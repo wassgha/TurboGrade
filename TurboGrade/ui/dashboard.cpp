@@ -29,14 +29,11 @@ Dashboard::Dashboard(QWidget *parent) :
     connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_courses()));
 
     // Create Git connection and pull data/database
-    _sync_interval = 15000;
-    _timer = new QTimer(this);
-    connect(_timer, SIGNAL(timeout()), this, SLOT(update_git()));
-    _timer->start(_sync_interval);
+    _last_sync = QTime::currentTime();
 
-    _timer2 = new QTimer(this);
-    connect(_timer2, SIGNAL(timeout()), this, SLOT(update_sync()));
-    _timer2->start(1000);
+    _timer = new QTimer(this);
+    connect(_timer, SIGNAL(timeout()), this, SLOT(update_sync()));
+    _timer->start(10000);
 
 }
 
@@ -46,7 +43,6 @@ Dashboard::~Dashboard()
     delete ui;
     delete courses;
     delete _timer;
-    delete _timer2;
     if (sections != nullptr)
         delete sections;
 }
@@ -138,8 +134,34 @@ void Dashboard::toggle_headers(bool show) {
 
 void Dashboard::update_git() {
     _controller->sync_git();
+    _last_sync = QTime::currentTime();
 }
 
 void Dashboard::update_sync() {
-    ui->last_synced->setText("Last Synced : " + QString::number(abs(_timer->remainingTime() - _sync_interval)/1000) + " seconds ago");
+    ui->last_synced->setText("Last Synced : " + time_elapsed(_last_sync.secsTo(QTime::currentTime())) + " ago");
+}
+
+
+QString Dashboard::time_elapsed(int time) {
+    time = abs(time);
+    time = (time<1)? 1 : time;
+    std::vector<std::pair<int, QString>> tokens;
+    tokens.push_back(std::make_pair(31536000, "year"));
+    tokens.push_back(std::make_pair(2592000, "month"));
+    tokens.push_back(std::make_pair(604800, "week"));
+    tokens.push_back(std::make_pair(86400, "day"));
+    tokens.push_back(std::make_pair(3600, "hour"));
+    tokens.push_back(std::make_pair(60, "minute"));
+    tokens.push_back(std::make_pair(1, "second"));
+    for (std::pair<int, QString> token : tokens) {
+        if(time<token.first) continue;
+        int numberOfUnits = floor(time/token.first);
+        return (numberOfUnits == 1?"a ":QString::number(numberOfUnits)) + " " + token.second + (numberOfUnits>1?"s":"");
+    }
+}
+
+void Dashboard::on_sync_now_clicked()
+{
+    update_git();
+    update_sync();
 }

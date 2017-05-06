@@ -69,6 +69,12 @@
 	margin: 0px;
 }
 
+#sync_now {
+	color: rgb(51, 204, 0);
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
 
 #last_synced {
 	color: white;
@@ -262,7 +268,7 @@ QScrollBar::sub-line:horizontal, QScrollBar::sub-line:vertical {
       <item>
        <widget class="QLabel" name="last_synced">
         <property name="text">
-         <string>Last synced : 5 seconds ago</string>
+         <string>Last synced : Just now</string>
         </property>
        </widget>
       </item>
@@ -270,6 +276,13 @@ QScrollBar::sub-line:horizontal, QScrollBar::sub-line:vertical {
        <widget class="QLabel" name="network_indicator">
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="ClickableLabel" name="sync_now">
+        <property name="text">
+         <string>Sync Now</string>
         </property>
        </widget>
       </item>
