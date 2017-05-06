@@ -33,7 +33,7 @@ Dashboard::Dashboard(QWidget *parent) :
 
     _timer = new QTimer(this);
     connect(_timer, SIGNAL(timeout()), this, SLOT(update_sync()));
-    _timer->start(10000);
+    _timer->start(8000);
 
 }
 
@@ -156,7 +156,7 @@ QString Dashboard::time_elapsed(int time) {
     for (std::pair<int, QString> token : tokens) {
         if(time<token.first) continue;
         int numberOfUnits = floor(time/token.first);
-        return (numberOfUnits == 1?"a ":QString::number(numberOfUnits)) + " " + token.second + (numberOfUnits>1?"s":"");
+        return (numberOfUnits == 1?"a":QString::number(numberOfUnits)) + " " + token.second + (numberOfUnits>1?"s":"");
     }
 }
 
