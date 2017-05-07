@@ -12,6 +12,7 @@ GitModule::GitModule(QString workingDirectory, QString repoUrl, QString password
  * directory designated by the workingDirectory
  */
 void GitModule::clone(){
+    store_credentials();
     // create process
     QProcess process;
     process.setProcessChannelMode(QProcess::ForwardedChannels);
@@ -29,6 +30,54 @@ void GitModule::clone(){
     // start process git with args clone repoUrl
     // git clone repoUrl
     process.start("git", arguments);
+    process.write((_password + "\n").toStdString().c_str()) ;
+
+    if(process.waitForFinished()){
+        // get standard out string
+        QString out = process.readAllStandardOutput();
+        // get error string
+        QString error = process.readAllStandardError();
+        if(!out.isEmpty()){
+            qDebug() << "Standard Out: ";
+            QStringList lines = out.split("\n");
+            for(QString line : lines){
+                qDebug() << line;
+            }
+        }
+        if(!error.isEmpty()){
+            qDebug() << "Errors: ";
+            QStringList lines = error.split("\n");
+            for(QString line : lines){
+                qDebug() << line;
+            }
+        }
+    }
+
+    QProcess::ExitStatus Status = process.exitStatus();
+    if(Status == 0){
+        qDebug() << "Finished ok";
+    }
+}
+
+
+/**
+ * @brief GitModule::store_credentials asks git
+ * to store the credentials on the first clone
+ */
+void GitModule::store_credentials(){
+    // create process
+    QProcess process;
+    process.setProcessChannelMode(QProcess::ForwardedChannels);
+    // add some arguments
+    QStringList arguments;
+    QDir parent(_workingDirectory);
+    parent.cdUp();
+    process.setWorkingDirectory(parent.path());
+
+    qDebug() << "Process trying to run command : git config ";
+    qDebug() << "In : " << process.workingDirectory();
+
+    process.start("git", QStringList() << "config" << "credential.helper" << "store");
     process.write((_password + "\n").toStdString().c_str()) ;
 
     if(process.waitForFinished()){

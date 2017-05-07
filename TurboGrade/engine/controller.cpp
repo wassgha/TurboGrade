@@ -17,7 +17,7 @@ Controller::Controller(bool drop_tables, QString dbname)
     qsrand(QTime::currentTime().msec());
 
     // Create Git connection and pull data/database
-    _git = new GitModule("sync", "ssh://spr2017_l1g4@139.147.9.185/home/spr2017_l1g4/sync.git", "637492638");
+    _git = new GitModule("sync", "ssh://spr2017_l1g4:637492638@139.147.9.185/home/spr2017_l1g4/sync.git", "637492638");
     _git->clone();
     sync_git();
 

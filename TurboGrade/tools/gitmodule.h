@@ -10,6 +10,8 @@ class GitModule
 {
 public:
     GitModule(QString workingDirectory = "", QString repoUrl = "", QString password = "");
+    // tells git to store credentials
+    void store_credentials();
     // clone the Git repo to the workingDirectory
     void clone();
     // add the file/directory/regex to the Git Repo in the workingDirectory
