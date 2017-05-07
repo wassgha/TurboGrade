@@ -55,7 +55,6 @@
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
 
-    setStyleSheet("CodeEditor { border: none; border-radius : 3px; background: #2b303c; color: #abb2be; selection-color: #000000; selection-background-color: #ffea8d; }");
 
     int font_id = QFontDatabase::addApplicationFont(":/fonts/res/FiraMono-Regular.ttf");
     _font.setFamily(QFontDatabase::applicationFontFamilies(font_id).at(0));
@@ -67,7 +66,8 @@ CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 
     setReadOnly(true);
 
-    syntaxHighlighter = new SyntaxHighlighter(this->document());
+    setTheme(_theme);
+
     lineNumberArea = new LineNumberArea(this);
 
     connect(this, SIGNAL(blockCountChanged(int)), this, SLOT(updateLineNumberAreaWidth(int)));
@@ -148,7 +148,10 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
 //    painter.fillPath(path, QColor(220, 220, 220));
 //    painter.drawPath(path);
 
-    painter.fillRect(event->rect(), QColor(43, 47, 59));
+    if (_theme == "Dark Theme")
+        painter.fillRect(event->rect(), QColor(43, 47, 59));
+    else
+        painter.fillRect(event->rect(), QColor(232, 232, 232));
 
     QTextBlock block = firstVisibleBlock();
     int blockNumber = block.blockNumber();
@@ -158,7 +161,10 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
     while (block.isValid() && top <= event->rect().bottom()) {
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
-            painter.setPen(QColor("#757a85"));
+            if (_theme == "Dark Theme")
+                painter.setPen(QColor("#757a85"));
+            else
+                painter.setPen(QColor("#3a3a3a"));
             painter.setFont(QFont("Courier", _font_size));
             painter.drawText(-5, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignRight, number);
@@ -179,4 +185,8 @@ void CodeEditor::setFontSize(int font_size) {
 
 void CodeEditor::setTheme(QString theme) {
     _theme = theme;
+    setStyleSheet("CodeEditor { border: none; border-radius : 3px; background: " + (_theme == "Dark Theme"?QString("#2b303c"):QString("#FFFFFF")) + "; color: " + (_theme == "Dark Theme"?QString("#abb2be"):QString("#222222")) + "; selection-color: #000000; selection-background-color: #ffea8d; }");
+    if (syntaxHighlighter != nullptr)
+        delete syntaxHighlighter;
+    syntaxHighlighter = new SyntaxHighlighter(this->document(), _theme);
 }

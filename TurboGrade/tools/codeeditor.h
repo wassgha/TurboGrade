@@ -89,7 +89,7 @@ private slots:
 
 private:
     QWidget *lineNumberArea;
-    SyntaxHighlighter *syntaxHighlighter;
+    SyntaxHighlighter *syntaxHighlighter = nullptr;
     int _font_size = 14;
     QFont _font;
     QString _theme = "Dark Theme";

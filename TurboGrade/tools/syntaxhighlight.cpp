@@ -50,9 +50,26 @@
 
 #include "syntaxhighlight.h"
 
-SyntaxHighlighter::SyntaxHighlighter(QTextDocument *parent)
-    : QSyntaxHighlighter(parent)
+SyntaxHighlighter::SyntaxHighlighter(QTextDocument *parent, QString theme)
+    : QSyntaxHighlighter(parent),
+    _theme(theme)
 {
+
+    themes["Dark Theme"]["keyword_format"] = QColor("#c57bdb");
+    themes["Dark Theme"]["type_format"] = QColor("orange");
+    themes["Dark Theme"]["class_format"] = QColor("#ce6770");
+    themes["Dark Theme"]["control_flow"] = QColor("#c57bdb");
+    themes["Dark Theme"]["comment"] = QColor("#5c636f");
+    themes["Dark Theme"]["quotation"] = QColor("#99c27c");
+    themes["Dark Theme"]["function"] = QColor("#65b0ed");
+
+    themes["Light Theme"]["keyword_format"] = Qt::darkCyan;
+    themes["Light Theme"]["type_format"] = QColor("orange");
+    themes["Light Theme"]["class_format"] = QColor("#ce6770");
+    themes["Light Theme"]["control_flow"] = QColor(114, 161, 20);
+    themes["Light Theme"]["comment"] = Qt::darkGray;
+    themes["Light Theme"]["quotation"] = QColor(125, 70, 150);
+    themes["Light Theme"]["function"] = QColor(0, 100, 150);
 
     /* Processing Theme
      * keyword : Qt::darkCyan
@@ -76,7 +93,8 @@ SyntaxHighlighter::SyntaxHighlighter(QTextDocument *parent)
      */
     HighlightingRule rule;
 
-    keywordFormat.setForeground(QColor("#c57bdb"));
+    keywordFormat.setForeground(themes[_theme]["keyword_format"]);
+
     QStringList keywordPatterns;
     keywordPatterns << "\\bclass\\b" << "\\bconst\\b"
                     << "\\bexplicit\\b" << "\\bthis\\b"
@@ -94,7 +112,7 @@ SyntaxHighlighter::SyntaxHighlighter(QTextDocument *parent)
         highlightingRules.append(rule);
     }
 
-    typeFormat.setForeground(QColor("orange"));
+    typeFormat.setForeground(themes[_theme]["type_format"]);
     QStringList typePatterns;
     typePatterns << "\\bchar\\b" << "\\bdouble\\b" << "\\bint\\b"
                  << "\\blong\\b" << "\\bshort\\b" << "\\bboolean\\b"
@@ -108,12 +126,12 @@ SyntaxHighlighter::SyntaxHighlighter(QTextDocument *parent)
     }
 
     classFormat.setFontWeight(QFont::Bold);
-    classFormat.setForeground(QColor("#ce6770"));
+    classFormat.setForeground(themes[_theme]["class_format"]);
     rule.pattern = QRegExp("\\bQ[A-Za-z]+\\b");
     rule.format = classFormat;
     highlightingRules.append(rule);
 
-    controlflowFormat.setForeground(QColor("#c57bdb"));
+    controlflowFormat.setForeground(themes[_theme]["control_flow"]);
     QStringList controlflowPatterns;
     controlflowPatterns << "\\bswitch\\b" << "\\bcase\\b" << "\\bif\\b"
                          << "\\bbreak\\b" << "\\belse\\b" << "\\belif\\b"
@@ -126,20 +144,20 @@ SyntaxHighlighter::SyntaxHighlighter(QTextDocument *parent)
         highlightingRules.append(rule);
     }
 
-    singleLineCommentFormat.setForeground(QColor("#5c636f"));
+    singleLineCommentFormat.setForeground(themes[_theme]["comment"]);
     rule.pattern = QRegExp("//[^\n]*");
     rule.format = singleLineCommentFormat;
     highlightingRules.append(rule);
 
-    multiLineCommentFormat.setForeground(QColor("#5c636f"));
+    multiLineCommentFormat.setForeground(themes[_theme]["comment"]);
 
-    quotationFormat.setForeground(QColor("#99c27c"));
+    quotationFormat.setForeground(themes[_theme]["quotation"]);
     rule.pattern = QRegExp("\".*\"");
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     //    functionFormat.setFontItalic(true);
-    functionFormat.setForeground(QColor("#65b0ed"));
+    functionFormat.setForeground(themes[_theme]["function"]);
     rule.pattern = QRegExp("\\b[A-Za-z0-9_]+(?=\\()");
     rule.format = functionFormat;
     highlightingRules.append(rule);

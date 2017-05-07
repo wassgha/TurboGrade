@@ -61,6 +61,7 @@
 
 #include <QSyntaxHighlighter>
 #include <QTextCharFormat>
+#include <map>
 
 QT_BEGIN_NAMESPACE
 class QTextDocument;
@@ -71,7 +72,7 @@ class SyntaxHighlighter : public QSyntaxHighlighter
     Q_OBJECT
 
 public:
-    SyntaxHighlighter(QTextDocument *parent = 0);
+    SyntaxHighlighter(QTextDocument *parent = 0, QString theme = "Dark Theme");
 
 protected:
     void highlightBlock(const QString &text) override;
@@ -95,6 +96,8 @@ private:
     QTextCharFormat functionFormat;
     QTextCharFormat typeFormat;
     QTextCharFormat controlflowFormat;
+    QString _theme;
+    std::map<QString, std::map<QString, QColor>> themes;
 };
 
 #endif // SYNTAXHIGHLIGHT_H
