@@ -6,7 +6,8 @@
  * @param drop_tables pass true to delete all information from the database
  * @param dbname the name of the database to connect to
  */
-Controller::Controller(bool drop_tables, QString dbname)
+Controller::Controller(bool drop_tables, QString dbname):
+    settings("PfaffCorp", "TurboGrade")
 {
 
     SHOW_WHERE;
@@ -16,8 +17,18 @@ Controller::Controller(bool drop_tables, QString dbname)
     // Initialize random number generator
     qsrand(QTime::currentTime().msec());
 
+    // Create application settings
+    if (!settings.contains("general/theme"))
+        settings.setValue("general/theme", "Dark Theme");
+    if (!settings.contains("general/repo_url"))
+        settings.setValue("general/repo_url", "ssh://spr2017_l1g4:637492638@139.147.9.185/home/spr2017_l1g4/sync.git");
+    if (!settings.contains("general/repo_pwd"))
+        settings.setValue("general/repo_pwd", "637492638");
+    if (!settings.contains("general/font_size"))
+        settings.setValue("general/font_size", 12);
+
     // Create Git connection and pull data/database
-    _git = new GitModule("sync", "ssh://spr2017_l1g4:637492638@139.147.9.185/home/spr2017_l1g4/sync.git", "637492638");
+    _git = new GitModule("sync", settings.value("general/repo_url").toString(), settings.value("general/repo_pwd").toString());
     _git->clone();
     sync_git();
 

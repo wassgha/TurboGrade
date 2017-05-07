@@ -2,7 +2,7 @@
 #include "ui_dashboard.h"
 
 Dashboard::Dashboard(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::Dashboard)
 {
     ui->setupUi(this);
@@ -27,6 +27,8 @@ Dashboard::Dashboard(QWidget *parent) :
     ui->mainWidget->setCurrentWidget(courses);
 
     connect(ui->logo, SIGNAL(clicked()), this, SLOT(show_courses()));
+
+    preferences = new Preferences(this, _controller);
 
     // Create Git connection and pull data/database
     _last_sync = QTime::currentTime();
@@ -164,4 +166,9 @@ void Dashboard::on_sync_now_clicked()
 {
     update_git();
     update_sync();
+}
+
+void Dashboard::on_actionPreferences_triggered()
+{
+    preferences->show();
 }

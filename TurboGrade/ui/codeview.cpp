@@ -245,6 +245,8 @@ void CodeView::refresh_comments() {
 
 void CodeView::setupCodeEditor(const QString &file_name)
 {
+    ui->editor->setFontSize(_controller->settings.value("general/font_size").toInt());
+    ui->editor->setTheme(_controller->settings.value("general/theme").toString());
     QFile file(file_name);
     if (file.open(QFile::ReadOnly | QFile::Text))
         ui->editor->setPlainText(file.readAll());

@@ -55,17 +55,15 @@
 CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
 {
 
-    QFont font;
-
     setStyleSheet("CodeEditor { border: none; border-radius : 3px; background: #2b303c; color: #abb2be; selection-color: #000000; selection-background-color: #ffea8d; }");
 
     int font_id = QFontDatabase::addApplicationFont(":/fonts/res/FiraMono-Regular.ttf");
-    font.setFamily(QFontDatabase::applicationFontFamilies(font_id).at(0));
-    font.setStyleHint(QFont::TypeWriter);
-    font.setFixedPitch(true);
-    font.setPointSize(12);
+    _font.setFamily(QFontDatabase::applicationFontFamilies(font_id).at(0));
+    _font.setStyleHint(QFont::TypeWriter);
+    _font.setFixedPitch(true);
+    _font.setPointSize(_font_size);
 
-    setFont(font);
+    setFont(_font);
 
     setReadOnly(true);
 
@@ -161,7 +159,7 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
         if (block.isVisible() && bottom >= event->rect().top()) {
             QString number = QString::number(blockNumber + 1);
             painter.setPen(QColor("#757a85"));
-            painter.setFont(QFont("Courier", 12));
+            painter.setFont(QFont("Courier", _font_size));
             painter.drawText(-5, top, lineNumberArea->width(), fontMetrics().height(),
                              Qt::AlignRight, number);
         }
@@ -173,3 +171,12 @@ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
     }
 }
 
+void CodeEditor::setFontSize(int font_size) {
+    _font_size = font_size;
+    _font.setPointSize(_font_size);
+    setFont(_font);
+}
+
+void CodeEditor::setTheme(QString theme) {
+    _theme = theme;
+}

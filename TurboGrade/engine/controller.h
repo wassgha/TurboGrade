@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <QObject>
 #include <QTimer>
+#include <QSettings>
 #include <map>
 
 #include "../tools/macro.h"
@@ -96,13 +97,13 @@ public:
 
 
     /**************************************
-     *        Git synchronization               *
+     *        Git synchronization         *
      **************************************/
     void sync_git();
 
-    /*
-     * Database containers
-     */
+    /**************************************
+     *        Database Containers         *
+     **************************************/
 
     // Course database table
     CourseDB *_courseDB;
@@ -127,9 +128,9 @@ public:
     // Current semester
     QString _current_semester;
 
-    /*
-     * UI variables
-     */
+    /**************************************
+     *            UI Variables            *
+     **************************************/
     const QStringList _flat_colors = QStringList()  <<"#63c46b"<<"#3498db"
                                                     <<"#9b59b6"<<"#34495e"
                                                     <<"#c0392b"<<"#f39c12"
@@ -137,6 +138,9 @@ public:
                                                     <<"#462446"<<"#FFC153"
                                                     <<"#47B39D"<<"#897FBA"
                                                     <<"#60646D"<<"#65878F";
+    // Application settings
+    QSettings settings;
+
 public slots:
     void update_git();
 

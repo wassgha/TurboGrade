@@ -2,6 +2,7 @@
 #define DASHBOARD_H
 
 #include <QWidget>
+#include <QMainWindow>
 #include <QDesktopServices>
 #include <QFontDatabase>
 #include <QTimer>
@@ -11,6 +12,9 @@
 
 #include "gradesubmission.h"
 #include "ui_gradesubmission.h"
+
+#include "preferences.h"
+#include "ui_preferences.h"
 
 #include "courseview.h"
 #include "sectionview.h"
@@ -28,12 +32,13 @@ class SubmissionView;
 class AssignmentView;
 class StudentView;
 class GradeSubmission;
+class Preferences;
 
 namespace Ui {
 class Dashboard;
 }
 
-class Dashboard : public QWidget
+class Dashboard : public QMainWindow
 {
     Q_OBJECT
 
@@ -48,12 +53,15 @@ public:
     SubmissionView *submissions = nullptr;
     Controller *_controller = nullptr;
     GradeSubmission *grade_submission = nullptr;
+    Preferences *preferences = nullptr;
     QFont roboto;
 
 private slots:
     void on_tutorial_btn_clicked();
 
     void on_sync_now_clicked();
+
+    void on_actionPreferences_triggered();
 
 public slots:
     void show_courses();

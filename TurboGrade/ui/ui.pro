@@ -83,7 +83,8 @@ SOURCES += main.cpp\
     criteriongradecard.cpp \
     criteriondialog.cpp \
     criterionguidedialog.cpp \
-    fireworks.cpp
+    fireworks.cpp \
+    preferences.cpp
 
 HEADERS  +=\
             "../tools/syntaxhighlight.h"\
@@ -137,7 +138,8 @@ HEADERS  +=\
     criteriongradecard.h \
     criteriondialog.h \
     criterionguidedialog.h \
-    fireworks.h
+    fireworks.h \
+    preferences.h
 
 FORMS    += \
     commentpopup.ui \
@@ -155,7 +157,8 @@ FORMS    += \
     criterionitem.ui \
     criteriongradecard.ui \
     criteriondialog.ui \
-    criterionguidedialog.ui
+    criterionguidedialog.ui \
+    preferences.ui
 
 RESOURCES += \
     resources.qrc \

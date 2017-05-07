@@ -76,6 +76,9 @@ public:
     void lineNumberAreaPaintEvent(QPaintEvent *event);
     int lineNumberAreaWidth();
 
+    void setFontSize(int font_size);
+    void setTheme(QString theme);
+
 protected:
     void resizeEvent(QResizeEvent *event) override;
 
@@ -87,6 +90,9 @@ private slots:
 private:
     QWidget *lineNumberArea;
     SyntaxHighlighter *syntaxHighlighter;
+    int _font_size = 14;
+    QFont _font;
+    QString _theme = "Dark Theme";
 };
 
 
