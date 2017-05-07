@@ -7,4 +7,4 @@ SUBDIRS += \
     test \
     ui \
     tools \
-    Stats
+    stats
