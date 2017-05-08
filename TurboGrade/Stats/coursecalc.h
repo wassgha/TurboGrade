@@ -18,6 +18,8 @@ public:
     ~CourseCalc();
     Course *current;
     float getTotMean();
+    float getTotal();
+    float getNumber();
     float getAssignMean(Assignment *assign);
 };
 
