@@ -12,7 +12,6 @@ GitModule::GitModule(QString workingDirectory, QString repoUrl, QString password
  * directory designated by the workingDirectory
  */
 void GitModule::clone(){
-    store_credentials();
     // create process
     QProcess process;
     process.setProcessChannelMode(QProcess::ForwardedChannels);
@@ -30,7 +29,7 @@ void GitModule::clone(){
     // start process git with args clone repoUrl
     // git clone repoUrl
     process.start("git", arguments);
-    process.write((_password + "\n").toStdString().c_str()) ;
+
 
     if(process.waitForFinished()){
         // get standard out string
@@ -78,7 +77,7 @@ void GitModule::store_credentials(){
     qDebug() << "In : " << process.workingDirectory();
 
     process.start("git", QStringList() << "config" << "credential.helper" << "store");
-    process.write((_password + "\n").toStdString().c_str()) ;
+
 
     if(process.waitForFinished()){
         // get standard out string
@@ -128,7 +127,7 @@ void GitModule::add(QString fileToAdd){
     // start process git with args add fileToAdd
     // git add fileToAdd
     process.start("git", arguments);
-    process.write((_password + "\n").toStdString().c_str()) ;
+
     if(process.waitForFinished()){
         // get standard out string
         QString out = process.readAllStandardOutput();
@@ -176,7 +175,7 @@ void GitModule::add_all(){
 
     // start process git with args add -A
     process.start("git", arguments);
-    process.write((_password + "\n").toStdString().c_str()) ;
+
     if(process.waitForFinished()){
         // get standard out string
         QString out = process.readAllStandardOutput();
@@ -225,7 +224,6 @@ void GitModule::commit(QString message){
 
     // git commit -m message
     process.start("git", arguments);
-    process.write((_password + "\n").toStdString().c_str()) ;
 
     if(process.waitForFinished()){
         // get standard out string
@@ -267,16 +265,15 @@ void GitModule::push(bool force){
     process.setWorkingDirectory(_workingDirectory);
 
     // arguments are push
-    arguments << "push";
+    arguments << "push" << _repoUrl;
     if (force)
-        arguments << "origin" << "master" << "--force";
+        arguments << "--force";
 
     qDebug() << "Process trying to run command : git push";
     qDebug() << "In : " << process.workingDirectory();
 
     // git add
     process.start("git", arguments);
-    process.write((_password + "\n").toStdString().c_str()) ;
 
     if(process.waitForFinished()){
         // get standard out string
@@ -318,14 +315,13 @@ void GitModule::pull(){
     process.setWorkingDirectory(_workingDirectory);
 
     // arguments are pull
-    arguments << "pull";
+    arguments << "pull" << _repoUrl;
 
     qDebug() << "Process trying to run command : git pull";
     qDebug() << "In : " << process.workingDirectory();
 
     // git pull
     process.start("git", arguments);
-    process.write((_password + "\n").toStdString().c_str()) ;
 
     if(process.waitForFinished()){
         // get standard out string
