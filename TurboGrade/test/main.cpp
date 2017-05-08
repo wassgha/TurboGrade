@@ -220,6 +220,28 @@ TEST(general,submission_updateGrade) {
     Criterion *testCriterion = criterionList->at(0);
     Submission *thisSubmission = new Submission(testAssign,testStudent,testControl,0,-1);
     ASSERT_NE(thisSubmission->get_grade(testCriterion),3);
+    thisSubmission->update_grade(testCriterion,3,false);
+    ASSERT_EQ(thisSubmission->get_grade(testCriterion),3);
+}
+
+TEST(general,submission_addComment) {
+    Controller* testControl = new Controller(true,"test.sql");
+    testControl->add_course("testCourse", "Fall 2017");
+    vector<Course*>* courseList = testControl->get_courses();
+    Course* testCourse = courseList->at(0);
+    testCourse->add_section("testSection");
+    vector<Section*>* sectionList = testCourse->get_sections();
+    Section* testSection = sectionList->at(0);
+    testSection->add_student("testStudent",-1);
+    vector<Student*>* studentList = testSection->get_students();
+    Student *testStudent = studentList->at(0);
+    Assignment *testAssign = new Assignment("Test","Objective",testControl,false,-1);
+    Rubric *testRubric = new Rubric(testAssign,testControl);
+    testRubric->add_criterion("testCriterion",nullptr,10,-1);
+    vector<Criterion*>* criterionList = testRubric->getCriterions();
+    Criterion *testCriterion = criterionList->at(0);
+    Submission *thisSubmission = new Submission(testAssign,testStudent,testControl,0,-1);
+    ASSERT_NE(thisSubmission->get_grade(testCriterion),3);
     thisSubmission->add_comment("file",testCriterion,"text",3,0,10,-1);
     ASSERT_EQ(thisSubmission->get_grade(testCriterion),3);
 }
