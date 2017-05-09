@@ -68,7 +68,8 @@ void Comment::update( QString filename, Criterion* criterion,
                       QString text, int grade,
                       int start_pos, int end_pos){
     //subtract the old grade
-    _submission->update_grade(_criterion, _submission->get_grade(_criterion) - _grade);
+    int currentGrade = _submission->get_grade(_criterion);
+    _submission->update_grade(_criterion, (currentGrade == -1? 0 : currentGrade) - _grade);
 
     _filename = filename;
     _criterion = criterion;
@@ -78,7 +79,8 @@ void Comment::update( QString filename, Criterion* criterion,
     _end_pos = end_pos;
 
     // add new grade
-    _submission->update_grade(_criterion, _submission->get_grade(_criterion) + _grade);
+    int newGrade = _submission->get_grade(_criterion);
+    _submission->update_grade(_criterion, (newGrade == -1 ? 0 : newGrade) + _grade);
 
     // update the comment DB
     _controller->_commentDB->update(_filename, _criterion->_id, _text, _grade, _start_pos, _end_pos, _id);
