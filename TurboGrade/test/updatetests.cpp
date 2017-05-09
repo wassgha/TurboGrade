@@ -133,3 +133,13 @@ TEST_F(UpdateTests, UpdateCriterionOutOfUpdatesGradesInSubmissionFG2){
     testCriterion->update("testCriterion", 5);
     ASSERT_EQ(2, testSubmission->get_grade(testCriterion));
 }
+
+TEST_F(UpdateTests, UpdateStudentName){
+    testStudent->update("New Name");
+    ASSERT_EQ(0, testStudent->_name.compare("New Name"));
+}
+
+TEST_F(UpdateTests, UpdateStudentNameSearch){
+    testStudent->update("New Name");
+    ASSERT_EQ(testStudent,testSection->get_student("New Name"));
+}
