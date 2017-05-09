@@ -189,3 +189,13 @@ TEST_F(UpdateTests, UpdateSectionNameSearch){
     testSection->update("New Name");
     ASSERT_EQ(testSection, testCourse->get_section("New Name"));
 }
+
+TEST_F(UpdateTests, UpdateCourseName){
+    testCourse->update("New Name");
+    ASSERT_EQ(0, testCourse->_name.compare("New Name"));
+}
+
+TEST_F(UpdateTests, UpdateCourseNameSearch){
+    testCourse->update("New Name");
+    ASSERT_EQ(0, testControl->get_course("New Name"));
+}
