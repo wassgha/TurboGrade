@@ -151,7 +151,7 @@ TEST_F(UpdateTests, UpdateAssignmentName){
 
 TEST_F(UpdateTests, UpdateAssignmentNameSearch){
     testAssignment->update("New Name", "Objective", false);
-    ASSERT_EQ(testAssignment, testSection->get_assignment("New Name"));
+    ASSERT_TRUE(testSection->get_assignment("New Name"));
 }
 
 TEST_F(UpdateTests, UpdateAssignmentNameControllerSearch){
@@ -197,7 +197,7 @@ TEST_F(UpdateTests, UpdateCourseName){
 
 TEST_F(UpdateTests, UpdateCourseNameSearch){
     testCourse->update("New Name", "Fall 2017");
-    ASSERT_EQ(0, testControl->get_course("New Name", "Fall 2017"));
+    ASSERT_TRUE(testControl->get_course("New Name", "Fall 2017"));
 }
 
 TEST_F(UpdateTests, UpdateCourseSemester){
@@ -207,5 +207,5 @@ TEST_F(UpdateTests, UpdateCourseSemester){
 
 TEST_F(UpdateTests, UpdateCourseSemesterSearch){
     testCourse->update("testCourse", "Spring 2017");
-    ASSERT_EQ(0, testControl->get_course("testCourse", "Spring 2017"));
+    ASSERT_TRUE(testControl->get_course("testCourse", "Spring 2017"));
 }

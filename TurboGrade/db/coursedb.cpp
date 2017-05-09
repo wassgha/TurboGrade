@@ -69,7 +69,7 @@ int CourseDB::update(const QString name, const QString semester, int course_id){
 
 
     query.prepare("UPDATE course "
-                  "SET name = :name, semester = :semester, "
+                  "SET name = :name, semester = :semester "
                   "WHERE id = :course_id");
 
     query.bindValue(":name", name);
