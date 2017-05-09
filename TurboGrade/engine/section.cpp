@@ -129,8 +129,8 @@ Assignment* Section::get_assignment(const QString name) {
     for(Assignment* assignment:*_assignments)
         if (assignment->_name == name)
             return assignment;
-    std::cerr<<"Assignment not found";
-    exit(0);
+
+    return nullptr;
 }
 
 /**
