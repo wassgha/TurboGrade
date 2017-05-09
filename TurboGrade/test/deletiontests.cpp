@@ -219,5 +219,17 @@ TEST_F(DeletionTests, RemoveSectionFromCourseList){
     ASSERT_TRUE(testCourse->get_sections()->empty());
 }
 
+TEST_F(DeletionTests, RemoveCourseFromControllerSearch){
+    testControl->remove_course(testCourse);
+    ASSERT_EQ(nullptr, testControl->get_course("testCourse", "Fall 2017"));
+}
+
+TEST_F(DeletionTests, RemoveCourseFromControllerList){
+    testControl->remove_course(testCourse);
+    ASSERT_TRUE(testControl->get_courses()->empty());
+}
+
+
+
 
 
