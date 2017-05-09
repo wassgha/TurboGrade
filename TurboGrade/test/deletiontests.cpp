@@ -189,5 +189,15 @@ TEST_F(DeletionTests, RemoveSubmissionRemovesFromStudent){
     ASSERT_TRUE(testStudent->get_submissions()->empty());
 }
 
+TEST_F(DeletionTests, RemoveStudentFromSectionSearch){
+    testSection->remove_student(testStudent);
+    ASSERT_EQ(nullptr, testSection->get_student("testStudent"));
+}
+
+TEST_F(DeletionTests, RemoveStudentFromSectionList){
+    testSection->remove_student(testStudent);
+    ASSERT_TRUE(testSection->get_students()->empty());
+}
+
 
 
