@@ -56,3 +56,15 @@ TEST_F(UpdateTests, UpdateCommentEndPost){
     ASSERT_EQ(15, testComment->_end_pos);
 }
 
+TEST_F(UpdateTests, UpdateCommentCriterionRemovesFromOldCriterion){
+    Criterion *newCrit = testRubric->add_criterion("NewCrit", nullptr, 5);
+    testComment->update("File", newCrit, "text", 3, 0, 10);
+    ASSERT_TRUE(testSubmission->get_comments(testCriterion).empty());
+}
+
+TEST_F(UpdateTests, UpdateCommentCriterionAddsToNewCriterion){
+    Criterion *newCrit = testRubric->add_criterion("NewCrit", nullptr, 5);
+    testComment->update("File", newCrit, "text", 3, 0, 10);
+    ASSERT_EQ(1, testSubmission->get_comments(newCrit).size());
+}
+
