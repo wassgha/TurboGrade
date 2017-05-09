@@ -165,7 +165,7 @@ TEST_F(DeletionTests, RemoveSubCriterionRemovesOnlyCommentsFromSub){
 TEST_F(DeletionTests, RemoveSubCriterionUpdatesSubmissionGrade){
     Criterion* subCrit = testRubric->add_criterion("SubCrit1",testCriterion,2);
     testSubmission->add_comment("File", subCrit, "nice", 1,0,0);
-    ASSERT_EQ(testSubmission->get_grade(testCriterion), 4);
+    ASSERT_EQ(testSubmission->get_grade(testCriterion), 1);
     testRubric->remove_criterion(subCrit);
     ASSERT_EQ(testSubmission->get_grade(testCriterion), 3);
 }
