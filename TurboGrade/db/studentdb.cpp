@@ -43,7 +43,7 @@ int StudentDB::update(const QString name, int student_id){
 
 
     query.prepare("UPDATE student "
-                  "SET name = :name,"
+                  "SET name = :name "
                   "WHERE id = :student_id");
 
     query.bindValue(":name", name);

@@ -41,6 +41,7 @@ public:
     void remove_criterion(Criterion* criterion);
     // Get the total grade for this rubric
     int total_grade();
+    std::vector<Criterion*>* getCriterions();
 
     // Assignment
     Assignment* _assignment;

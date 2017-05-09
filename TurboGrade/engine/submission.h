@@ -36,7 +36,7 @@ public:
     ~Submission();
 
     // Add a comment on the submission
-    void add_comment(QString filename,
+    Comment *add_comment(QString filename,
                      Criterion *criterion,
                      QString text, int grade,
                      int start_pos, int end_pos,
@@ -90,6 +90,7 @@ public:
 
     //gets the comments for the given criterion
     std::vector<Comment*> get_comments(Criterion *criterion);
+    std::vector<Comment*>* get_comments();
 
     // Submission id
     int _id;

@@ -50,7 +50,7 @@ int RubricDB::update(const QString name, int out_of, int criterion_id){
 
 
     query.prepare("UPDATE rubric "
-                  "SET name = :name, out_of = :out_of "
+                  "SET name = :name, grade_out_of = :out_of "
                   "WHERE id = :criterion_id");
 
     query.bindValue(":name", name);

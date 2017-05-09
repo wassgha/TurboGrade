@@ -145,3 +145,8 @@ int Rubric::total_grade() {
     }
     return grade;
 }
+
+std::vector<Criterion*>* Rubric::getCriterions()
+{
+    return _criteria;
+}

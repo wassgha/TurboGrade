@@ -53,8 +53,9 @@ void Submission::load_contents() {
 
 /**
  * @brief Submission::add_comment adds a comment made on this submission
+ * @return the new comment
  */
-void Submission::add_comment(QString filename,
+Comment *Submission::add_comment(QString filename,
                              Criterion *criterion,
                              QString text, int grade,
                              int start_pos, int end_pos,
@@ -65,6 +66,8 @@ void Submission::add_comment(QString filename,
     _comments->push_back(new_comment);
 
     _controller->refresh_autocomplete(_assignment);
+
+    return new_comment;
 
 }
 
@@ -269,6 +272,10 @@ std::vector<Comment *> Submission::get_comments(Criterion *criterion){
         }
     }
     return comment_vec;
+}
+
+std::vector<Comment*>* Submission::get_comments(){
+    return _comments;
 }
 
 /**
