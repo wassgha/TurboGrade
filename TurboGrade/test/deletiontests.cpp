@@ -229,6 +229,16 @@ TEST_F(DeletionTests, RemoveCourseFromControllerList){
     ASSERT_TRUE(testControl->get_courses()->empty());
 }
 
+TEST_F(DeletionTests, RemoveAssignmentFromControllerSearch){
+    testControl->remove_assignment(testAssignment);
+    ASSERT_EQ(nullptr, testControl->get_assignment("Test"));
+}
+
+TEST_F(DeletionTests, RemoveAssignmentFromControllerList){
+    testControl->remove_assignment(testAssignment);
+    ASSERT_TRUE(testControl->get_assignments()->empty());
+}
+
 
 
 
