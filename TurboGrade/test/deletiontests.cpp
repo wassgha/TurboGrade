@@ -209,5 +209,15 @@ TEST_F(DeletionTests, RemoveAssignmentFromSectionList){
     ASSERT_TRUE(testSection->get_assignments()->empty());
 }
 
+TEST_F(DeletionTests, RemoveSectionFromCourseSearch){
+    testCourse->remove_section(testSection);
+    ASSERT_EQ(nullptr, testCourse->get_section("testSection"));
+}
+
+TEST_F(DeletionTests, RemoveSectionFromCourseList){
+    testCourse->remove_section(testSection);
+    ASSERT_TRUE(testCourse->get_sections()->empty());
+}
+
 
 
