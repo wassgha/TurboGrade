@@ -179,3 +179,13 @@ TEST_F(UpdateTests, UpdateAssignmentFullGradeUpdatesCriterionGradesNF){
     testAssignment->update("Test", "Objective", false);
     ASSERT_EQ(3, testSubmission->get_grade(testCriterion));
 }
+
+TEST_F(UpdateTests, UpdateSectionName){
+    testSection->update("New Name");
+    ASSERT_EQ(0, testSection->_name.compare("New Name"));
+}
+
+TEST_F(UpdateTests, UpdateSectionNameSearch){
+    testSection->update("New Name");
+    ASSERT_EQ(testSection, testCourse->get_section("New Name"));
+}
