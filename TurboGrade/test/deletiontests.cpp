@@ -16,7 +16,7 @@ void DeletionTests::SetUp(){
     testStudent = testSection->add_student("testStudent",-1);
     testAssignment = new Assignment("Test","Objective",testControl,false,-1);
     testSection->add_assignment(testAssignment);
-    testRubric = new Rubric(testAssignment,testControl);
+    testRubric = testAssignment->_rubric;
     testCriterion = testRubric->add_criterion("testCriterion",nullptr,10,-1);
     testSubmission = testStudent->add_submission(testAssignment);
     testComment = testSubmission->add_comment("file",testCriterion,"text",3,0,10,-1);
