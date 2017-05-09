@@ -52,8 +52,9 @@ void Submission::load_contents() {
 
 /**
  * @brief Submission::add_comment adds a comment made on this submission
+ * @return the new comment
  */
-void Submission::add_comment(QString filename,
+Comment *Submission::add_comment(QString filename,
                              Criterion *criterion,
                              QString text, int grade,
                              int start_pos, int end_pos,
@@ -64,6 +65,8 @@ void Submission::add_comment(QString filename,
     _comments->push_back(new_comment);
 
     _controller->refresh_autocomplete();
+
+    return new_comment;
 
 }
 

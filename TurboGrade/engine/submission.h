@@ -36,7 +36,7 @@ public:
     ~Submission();
 
     // Add a comment on the submission
-    void add_comment(QString filename,
+    Comment *add_comment(QString filename,
                      Criterion *criterion,
                      QString text, int grade,
                      int start_pos, int end_pos,
