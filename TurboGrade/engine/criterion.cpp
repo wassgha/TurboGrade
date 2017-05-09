@@ -45,9 +45,14 @@ void Criterion::update(const QString name, int out_of){
             for(Section *section : *course->_sections){
                 for(Student *student : *section->_students){
                     Submission *submission = student->get_submission(_rubric->_assignment);
-                    // update the grade by subtracting old total and adding new
-                    if(_rubric->_assignment->_full_grade){
-                        submission->update_grade(this, submission->get_grade(this) - _out_of + out_of);
+                    if(submission){
+                        // update the grade by subtracting old total and adding new
+                        if(_rubric->_assignment->_full_grade){
+                            int oldScore = submission->get_grade(this);
+                            int oldScoreUndone = oldScore - _out_of;
+                            int newScore = oldScoreUndone + out_of;
+                            submission->update_grade(this, newScore);
+                        }
                     }
                 }
             }
