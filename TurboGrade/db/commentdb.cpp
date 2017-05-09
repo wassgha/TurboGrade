@@ -133,13 +133,13 @@ int CommentDB::update(QString filename, int criterion_id, QString comment_text, 
 
 
     query.prepare("UPDATE comment "
-                  "SET filename = :filename, criterion_id = :criterion_id, "
+                  "SET filename = :filename, rubric = :rubric, "
                     "comment_text = :comment_text, grade = :grade, "
                     "start_pos = :start_pos, end_pos = :end_pos "
                   "WHERE id = :comment_id");
 
     query.bindValue(":filename", filename);
-    query.bindValue(":criterion_id", criterion_id);
+    query.bindValue(":rubric", criterion_id);
     query.bindValue(":comment_text", comment_text);
     query.bindValue(":grade", grade);
     query.bindValue(":start_pos", start_pos);
