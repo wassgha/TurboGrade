@@ -143,3 +143,28 @@ TEST_F(UpdateTests, UpdateStudentNameSearch){
     testStudent->update("New Name");
     ASSERT_EQ(testStudent,testSection->get_student("New Name"));
 }
+
+TEST_F(UpdateTests, UpdateAssignmentName){
+    testAssignment->update("New Name", "Objective", false);
+    ASSERT_EQ(0, testAssignment->_name.compare("New Name"));
+}
+
+TEST_F(UpdateTests, UpdateAssignmentNameSearch){
+    testAssignment->update("New Name", "Objective", false);
+    ASSERT_EQ(testAssignment, testSection->get_assignment("New Name"));
+}
+
+TEST_F(UpdateTests, UpdateAssignmentNameControllerSearch){
+    testAssignment->update("New Name", "Objective", false);
+    ASSERT_EQ(testAssignment, testControl->get_assignment("New Name"));
+}
+
+TEST_F(UpdateTests, UpdateAssignmentObjective){
+    testAssignment->update("Test", "New Objective", false);
+    ASSERT_EQ(0, testAssignment->_objective.compare("New Objective"));
+}
+
+TEST_F(UpdateTests, UpdateAssignmentFullGrade){
+    testAssignment->update("Test", "Objective", true);
+    ASSERT_TRUE(testAssignment->_full_grade);
+}
