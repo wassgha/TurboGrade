@@ -191,11 +191,21 @@ TEST_F(UpdateTests, UpdateSectionNameSearch){
 }
 
 TEST_F(UpdateTests, UpdateCourseName){
-    testCourse->update("New Name");
+    testCourse->update("New Name", "Fall 2017");
     ASSERT_EQ(0, testCourse->_name.compare("New Name"));
 }
 
 TEST_F(UpdateTests, UpdateCourseNameSearch){
-    testCourse->update("New Name");
-    ASSERT_EQ(0, testControl->get_course("New Name"));
+    testCourse->update("New Name", "Fall 2017");
+    ASSERT_EQ(0, testControl->get_course("New Name", "Fall 2017"));
+}
+
+TEST_F(UpdateTests, UpdateCourseSemester){
+    testCourse->update("testCourse", "Spring 2017");
+    ASSERT_EQ(0, testCourse->_semester.compare("Spring 2017"));
+}
+
+TEST_F(UpdateTests, UpdateCourseSemesterSearch){
+    testCourse->update("testCourse", "Spring 2017");
+    ASSERT_EQ(0, testControl->get_course("testCourse", "Spring 2017"));
 }
