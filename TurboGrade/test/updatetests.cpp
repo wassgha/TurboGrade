@@ -79,3 +79,29 @@ TEST_F(UpdateTests, UpdateCommentCriterionAdjustsGradeNewCriterion){
     testComment->update("File", newCrit, "text", 3, 0, 10);
     ASSERT_EQ(3, testSubmission->get_grade(newCrit));
 }
+
+TEST_F(UpdateTests, UpdateCriterionName){
+    testCriterion->update("New Criterion",10);
+    ASSERT_EQ(0, testCriterion->_name.compare("New Criterion"));
+}
+
+TEST_F(UpdateTests, UpdateCriterionNameSearch){
+    testCriterion->update("New Criterion",10);
+    ASSERT_EQ(testCriterion, testRubric->get_criterion("New Criterion"));
+}
+
+TEST_F(UpdateTests, UpdateCriterionOutOf){
+    testCriterion->update("testCriterion", 5);
+    ASSERT_EQ(5, testCriterion->_out_of);
+}
+
+TEST_F(UpdateTests, UpdateCriterionOutOfUpdatesGradesInSubmission){
+    testCriterion->update("testCriterion", 5);
+    ASSERT_EQ(3, testSubmission->get_grade(testCriterion));
+}
+
+TEST_F(UpdateTests, UpdateCriterionOutOfUpdatesGradesInSubmissionFG){
+    testAssignment->_full_grade = true;
+    testCriterion->update("testCriterion", 5);
+    ASSERT_EQ(-2, testSubmission->get_grade(testCriterion));
+}
