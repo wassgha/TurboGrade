@@ -1,0 +1,7 @@
+1. Download
+http://qt.mirror.constant.com/official_releases/qt-installer-framework/2.0.5/QtInstallerFramework-mac-x64.dmg
+
+2. Install QtInstallerFramework
+
+2. Compile Installer using
+binarycreator --offline-only -c config/config.xml -p packages installer
