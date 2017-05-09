@@ -15,7 +15,8 @@ SOURCES += main.cpp                                        \
     filewritertest.cpp  \
     ../tools/objectidentifier.cpp \
     ../tools/filewriter.cpp \
-    deletiontests.cpp
+    deletiontests.cpp \
+    updatetests.cpp
 
 INCLUDEPATH +=  ../tools/gtest                             \
                 ../tools/gtest/googletest                  \
@@ -27,7 +28,8 @@ HEADERS += \
     filewritertest.h \
     ../tools/objectidentifier.h \
     ../tools/filewriter.h \
-    deletiontests.h
+    deletiontests.h \
+    updatetests.h
 
 SOURCES     += \
             "../db/dbengine.cpp" \
