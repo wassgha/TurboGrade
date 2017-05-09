@@ -168,3 +168,14 @@ TEST_F(UpdateTests, UpdateAssignmentFullGrade){
     testAssignment->update("Test", "Objective", true);
     ASSERT_TRUE(testAssignment->_full_grade);
 }
+
+TEST_F(UpdateTests, UpdateAssignmentFullGradeUpdatesCriterionGrades){
+    testAssignment->update("Test", "Objective", true);
+    ASSERT_EQ(13, testSubmission->get_grade(testCriterion));
+}
+
+TEST_F(UpdateTests, UpdateAssignmentFullGradeUpdatesCriterionGradesNF){
+    testAssignment->update("Test", "Objective", true);
+    testAssignment->update("Test", "Objective", false);
+    ASSERT_EQ(3, testSubmission->get_grade(testCriterion));
+}
