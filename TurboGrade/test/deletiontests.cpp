@@ -239,6 +239,16 @@ TEST_F(DeletionTests, RemoveAssignmentFromControllerList){
     ASSERT_TRUE(testControl->get_assignments()->empty());
 }
 
+TEST_F(DeletionTests, RemoveAssignmentFromControllerAffectsSectionSearch){
+    testControl->remove_assignment(testAssignment);
+    ASSERT_EQ(nullptr, testSection->get_assignment("Test"));
+}
+
+TEST_F(DeletionTests,RemoveAssignmentFromControllerAffectsSectionList){
+    testControl->remove_assignment(testAssignment);
+    ASSERT_TRUE(testSection->get_assignments()->empty());
+}
+
 
 
 
