@@ -101,7 +101,18 @@ TEST_F(UpdateTests, UpdateCriterionOutOfUpdatesGradesInSubmission){
 }
 
 TEST_F(UpdateTests, UpdateCriterionOutOfUpdatesGradesInSubmissionFG){
-    testAssignment->_full_grade = true;
+    delete testControl;
+    testControl = new Controller(true,"test.sql");
+    testCourse = testControl->add_course("testCourse", "Fall 2017");
+    testSection = testCourse->add_section("testSection");
+    testStudent = testSection->add_student("testStudent",-1);
+    testAssignment = new Assignment("Test","Objective",testControl,true,-1);
+    testSection->add_assignment(testAssignment);
+    testRubric = testAssignment->_rubric;
+    testCriterion = testRubric->add_criterion("testCriterion",nullptr,10,-1);
+    testSubmission = testStudent->add_submission(testAssignment);
+    testSubmission->attribute_full_grade(true);
+    testComment = testSubmission->add_comment("file",testCriterion,"text",3,0,10,-1);
     testCriterion->update("testCriterion", 5);
-    ASSERT_EQ(-2, testSubmission->get_grade(testCriterion));
+    ASSERT_EQ(8, testSubmission->get_grade(testCriterion));
 }
