@@ -21,9 +21,9 @@ Controller::Controller(bool drop_tables, QString dbname):
     if (!settings.contains("general/theme"))
         settings.setValue("general/theme", "Dark Theme");
     if (!settings.contains("general/repo_url"))
-        settings.setValue("general/repo_url", "ssh://spr2017_l1g4:637492638@139.147.9.185/home/spr2017_l1g4/sync.git");
+        settings.setValue("general/repo_url", "https://turbograde:PK4R29Dede@github.com/turbograde/sync.git");
     if (!settings.contains("general/repo_pwd"))
-        settings.setValue("general/repo_pwd", "637492638");
+        settings.setValue("general/repo_pwd", "PK4R29Dede");
     if (!settings.contains("general/font_size"))
         settings.setValue("general/font_size", 12);
 
