@@ -143,7 +143,7 @@ int CommentDB::update(QString filename, int criterion_id, QString comment_text, 
     query.bindValue(":comment_text", comment_text);
     query.bindValue(":grade", grade);
     query.bindValue(":start_pos", start_pos);
-    query.bindValue(":end_post", end_pos);
+    query.bindValue(":end_pos", end_pos);
     query.bindValue(":comment_id", comment_id);
 
 
