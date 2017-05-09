@@ -165,8 +165,10 @@ TEST_F(DeletionTests, RemoveSubCriterionRemovesOnlyCommentsFromSub){
 TEST_F(DeletionTests, RemoveSubCriterionUpdatesSubmissionGrade){
     Criterion* subCrit = testRubric->add_criterion("SubCrit1",testCriterion,2);
     testSubmission->add_comment("File", subCrit, "nice", 1,0,0);
+    //parent's grade is overriden since it has children, expect 1
     ASSERT_EQ(testSubmission->get_grade(testCriterion), 1);
     testRubric->remove_criterion(subCrit);
+    //once the sub is remove, the grade should go back to the parent's
     ASSERT_EQ(testSubmission->get_grade(testCriterion), 3);
 }
 
@@ -175,6 +177,16 @@ TEST_F(DeletionTests, RemoveSubCriterionUpdatesRubricGrade){
     testSubmission->add_comment("File", subCrit, "nice", -1, 0, 0);
     testRubric->remove_criterion(subCrit);
     ASSERT_EQ(testRubric->total_grade(), 10);
+}
+
+TEST_F(DeletionTests, RemoveSubmissionRemovesFromStudentGetSubmission){
+    testStudent->remove_submission(testSubmission);
+    ASSERT_EQ(nullptr, testStudent->get_submission(testAssignment));
+}
+
+TEST_F(DeletionTests, RemoveSubmissionRemovesFromStudent){
+    testStudent->remove_submission(testSubmission);
+    ASSERT_TRUE(testStudent->get_submissions()->empty());
 }
 
 
