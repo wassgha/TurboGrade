@@ -9,7 +9,10 @@ UpdateTests::~UpdateTests(){
 }
 
 void UpdateTests::SetUp(){
-    testControl = new Controller(true,"test.sql");
+    testControl = new Controller(true,          // drop tables every time
+                                 "test.sql",    // separate database name
+                                 false          // no git sync
+                                 );
     testCourse = testControl->add_course("testCourse", "Fall 2017");
     testSection = testCourse->add_section("testSection");
     testStudent = testSection->add_student("testStudent",-1);

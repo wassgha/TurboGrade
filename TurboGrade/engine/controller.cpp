@@ -6,8 +6,9 @@
  * @param drop_tables pass true to delete all information from the database
  * @param dbname the name of the database to connect to
  */
-Controller::Controller(bool drop_tables, QString dbname):
-    settings("PfaffCorp", "TurboGrade")
+Controller::Controller(bool drop_tables, QString dbname, bool git_sync):
+    settings("PfaffCorp", "TurboGrade"),
+    _git_sync(git_sync)
 {
 
     SHOW_WHERE;
@@ -28,9 +29,11 @@ Controller::Controller(bool drop_tables, QString dbname):
         settings.setValue("general/font_size", 12);
 
     // Create Git connection and pull data/database
-    _git = new GitModule("sync", settings.value("general/repo_url").toString(), settings.value("general/repo_pwd").toString());
-    _git->clone();
-    sync_git();
+    if (_git_sync) {
+        _git = new GitModule("sync", settings.value("general/repo_url").toString(), settings.value("general/repo_pwd").toString());
+        _git->clone();
+        sync_git();
+    }
 
     // If tables are to be dropped then drop them
     if (drop_tables) {
@@ -74,7 +77,8 @@ Controller::Controller(bool drop_tables, QString dbname):
  */
 Controller::~Controller()
 {
-    sync_git();
+    if (_git_sync)
+        sync_git();
 
     delete _commentDB;
     delete _submissionDB;
@@ -325,6 +329,8 @@ QString Controller::rand_color() {
  * to the git repository
  */
 void Controller::sync_git() {
+    if (!_git_sync)
+        return;
     _git->pull();
     _git->add_all();
     _git->commit("TurboGrade Synchronization");

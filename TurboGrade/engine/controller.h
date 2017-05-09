@@ -51,7 +51,7 @@ class Controller : public ObjectIdentifier
 public:
 
     // Constructor used to initialize database
-    Controller(bool drop_tables = false, QString dbname = "sync/turbograde.sqlite");
+    Controller(bool drop_tables = false, QString dbname = "sync/turbograde.sqlite", bool git_sync = true);
     // Destructor
     ~Controller();
 
@@ -158,6 +158,7 @@ private:
 
     // Git sync variables
     GitModule *_git;
+    bool _git_sync = true;
 };
 
 #endif // CONTROLLER_H
