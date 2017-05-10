@@ -118,6 +118,7 @@ void AssignmentView::refresh_cards() {
                                      assignment->_color, assignment);
         cards.push_back(new_assignment);
         connect(new_assignment, SIGNAL(clicked(QObject *)), this, SLOT(show_submissions(QObject *)));
+        connect(new_assignment, SIGNAL(deleted(QObject*)), this, SLOT(delete_assignment(QObject*)));
         add_card(new_assignment);
     }
 
@@ -167,4 +168,10 @@ void AssignmentView::add_existing(int id) {
         refresh_existing_assignments();
         refresh_cards();
     }
+}
+
+
+void AssignmentView::delete_assignment(QObject* assignment) {
+    _section->remove_assignment(dynamic_cast<Assignment*>(assignment));
+    refresh_cards();
 }

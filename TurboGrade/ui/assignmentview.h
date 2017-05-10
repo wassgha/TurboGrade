@@ -35,6 +35,8 @@ public slots:
     void add_new();
     // Callback for the "add new" form, add a selected existing assignment to this section
     void add_existing(int id);
+    // Delete an assignment from the list
+    void delete_assignment(QObject* assignment);
 
 private:
     void refresh_existing_assignments();

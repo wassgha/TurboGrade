@@ -28,6 +28,7 @@ public slots:
     void import_submission();
     void export_csv();
     void export_all_pdf();
+    void delete_submission(QObject* submission);
 
 private:
     Controller *_controller;

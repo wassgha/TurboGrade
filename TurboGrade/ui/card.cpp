@@ -25,6 +25,7 @@ Card::Card(QString title, QString info, QString color, QObject* obj, bool initia
         ui->logo->setText(title.left(2).toUpper());
     }
     _obj = obj;
+    connect(ui->remove, SIGNAL(clicked()), this, SLOT(emit_deleted()));
 }
 
 Card::~Card()
@@ -37,4 +38,8 @@ void Card::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton && !_disabled) {
         emit clicked(_obj);
     }
+}
+
+void Card::emit_deleted() {
+    emit deleted(_obj);
 }

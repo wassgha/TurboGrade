@@ -35,6 +35,7 @@ void SectionView::refresh_cards() {
                                      section->_color, section);
         cards.push_back(new_section);
         connect(new_section, SIGNAL(clicked(QObject *)), _parent, SLOT(show_assignments(QObject *)));
+        connect(new_section, SIGNAL(deleted(QObject*)), this, SLOT(delete_section(QObject*)));
         add_card(new_section);
     }
 
@@ -44,3 +45,10 @@ void SectionView::save_new() {
     _course->add_section(add_dialog->val("name"));
     refresh_cards();
 }
+
+
+void SectionView::delete_section(QObject* section) {
+    _course->remove_section(dynamic_cast<Section*>(section));
+    refresh_cards();
+}
+

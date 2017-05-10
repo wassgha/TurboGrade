@@ -41,11 +41,11 @@ public:
     // Add a student to the section
     Student* add_student(const QString name, int id = -1);
     // Remove a student from the section
-    void remove_student(Student *student);
+    void remove_student(Student *student, bool erase = true);
     // Add an assignment to the section
     Assignment* add_assignment(Assignment* assignment, bool load = false);
     // Remove an assignment from the section
-    void remove_assignment(Assignment* assignment);
+    void remove_assignment(Assignment* assignment, bool erase = true);
     // Find a student in the section
     Student* get_student(const QString name);
     // Find an assignment in the section
