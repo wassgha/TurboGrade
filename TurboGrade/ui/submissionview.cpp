@@ -101,6 +101,7 @@ void SubmissionView::refresh_cards() {
             cards.push_back(new_submission);
 
             connect(new_submission, SIGNAL(clicked(QObject*)), _parent, SLOT(start_grading(QObject*)));
+            connect(new_submission, SIGNAL(deleted(QObject*)), this, SLOT(delete_submission(QObject*)));
 
             add_card(new_submission);
 
@@ -194,3 +195,7 @@ void SubmissionView::export_all_pdf() {
 
 }
 
+void SubmissionView::delete_submission(QObject* submission) {
+    dynamic_cast<Submission*>(submission)->_student->remove_submission(dynamic_cast<Submission*>(submission));
+    refresh_cards();
+}

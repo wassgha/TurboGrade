@@ -42,6 +42,7 @@ void StudentView::refresh_cards() {
                                     student->_color, student, true);
         cards.push_back(new_student);
 //      connect(new_student, SIGNAL(clicked(QObject*)), _parent, SLOT(show_sections(QObject*)));
+        connect(new_student, SIGNAL(deleted(QObject*)), this, SLOT(delete_student(QObject*)));
         add_card(new_student);
     }
 
@@ -49,5 +50,11 @@ void StudentView::refresh_cards() {
 
 void StudentView::save_new() {
     _section->add_student(add_dialog->val("name"));
+    refresh_cards();
+}
+
+
+void StudentView::delete_student(QObject* student) {
+    _section->remove_student(dynamic_cast<Student*>(student));
     refresh_cards();
 }

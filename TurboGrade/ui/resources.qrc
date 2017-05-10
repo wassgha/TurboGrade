@@ -38,6 +38,7 @@
         <file>res/caret-up.png</file>
         <file>res/back.png</file>
         <file>res/sync-arrows.png</file>
+        <file>res/delete-card.png</file>
     </qresource>
     <qresource prefix="/fonts">
         <file>res/Roboto-Black.ttf</file>

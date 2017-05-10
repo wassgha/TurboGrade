@@ -73,17 +73,19 @@ void Course::remove_section(Section *section){
     if(section == nullptr){
         return;
     }
+    for(Student *student: *section->_students){
+        section->remove_student(student, false);
+    }
+    section->_students->clear();
+    for(Assignment *assignment : *section->_assignments){
+        section->remove_assignment(assignment, false);
+    }
+    section->_assignments->clear();
     // erase from DB
     _controller->_sectionDB->remove(section->_id);
     // erase section from sections vector
     _sections->erase(std::remove(_sections->begin(), _sections->end(), section),
                     _sections->end());
-    for(Student *student: *section->_students){
-        section->remove_student(student);
-    }
-    for(Assignment *assignment : *section->_assignments){
-        section->remove_assignment(assignment);
-    }
     delete section;
 }
 

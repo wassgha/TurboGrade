@@ -19,6 +19,8 @@ public slots:
 
     void save_new() override;
 
+    void delete_section(QObject* section);
+
 private:
     Controller *_controller;
     Course* _course;

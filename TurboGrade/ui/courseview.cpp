@@ -61,6 +61,7 @@ void CourseView::refresh_cards() {
                                         course->_color, course);
             cards.push_back(new_course);
             connect(new_course, SIGNAL(clicked(QObject*)), _parent, SLOT(show_sections(QObject*)));
+            connect(new_course, SIGNAL(deleted(QObject*)), this, SLOT(delete_course(QObject*)));
             add_card(new_course);
         }
     }
@@ -73,5 +74,10 @@ void CourseView::save_new() {
     _controller->add_course(add_dialog->val("name"), _semester_select->currentText());
     _semester_switch->setCurrentText(_semester_select->currentText());
     add_dialog->val("semester");
+    refresh_cards();
+}
+
+void CourseView::delete_course(QObject* course) {
+    _controller->remove_course(dynamic_cast<Course*>(course));
     refresh_cards();
 }

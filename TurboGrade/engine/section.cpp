@@ -77,18 +77,19 @@ Student* Section::add_student(const QString name, int id) {
  * deletes all submissions from student.
  * @param student the student to remove
  */
-void Section::remove_student(Student *student){
+void Section::remove_student(Student *student, bool erase){
     if(student == nullptr){
         return;
+    }
+    for(Submission *submission : *student->_submissions){
+        student->remove_submission(submission);
     }
     // erase from DB
     _controller->_studentDB->remove(student->_id);
     // erase student from students vector
-    _students->erase(std::remove(_students->begin(), _students->end(), student),
-                    _students->end());
-    for(Submission *submission : *student->_submissions){
-        student->remove_submission(submission);
-    }
+    if (erase)
+        _students->erase(std::remove(_students->begin(), _students->end(), student),
+                        _students->end());
     delete student;
 }
 
@@ -142,15 +143,16 @@ Assignment* Section::get_assignment(const QString name) {
  * SECTION -> ASSIGNMENT LINK
  * @param assignment the assignment to delete
  */
-void Section::remove_assignment(Assignment *assignment){
+void Section::remove_assignment(Assignment *assignment, bool erase){
     if(assignment == nullptr){
         return;
     }
     // erase from DB
     _controller->_assignmentDB->remove_link(assignment->_id, _id);
     // erase assignment from assignment vector
-    _assignments->erase(std::remove(_assignments->begin(), _assignments->end(), assignment),
-                    _assignments->end());
+    if (erase)
+        _assignments->erase(std::remove(_assignments->begin(), _assignments->end(), assignment),
+                        _assignments->end());
     for(Student *student : *_students){
         student->remove_submission(student->get_submission(assignment));
     }

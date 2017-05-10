@@ -26,8 +26,12 @@ private:
     QObject* _obj;
     bool _disabled = false;
 
+private slots:
+    void emit_deleted();
+
 signals:
     void clicked(QObject* obj);
+    void deleted(QObject* obj);
 };
 
 #endif // CARD_H

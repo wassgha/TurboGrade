@@ -18,6 +18,7 @@ public slots:
     void refresh_cards() override;
     void save_new() override;
     void show_assignments();
+    void delete_student(QObject* student);
 
 private:
     Controller *_controller;
