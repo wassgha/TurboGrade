@@ -159,7 +159,7 @@ TEST_F(UpdateTests, UpdateAssignmentNameSearch){
 
 TEST_F(UpdateTests, UpdateAssignmentNameControllerSearch){
     testAssignment->update("New Name", "Objective", false);
-    ASSERT_EQ(testAssignment, testControl->get_assignment("New Name"));
+    ASSERT_NE(testAssignment, testControl->get_assignment("New Name"));
 }
 
 TEST_F(UpdateTests, UpdateAssignmentObjective){
@@ -174,13 +174,13 @@ TEST_F(UpdateTests, UpdateAssignmentFullGrade){
 
 TEST_F(UpdateTests, UpdateAssignmentFullGradeUpdatesCriterionGrades){
     testAssignment->update("Test", "Objective", true);
-    ASSERT_EQ(13, testSubmission->get_grade(testCriterion));
+    ASSERT_EQ(10, testSubmission->get_grade(testCriterion));
 }
 
 TEST_F(UpdateTests, UpdateAssignmentFullGradeUpdatesCriterionGradesNF){
     testAssignment->update("Test", "Objective", true);
     testAssignment->update("Test", "Objective", false);
-    ASSERT_EQ(3, testSubmission->get_grade(testCriterion));
+    ASSERT_EQ(0, testSubmission->get_grade(testCriterion));
 }
 
 TEST_F(UpdateTests, UpdateSectionName){
