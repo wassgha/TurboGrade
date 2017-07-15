@@ -3,28 +3,28 @@ Grading software for Computer Science labs. Created as part of my CS 200: Softwa
 
 ### User Manual
 
-The user manual is available (here)[http://docdro.id/i2YK8jO]
+The user manual is available [here](http://docdro.id/i2YK8jO)
 
 ### Functionality
 
 #### Course Management
 
-![Course Management](http://i.imgur.com/Y9yKlNu.gifv)
+![Course Management](https://preview.ibb.co/ihZcKa/ezgif_com_video_to_gif.gif)
 
 #### Student Management
 
-![Student Management](http://i.imgur.com/LOdtXDv.gifv)
+![Student Management](https://preview.ibb.co/mqzzXv/ezgif_com_crop.gif)
 
 #### Assignments
 
-![Assignments](http://i.imgur.com/EBBB98D.gifv)
+![Assignments](https://preview.ibb.co/jMKYsv/ezgif_com_video_to_gif_1.gif)
 
 #### Rubric Creation
 
-![Rubric Creation](http://i.imgur.com/DsYzJwB.gifv)
+![Rubric Creation](https://preview.ibb.co/b7ezXv/ezgif_com_video_to_gif_2.gif)
 
 #### Grading
-![Grading](http://i.imgur.com/5ajKEwX.gifv)
+![Grading](https://preview.ibb.co/nhS8QF/ezgif_com_video_to_gif_3.gif)
 
 ### Features
 
