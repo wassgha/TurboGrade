@@ -9,22 +9,22 @@ The user manual is available (here)[http://docdro.id/i2YK8jO]
 
 #### Course Management
 
-[Imgur](http://i.imgur.com/Y9yKlNu.gifv)
+![Course Management](http://i.imgur.com/Y9yKlNu.gifv)
 
 #### Student Management
 
-[Imgur](http://i.imgur.com/LOdtXDv.gifv)
+![Student Management](http://i.imgur.com/LOdtXDv.gifv)
 
 #### Assignments
 
-[Imgur](http://i.imgur.com/EBBB98D.gifv)
+![Assignments](http://i.imgur.com/EBBB98D.gifv)
 
 #### Rubric Creation
 
-[Imgur](http://i.imgur.com/DsYzJwB.gifv)
+![Rubric Creation](http://i.imgur.com/DsYzJwB.gifv)
 
 #### Grading
-[Imgur](http://i.imgur.com/5ajKEwX.gifv)
+![Grading](http://i.imgur.com/5ajKEwX.gifv)
 
 ### Features
 
@@ -33,3 +33,4 @@ The user manual is available (here)[http://docdro.id/i2YK8jO]
 - Select & Drag to comment
 - Synchronization to a remote Git repository
 - Deliverable PDF reports
+- CSV Gradebook
