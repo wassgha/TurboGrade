@@ -9,22 +9,22 @@ The user manual is available [here](http://docdro.id/i2YK8jO)
 
 #### Course Management
 
-![Course Management](https://image.ibb.co/ihZcKa/ezgif_com_video_to_gif.gif)
+![Course Management](https://image.ibb.co/buca5F/ezgif_com_video_to_gif.gif)
 
 #### Student Management
 
-![Student Management](https://image.ibb.co/mqzzXv/ezgif_com_crop.gif)
+![Student Management](https://image.ibb.co/nsihkF/ezgif_com_crop.gif)
 
 #### Assignments
 
-![Assignments](https://image.ibb.co/jMKYsv/ezgif_com_video_to_gif_1.gif)
+![Assignments](https://image.ibb.co/fEQjza/ezgif_com_video_to_gif_1.gif)
 
 #### Rubric Creation
 
-![Rubric Creation](https://image.ibb.co/b7ezXv/ezgif_com_video_to_gif_2.gif)
+![Rubric Creation](https://image.ibb.co/iRTtsv/ezgif_com_video_to_gif_2.gif)
 
 #### Grading
-![Grading](https://image.ibb.co/nhS8QF/ezgif_com_video_to_gif_3.gif)
+![Grading](https://image.ibb.co/i6PBea/ezgif_com_video_to_gif_3.gif)
 
 ### Features
 
